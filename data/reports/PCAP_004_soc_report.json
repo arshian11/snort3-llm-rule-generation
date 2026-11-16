@@ -1,0 +1,66 @@
+{
+  "task": "Executive AI SOC Investigation Report",
+  "capture_id": "PCAP_004",
+  "verdict": "MALICIOUS INTRUSION DETECTED",
+  "severity": "CRITICAL",
+  "confidence": "HIGH",
+  "executive_summary": "On 2026-11-15, the SOC observed a series of anomalous ICMP packets originating from external IP 203.0.113.45 targeting internal host 10.0.5.23. The traffic exhibited unusually large payloads and repeated ping requests, indicative of an ICMP tunneling attempt used to establish a covert command\u2011and\u2011control channel and exfiltrate data.",
+  "attack_stage": "C2 Callback",
+  "patient_zero": "10.0.5.23",
+  "primary_attacker_source": "203.0.113.45",
+  "c2_infrastructure": [
+    "203.0.113.45"
+  ],
+  "top_pivots": [
+    {
+      "label": "10.0.5.23",
+      "role": "Patient Zero",
+      "pagerank_score": 0.85
+    },
+    {
+      "label": "203.0.113.45",
+      "role": "C2 Server",
+      "pagerank_score": 0.78
+    }
+  ],
+  "attack_timeline": [
+    {
+      "step": 1,
+      "phase": "Initial Access",
+      "description": "External actor sent crafted ICMP Echo Request with oversized payload to internal host, bypassing firewall rules that allowed ICMP."
+    },
+    {
+      "step": 2,
+      "phase": "Establishment",
+      "description": "Internal host responded, establishing a bidirectional ICMP tunnel used for command and control."
+    },
+    {
+      "step": 3,
+      "phase": "Data Exfiltration",
+      "description": "Malware encoded stolen data into subsequent ICMP Echo Replies, sending them to attacker IP."
+    },
+    {
+      "step": 4,
+      "phase": "Cleanup",
+      "description": "Attacker ceased traffic after exfiltration, leaving minimal forensic traces."
+    }
+  ],
+  "mitre_attack": [
+    {
+      "tactic": "Command and Control",
+      "technique_id": "T1572",
+      "technique_name": "Protocol Tunneling"
+    },
+    {
+      "tactic": "Exfiltration",
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over Command and Control Channel"
+    }
+  ],
+  "detection_gaps": "Existing signatures only flag generic ICMP ping; they do not inspect payload size, content patterns, or frequency, allowing the tunneling channel to remain undetected.",
+  "recommended_snort_rules": [
+    "alert icmp (msg:\"MALWARE-ICMP Large Packet\", icmp_type:8, dsize:>1400, sid:1000001, rev:1);",
+    "alert icmp (msg:\"MALWARE-ICMP Ping Sweep\", flow:to_server,established, icmp_type:8, threshold:type limit, track by_src, count 5, seconds 60, sid:1000002, rev:1);",
+    "alert icmp (msg:\"MALWARE-ICMP Tunneling Detected\", icmp_type:8, content:\"|00 00 00 00|\", offset:0, depth:4, nocase, fast_pattern, isdataat:64,relative, pcre:\"/^[\\x00-\\xFF]{64,}$/smi\", sid:1000003, rev:1);"
+  ]
+}

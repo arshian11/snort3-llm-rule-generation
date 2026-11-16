@@ -1,0 +1,1 @@
+alert icmp $HOME_NET any -> $EXTERNAL_NET any (msg:"MALICIOUS ICMP Large Packet - Potential Tunneling"; icmp_type 8; dsize:>1000; classtype:trojan-activity; sid:9001016; rev:1;)

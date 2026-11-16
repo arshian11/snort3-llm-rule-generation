@@ -54,8 +54,8 @@ This project automates that entire process from end to end:
 
 #### 1. Clone the Repository
 ```bash
-git clone https://github.com/snort3/snort3.git
-cd snort3
+git clone https://github.com/arshian11/snort3-llm-rule-generation.git
+cd snort3-llm-rule-generation
 ```
 
 #### 2. Set Up a Python Virtual Environment
@@ -410,7 +410,8 @@ The system incorporates comprehensive token tracking, rate limiting, and observa
 - **`total_cached_tokens`**: Cumulative volume of prompt tokens served directly from Groq's prefix cache (50% cost reduction).
 - **`total_completion_tokens`**: Cumulative volume of output/completion tokens generated.
 - **`overall_hit_rate_pct`**: Cumulative cache hit rate percentage, calculated as:
-  $$\text{Hit Rate} = \left( \frac{\text{total\_cached\_tokens}}{\text{total\_prompt\_tokens}} \right) \times 100\%$$
+  $$\text{Hit Rate (\%)} = \left( \frac{\text{Total Cached Tokens}}{\text{Total Prompt Tokens}} \right) \times 100$$
+  *(i.e. `(total_cached_tokens / total_prompt_tokens) * 100%`)*
 - **`last_request` metrics**:
   - `last_prompt_tokens`: Prompt token count of the most recent query.
   - `last_cached_tokens`: Number of tokens served from cache for the most recent query.
