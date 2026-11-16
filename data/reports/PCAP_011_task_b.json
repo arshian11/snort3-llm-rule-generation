@@ -1,0 +1,47 @@
+{
+  "task": "Behavioural Pattern Discovery",
+  "static_indicators": [
+    "10.10.10.101",
+    "10.12.13.102",
+    "162.241.85.74",
+    "162.241.85.74:80",
+    "185.43.223.31:80",
+    "192.168.122.129",
+    "209.238.150.129:80",
+    "217.61.125.151"
+  ],
+  "protocol_indicators": [
+    "DNS Type A (UDP/53)",
+    "HTTP GET method",
+    "HTTP POST method",
+    "URI endpoint /",
+    "URI endpoint /?[[[[[",
+    "URI endpoint /api.php?id=4046AAB085AB2C197B",
+    "URI endpoint /even.wrf?apply=&without=_tn9w",
+    "URI endpoint /forums/viewforum.php?f=41&sid"
+  ],
+  "behavioural_indicators": [
+    "BEHAVIOUR: "
+  ],
+  "campaign_specific_indicators": [
+    "UA: Mozilla/4.0 (compatible; MSIE 7.0; ",
+    "UA: Mozilla/5.0 (Windows NT 10.0; Win64",
+    "UA: Mozilla/5.0 (Windows NT 6.1; Triden",
+    "UA: Mozilla/5.0 (Windows NT 6.1; WOW64;",
+    "UA: Mozilla/5.0 (Windows NT 6.1; Win64;"
+  ],
+  "reusable_patterns": [
+    {
+      "pattern_name": "Invariant C2 HTTP Beaconing / Command Endpoint Pattern",
+      "protocol": "TCP/HTTP",
+      "stable_characteristics": "Repeated outbound HTTP transactions targeting deterministic API paths with constant header presence across sessions.",
+      "generalization_rationale": "Matches protocol communication mechanics independent of source/destination IP addresses or domain infrastructure."
+    },
+    {
+      "pattern_name": "Exploitation Payload Token in Request Headers / URI",
+      "protocol": "TCP/HTTP",
+      "stable_characteristics": "Presence of shell metacharacters, JNDI lookup strings, or anomalous SQL syntax inside client request headers.",
+      "generalization_rationale": "Focuses on the vulnerability exploitation vector itself, protecting against polymorphic attack delivery across multiple hosts."
+    }
+  ]
+}

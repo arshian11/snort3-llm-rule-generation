@@ -1,0 +1,29 @@
+{
+  "task": "Behavioural Pattern Discovery",
+  "static_indicators": [
+    "192.168.1.112",
+    "1.1.1.1",
+    "duckdns.org"
+  ],
+  "protocol_indicators": [
+    "ICMP echo request with unusually large payload (\"GPL ICMP Large ICMP Packet Ping Diagnostic\")",
+    "ICMP echo request flagged as \"PROTOCOL-ICMP Unusual PING\"",
+    "DNS query for the domain \"duckdns.org\""
+  ],
+  "behavioural_indicators": [],
+  "campaign_specific_indicators": [],
+  "reusable_patterns": [
+    {
+      "pattern_name": "Large ICMP Ping Diagnostic",
+      "protocol": "ICMP",
+      "stable_characteristics": "ICMP echo request packets with payload size exceeding a configurable threshold (e.g., > 1000 bytes) and/or containing non\u2011standard payload patterns",
+      "generalization_rationale": "Large ICMP packets are commonly used for network reconnaissance, bandwidth consumption tests, or to trigger ICMP\u2011based denial\u2011of\u2011service attacks. Detecting them without tying to specific IPs or payload content allows broad coverage of similar malicious behaviour."
+    },
+    {
+      "pattern_name": "DNS Query to Dynamic DNS Provider",
+      "protocol": "DNS",
+      "stable_characteristics": "DNS query for a domain that matches a known dynamic DNS provider (e.g., duckdns.org, no\u2011ip.com, dyndns.org) or any domain with a short, frequently changing name pattern typical of dynamic DNS services",
+      "generalization_rationale": "Malware often uses dynamic DNS to hide command\u2011and\u2011control servers. By matching on the provider domain or on high\u2011entropy, short\u2011length domain names, the rule can detect similar activity across multiple campaigns without hardcoding specific hostnames."
+    }
+  ]
+}

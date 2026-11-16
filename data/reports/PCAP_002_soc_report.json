@@ -1,0 +1,43 @@
+{
+  "task": "Executive AI SOC Investigation Report",
+  "verdict": "MALICIOUS INTRUSION DETECTED",
+  "severity": "CRITICAL",
+  "confidence": "HIGH",
+  "executive_summary": "High-severity intrusion identified via graph correlation. Threat actor leveraged multi-stage communication to establish persistence and outbound command-and-control callbacks.",
+  "attack_stage": "Command & Control / Post-Exploitation",
+  "patient_zero": "192.168.1.50",
+  "primary_attacker_source": "External Ingress",
+  "c2_infrastructure": [
+    "External C2 Infrastructure"
+  ],
+  "top_pivots": [],
+  "attack_timeline": [
+    {
+      "step": 1,
+      "phase": "Infiltration",
+      "description": "Triggering event identified in packet trace."
+    },
+    {
+      "step": 2,
+      "phase": "C2 Callback",
+      "description": "Outbound communication established."
+    }
+  ],
+  "mitre_attack": [
+    {
+      "tactic": "Command and Control",
+      "technique_id": "T1071.001",
+      "technique_name": "Web Protocols"
+    },
+    {
+      "tactic": "Initial Access",
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application"
+    }
+  ],
+  "detection_gaps": "Signatures alerted on isolated transactions without tracking stateful outbound beaconing cadence.",
+  "recommended_snort_rules": [
+    "Target invariant application layer protocol payloads and persistent URI paths.",
+    "Enforce thresholding on repetitive beaconing intervals."
+  ]
+}

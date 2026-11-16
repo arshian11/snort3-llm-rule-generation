@@ -1,0 +1,1 @@
+alert http ( msg:"EXPLOIT Apache Log4j JNDI Exploit Inbound"; flow:to_server,established; http_header; content:"${jndi:ldap://",nocase,fast_pattern; classtype:attempted-user; sid:9001010; rev:1; )

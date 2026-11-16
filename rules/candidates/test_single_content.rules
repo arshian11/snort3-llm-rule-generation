@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC Log4j"; flow:to_server,established; http_header; content:"User-Agent: ${jndi:ldap://",nocase,fast_pattern; classtype:trojan-activity; sid:9001010; rev:1; )

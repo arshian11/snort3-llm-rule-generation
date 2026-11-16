@@ -1,0 +1,80 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_005",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 2100366,
+      "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+      "triggering_packets": [
+        90,
+        92,
+        1476,
+        1489,
+        1491,
+        1888,
+        1890,
+        1931,
+        1943,
+        1945
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the CTU-13 Botnet execution chain. Represents initial detection artifact matching known Botnet Traffic baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by CTU-13 Botnet.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 28 DNS queries or secondary command channels not matched by SID 2100366."
+    },
+    {
+      "gid": 1,
+      "sid": 402,
+      "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+      "triggering_packets": [
+        90,
+        92,
+        1476,
+        1489,
+        1491,
+        1888,
+        1890,
+        1931,
+        1943,
+        1945
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the CTU-13 Botnet execution chain. Represents initial detection artifact matching known Botnet Traffic baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by CTU-13 Botnet.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 28 DNS queries or secondary command channels not matched by SID 402."
+    },
+    {
+      "gid": 1,
+      "sid": 449,
+      "msg": "PROTOCOL-ICMP Time-To-Live Exceeded in Transit",
+      "triggering_packets": [
+        12931,
+        13370,
+        13822,
+        17415,
+        17424
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the CTU-13 Botnet execution chain. Represents initial detection artifact matching known Botnet Traffic baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by CTU-13 Botnet.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 28 DNS queries or secondary command channels not matched by SID 449."
+    },
+    {
+      "gid": 1,
+      "sid": 254,
+      "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+      "triggering_packets": [
+        127,
+        268,
+        378,
+        435
+      ],
+      "matching_conditions": "flow:stateless; content:\"|00 01 00 01|\"; threshold:type limit, track by_src, count 1, seconds 60;",
+      "activity_relationship": "Triggered during the CTU-13 Botnet execution chain. Represents initial detection artifact matching known Botnet Traffic baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by CTU-13 Botnet.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 28 DNS queries or secondary command channels not matched by SID 254."
+    }
+  ],
+  "overall_detection_gaps": "Existing signatures detect 4 specific signature indicators for CTU-13 Botnet, but lack comprehensive session lifecycle coverage. Missing detections include 28 related DNS queries, unmonitored payload parameters across 30 HTTP requests, and timing-based beaconing intervals across network flows. Attackers altering URIs or using randomized headers easily evade this baseline without novel candidate rules."
+}

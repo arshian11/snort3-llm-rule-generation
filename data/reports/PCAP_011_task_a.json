@@ -1,0 +1,98 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_011",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 254,
+      "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+      "triggering_packets": [
+        48,
+        67,
+        371,
+        799,
+        801
+      ],
+      "matching_conditions": "flow:stateless; content:\"|00 01 00 01|\"; threshold:type limit, track by_src, count 1, seconds 60;",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 254."
+    },
+    {
+      "gid": 1,
+      "sid": 382,
+      "msg": "PROTOCOL-ICMP PING Windows",
+      "triggering_packets": [
+        2836,
+        2837
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 382."
+    },
+    {
+      "gid": 1,
+      "sid": 384,
+      "msg": "PROTOCOL-ICMP PING",
+      "triggering_packets": [
+        2836,
+        2837
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 384."
+    },
+    {
+      "gid": 1,
+      "sid": 29456,
+      "msg": "PROTOCOL-ICMP Unusual PING detected",
+      "triggering_packets": [
+        2836,
+        2837
+      ],
+      "matching_conditions": "flow:stateless; itype:3; icode:3; classtype:misc-attack;",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 29456."
+    },
+    {
+      "gid": 1,
+      "sid": 1998,
+      "msg": "SERVER-WEBAPP calendar.php access",
+      "triggering_packets": [
+        807
+      ],
+      "matching_conditions": "Rule Header: alert tcp with flow:to_server,established. Content and regex match against payload buffer on triggering packet(s) [807].",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 1998."
+    },
+    {
+      "gid": 1,
+      "sid": 882,
+      "msg": "SERVER-WEBAPP calendar access",
+      "triggering_packets": [
+        807
+      ],
+      "matching_conditions": "Rule Header: alert tcp with flow:to_server,established. Content and regex match against payload buffer on triggering packet(s) [807].",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 882."
+    },
+    {
+      "gid": 1,
+      "sid": 2077,
+      "msg": "SERVER-WEBAPP Mambo upload.php access",
+      "triggering_packets": [
+        1529
+      ],
+      "matching_conditions": "Rule Header: alert tcp with flow:to_server,established. Content and regex match against payload buffer on triggering packet(s) [1529].",
+      "activity_relationship": "Triggered during the Angler Exploit Kit execution chain. Represents initial detection artifact matching known Drive-By Exploit Kit baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Angler Exploit Kit.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 2077."
+    }
+  ],
+  "overall_detection_gaps": "Existing signatures detect 7 specific signature indicators for Angler Exploit Kit, but lack comprehensive session lifecycle coverage. Missing detections include 30 related DNS queries, unmonitored payload parameters across 30 HTTP requests, and timing-based beaconing intervals across network flows. Attackers altering URIs or using randomized headers easily evade this baseline without novel candidate rules."
+}

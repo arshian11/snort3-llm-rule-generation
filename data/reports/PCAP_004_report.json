@@ -1,0 +1,554 @@
+{
+  "capture_id": "PCAP_004",
+  "filename": "scenario4_network_anomalies.pcap",
+  "malware_family": "ICMP / DNS Anomalies",
+  "threat_category": "Protocol Anomaly",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 3,
+    "unique_signatures": 3,
+    "pcap_hash": "e8c4ca3ec069dadd27d45ae931e5422afae498ff12f57b1c1a91e95e8bb868d3",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [
+    {
+      "gid": 1,
+      "sid": 29456,
+      "rev": 3,
+      "count": 1,
+      "priority": 3,
+      "protocol": "ICMP",
+      "msg": "PROTOCOL-ICMP Unusual PING detected",
+      "triggering_packets": [
+        1
+      ]
+    },
+    {
+      "gid": 1,
+      "sid": 384,
+      "rev": 8,
+      "count": 1,
+      "priority": 3,
+      "protocol": "ICMP",
+      "msg": "PROTOCOL-ICMP PING",
+      "triggering_packets": [
+        1
+      ]
+    },
+    {
+      "gid": 1,
+      "sid": 2100366,
+      "rev": 8,
+      "count": 1,
+      "priority": 3,
+      "protocol": "ICMP",
+      "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+      "triggering_packets": [
+        1
+      ]
+    }
+  ],
+  "network_behaviour": {
+    "dns_queries": [
+      {
+        "pkt_num": 2,
+        "time_epoch": 1794652565.001,
+        "query_name": "duckdns.org",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.278,
+        "src_ip": "192.168.1.112",
+        "dst_ip": "1.1.1.1"
+      }
+    ],
+    "http_requests": [],
+    "tcp_connections": [
+      {
+        "flow_id": "192.168.1.1:0<->192.168.1.254:0/ICMP",
+        "proto": "ICMP",
+        "src_ip": "192.168.1.1",
+        "dst_ip": "192.168.1.254",
+        "src_port": 0,
+        "dst_port": 0,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 192,
+        "tcp_flags": [],
+        "zeek_conn_state": "",
+        "zeek_service": ""
+      },
+      {
+        "flow_id": "1.1.1.1:53<->192.168.1.112:61400/UDP",
+        "proto": "UDP",
+        "src_ip": "1.1.1.1",
+        "dst_ip": "192.168.1.112",
+        "src_port": 53,
+        "dst_port": 61400,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 71,
+        "tcp_flags": [],
+        "zeek_conn_state": "S0",
+        "zeek_service": "dns"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "1.1.1.1:53<->192.168.1.112:61400/UDP",
+        "src_ip": "1.1.1.1",
+        "dst_ip": "192.168.1.112",
+        "dst_port": 61400,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 61400"
+        ],
+        "packets": [
+          2
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 2,
+      "connection_states": {
+        "S0": 1,
+        "OTH": 1
+      },
+      "detected_services": {
+        "dns": 1,
+        "other": 1
+      },
+      "files_transferred": [],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": [
+        {
+          "uid": "CUxmdg8jbkoZJPVoe",
+          "ts": 1794652565.001,
+          "orig_h": "192.168.1.112",
+          "orig_p": 61400,
+          "resp_h": "1.1.1.1",
+          "resp_p": 53,
+          "proto": "UDP",
+          "service": "dns",
+          "duration": 0.0,
+          "orig_bytes": 0,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 1,
+          "resp_pkts": 0
+        }
+      ]
+    }
+  },
+  "correlations": [],
+  "packet_evidence": [
+    {
+      "pkt_num": 1,
+      "source": "snort_alert",
+      "summary": "SID 2100366: GPL ICMP Large ICMP Packet Ping Diagnostic",
+      "proto": "ICMP",
+      "src": "192.168.1.254:0",
+      "dst": "192.168.1.1:0"
+    },
+    {
+      "pkt_num": 2,
+      "source": "dns_protocol",
+      "summary": "DNS Query: duckdns.org (TTL=None, Entropy=3.278)",
+      "proto": "UDP/53",
+      "src": "192.168.1.112",
+      "dst": "1.1.1.1"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:29456:1",
+        "label": "Alert: PROTOCOL-ICMP Unusual PING det...",
+        "type": "alert",
+        "details": {
+          "sid": 29456,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "packets": [
+              1
+            ],
+            "alert_sid": 29456,
+            "gid": 1,
+            "msg": "PROTOCOL-ICMP Unusual PING detected",
+            "proto": "ICMP",
+            "src_ip": "192.168.1.254",
+            "dst_ip": "192.168.1.1",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "ip:192.168.1.254",
+        "label": "192.168.1.254",
+        "type": "entity_ip",
+        "details": {
+          "ip": "192.168.1.254"
+        }
+      },
+      {
+        "id": "ip:192.168.1.1",
+        "label": "192.168.1.1",
+        "type": "entity_ip",
+        "details": {
+          "ip": "192.168.1.1"
+        }
+      },
+      {
+        "id": "alert:1:384:1",
+        "label": "Alert: PROTOCOL-ICMP PING...",
+        "type": "alert",
+        "details": {
+          "sid": 384,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "packets": [
+              1
+            ],
+            "alert_sid": 384,
+            "gid": 1,
+            "msg": "PROTOCOL-ICMP PING",
+            "proto": "ICMP",
+            "src_ip": "192.168.1.254",
+            "dst_ip": "192.168.1.1",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "alert:1:2100366:1",
+        "label": "Alert: GPL ICMP Large ICMP Packet Pin...",
+        "type": "alert",
+        "details": {
+          "sid": 2100366,
+          "priority": 3,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "packets": [
+              1
+            ],
+            "alert_sid": 2100366,
+            "gid": 1,
+            "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+            "proto": "ICMP",
+            "src_ip": "192.168.1.254",
+            "dst_ip": "192.168.1.1",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "flow:192.168.1.1:0<->192.168.1.254:0/ICMP",
+        "label": "Flow: ICMP 0",
+        "type": "flow",
+        "details": {
+          "proto": "ICMP",
+          "src_ip": "192.168.1.1",
+          "dst_ip": "192.168.1.254",
+          "dst_port": 0,
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "flow_id": "192.168.1.1:0<->192.168.1.254:0/ICMP",
+            "packets": [
+              1
+            ],
+            "byte_count": 192,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652564.0,
+            "end_time": 1794652564.0,
+            "zeek_conn_state": "",
+            "zeek_service": ""
+          }
+        }
+      },
+      {
+        "id": "flow:1.1.1.1:53<->192.168.1.112:61400/UDP",
+        "label": "Flow: UDP 61400 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "1.1.1.1",
+          "dst_ip": "192.168.1.112",
+          "dst_port": 61400,
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "flow_id": "1.1.1.1:53<->192.168.1.112:61400/UDP",
+            "packets": [
+              2
+            ],
+            "byte_count": 71,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652565.001,
+            "end_time": 1794652565.001,
+            "zeek_conn_state": "S0",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:1.1.1.1",
+        "label": "1.1.1.1",
+        "type": "entity_ip",
+        "details": {
+          "ip": "1.1.1.1"
+        }
+      },
+      {
+        "id": "ip:192.168.1.112",
+        "label": "192.168.1.112",
+        "type": "entity_ip",
+        "details": {
+          "ip": "192.168.1.112"
+        }
+      },
+      {
+        "id": "dns:2",
+        "label": "DNS: duckdns.org",
+        "type": "dns_event",
+        "details": {
+          "query_name": "duckdns.org",
+          "entropy": 3.278,
+          "evidence": {
+            "capture_id": "PCAP_004",
+            "packets": [
+              2
+            ],
+            "query_name": "duckdns.org",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.278,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:duckdns.org",
+        "label": "duckdns.org",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.278
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "alert:1:29456:1",
+        "target": "ip:192.168.1.1",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 29456,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP Unusual PING detected",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:192.168.1.254",
+        "target": "alert:1:29456:1",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 29456,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP Unusual PING detected",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:192.168.1.254",
+        "target": "alert:1:384:1",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 384,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP PING",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:192.168.1.254",
+        "target": "alert:1:2100366:1",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:192.168.1.1",
+        "target": "flow:192.168.1.1:0<->192.168.1.254:0/ICMP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "flow_id": "192.168.1.1:0<->192.168.1.254:0/ICMP",
+          "packets": [
+            1
+          ],
+          "byte_count": 192,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "alert:1:384:1",
+        "target": "ip:192.168.1.1",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 384,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP PING",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "alert:1:2100366:1",
+        "target": "ip:192.168.1.1",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "192.168.1.254",
+          "dst_ip": "192.168.1.1",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "flow:192.168.1.1:0<->192.168.1.254:0/ICMP",
+        "target": "ip:192.168.1.254",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "flow_id": "192.168.1.1:0<->192.168.1.254:0/ICMP",
+          "packets": [
+            1
+          ],
+          "byte_count": 192,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "flow:1.1.1.1:53<->192.168.1.112:61400/UDP",
+        "target": "ip:192.168.1.112",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "flow_id": "1.1.1.1:53<->192.168.1.112:61400/UDP",
+          "packets": [
+            2
+          ],
+          "byte_count": 71,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652565.001,
+          "end_time": 1794652565.001,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:1.1.1.1",
+        "target": "flow:1.1.1.1:53<->192.168.1.112:61400/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "flow_id": "1.1.1.1:53<->192.168.1.112:61400/UDP",
+          "packets": [
+            2
+          ],
+          "byte_count": 71,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652565.001,
+          "end_time": 1794652565.001,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:duckdns.org",
+        "target": "dns:2",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_004",
+          "packets": [
+            2
+          ],
+          "query_name": "duckdns.org",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.278,
+          "is_response": false
+        }
+      }
+    ]
+  }
+}

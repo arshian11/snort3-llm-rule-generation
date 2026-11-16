@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"MALWARE-CNC Sliver C2 Domain Resolution Query"; flow:to_server; content:"carwaded.com",fast_pattern,nocase; classtype:trojan-activity; sid:9001006; rev:1; )

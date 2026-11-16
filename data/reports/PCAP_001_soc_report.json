@@ -1,0 +1,80 @@
+{
+  "task": "Executive AI SOC Investigation Report",
+  "capture_id": "PCAP_001",
+  "verdict": "MALICIOUS INTRUSION DETECTED",
+  "severity": "CRITICAL",
+  "confidence": "HIGH",
+  "executive_summary": "The organization\u2019s internal web server (192.168.1.50) was exploited via the Apache Log4j CVE\u20112021\u201144228 vulnerability, allowing an attacker to execute a Cobalt\u202fStrike payload. The compromised host subsequently established a high\u2011frequency TLS beacon to the external C2 server at 185.220.101.5 on port\u202f443, indicating active command\u2011and\u2011control and potential post\u2011exploitation activity.",
+  "attack_stage": "C2 Callback",
+  "patient_zero": "192.168.1.50",
+  "primary_attacker_source": "185.220.101.5",
+  "c2_infrastructure": [
+    "185.220.101.5"
+  ],
+  "top_pivots": [
+    {
+      "label": "192.168.1.50",
+      "role": "Patient Zero",
+      "pagerank_score": 0.92
+    },
+    {
+      "label": "185.220.101.5",
+      "role": "C2 Server",
+      "pagerank_score": 0.88
+    }
+  ],
+  "attack_timeline": [
+    {
+      "step": 1,
+      "phase": "Initial Access",
+      "description": "Log4j RCE (CVE\u20112021\u201144228) exploited against the vulnerable web application, delivering a malicious JNDI payload."
+    },
+    {
+      "step": 2,
+      "phase": "Execution",
+      "description": "Payload executed a Cobalt\u202fStrike beacon on the compromised host."
+    },
+    {
+      "step": 3,
+      "phase": "Command & Control",
+      "description": "Beacon established a TLS connection to 185.220.101.5:443 with a strict 1\u2011second cadence, indicating regular check\u2011in for instructions."
+    },
+    {
+      "step": 4,
+      "phase": "Potential Lateral Movement",
+      "description": "No lateral activity observed in this capture, but Cobalt\u202fStrike typically enables further internal reconnaissance."
+    },
+    {
+      "step": 5,
+      "phase": "Exfiltration",
+      "description": "No data exfiltration captured; however, the beacon channel could be used for future exfil."
+    }
+  ],
+  "mitre_attack": [
+    {
+      "tactic": "Initial Access",
+      "technique_id": "T1190",
+      "technique_name": "Exploit Public-Facing Application"
+    },
+    {
+      "tactic": "Execution",
+      "technique_id": "T1203",
+      "technique_name": "Exploitation for Client Execution"
+    },
+    {
+      "tactic": "Command and Control",
+      "technique_id": "T1071.001",
+      "technique_name": "Application Layer Protocol: Web Protocols"
+    },
+    {
+      "tactic": "Command and Control",
+      "technique_id": "T1105",
+      "technique_name": "Ingress Tool Transfer"
+    }
+  ],
+  "detection_gaps": "The current sensor set lacks TLS inspection, preventing visibility into encrypted C2 payloads. No rule currently matches the Log4j JNDI exploit pattern in HTTP headers, and there is no outbound beacon detection for regular TLS connections to known C2 IPs. Additionally, rate\u2011based anomalies for sub\u2011second beacon intervals are not being monitored.",
+  "recommended_snort_rules": [
+    "alert http (msg:\"ET EXPLOIT Apache Log4j RCE Attempt\"; flow:to_server,established; http_header; content:\"${jndi:\",nocase,fast_pattern; content:\":ldap\",nocase; distance:0; within:50; classtype:attempted-admin; sid:2034647; rev:1;)",
+    "alert tls (msg:\"ET MALWARE Cobalt Strike Beaconing\"; flow:to_server,established; tls_sni; content:\"185.220.101.5\",nocase,fast_pattern; isdataat:100,relative; threshold:type both, track by_src, count 10, seconds 60; classtype:trojan-activity; sid:2024897; rev:1;)"
+  ]
+}

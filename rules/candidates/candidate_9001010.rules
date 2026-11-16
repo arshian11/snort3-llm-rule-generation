@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (msg:"MALWARE-CNC Suspicious Beaconing and Malicious URI Pattern Detected"; flow:to_server,established; content:"/api/v2/beacon",fast_pattern; classtype:trojan-activity; sid:9001010; rev:1; )

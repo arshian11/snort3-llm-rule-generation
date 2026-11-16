@@ -27,6 +27,14 @@ def main():
     repo_dir = Path(__file__).resolve().parent
     web_dir = repo_dir / "web"
     sys.path.insert(0, str(web_dir))
+    sys.path.insert(0, str(repo_dir))
+
+    # Keep candidates.json clean/empty on boot-up; archive prior candidates to candidates_history.json
+    try:
+        from snort_pipeline.lifecycle import RuleLifecycleManager
+        RuleLifecycleManager().archive_and_reset_candidates()
+    except Exception as e:
+        print(f"[!] Note: Candidate lifecycle boot check: {e}")
 
     from server import app, load_log_file, start_tailing_log, run_on_pcap_target
     print("=" * 70)

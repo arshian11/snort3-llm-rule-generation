@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any ( msg:"SERVER-WEBAPP Log4j RCE Attempt via JNDI Header"; flow:to_server,established; content:"${jndi:ldap",nocase,fast_pattern; classtype:web-application-attack; reference:cve,2021-44228; sid:1000994; rev:1; )

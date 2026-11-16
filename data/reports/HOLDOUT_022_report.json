@@ -1,0 +1,1637 @@
+{
+  "capture_id": "HOLDOUT_022",
+  "filename": "2024-10-23-Redline-Stealer-infection-traffic.pcap",
+  "malware_family": "Redline Stealer / RigEK",
+  "threat_category": "InfoStealer / Credential Harvesting",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 2,
+    "unique_signatures": 1,
+    "pcap_hash": "6498af315e9206c6ffc1ed5a488b28d1230c2fb44f2252bb5f05c3f8f68ce311",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [
+    {
+      "gid": 1,
+      "sid": 1394,
+      "rev": 17,
+      "count": 2,
+      "priority": 3,
+      "protocol": "TCP",
+      "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+      "triggering_packets": [
+        4389,
+        8784
+      ]
+    }
+  ],
+  "network_behaviour": {
+    "dns_queries": [
+      {
+        "pkt_num": 21,
+        "time_epoch": 1729710938.096605,
+        "query_name": "api.ip.sb",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.503,
+        "src_ip": "10.10.23.101",
+        "dst_ip": "10.10.23.1"
+      },
+      {
+        "pkt_num": 22,
+        "time_epoch": 1729710938.144944,
+        "query_name": "api.ip.sb",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+        "rcode": "0",
+        "entropy": 2.503,
+        "src_ip": "10.10.23.1",
+        "dst_ip": "10.10.23.101"
+      }
+    ],
+    "http_requests": [
+      {
+        "pkt_num": 7,
+        "time_epoch": 1729710932.485773,
+        "method": "POST",
+        "host": "188.190.10.10:55123",
+        "uri": "/",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "dst_port": 55123
+      },
+      {
+        "pkt_num": 14,
+        "time_epoch": 1729710937.865468,
+        "method": "POST",
+        "host": "188.190.10.10:55123",
+        "uri": "/",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "dst_port": 55123
+      },
+      {
+        "pkt_num": 4387,
+        "time_epoch": 1729710948.389252,
+        "method": "POST",
+        "host": "188.190.10.10:55123",
+        "uri": "/",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "dst_port": 55123
+      },
+      {
+        "pkt_num": 8786,
+        "time_epoch": 1729710956.879694,
+        "method": "POST",
+        "host": "188.190.10.10:55123",
+        "uri": "/",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "dst_port": 55123
+      }
+    ],
+    "tcp_connections": [
+      {
+        "flow_id": "10.10.23.101:49697<->188.190.10.10:55123/TCP",
+        "proto": "TCP",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "src_port": 49697,
+        "dst_port": 55123,
+        "duration_sec": 25.676,
+        "packet_count": 8787,
+        "byte_count": 6057154,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.10.23.101:49699<->104.26.13.31:443/TCP",
+        "proto": "TCP",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "104.26.13.31",
+        "src_port": 49699,
+        "dst_port": 443,
+        "duration_sec": 19.666,
+        "packet_count": 18,
+        "byte_count": 7162,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "ssl"
+      },
+      {
+        "flow_id": "10.10.23.1:53<->10.10.23.101:50004/UDP",
+        "proto": "UDP",
+        "src_ip": "10.10.23.1",
+        "dst_ip": "10.10.23.101",
+        "src_port": 53,
+        "dst_port": 50004,
+        "duration_sec": 0.048,
+        "packet_count": 2,
+        "byte_count": 228,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "10.10.23.101:49697<->188.190.10.10:55123/TCP",
+        "src_ip": "10.10.23.101",
+        "dst_ip": "188.190.10.10",
+        "dst_port": 55123,
+        "proto": "TCP",
+        "reasons": [
+          "Unusual destination port 55123"
+        ],
+        "packets": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      },
+      {
+        "flow_id": "10.10.23.1:53<->10.10.23.101:50004/UDP",
+        "src_ip": "10.10.23.1",
+        "dst_ip": "10.10.23.101",
+        "dst_port": 50004,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 50004"
+        ],
+        "packets": [
+          21,
+          22
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 3,
+      "connection_states": {
+        "SF": 1,
+        "RSTO": 2
+      },
+      "detected_services": {
+        "dns": 1,
+        "ssl": 1,
+        "http": 1
+      },
+      "files_transferred": [
+        {
+          "fuid": "Fy869i1DBkPUYm0Mv4",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 137
+        },
+        {
+          "fuid": "Fp34vy3LOi7THil4V2",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 212
+        },
+        {
+          "fuid": "F3RMAzOAfdZD9d405",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 144
+        },
+        {
+          "fuid": "FQbA574T9fwjwWvl1l",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 4744
+        },
+        {
+          "fuid": "FOLHp01pqQBcjX2NZ8",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 2786973
+        },
+        {
+          "fuid": "Fqtk3B1g4VDumPEjbe",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 147
+        },
+        {
+          "fuid": "F3yeqw3FcsDO10mMY",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 2786965
+        },
+        {
+          "fuid": "Fzd8b32kpxVBeDfsX7",
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 261
+        }
+      ],
+      "ssl_certificates": [
+        {
+          "fingerprint": "b4711ec5c976a7cdb47cebeb52a7ea846c0522b1c4f0d2f17928b5073fa569c2",
+          "subject": "CN=api.ip.sb",
+          "issuer": "CN=WR1,O=Google Trust Services,C=US",
+          "is_self_signed": false,
+          "key_alg": "rsaEncryption",
+          "sig_alg": "sha256WithRSAEncryption",
+          "key_length": 2048,
+          "ca": false
+        },
+        {
+          "fingerprint": "b10b6f00e609509e8700f6d34687a2bfce38ea05a8fdf1cdc40c3a2a0d0d0e45",
+          "subject": "CN=WR1,O=Google Trust Services,C=US",
+          "issuer": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+          "is_self_signed": false,
+          "key_alg": "rsaEncryption",
+          "sig_alg": "sha256WithRSAEncryption",
+          "key_length": 2048,
+          "ca": true
+        },
+        {
+          "fingerprint": "3ee0278df71fa3c125c4cd487f01d774694e6fc57e0cd94c24efd769133918e5",
+          "subject": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+          "issuer": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+          "is_self_signed": false,
+          "key_alg": "rsaEncryption",
+          "sig_alg": "sha256WithRSAEncryption",
+          "key_length": 4096,
+          "ca": true
+        }
+      ],
+      "ssl_sessions": [
+        {
+          "uid": "CBLdr72BCZMtl0fwQi",
+          "ts": 1729710938.211107,
+          "orig_h": "10.10.23.101",
+          "orig_p": 49699,
+          "resp_h": "104.26.13.31",
+          "resp_p": 443,
+          "version": "TLSv10",
+          "cipher": "TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA",
+          "server_name": "api.ip.sb",
+          "established": true,
+          "cert_chain_fps": [
+            "b4711ec5c976a7cdb47cebeb52a7ea846c0522b1c4f0d2f17928b5073fa569c2",
+            "b10b6f00e609509e8700f6d34687a2bfce38ea05a8fdf1cdc40c3a2a0d0d0e45",
+            "3ee0278df71fa3c125c4cd487f01d774694e6fc57e0cd94c24efd769133918e5"
+          ],
+          "sni_matches_cert": true
+        }
+      ],
+      "failed_connections": [
+        {
+          "uid": "CBLdr72BCZMtl0fwQi",
+          "ts": 1729710938.151702,
+          "orig_h": "10.10.23.101",
+          "orig_p": 49699,
+          "resp_h": "104.26.13.31",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 19.666,
+          "orig_bytes": 350,
+          "resp_bytes": 5824,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 8,
+          "resp_pkts": 10
+        },
+        {
+          "uid": "CBnrOV12a5Sa8tQcWe",
+          "ts": 1729710932.142507,
+          "orig_h": "10.10.23.101",
+          "orig_p": 49697,
+          "resp_h": "188.190.10.10",
+          "resp_p": 55123,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 25.676,
+          "orig_bytes": 5575122,
+          "resp_bytes": 6053,
+          "conn_state": "RSTO",
+          "history": "ShADadwwwTwR",
+          "orig_pkts": 3835,
+          "resp_pkts": 4952
+        }
+      ]
+    }
+  },
+  "correlations": [
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'api.ip.sb' resolved to 104.26.13.31, followed within 0.007s by TCP traffic to port 443",
+      "domain": "api.ip.sb",
+      "resolved_ip": "104.26.13.31",
+      "target_port": 443,
+      "time_delta_sec": 0.007,
+      "evidence_packets": [
+        22,
+        23,
+        24,
+        25,
+        26,
+        27
+      ],
+      "evidence_summary": "Packet 22 queried api.ip.sb -> 104.26.13.31; flow 10.10.23.101:49699<->104.26.13.31:443/TCP initiated immediately."
+    }
+  ],
+  "packet_evidence": [
+    {
+      "pkt_num": 7,
+      "source": "http_protocol",
+      "summary": "HTTP POST 188.190.10.10:55123/ (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.10.23.101",
+      "dst": "188.190.10.10:55123"
+    },
+    {
+      "pkt_num": 14,
+      "source": "http_protocol",
+      "summary": "HTTP POST 188.190.10.10:55123/ (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.10.23.101",
+      "dst": "188.190.10.10:55123"
+    },
+    {
+      "pkt_num": 21,
+      "source": "dns_protocol",
+      "summary": "DNS Query: api.ip.sb (TTL=None, Entropy=2.503)",
+      "proto": "UDP/53",
+      "src": "10.10.23.101",
+      "dst": "10.10.23.1"
+    },
+    {
+      "pkt_num": 22,
+      "source": "dns_protocol",
+      "summary": "DNS Query: api.ip.sb (TTL=None, Entropy=2.503)",
+      "proto": "UDP/53",
+      "src": "10.10.23.1",
+      "dst": "10.10.23.101"
+    },
+    {
+      "pkt_num": 4387,
+      "source": "http_protocol",
+      "summary": "HTTP POST 188.190.10.10:55123/ (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.10.23.101",
+      "dst": "188.190.10.10:55123"
+    },
+    {
+      "pkt_num": 4389,
+      "source": "snort_alert",
+      "summary": "SID 1394: INDICATOR-SHELLCODE x86 inc ecx NOOP",
+      "proto": "TCP",
+      "src": "10.10.23.101:49697",
+      "dst": "188.190.10.10:55123"
+    },
+    {
+      "pkt_num": 8784,
+      "source": "snort_alert",
+      "summary": "SID 1394: INDICATOR-SHELLCODE x86 inc ecx NOOP",
+      "proto": "TCP",
+      "src": "10.10.23.101:49697",
+      "dst": "188.190.10.10:55123"
+    },
+    {
+      "pkt_num": 8786,
+      "source": "http_protocol",
+      "summary": "HTTP POST 188.190.10.10:55123/ (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.10.23.101",
+      "dst": "188.190.10.10:55123"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:1394:4389",
+        "label": "Alert: INDICATOR-SHELLCODE x86 inc ec...",
+        "type": "alert",
+        "details": {
+          "sid": 1394,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              4389
+            ],
+            "alert_sid": 1394,
+            "gid": 1,
+            "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+            "proto": "TCP",
+            "src_ip": "10.10.23.101",
+            "dst_ip": "188.190.10.10",
+            "timestamp": "10/24-00:45:48.350137"
+          }
+        }
+      },
+      {
+        "id": "ip:10.10.23.101",
+        "label": "10.10.23.101",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.10.23.101"
+        }
+      },
+      {
+        "id": "ip:188.190.10.10",
+        "label": "188.190.10.10",
+        "type": "entity_ip",
+        "details": {
+          "ip": "188.190.10.10"
+        }
+      },
+      {
+        "id": "alert:1:1394:8784",
+        "label": "Alert: INDICATOR-SHELLCODE x86 inc ec...",
+        "type": "alert",
+        "details": {
+          "sid": 1394,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              8784
+            ],
+            "alert_sid": 1394,
+            "gid": 1,
+            "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+            "proto": "TCP",
+            "src_ip": "10.10.23.101",
+            "dst_ip": "188.190.10.10",
+            "timestamp": "10/24-00:45:56.819753"
+          }
+        }
+      },
+      {
+        "id": "flow:10.10.23.101:49697<->188.190.10.10:55123/TCP",
+        "label": "Flow: TCP 55123 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "188.190.10.10",
+          "dst_port": 55123,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "flow_id": "10.10.23.101:49697<->188.190.10.10:55123/TCP",
+            "packets": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "byte_count": 6057154,
+            "packet_count": 8787,
+            "duration": 25.676,
+            "start_time": 1729710932.142507,
+            "end_time": 1729710957.818652,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "flow:10.10.23.101:49699<->104.26.13.31:443/TCP",
+        "label": "Flow: TCP 443 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "104.26.13.31",
+          "dst_port": 443,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "flow_id": "10.10.23.101:49699<->104.26.13.31:443/TCP",
+            "packets": [
+              23,
+              24,
+              25,
+              26,
+              27,
+              28,
+              29,
+              30,
+              31,
+              32
+            ],
+            "byte_count": 7162,
+            "packet_count": 18,
+            "duration": 19.666,
+            "start_time": 1729710938.151702,
+            "end_time": 1729710957.818053,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "ssl"
+          }
+        }
+      },
+      {
+        "id": "ip:104.26.13.31",
+        "label": "104.26.13.31",
+        "type": "entity_ip",
+        "details": {
+          "ip": "104.26.13.31"
+        }
+      },
+      {
+        "id": "flow:10.10.23.1:53<->10.10.23.101:50004/UDP",
+        "label": "Flow: UDP 50004 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.10.23.1",
+          "dst_ip": "10.10.23.101",
+          "dst_port": 50004,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "flow_id": "10.10.23.1:53<->10.10.23.101:50004/UDP",
+            "packets": [
+              21,
+              22
+            ],
+            "byte_count": 228,
+            "packet_count": 2,
+            "duration": 0.048,
+            "start_time": 1729710938.096605,
+            "end_time": 1729710938.144944,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:10.10.23.1",
+        "label": "10.10.23.1",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.10.23.1"
+        }
+      },
+      {
+        "id": "dns:21",
+        "label": "DNS: api.ip.sb",
+        "type": "dns_event",
+        "details": {
+          "query_name": "api.ip.sb",
+          "entropy": 2.503,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              21
+            ],
+            "query_name": "api.ip.sb",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.503,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:api.ip.sb",
+        "label": "api.ip.sb",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 2.503
+        }
+      },
+      {
+        "id": "dns:22",
+        "label": "DNS: api.ip.sb",
+        "type": "dns_event",
+        "details": {
+          "query_name": "api.ip.sb",
+          "entropy": 2.503,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              22
+            ],
+            "query_name": "api.ip.sb",
+            "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+            "ttl": null,
+            "entropy": 2.503,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "ip:172.67.75.172",
+        "label": "172.67.75.172",
+        "type": "entity_ip",
+        "details": {
+          "ip": "172.67.75.172"
+        }
+      },
+      {
+        "id": "ip:104.26.12.31",
+        "label": "104.26.12.31",
+        "type": "entity_ip",
+        "details": {
+          "ip": "104.26.12.31"
+        }
+      },
+      {
+        "id": "http:7",
+        "label": "HTTP: POST /",
+        "type": "http_event",
+        "details": {
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              7
+            ],
+            "method": "POST",
+            "host": "188.190.10.10:55123",
+            "uri": "/",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "domain:188.190.10.10:55123",
+        "label": "188.190.10.10:55123",
+        "type": "entity_domain",
+        "details": {}
+      },
+      {
+        "id": "http:14",
+        "label": "HTTP: POST /",
+        "type": "http_event",
+        "details": {
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              14
+            ],
+            "method": "POST",
+            "host": "188.190.10.10:55123",
+            "uri": "/",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "http:4387",
+        "label": "HTTP: POST /",
+        "type": "http_event",
+        "details": {
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              4387
+            ],
+            "method": "POST",
+            "host": "188.190.10.10:55123",
+            "uri": "/",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "http:8786",
+        "label": "HTTP: POST /",
+        "type": "http_event",
+        "details": {
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "packets": [
+              8786
+            ],
+            "method": "POST",
+            "host": "188.190.10.10:55123",
+            "uri": "/",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "file:Fy869i1DBkPUYm0Mv4",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 137,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "Fy869i1DBkPUYm0Mv4",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 137,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:Fp34vy3LOi7THil4V2",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 212,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "Fp34vy3LOi7THil4V2",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 212,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:F3RMAzOAfdZD9d405",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 144,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "F3RMAzOAfdZD9d405",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 144,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:FQbA574T9fwjwWvl1l",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 4744,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "FQbA574T9fwjwWvl1l",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 4744,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:FOLHp01pqQBcjX2NZ8",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 2786973,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "FOLHp01pqQBcjX2NZ8",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 2786973,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:Fqtk3B1g4VDumPEjbe",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 147,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "Fqtk3B1g4VDumPEjbe",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 147,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:F3yeqw3FcsDO10mMY",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 2786965,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "F3yeqw3FcsDO10mMY",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 2786965,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "file:Fzd8b32kpxVBeDfsX7",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 261,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fuid": "Fzd8b32kpxVBeDfsX7",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 261,
+            "source": "HTTP",
+            "orig_h": "10.10.23.101",
+            "resp_h": "188.190.10.10"
+          }
+        }
+      },
+      {
+        "id": "cert:b4711ec5c976a7cd",
+        "label": "Cert: CN=api.ip.sb",
+        "type": "entity_cert",
+        "details": {
+          "subject": "CN=api.ip.sb",
+          "issuer": "CN=WR1,O=Google Trust Services,C=US",
+          "is_self_signed": false,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fingerprint": "b4711ec5c976a7cdb47cebeb52a7ea846c0522b1c4f0d2f17928b5073fa569c2",
+            "subject": "CN=api.ip.sb",
+            "issuer": "CN=WR1,O=Google Trust Services,C=US",
+            "is_self_signed": false,
+            "sig_alg": "sha256WithRSAEncryption"
+          }
+        }
+      },
+      {
+        "id": "cert:b10b6f00e609509e",
+        "label": "Cert: CN=WR1,O=Google Trust Ser",
+        "type": "entity_cert",
+        "details": {
+          "subject": "CN=WR1,O=Google Trust Services,C=US",
+          "issuer": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+          "is_self_signed": false,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fingerprint": "b10b6f00e609509e8700f6d34687a2bfce38ea05a8fdf1cdc40c3a2a0d0d0e45",
+            "subject": "CN=WR1,O=Google Trust Services,C=US",
+            "issuer": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+            "is_self_signed": false,
+            "sig_alg": "sha256WithRSAEncryption"
+          }
+        }
+      },
+      {
+        "id": "cert:3ee0278df71fa3c1",
+        "label": "Cert: CN=GTS Root R1,O=Google T",
+        "type": "entity_cert",
+        "details": {
+          "subject": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+          "issuer": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+          "is_self_signed": false,
+          "evidence": {
+            "capture_id": "HOLDOUT_022",
+            "fingerprint": "3ee0278df71fa3c125c4cd487f01d774694e6fc57e0cd94c24efd769133918e5",
+            "subject": "CN=GTS Root R1,O=Google Trust Services LLC,C=US",
+            "issuer": "CN=GlobalSign Root CA,OU=Root CA,O=GlobalSign nv-sa,C=BE",
+            "is_self_signed": false,
+            "sig_alg": "sha256WithRSAEncryption"
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "alert:1:1394:4389",
+        "target": "ip:188.190.10.10",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            4389
+          ],
+          "alert_sid": 1394,
+          "gid": 1,
+          "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "188.190.10.10",
+          "timestamp": "10/24-00:45:48.350137"
+        }
+      },
+      {
+        "source": "ip:10.10.23.101",
+        "target": "alert:1:1394:4389",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            4389
+          ],
+          "alert_sid": 1394,
+          "gid": 1,
+          "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "188.190.10.10",
+          "timestamp": "10/24-00:45:48.350137"
+        }
+      },
+      {
+        "source": "ip:10.10.23.101",
+        "target": "alert:1:1394:8784",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            8784
+          ],
+          "alert_sid": 1394,
+          "gid": 1,
+          "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "188.190.10.10",
+          "timestamp": "10/24-00:45:56.819753"
+        }
+      },
+      {
+        "source": "ip:10.10.23.101",
+        "target": "flow:10.10.23.101:49697<->188.190.10.10:55123/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.101:49697<->188.190.10.10:55123/TCP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 6057154,
+          "packet_count": 8787,
+          "duration": 25.676,
+          "start_time": 1729710932.142507,
+          "end_time": 1729710957.818652,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.10.23.101",
+        "target": "flow:10.10.23.101:49699<->104.26.13.31:443/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.101:49699<->104.26.13.31:443/TCP",
+          "packets": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32
+          ],
+          "byte_count": 7162,
+          "packet_count": 18,
+          "duration": 19.666,
+          "start_time": 1729710938.151702,
+          "end_time": 1729710957.818053,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "ssl"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:Fy869i1DBkPUYm0Mv4",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fy869i1DBkPUYm0Mv4",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 137,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:Fp34vy3LOi7THil4V2",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fp34vy3LOi7THil4V2",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 212,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:F3RMAzOAfdZD9d405",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "F3RMAzOAfdZD9d405",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 144,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:FQbA574T9fwjwWvl1l",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "FQbA574T9fwjwWvl1l",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 4744,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:FOLHp01pqQBcjX2NZ8",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "FOLHp01pqQBcjX2NZ8",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 2786973,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:Fqtk3B1g4VDumPEjbe",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fqtk3B1g4VDumPEjbe",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 147,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:F3yeqw3FcsDO10mMY",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "F3yeqw3FcsDO10mMY",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 2786965,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "ip:188.190.10.10",
+        "target": "file:Fzd8b32kpxVBeDfsX7",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fzd8b32kpxVBeDfsX7",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 261,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "alert:1:1394:8784",
+        "target": "ip:188.190.10.10",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            8784
+          ],
+          "alert_sid": 1394,
+          "gid": 1,
+          "msg": "INDICATOR-SHELLCODE x86 inc ecx NOOP",
+          "proto": "TCP",
+          "src_ip": "10.10.23.101",
+          "dst_ip": "188.190.10.10",
+          "timestamp": "10/24-00:45:56.819753"
+        }
+      },
+      {
+        "source": "flow:10.10.23.101:49697<->188.190.10.10:55123/TCP",
+        "target": "ip:188.190.10.10",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.101:49697<->188.190.10.10:55123/TCP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 6057154,
+          "packet_count": 8787,
+          "duration": 25.676,
+          "start_time": 1729710932.142507,
+          "end_time": 1729710957.818652,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "flow:10.10.23.101:49699<->104.26.13.31:443/TCP",
+        "target": "ip:104.26.13.31",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.101:49699<->104.26.13.31:443/TCP",
+          "packets": [
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32
+          ],
+          "byte_count": 7162,
+          "packet_count": 18,
+          "duration": 19.666,
+          "start_time": 1729710938.151702,
+          "end_time": 1729710957.818053,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "ssl"
+        }
+      },
+      {
+        "source": "flow:10.10.23.1:53<->10.10.23.101:50004/UDP",
+        "target": "ip:10.10.23.101",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.1:53<->10.10.23.101:50004/UDP",
+          "packets": [
+            21,
+            22
+          ],
+          "byte_count": 228,
+          "packet_count": 2,
+          "duration": 0.048,
+          "start_time": 1729710938.096605,
+          "end_time": 1729710938.144944,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.10.23.1",
+        "target": "flow:10.10.23.1:53<->10.10.23.101:50004/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "flow_id": "10.10.23.1:53<->10.10.23.101:50004/UDP",
+          "packets": [
+            21,
+            22
+          ],
+          "byte_count": 228,
+          "packet_count": 2,
+          "duration": 0.048,
+          "start_time": 1729710938.096605,
+          "end_time": 1729710938.144944,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:api.ip.sb",
+        "target": "dns:21",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            21
+          ],
+          "query_name": "api.ip.sb",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.503,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:api.ip.sb",
+        "target": "dns:22",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            22
+          ],
+          "query_name": "api.ip.sb",
+          "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+          "ttl": null,
+          "entropy": 2.503,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:api.ip.sb",
+        "target": "ip:104.26.13.31",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            22
+          ],
+          "query_name": "api.ip.sb",
+          "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+          "ttl": null,
+          "entropy": 2.503,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:api.ip.sb",
+        "target": "ip:172.67.75.172",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            22
+          ],
+          "query_name": "api.ip.sb",
+          "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+          "ttl": null,
+          "entropy": 2.503,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:api.ip.sb",
+        "target": "ip:104.26.12.31",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            22
+          ],
+          "query_name": "api.ip.sb",
+          "resolved_ip": "104.26.13.31,172.67.75.172,104.26.12.31",
+          "ttl": null,
+          "entropy": 2.503,
+          "is_response": false
+        }
+      },
+      {
+        "source": "dns:22",
+        "target": "flow:10.10.23.101:49699<->104.26.13.31:443/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'api.ip.sb' resolved to 104.26.13.31, followed within 0.007s by TCP traffic to port 443",
+          "domain": "api.ip.sb",
+          "resolved_ip": "104.26.13.31",
+          "target_port": 443,
+          "time_delta_sec": 0.007,
+          "evidence_packets": [
+            22,
+            23,
+            24,
+            25,
+            26,
+            27
+          ],
+          "evidence_summary": "Packet 22 queried api.ip.sb -> 104.26.13.31; flow 10.10.23.101:49699<->104.26.13.31:443/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "domain:188.190.10.10:55123",
+        "target": "http:7",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            7
+          ],
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "domain:188.190.10.10:55123",
+        "target": "http:14",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            14
+          ],
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "domain:188.190.10.10:55123",
+        "target": "http:4387",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            4387
+          ],
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "domain:188.190.10.10:55123",
+        "target": "http:8786",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "packets": [
+            8786
+          ],
+          "method": "POST",
+          "host": "188.190.10.10:55123",
+          "uri": "/",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "file:Fy869i1DBkPUYm0Mv4",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fy869i1DBkPUYm0Mv4",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 137,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:Fp34vy3LOi7THil4V2",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fp34vy3LOi7THil4V2",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 212,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:F3RMAzOAfdZD9d405",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "F3RMAzOAfdZD9d405",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 144,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:FQbA574T9fwjwWvl1l",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "FQbA574T9fwjwWvl1l",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 4744,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:FOLHp01pqQBcjX2NZ8",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "FOLHp01pqQBcjX2NZ8",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 2786973,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:Fqtk3B1g4VDumPEjbe",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fqtk3B1g4VDumPEjbe",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 147,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:F3yeqw3FcsDO10mMY",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "F3yeqw3FcsDO10mMY",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 2786965,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      },
+      {
+        "source": "file:Fzd8b32kpxVBeDfsX7",
+        "target": "ip:10.10.23.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "HOLDOUT_022",
+          "fuid": "Fzd8b32kpxVBeDfsX7",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 261,
+          "source": "HTTP",
+          "orig_h": "10.10.23.101",
+          "resp_h": "188.190.10.10"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+alert http (msg:"WEB-APPLICATION-ATTACK SQL Injection attempt - unescaped single quote in URI"; flow:to_server,established; http_uri; content:"'",fast_pattern,nocase; classtype:web-application-attack; sid:9001014; rev:1; )

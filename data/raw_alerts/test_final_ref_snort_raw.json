@@ -1,0 +1,1 @@
+{ "timestamp" : "11/14-16:06:07.003000", "pkt_num" : 4, "proto" : "TCP", "pkt_gen" : "raw", "pkt_len" : 143, "dir" : "C2S", "src_ap" : "185.220.101.5:44892", "dst_ap" : "192.168.1.50:443", "rule" : "1:1000205:1", "action" : "allow" }

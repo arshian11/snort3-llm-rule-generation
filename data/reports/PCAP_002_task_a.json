@@ -1,0 +1,19 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_002",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 2101424,
+      "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+      "triggering_packets": [
+        1
+      ],
+      "matching_conditions": "flow:to_server,established; http_method; http_uri; content:\"'\",nocase,fast_pattern; pcre:\"/\\bunion\\s+select\\b/i\"; sid:2101424;",
+      "activity_relationship": "Only a single alert was generated for the captured traffic. The alert corresponds to the initial HTTP GET request that contains a suspicious single\u2011quote character in the query string, which the rule interprets as a potential blind SQL\u2011injection attempt. No additional alerts were produced, indicating that the observed activity is treated as a solitary injection probe rather than a multi\u2011stage campaign within this capture.",
+      "coverage_limitations": "The rule focuses exclusively on payload patterns (single\u2011quote, \"union select\") in HTTP request URIs. It does not inspect HTTP POST bodies, other HTTP methods (e.g., PUT, DELETE), or encoded/obfuscated payloads. It also lacks any correlation with subsequent server responses (e.g., error messages that confirm successful injection) or with other protocol activity such as DNS lookups for the target host. Rate\u2011limiting, evasion via URL encoding, or use of stacked queries are not covered. The rule does not employ any thresholding, so repeated probes would generate a flood of alerts.",
+      "uncovered_related_events": "Potential DNS query for db.corp, TCP three\u2011way handshake details, HTTP response packets that might contain SQL error messages, any follow\u2011up malicious POST or GET requests that exploit the injection, outbound data exfiltration attempts, or lateral movement traffic that could follow a successful injection are not captured by this signature."
+    }
+  ],
+  "overall_detection_gaps": "The current detection only flags the presence of classic SQL\u2011injection signatures in HTTP request URIs. It misses the broader attack lifecycle: DNS resolution, TCP session establishment, server\u2011side error feedback, subsequent exploitation steps (e.g., data extraction, command execution), and alternative injection vectors (POST bodies, JSON payloads, encoded strings). Additionally, there is no correlation across multiple packets or sessions, no rate\u2011limiting to prevent alert fatigue, and no contextual enrichment (e.g., reputation of the target domain). Enhancing coverage would require supplemental rules that monitor HTTP responses for SQL error codes, inspect POST data, decode URL\u2011encoded payloads, and correlate DNS/TCP activity with the injection attempt."
+}

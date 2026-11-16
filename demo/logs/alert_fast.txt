@@ -1,0 +1,86 @@
+11/14-16:06:07.003000 [**] [1:2034647:1] "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)" [**] [Priority: 0] {TCP} 185.220.101.5:44892 -> 192.168.1.50:443
+11/14-16:06:08.004000 [**] [1:2024897:2] "ET MALWARE Cobalt Strike Malleable C2 Beaconing" [**] [Priority: 0] {TCP} 185.220.101.5:44892 -> 192.168.1.50:443
+11/14-16:06:04.000000 [**] [1:2101424:5] "GPL SQL UNION SELECT Blind SQL Injection Attempt" [**] [Priority: 0] {TCP} 103.251.167.20:39114 -> 192.168.1.50:80
+11/14-16:06:04.000000 [**] [1:2010935:2] "ET SCAN Potential SSH Scan" [**] [Priority: 0] {TCP} 45.142.166.12:51230 -> 192.168.1.20:22
+11/14-16:06:04.000000 [**] [1:2100366:8] "GPL ICMP Large ICMP Packet Ping Diagnostic" [**] [Priority: 0] {ICMP} 192.168.1.254 -> 192.168.1.1
+11/14-16:06:04.000000 [**] [1:29456:3] "PROTOCOL-ICMP Unusual PING detected" [**] [Classification: Information Leak] [Priority: 2] {ICMP} 192.168.1.254 -> 192.168.1.1
+11/14-16:06:04.000000 [**] [1:384:8] "PROTOCOL-ICMP PING" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 192.168.1.254 -> 192.168.1.1
+11/14-16:06:04.000000 [**] [1:29456:3] "PROTOCOL-ICMP Unusual PING detected" [**] [Classification: Information Leak] [Priority: 2] {ICMP} 192.168.1.254 -> 192.168.1.1
+11/14-16:06:04.000000 [**] [1:384:8] "PROTOCOL-ICMP PING" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 192.168.1.254 -> 192.168.1.1
+01/01-05:36:10.544201 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 187.19.218.40 -> 10.0.2.16
+01/01-05:36:16.436306 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/01-05:37:12.418611 [**] [1:254:17] "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority" [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 8.8.8.8:53 -> 10.0.2.16:57037
+01/01-06:09:12.839796 [**] [1:254:17] "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority" [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 8.8.8.8:53 -> 10.0.2.16:51898
+01/01-06:40:52.822832 [**] [1:254:17] "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority" [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 8.8.8.8:53 -> 10.0.2.16:55140
+01/01-07:11:07.792362 [**] [1:254:17] "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority" [**] [Classification: Potentially Bad Traffic] [Priority: 2] {UDP} 8.8.8.8:53 -> 10.0.2.16:54152
+01/01-12:55:57.754583 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/01-12:56:44.725284 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 187.19.218.40 -> 10.0.2.16
+01/01-12:56:52.635014 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/01-15:03:26.467951 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/01-15:03:35.381703 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/01-15:04:20.120400 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/01-15:05:11.610821 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 187.19.218.40 -> 10.0.2.16
+01/01-15:05:18.626468 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/01-17:12:35.752523 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/01-17:13:26.551766 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 187.19.218.40 -> 10.0.2.16
+01/01-17:13:34.622112 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/01-19:20:15.564609 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/01-19:21:09.605396 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 187.19.218.40 -> 10.0.2.16
+01/01-19:21:17.314991 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/02-08:56:38.007220 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/02-08:57:18.577957 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/02-11:05:35.391545 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/02-13:13:46.997409 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/02-15:20:52.774834 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/02-15:21:00.026735 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/02-15:21:44.201003 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-05:58:02.032241 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/03-07:01:17.297808 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-07:02:12.790315 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-09:08:06.176908 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/03-09:08:15.162305 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/03-09:09:54.793297 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-11:16:38.762492 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-11:17:35.303832 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-12:21:44.496574 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-12:22:40.836578 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-12:22:56.088503 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/03-13:27:00.344904 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-13:27:58.231168 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-14:32:01.921167 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-14:32:56.125778 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-15:37:01.484958 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-15:37:54.895995 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-16:41:39.870392 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-16:42:37.178525 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-17:46:14.047915 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-17:47:10.617554 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-18:50:45.113080 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-18:51:42.887923 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-19:55:24.019676 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-19:56:26.259821 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-21:00:21.255899 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-21:01:15.149451 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/03-23:07:51.758150 [**] [1:449:9] "PROTOCOL-ICMP Time-To-Live Exceeded in Transit" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 115.69.240.13 -> 10.0.2.16
+01/03-23:08:00.139308 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/03-23:08:58.320401 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/04-01:16:09.958673 [**] [1:449:9] "PROTOCOL-ICMP Time-To-Live Exceeded in Transit" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 115.69.240.13 -> 10.0.2.16
+01/04-01:16:17.899488 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-01:17:15.341812 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 95.57.211.247 -> 10.0.2.16
+01/04-03:23:27.969472 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/04-03:23:35.921595 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/04-03:24:04.108955 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.240.194.123 -> 10.0.2.16
+01/04-03:24:12.696453 [**] [1:449:9] "PROTOCOL-ICMP Time-To-Live Exceeded in Transit" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 115.69.240.13 -> 10.0.2.16
+01/04-03:24:20.668301 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-04:28:57.267778 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-05:33:55.600504 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-06:38:46.560132 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-07:43:43.049180 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-08:48:34.539559 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-09:53:04.149883 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-10:58:20.176971 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 111.242.171.190 -> 10.0.2.16
+01/04-15:14:10.886493 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.235.190.17 -> 10.0.2.16
+01/04-15:14:17.770456 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 66.36.228.41 -> 10.0.2.16
+01/04-19:32:21.652718 [**] [1:449:9] "PROTOCOL-ICMP Time-To-Live Exceeded in Transit" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 115.69.240.13 -> 10.0.2.16
+01/04-19:33:06.522891 [**] [1:449:9] "PROTOCOL-ICMP Time-To-Live Exceeded in Transit" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 223.19.48.1 -> 10.0.2.16
+01/04-21:42:43.126178 [**] [1:402:16] "PROTOCOL-ICMP destination unreachable port unreachable packet detected" [**] [Classification: Misc activity] [Priority: 3] {ICMP} 113.252.247.200 -> 10.0.2.16

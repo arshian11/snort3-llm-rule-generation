@@ -1,0 +1,2 @@
+{ "timestamp" : "10/24-00:45:48.350137", "pkt_num" : 4389, "proto" : "TCP", "pkt_gen" : "stream_tcp", "pkt_len" : 16357, "dir" : "C2S", "src_ap" : "10.10.23.101:49697", "dst_ap" : "188.190.10.10:55123", "rule" : "1:1394:17", "action" : "allow" }
+{ "timestamp" : "10/24-00:45:56.819753", "pkt_num" : 8784, "proto" : "TCP", "pkt_gen" : "stream_tcp", "pkt_len" : 16424, "dir" : "C2S", "src_ap" : "10.10.23.101:49697", "dst_ap" : "188.190.10.10:55123", "rule" : "1:1394:17", "action" : "allow" }

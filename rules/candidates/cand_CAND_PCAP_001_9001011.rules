@@ -1,0 +1,1 @@
+alert http ( msg:"SERVER-WEBAPP Log4j JNDI User-Agent request"; flow:to_server,established; http_header; content:"User-Agent: ${jndi:ldap://",nocase,fast_pattern; classtype:web-application-attack; reference:cve,2021-44228; metadata:policy max-detect-ips drop, ruleset community, malware_family Log4j_RCE___Cobalt_Strike_C2; sid:9001011; rev:1; )

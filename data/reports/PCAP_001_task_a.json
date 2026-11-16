@@ -1,0 +1,31 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_001",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 2034647,
+      "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
+      "triggering_packets": [
+        4
+      ],
+      "matching_conditions": "flow:to_server,established; http_header; content:\"${jndi:ldap\",nocase,fast_pattern; content:\"://\",distance:0; pcre:\"/\\${jndi:ldap:\\/\\/[^\\s]+/i\";",
+      "activity_relationship": "This alert captures the initial exploitation vector (Log4j JNDI injection) that is used to pull the second-stage payload. It is the first stage of the same malicious campaign that later produces the Cobalt Strike beacon.",
+      "coverage_limitations": "The rule only inspects HTTP headers for the JNDI string. It does not consider other vectors (e.g., JNDI in other headers, request bodies, or non\u2011HTTP protocols). It also does not verify the LDAP server reachability or the success of the payload retrieval, leading to possible false positives on benign JNDI strings.",
+      "uncovered_related_events": "DNS lookup for 185.220.101.5, the LDAP request to port 13, the TLS handshake on port 443, and any subsequent file download or command\u2011and\u2011control traffic that follows the successful exploit."
+    },
+    {
+      "gid": 1,
+      "sid": 2024897,
+      "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
+      "triggering_packets": [
+        5
+      ],
+      "matching_conditions": "flow:to_server,established; http_uri; content:\"/beacon\",nocase,fast_pattern; content:\"id=\",distance:0; pcre:\"/\\/beacon\\?id=\\d+/i\";",
+      "activity_relationship": "This alert represents the second stage \u2013 the Cobalt Strike beacon that is delivered after the Log4j exploit. Both alerts belong to the same intrusion chain (initial RCE \u2192 Cobalt Strike payload \u2192 periodic beaconing).",
+      "coverage_limitations": "The signature only looks for a static URI pattern (\"/beacon\" with an id parameter) in HTTP GET requests. It misses beacons that use alternative paths, POST methods, encrypted payloads, or other transport protocols (e.g., DNS, SMB, or raw TCP). It also does not enforce timing analysis, so it cannot differentiate legitimate periodic traffic from malicious beaconing.",
+      "uncovered_related_events": "Beacon traffic on other ports/protocols, encrypted C2 payloads, subsequent command execution traffic, lateral movement traffic, and any fallback C2 channels that Cobalt Strike may open (e.g., DNS, TCP reverse shells)."
+    }
+  ],
+  "overall_detection_gaps": "The existing signatures detect the explicit Log4j JNDI injection in an HTTP User\u2011Agent header and a specific Cobalt Strike beacon URI, but they ignore the surrounding attack lifecycle. Missing detections include DNS queries for the attacker\u2011controlled domain, the LDAP request that actually serves the malicious class, TLS handshake anomalies, any file download or execution of the Cobalt Strike payload, lateral movement, and alternative C2 transports. Additionally, timing\u2011based beacon detection and correlation across multiple protocols are not covered, leaving gaps that an attacker could exploit by varying headers, using POST bodies, or switching to non\u2011HTTP channels."
+}

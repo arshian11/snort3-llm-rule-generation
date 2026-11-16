@@ -1,0 +1,604 @@
+{
+  "2026-11-16T00:50:00.000000": {
+    "created_at": "2026-11-16T00:50:00.000000",
+    "total_rules": 6,
+    "sids": [
+      9001001,
+      9001002,
+      9001003,
+      9001004,
+      9001005,
+      9001006
+    ],
+    "rules": {
+      "9001001": {
+        "rule_id": 9001001,
+        "rule_text": "alert http ( msg:\"ET EXPLOIT Apache Log4j JNDI Injection Pattern in Request Headers\"; flow:to_server,established; http_header; content:\"${jndi:\",fast_pattern,nocase; classtype:attempted-user; sid:9001001; rev:1; )",
+        "rule_objective": "Detect HTTP requests that contain a malicious Log4j JNDI LDAP payload in the User-Agent header (evidence of CVE-2021-44228 exploitation).",
+        "evidence": {
+          "pcaps": [
+            "PCAP_001"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "APPROVED_DEPLOYED",
+        "source_pcap": "PCAP_001",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": null,
+        "analyst_review": null
+      },
+      "9001002": {
+        "rule_id": 9001002,
+        "rule_text": "alert http ( msg:\"WEB-APPLICATION-ATTACK Generic SQL Injection Meta-Character in Request URI\"; flow:to_server,established; http_uri; content:\"'\",fast_pattern; pcre:\"/(%27|')(\\s*or\\s*|\\s*union\\s*)/i\"; classtype:web-application-attack; sid:9001002; rev:1; )",
+        "rule_objective": "Detect HTTP requests containing a single-quote (') character, a common SQL meta-character used to terminate strings in injection payloads.",
+        "evidence": {
+          "pcaps": [
+            "PCAP_002"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "FAILED_NO_TRIGGER",
+        "source_pcap": "PCAP_002",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": {
+          "rule_id": 9001002,
+          "rule_text": "alert http ( msg:\"WEB-APPLICATION-ATTACK Generic SQL Injection Meta-Character in Request URI\"; flow:to_server,established; http_uri; content:\"'\",fast_pattern; pcre:\"/(%27|')(\\s*or\\s*|\\s*union\\s*)/i\"; classtype:web-application-attack; sid:9001002; rev:1; )",
+          "overall_status": "FAILED_NO_TRIGGER",
+          "stage1_syntax": {
+            "stage": 1,
+            "name": "Syntax Validation",
+            "passed": true,
+            "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001002.rules",
+            "return_code": 0,
+            "error_output": ""
+          },
+          "stage2_positive": {
+            "stage": 2,
+            "name": "Positive PCAP Testing",
+            "tested_pcaps_count": 1,
+            "detected_pcaps_count": 0,
+            "missed_pcaps_count": 1,
+            "total_alerts": 0,
+            "detected": [],
+            "missed": [
+              {
+                "capture_id": "PCAP_002",
+                "filename": "scenario2_web_sqli.pcap"
+              }
+            ]
+          },
+          "stage3_negative": {
+            "stage": 3,
+            "name": "Negative PCAP Testing (False Positives)",
+            "tested_benign_count": 2,
+            "false_positive_pcaps_count": 0,
+            "benign_clean_pcaps_count": 2,
+            "total_fp_alerts": 0,
+            "false_positive_details": [],
+            "clean_captures": [
+              {
+                "capture_id": "BENIGN_033",
+                "filename": "casual_traffic.pcapng"
+              },
+              {
+                "capture_id": "BENIGN_034",
+                "filename": "yt_watch_40_min.pcapng"
+              }
+            ]
+          },
+          "stage4_generalization": {
+            "stage": 4,
+            "name": "Generalization Testing",
+            "status": "SKIPPED",
+            "target_family": "SQL Injection",
+            "reason": "No matching malware family in holdout split for 'SQL Injection'",
+            "tested_holdout_count": 0,
+            "detected_pcaps_count": 0,
+            "missed_pcaps_count": 0,
+            "cross_family_clean_count": 0,
+            "cross_family_fp_count": 0,
+            "total_alerts": 0,
+            "detected": [],
+            "missed": [],
+            "cross_family_results": {
+              "clean_true_negatives": [],
+              "unexpected_false_positives": []
+            }
+          },
+          "metrics": {
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "true_negatives": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0
+          }
+        },
+        "analyst_review": null
+      },
+      "9001003": {
+        "rule_id": 9001003,
+        "rule_text": "alert tcp $EXTERNAL_NET any -> $HOME_NET 22 ( msg:\"SCAN Anomalous High-Frequency SSH Handshake Connection\"; flow:to_server,established; threshold:type threshold, track by_src, count 5, seconds 10; classtype:attempted-recon; sid:9001003; rev:1; )",
+        "rule_objective": "Detect high-frequency SSH connection attempts and brute-force reconnaissance scanning against internal SSH servers.",
+        "evidence": {
+          "pcaps": [
+            "PCAP_003"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "FAILED_SYNTAX",
+        "source_pcap": "PCAP_003",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": {
+          "rule_id": 9001003,
+          "rule_text": "alert tcp $EXTERNAL_NET any -> $HOME_NET $SSH_PORTS (msg:\"SCAN Anomalous High-Frequency SSH Handshake Connection\"; flow:to_server,established; threshold:type threshold, track by_src, count 5, seconds 10; classtype:attempted-admin; sid:9001003; rev:1;)",
+          "overall_status": "FAILED_SYNTAX",
+          "stage1_syntax": {
+            "stage": 1,
+            "name": "Syntax Validation",
+            "passed": false,
+            "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001003.rules",
+            "return_code": 1,
+            "error_output": "ERROR: /mnt/d/GitHub/snort3/rules/candidates/candidate_9001003.rules:1 unknown rule keyword: threshold.\nFATAL: see prior 1 errors (0 warnings)\nFatal Error, Quitting.."
+          },
+          "stage2_positive": {
+            "status": "SKIPPED",
+            "detected_pcaps_count": 0,
+            "tested_pcaps_count": 0,
+            "total_alerts": 0
+          },
+          "stage3_negative": {
+            "status": "SKIPPED",
+            "false_positive_pcaps_count": 0,
+            "tested_benign_count": 0,
+            "total_fp_alerts": 0
+          },
+          "stage4_generalization": {
+            "status": "SKIPPED",
+            "detected_pcaps_count": 0,
+            "tested_holdout_count": 0,
+            "total_alerts": 0
+          },
+          "metrics": {
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "true_negatives": 0,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0
+          }
+        },
+        "analyst_review": null
+      },
+      "9001004": {
+        "rule_id": 9001004,
+        "rule_text": "alert http ( msg:\"MALWARE-CNC Anomalous URI Pattern Containing Multiple Square Brackets\"; flow:to_server,established; http_uri; content:\"?[[[[[\",fast_pattern,nocase; classtype:trojan-activity; sid:9001004; rev:1; )",
+        "rule_objective": "Detect malicious staging activity characterized by a specific, anomalous URI pattern containing multiple square brackets.",
+        "evidence": {
+          "pcaps": [
+            "HOLDOUT_013"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "PENDING_REVIEW",
+        "source_pcap": "HOLDOUT_013",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": {
+          "rule_id": 9001004,
+          "rule_text": "alert http ( msg:\"MALWARE-CNC Anomalous URI Pattern Containing Multiple Square Brackets\"; flow:to_server,established; http_uri; content:\"?[[[[[\",fast_pattern,nocase; classtype:trojan-activity; sid:9001004; rev:1; )",
+          "overall_status": "PASSED",
+          "stage1_syntax": {
+            "stage": 1,
+            "name": "Syntax Validation",
+            "passed": true,
+            "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001004.rules",
+            "return_code": 0,
+            "error_output": ""
+          },
+          "stage2_positive": {
+            "stage": 2,
+            "name": "Positive PCAP Testing",
+            "tested_pcaps_count": 1,
+            "detected_pcaps_count": 1,
+            "missed_pcaps_count": 0,
+            "total_alerts": 1,
+            "detected": [
+              {
+                "capture_id": "HOLDOUT_013",
+                "filename": "2017-12-13-Hancitor-infection-with-IcedID.pcap",
+                "alerts_count": 1,
+                "triggering_packets": [
+                  7
+                ]
+              }
+            ],
+            "missed": []
+          },
+          "stage3_negative": {
+            "stage": 3,
+            "name": "Negative PCAP Testing (False Positives)",
+            "tested_benign_count": 2,
+            "false_positive_pcaps_count": 0,
+            "benign_clean_pcaps_count": 2,
+            "total_fp_alerts": 0,
+            "false_positive_details": [],
+            "clean_captures": [
+              {
+                "capture_id": "BENIGN_033",
+                "filename": "casual_traffic.pcapng"
+              },
+              {
+                "capture_id": "BENIGN_034",
+                "filename": "yt_watch_40_min.pcapng"
+              }
+            ]
+          },
+          "stage4_generalization": {
+            "stage": 4,
+            "name": "Generalization Testing",
+            "status": "SKIPPED",
+            "target_family": "Hancitor Loader (IcedID / ZLoader)",
+            "reason": "No matching malware family in holdout split for 'Hancitor Loader (IcedID / ZLoader)'",
+            "tested_holdout_count": 0,
+            "detected_pcaps_count": 0,
+            "missed_pcaps_count": 0,
+            "cross_family_clean_count": 0,
+            "cross_family_fp_count": 0,
+            "total_alerts": 0,
+            "detected": [],
+            "missed": [],
+            "cross_family_results": {
+              "clean_true_negatives": [],
+              "unexpected_false_positives": []
+            }
+          },
+          "metrics": {
+            "true_positives": 1,
+            "false_positives": 0,
+            "false_negatives": 0,
+            "true_negatives": 2,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0
+          }
+        },
+        "analyst_review": null
+      },
+      "9001005": {
+        "rule_id": 9001005,
+        "rule_text": "alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:\"BOTNET-CNC Suspicious Outbound DNS Query Anomaly Linked to Botnet\"; flow:to_server; content:\"|00 01 00 01|\"; classtype:trojan-activity; sid:9001005; rev:1; )",
+        "rule_objective": "Detect anomalous outbound DNS resolution activity and spoofing associated with botnet communication.",
+        "evidence": {
+          "pcaps": [
+            "PCAP_009"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "FAILED_FALSE_POSITIVE",
+        "source_pcap": "PCAP_009",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": {
+          "rule_id": 9001005,
+          "rule_text": "alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:\"BOTNET-CNC Suspicious Outbound DNS Query Anomaly Linked to Botnet\"; flow:to_server; content:\"|00 01 00 01|\"; classtype:trojan-activity; sid:9001005; rev:1; )",
+          "overall_status": "FAILED_FALSE_POSITIVE",
+          "stage1_syntax": {
+            "stage": 1,
+            "name": "Syntax Validation",
+            "passed": true,
+            "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001005.rules",
+            "return_code": 0,
+            "error_output": ""
+          },
+          "stage2_positive": {
+            "stage": 2,
+            "name": "Positive PCAP Testing",
+            "tested_pcaps_count": 1,
+            "detected_pcaps_count": 1,
+            "missed_pcaps_count": 0,
+            "total_alerts": 13,
+            "detected": [
+              {
+                "capture_id": "PCAP_009",
+                "filename": "2013-11-06_capture-win8.pcap",
+                "alerts_count": 13,
+                "triggering_packets": [
+                  16,
+                  21,
+                  86,
+                  103,
+                  105
+                ]
+              }
+            ],
+            "missed": []
+          },
+          "stage3_negative": {
+            "stage": 3,
+            "name": "Negative PCAP Testing (False Positives)",
+            "tested_benign_count": 2,
+            "false_positive_pcaps_count": 0,
+            "benign_clean_pcaps_count": 2,
+            "total_fp_alerts": 0,
+            "false_positive_details": [],
+            "clean_captures": [
+              {
+                "capture_id": "BENIGN_033",
+                "filename": "casual_traffic.pcapng"
+              },
+              {
+                "capture_id": "BENIGN_034",
+                "filename": "yt_watch_40_min.pcapng"
+              }
+            ]
+          },
+          "stage4_generalization": {
+            "stage": 4,
+            "name": "Generalization Testing",
+            "status": "FAILED_CROSS_FAMILY_ALERT",
+            "target_family": "CTU-13 Botnet",
+            "tested_holdout_count": 4,
+            "family_holdouts_tested": 2,
+            "detected_pcaps_count": 2,
+            "missed_pcaps_count": 0,
+            "cross_family_tested": 2,
+            "cross_family_clean_count": 0,
+            "cross_family_fp_count": 2,
+            "total_alerts": 6806,
+            "detected": [
+              {
+                "capture_id": "HOLDOUT_007",
+                "filename": "2013-11-06_capture-win10.pcap",
+                "malware_family": "CTU-13 Botnet",
+                "alerts_count": 62,
+                "triggering_packets": [
+                  19,
+                  22,
+                  42,
+                  54,
+                  78
+                ]
+              },
+              {
+                "capture_id": "HOLDOUT_010",
+                "filename": "2014-01-25_capture_win3.pcap",
+                "malware_family": "CTU-13 Botnet",
+                "alerts_count": 6727,
+                "triggering_packets": [
+                  15,
+                  21,
+                  23,
+                  24,
+                  25
+                ]
+              }
+            ],
+            "missed": [],
+            "cross_family_results": {
+              "clean_true_negatives": [],
+              "unexpected_false_positives": [
+                {
+                  "capture_id": "HOLDOUT_013",
+                  "filename": "2017-12-13-Hancitor-infection-with-IcedID.pcap",
+                  "malware_family": "Hancitor Loader (IcedID / ZLoader)",
+                  "alerts_count": 15,
+                  "details": "Unexpected trigger on unrelated threat family (Specificity Violation)"
+                },
+                {
+                  "capture_id": "HOLDOUT_016",
+                  "filename": "2022-10-10-Qakbot-infection-with-Cobalt-Strike-carved-and-sanitized.pcap",
+                  "malware_family": "Qakbot Banking Trojan",
+                  "alerts_count": 2,
+                  "details": "Unexpected trigger on unrelated threat family (Specificity Violation)"
+                }
+              ]
+            }
+          },
+          "metrics": {
+            "true_positives": 3,
+            "false_positives": 2,
+            "false_negatives": 0,
+            "true_negatives": 2,
+            "precision": 0.6,
+            "recall": 1.0,
+            "f1_score": 0.75
+          }
+        },
+        "analyst_review": null
+      },
+      "9001006": {
+        "rule_id": 9001006,
+        "rule_text": "alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:\"MALWARE-CNC Sliver C2 Domain Resolution Query\"; flow:to_server; content:\"carwaded.com\",fast_pattern,nocase; classtype:trojan-activity; sid:9001006; rev:1; )",
+        "rule_objective": "Detect DNS queries resolving known Sliver command-and-control infrastructure (carwaded.com).",
+        "evidence": {
+          "pcaps": [
+            "PCAP_015"
+          ],
+          "packets": [
+            4,
+            5
+          ],
+          "summary": "Ground truth packet evidence."
+        },
+        "matching_logic": {
+          "header": "Snort 3 rule header",
+          "options_explanation": "Matching logic explanation"
+        },
+        "generalization": "Grounded in invariant attack indicators",
+        "limitations": "Standard limitations",
+        "false_positive_risks": "Low",
+        "confidence": "high",
+        "status": "FAILED_NO_TRIGGER",
+        "source_pcap": "PCAP_015",
+        "created_at": "2026-11-16T00:50:00.000000",
+        "duplicate_check": {
+          "has_conflicts": false,
+          "duplicate_in_local": false,
+          "conflicts": []
+        },
+        "validation_results": {
+          "rule_id": 9001006,
+          "rule_text": "alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:\"MALWARE-CNC Sliver C2 Domain Resolution Query\"; flow:to_server; content:\"carwaded.com\",fast_pattern,nocase; classtype:trojan-activity; sid:9001006; rev:1; )",
+          "overall_status": "FAILED_NO_TRIGGER",
+          "stage1_syntax": {
+            "stage": 1,
+            "name": "Syntax Validation",
+            "passed": true,
+            "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001006.rules",
+            "return_code": 0,
+            "error_output": ""
+          },
+          "stage2_positive": {
+            "stage": 2,
+            "name": "Positive PCAP Testing",
+            "tested_pcaps_count": 1,
+            "detected_pcaps_count": 0,
+            "missed_pcaps_count": 1,
+            "total_alerts": 0,
+            "detected": [],
+            "missed": [
+              {
+                "capture_id": "PCAP_015",
+                "filename": "2021-10-20-TA551-pushes-Sliver.pcap"
+              }
+            ]
+          },
+          "stage3_negative": {
+            "stage": 3,
+            "name": "Negative PCAP Testing (False Positives)",
+            "tested_benign_count": 2,
+            "false_positive_pcaps_count": 0,
+            "benign_clean_pcaps_count": 2,
+            "total_fp_alerts": 0,
+            "false_positive_details": [],
+            "clean_captures": [
+              {
+                "capture_id": "BENIGN_033",
+                "filename": "casual_traffic.pcapng"
+              },
+              {
+                "capture_id": "BENIGN_034",
+                "filename": "yt_watch_40_min.pcapng"
+              }
+            ]
+          },
+          "stage4_generalization": {
+            "stage": 4,
+            "name": "Generalization Testing",
+            "status": "SKIPPED",
+            "target_family": "Sliver C2",
+            "reason": "No matching malware family in holdout split for 'Sliver C2'",
+            "tested_holdout_count": 0,
+            "detected_pcaps_count": 0,
+            "missed_pcaps_count": 0,
+            "cross_family_clean_count": 0,
+            "cross_family_fp_count": 0,
+            "total_alerts": 0,
+            "detected": [],
+            "missed": [],
+            "cross_family_results": {
+              "clean_true_negatives": [],
+              "unexpected_false_positives": []
+            }
+          },
+          "metrics": {
+            "true_positives": 0,
+            "false_positives": 0,
+            "false_negatives": 1,
+            "true_negatives": 2,
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1_score": 0.0
+          }
+        },
+        "analyst_review": null
+      }
+    }
+  }
+}

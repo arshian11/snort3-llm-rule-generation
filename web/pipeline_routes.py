@@ -29,6 +29,10 @@ llm_engine = LLMAnalysisEngine()
 validator = RuleValidator(dataset_manager=dataset_mgr)
 lifecycle_mgr = RuleLifecycleManager()
 
+# On web server startup: archive existing candidates into candidates_history.json
+# and keep candidates.json clean/empty
+lifecycle_mgr.archive_and_reset_candidates()
+
 @pipeline_bp.route("/dataset", methods=["GET"])
 def get_dataset():
     """Return all registered PCAPs grouped by split and ground truth."""
@@ -305,10 +309,9 @@ def generate_candidate_rule(capture_id: str):
     if not report.get("executive_soc_report"):
         report["executive_soc_report"] = llm_engine.generate_executive_soc_report(report)
 
-    # Determine next available SID
+    # Determine next available SID (must not collide with active or historical candidate SIDs)
     lifecycle_mgr._load()
-    existing_sids = set(lifecycle_mgr.candidates.keys())
-    next_sid = max(existing_sids) + 1 if existing_sids else 9001001
+    next_sid = lifecycle_mgr.get_next_sid()
 
     # Optional pattern discovery context
     pat_res = llm_engine.task_b_pattern_discovery([report])
@@ -604,11 +607,30 @@ def get_rules():
         "audit_log": lifecycle_mgr.audit_log[-100:]
     })
 
+@pipeline_bp.route("/rules/history", methods=["GET"])
+def get_rules_history():
+    """Return historical candidate rules grouped and differentiated by creation time."""
+    history = lifecycle_mgr.get_candidates_history()
+    return jsonify({
+        "status": "success",
+        "total_batches": len(history),
+        "history": history
+    })
+
 @pipeline_bp.route("/rule_definition/<int:sid>", methods=["GET"])
 def get_rule_definition(sid: int):
     """Retrieve actual Snort 3 rule definition by SID."""
     # 1. Search candidate rules
     cand = lifecycle_mgr.candidates.get(sid) or lifecycle_mgr.candidates.get(str(sid))
+    if not cand:
+        # Search candidate history
+        history = lifecycle_mgr.get_candidates_history()
+        for batch in history.values():
+            rules_dict = batch.get("rules", {})
+            if str(sid) in rules_dict:
+                cand = rules_dict[str(sid)]
+                break
+
     if cand and cand.get("rule_text"):
         return jsonify({
             "status": "success",

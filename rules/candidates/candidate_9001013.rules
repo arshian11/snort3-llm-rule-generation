@@ -1,0 +1,1 @@
+alert http (msg:"Cobalt Strike Beacon GET request"; flow:to_server,established; http_uri; content:"/api/v2/beacon?id=",nocase,fast_pattern; pcre:"/\/api\/v2\/beacon\?id=\d+/i"; classtype:trojan-activity; sid:9001013; rev:1; )

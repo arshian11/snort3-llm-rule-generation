@@ -1,0 +1,29 @@
+{
+  "task": "Behavioural Pattern Discovery",
+  "static_indicators": [
+    "103.251.167.20",
+    "192.168.1.50",
+    "db.corp"
+  ],
+  "protocol_indicators": [
+    "HTTP GET method",
+    "URI containing single quote character (')",
+    "URI path /products?id=1'",
+    "TCP protocol",
+    "Destination port 80"
+  ],
+  "behavioural_indicators": [
+    "Single packet capture (no beaconing or periodic connections observed)",
+    "No DNS queries associated with the connection",
+    "No file transfers or SSL handshakes"
+  ],
+  "campaign_specific_indicators": [],
+  "reusable_patterns": [
+    {
+      "pattern_name": "Blind SQL Injection via Single Quote in URI",
+      "protocol": "TCP/HTTP",
+      "stable_characteristics": "HTTP GET request where the URI contains a single quote character (') often used to break out of SQL string literals. The presence of a quote in a query parameter or path is a strong indicator of SQL injection attempts, especially when combined with common injection keywords or patterns.",
+      "generalization_rationale": "Single quotes in URIs are a fundamental technique in SQL injection attacks to manipulate SQL queries. This pattern is stable across different applications and databases. A general rule can detect HTTP requests where the URI contains a single quote, particularly in query parameters, without relying on specific IPs or hostnames. This aligns with the existing Snort rule 'GPL SQL UNION SELECT Blind SQL Injection Attempt' which likely triggers on similar URI patterns."
+    }
+  ]
+}

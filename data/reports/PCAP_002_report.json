@@ -1,0 +1,254 @@
+{
+  "capture_id": "PCAP_002",
+  "filename": "scenario2_web_sqli.pcap",
+  "malware_family": "SQL Injection",
+  "threat_category": "Web Exploit",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 1,
+    "unique_signatures": 1,
+    "pcap_hash": "64b3393346472f1e985886ba5be8d6a0008145f636434529040fa4fb55dc9017",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [
+    {
+      "gid": 1,
+      "sid": 2101424,
+      "rev": 5,
+      "count": 1,
+      "priority": 1,
+      "protocol": "TCP",
+      "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+      "triggering_packets": [
+        1
+      ]
+    }
+  ],
+  "network_behaviour": {
+    "dns_queries": [],
+    "http_requests": [
+      {
+        "pkt_num": 1,
+        "time_epoch": 1794652564.0,
+        "method": "GET",
+        "host": "db.corp",
+        "uri": "/products?id=1'",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "103.251.167.20",
+        "dst_ip": "192.168.1.50",
+        "dst_port": 80
+      }
+    ],
+    "tcp_connections": [
+      {
+        "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "proto": "TCP",
+        "src_ip": "103.251.167.20",
+        "dst_ip": "192.168.1.50",
+        "src_port": 39114,
+        "dst_port": 80,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 145,
+        "tcp_flags": [
+          "0x0018"
+        ]
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": []
+  },
+  "correlations": [],
+  "packet_evidence": [
+    {
+      "pkt_num": 1,
+      "source": "http_protocol",
+      "summary": "HTTP GET db.corp/products?id=1' (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "103.251.167.20",
+      "dst": "192.168.1.50:80"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:2101424:1",
+        "label": "Alert: GPL SQL UNION SELECT Blind SQL...",
+        "type": "alert",
+        "details": {
+          "sid": 2101424,
+          "priority": 1,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_002",
+            "packets": [
+              1
+            ],
+            "alert_sid": 2101424,
+            "gid": 1,
+            "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+            "proto": "TCP",
+            "src_ip": "103.251.167.20",
+            "dst_ip": "192.168.1.50",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "ip:103.251.167.20",
+        "label": "103.251.167.20",
+        "type": "entity_ip",
+        "details": {
+          "ip": "103.251.167.20"
+        }
+      },
+      {
+        "id": "ip:192.168.1.50",
+        "label": "192.168.1.50",
+        "type": "entity_ip",
+        "details": {
+          "ip": "192.168.1.50"
+        }
+      },
+      {
+        "id": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "label": "Flow: TCP 80",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_002",
+            "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+            "packets": [
+              1
+            ],
+            "byte_count": 145,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652564.0,
+            "end_time": 1794652564.0
+          }
+        }
+      },
+      {
+        "id": "http:1",
+        "label": "HTTP: GET /products?id=1'",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "db.corp",
+          "uri": "/products?id=1'",
+          "evidence": {
+            "capture_id": "PCAP_002",
+            "packets": [
+              1
+            ],
+            "method": "GET",
+            "host": "db.corp",
+            "uri": "/products?id=1'",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "domain:db.corp",
+        "label": "db.corp",
+        "type": "entity_domain",
+        "details": {}
+      }
+    ],
+    "links": [
+      {
+        "source": "alert:1:2101424:1",
+        "target": "ip:192.168.1.50",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2101424,
+          "gid": 1,
+          "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:103.251.167.20",
+        "target": "alert:1:2101424:1",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2101424,
+          "gid": 1,
+          "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:103.251.167.20",
+        "target": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 145,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0
+        }
+      },
+      {
+        "source": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "target": "ip:192.168.1.50",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 145,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0
+        }
+      },
+      {
+        "source": "domain:db.corp",
+        "target": "http:1",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "packets": [
+            1
+          ],
+          "method": "GET",
+          "host": "db.corp",
+          "uri": "/products?id=1'",
+          "user_agent": ""
+        }
+      }
+    ]
+  }
+}

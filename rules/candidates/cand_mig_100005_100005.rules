@@ -1,0 +1,1 @@
+alert tcp any any -> any 80 ( msg:"PCRE Attack"; http_uri; pcre:"/endpoint.*action/i"; sid:100005; )

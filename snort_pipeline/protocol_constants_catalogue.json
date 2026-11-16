@@ -1,0 +1,1406 @@
+{
+  "catalogue_version": "1.0.0",
+  "purpose": "payload_invariant_exclusion",
+  "authoritative_sources": [
+    {
+      "name": "IANA Protocol Registries",
+      "url": "https://www.iana.org/protocols"
+    },
+    {
+      "name": "IANA DNS Parameters",
+      "url": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "HTTP Field Name Registry",
+      "url": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "TLS Parameters",
+      "url": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TCP Parameters",
+      "url": "https://www.iana.org/assignments/tcp-parameters"
+    },
+    {
+      "name": "ICMP Parameters",
+      "url": "https://www.iana.org/assignments/icmp-parameters"
+    },
+    {
+      "name": "DHCPv6 Parameters",
+      "url": "https://www.iana.org/assignments/dhcpv6-parameters"
+    }
+  ],
+  "total_entries": 108,
+  "entries": [
+    {
+      "name": "DNS_QTYPE_A",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 01|"
+      ],
+      "description": "Standard DNS QTYPE A (IPv4 address query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_NS",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 02|"
+      ],
+      "description": "Standard DNS QTYPE NS (Name server query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_CNAME",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 05|"
+      ],
+      "description": "Standard DNS QTYPE CNAME (Canonical name query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_SOA",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 06|"
+      ],
+      "description": "Standard DNS QTYPE SOA (Start of authority query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_PTR",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 0C|"
+      ],
+      "description": "Standard DNS QTYPE PTR (Pointer record query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_MX",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 0F|"
+      ],
+      "description": "Standard DNS QTYPE MX (Mail exchange query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_TXT",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 10|"
+      ],
+      "description": "Standard DNS QTYPE TXT (Text record query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_AAAA",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 1C|"
+      ],
+      "description": "Standard DNS QTYPE AAAA (IPv6 address query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_SRV",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 21|"
+      ],
+      "description": "Standard DNS QTYPE SRV (Service record query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_QTYPE_ANY",
+      "category": "dns_qtype",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 FF|"
+      ],
+      "description": "Standard DNS QTYPE ANY (Any record query)",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_A_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 01 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS A record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_AAAA_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 1C 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS AAAA record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_MX_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 0F 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS MX record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_TXT_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 10 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS TXT record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_CNAME_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 05 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS CNAME record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_SRV_IN",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 21 00 01|"
+      ],
+      "description": "Standard DNS Query Footer DNS SRV record Internet Class. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "DNS_COMBO_OPT_PSEUDO",
+      "category": "dns_combo",
+      "protocol": "dns",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00 00 29|"
+      ],
+      "description": "Standard DNS Query Footer DNS OPT pseudo-record type. Ubiquitous in normal DNS traffic.",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/dns-parameters"
+    },
+    {
+      "name": "HTTP_METHOD_GET",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "GET",
+        "GET "
+      ],
+      "description": "Standard HTTP/WebDAV request method GET",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_POST",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "POST",
+        "POST "
+      ],
+      "description": "Standard HTTP/WebDAV request method POST",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_HEAD",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "HEAD",
+        "HEAD "
+      ],
+      "description": "Standard HTTP/WebDAV request method HEAD",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_PUT",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "PUT",
+        "PUT "
+      ],
+      "description": "Standard HTTP/WebDAV request method PUT",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_DELETE",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "DELETE",
+        "DELETE "
+      ],
+      "description": "Standard HTTP/WebDAV request method DELETE",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_CONNECT",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "CONNECT",
+        "CONNECT "
+      ],
+      "description": "Standard HTTP/WebDAV request method CONNECT",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_OPTIONS",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "OPTIONS",
+        "OPTIONS "
+      ],
+      "description": "Standard HTTP/WebDAV request method OPTIONS",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_TRACE",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "TRACE",
+        "TRACE "
+      ],
+      "description": "Standard HTTP/WebDAV request method TRACE",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_PATCH",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "PATCH",
+        "PATCH "
+      ],
+      "description": "Standard HTTP/WebDAV request method PATCH",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_PROPFIND",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "PROPFIND",
+        "PROPFIND "
+      ],
+      "description": "Standard HTTP/WebDAV request method PROPFIND",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_PROPPATCH",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "PROPPATCH",
+        "PROPPATCH "
+      ],
+      "description": "Standard HTTP/WebDAV request method PROPPATCH",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_MKCOL",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "MKCOL",
+        "MKCOL "
+      ],
+      "description": "Standard HTTP/WebDAV request method MKCOL",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_COPY",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "COPY",
+        "COPY "
+      ],
+      "description": "Standard HTTP/WebDAV request method COPY",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_MOVE",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "MOVE",
+        "MOVE "
+      ],
+      "description": "Standard HTTP/WebDAV request method MOVE",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_LOCK",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "LOCK",
+        "LOCK "
+      ],
+      "description": "Standard HTTP/WebDAV request method LOCK",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_METHOD_UNLOCK",
+      "category": "http_method",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "UNLOCK",
+        "UNLOCK "
+      ],
+      "description": "Standard HTTP/WebDAV request method UNLOCK",
+      "buffer_scope": "http_method",
+      "iana_reference": "https://www.iana.org/assignments/http-methods"
+    },
+    {
+      "name": "HTTP_HEADER_HOST",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Host",
+        "Host:",
+        "Host: "
+      ],
+      "description": "Standard HTTP header identifier 'Host:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_USER_AGENT",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "User-Agent",
+        "User-Agent:",
+        "User-Agent: "
+      ],
+      "description": "Standard HTTP header identifier 'User-Agent:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ACCEPT",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Accept",
+        "Accept:",
+        "Accept: "
+      ],
+      "description": "Standard HTTP header identifier 'Accept:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ACCEPT_ENCODING",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Accept-Encoding",
+        "Accept-Encoding:",
+        "Accept-Encoding: "
+      ],
+      "description": "Standard HTTP header identifier 'Accept-Encoding:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ACCEPT_LANGUAGE",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Accept-Language",
+        "Accept-Language:",
+        "Accept-Language: "
+      ],
+      "description": "Standard HTTP header identifier 'Accept-Language:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ACCEPT_CHARSET",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Accept-Charset",
+        "Accept-Charset:",
+        "Accept-Charset: "
+      ],
+      "description": "Standard HTTP header identifier 'Accept-Charset:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_CONNECTION",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Connection",
+        "Connection:",
+        "Connection: "
+      ],
+      "description": "Standard HTTP header identifier 'Connection:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_CACHE_CONTROL",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Cache-Control",
+        "Cache-Control:",
+        "Cache-Control: "
+      ],
+      "description": "Standard HTTP header identifier 'Cache-Control:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_PRAGMA",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Pragma",
+        "Pragma:",
+        "Pragma: "
+      ],
+      "description": "Standard HTTP header identifier 'Pragma:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_REFERER",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Referer",
+        "Referer:",
+        "Referer: "
+      ],
+      "description": "Standard HTTP header identifier 'Referer:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ORIGIN",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Origin",
+        "Origin:",
+        "Origin: "
+      ],
+      "description": "Standard HTTP header identifier 'Origin:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_COOKIE",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Cookie",
+        "Cookie:",
+        "Cookie: "
+      ],
+      "description": "Standard HTTP header identifier 'Cookie:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_AUTHORIZATION",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Authorization",
+        "Authorization:",
+        "Authorization: "
+      ],
+      "description": "Standard HTTP header identifier 'Authorization:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_PROXY_AUTHORIZATION",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Proxy-Authorization",
+        "Proxy-Authorization:",
+        "Proxy-Authorization: "
+      ],
+      "description": "Standard HTTP header identifier 'Proxy-Authorization:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_CONTENT_TYPE",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Content-Type",
+        "Content-Type:",
+        "Content-Type: "
+      ],
+      "description": "Standard HTTP header identifier 'Content-Type:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_CONTENT_LENGTH",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Content-Length",
+        "Content-Length:",
+        "Content-Length: "
+      ],
+      "description": "Standard HTTP header identifier 'Content-Length:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_CONTENT_ENCODING",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Content-Encoding",
+        "Content-Encoding:",
+        "Content-Encoding: "
+      ],
+      "description": "Standard HTTP header identifier 'Content-Encoding:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_TRANSFER_ENCODING",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Transfer-Encoding",
+        "Transfer-Encoding:",
+        "Transfer-Encoding: "
+      ],
+      "description": "Standard HTTP header identifier 'Transfer-Encoding:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_SERVER",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Server",
+        "Server:",
+        "Server: "
+      ],
+      "description": "Standard HTTP header identifier 'Server:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_DATE",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Date",
+        "Date:",
+        "Date: "
+      ],
+      "description": "Standard HTTP header identifier 'Date:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_EXPIRES",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Expires",
+        "Expires:",
+        "Expires: "
+      ],
+      "description": "Standard HTTP header identifier 'Expires:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_LAST_MODIFIED",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Last-Modified",
+        "Last-Modified:",
+        "Last-Modified: "
+      ],
+      "description": "Standard HTTP header identifier 'Last-Modified:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_ETAG",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "ETag",
+        "ETag:",
+        "ETag: "
+      ],
+      "description": "Standard HTTP header identifier 'ETag:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_LOCATION",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Location",
+        "Location:",
+        "Location: "
+      ],
+      "description": "Standard HTTP header identifier 'Location:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_HEADER_SET_COOKIE",
+      "category": "http_header_name",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Set-Cookie",
+        "Set-Cookie:",
+        "Set-Cookie: "
+      ],
+      "description": "Standard HTTP header identifier 'Set-Cookie:'",
+      "buffer_scope": "http_header",
+      "iana_reference": "https://www.iana.org/assignments/http-fields"
+    },
+    {
+      "name": "HTTP_VALUE_MOZILLA_UA",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "Mozilla/5.0"
+      ],
+      "description": "Generic web browser User-Agent prefix",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_ANY_MIME",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "*/*"
+      ],
+      "description": "Generic Accept header value",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_GZIP",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "gzip"
+      ],
+      "description": "Standard compression transfer encoding",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_DEFLATE",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "deflate"
+      ],
+      "description": "Standard deflate encoding",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_BR",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "br"
+      ],
+      "description": "Brotli compression encoding",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_KEEP_ALIVE",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "keep-alive"
+      ],
+      "description": "Standard HTTP persistent connection token",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_CLOSE",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "close"
+      ],
+      "description": "Standard HTTP connection close token",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_NO_CACHE",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "no-cache"
+      ],
+      "description": "Standard cache-control directive",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_CHUNKED",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "chunked"
+      ],
+      "description": "Standard HTTP chunked transfer encoding",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_TEXT_HTML",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "text/html"
+      ],
+      "description": "Standard HTML content type",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_APP_JSON",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "application/json"
+      ],
+      "description": "Standard JSON content type",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_VALUE_APP_OCTET",
+      "category": "http_generic_value",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "application/octet-stream"
+      ],
+      "description": "Generic binary stream content type",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_LINE_GET_ROOT",
+      "category": "http_request_line",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "GET / HTTP/1.1"
+      ],
+      "description": "Root HTTP request line",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_LINE_POST_ROOT",
+      "category": "http_request_line",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "POST / HTTP/1.1"
+      ],
+      "description": "Root HTTP POST request line",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_LINE_RESP_200_OK",
+      "category": "http_request_line",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "HTTP/1.1 200 OK"
+      ],
+      "description": "Standard HTTP OK response line",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "HTTP_LINE_RESP_404_NOT_FOUND",
+      "category": "http_request_line",
+      "protocol": "http",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "HTTP/1.1 404 Not Found"
+      ],
+      "description": "Standard HTTP Not Found response line",
+      "buffer_scope": "http_header",
+      "iana_reference": null
+    },
+    {
+      "name": "TLS_CHANGE_CIPHER_SPEC",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|14 03 03|"
+      ],
+      "description": "TLS ChangeCipherSpec record header",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_ALERT",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|15 03 03|"
+      ],
+      "description": "TLS Alert record header",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_HANDSHAKE_RECORD",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|16 03 01|"
+      ],
+      "description": "TLS 1.0 Handshake record layer",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_HANDSHAKE_RECORD_12",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|16 03 03|"
+      ],
+      "description": "TLS 1.2/1.3 Handshake record layer",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_CLIENT_HELLO",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|01 00|"
+      ],
+      "description": "TLS ClientHello handshake token",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_SERVER_HELLO",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|02 00|"
+      ],
+      "description": "TLS ServerHello handshake token",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "TLS_APP_DATA",
+      "category": "tls_record",
+      "protocol": "ssl",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|17 03 03|"
+      ],
+      "description": "TLS Application Data record header",
+      "buffer_scope": null,
+      "iana_reference": "https://www.iana.org/assignments/tls-parameters"
+    },
+    {
+      "name": "SMB1_MAGIC",
+      "category": "protocol_magic_bytes",
+      "protocol": "smb",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|FF 53 4D 42|"
+      ],
+      "description": "SMB1 Protocol Signature header (\\xFFSMB). Identifies protocol itself; invalid as independent malware indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "SMB2_MAGIC",
+      "category": "protocol_magic_bytes",
+      "protocol": "smb",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|FE 53 4D 42|"
+      ],
+      "description": "SMB2/SMB3 Protocol Signature header (\\xFESMB). Identifies protocol itself; invalid as independent malware indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "SMB3_ENCRYPTED",
+      "category": "protocol_magic_bytes",
+      "protocol": "smb",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|FD 53 4D 42|"
+      ],
+      "description": "SMB3 Encrypted transform header (\\xFDSMB). Identifies protocol itself; invalid as independent malware indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "SMB3_COMPRESSION",
+      "category": "protocol_magic_bytes",
+      "protocol": "smb",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|FC 53 4D 42|"
+      ],
+      "description": "SMB3 Compression transform header (\\xFCSMB). Identifies protocol itself; invalid as independent malware indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "DHCP_MAGIC_COOKIE",
+      "category": "protocol_magic_bytes",
+      "protocol": "dhcp",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|63 82 53 63|"
+      ],
+      "description": "Standard DHCP Magic Cookie (0x63825363). Present in all DHCP messages.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "STUN_MAGIC_COOKIE",
+      "category": "protocol_magic_bytes",
+      "protocol": "stun",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|21 12 A4 42|"
+      ],
+      "description": "Standard STUN Magic Cookie (RFC 5389). Present in all STUN transactions.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_EXE_MZ",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|4D 5A|",
+        "MZ"
+      ],
+      "description": "Windows Portable Executable magic bytes. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_ZIP_PK",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|50 4B 03 04|",
+        "PK"
+      ],
+      "description": "ZIP Archive magic bytes. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_ELF_MAGIC",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|7F 45 4C 46|",
+        "\u007fELF"
+      ],
+      "description": "Linux ELF Executable magic bytes. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_PDF_MAGIC",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|25 50 44 46|",
+        "%PDF"
+      ],
+      "description": "PDF Document header. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_PNG_MAGIC",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|89 50 4E 47 0D 0A 1A 0A|"
+      ],
+      "description": "PNG Image header. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_JPEG_MAGIC",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|FF D8 FF|"
+      ],
+      "description": "JPEG Image start of image. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_GZIP_MAGIC",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|1F 8B 08|"
+      ],
+      "description": "GZIP Archive header. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "FILE_SIG_JAVA_CLASS",
+      "category": "file_magic_bytes",
+      "protocol": "file",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|CA FE BA BE|"
+      ],
+      "description": "Java compiled class magic bytes. Weak as standalone malware invariant; should be combined with distinctive payload.",
+      "buffer_scope": "file_data",
+      "iana_reference": null
+    },
+    {
+      "name": "DELIM_CRLF",
+      "category": "generic_delimiters",
+      "protocol": "generic",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|0D 0A|",
+        "\r\n"
+      ],
+      "description": "Carriage Return Line Feed delimiter",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "DELIM_CRLF_DOUBLE",
+      "category": "generic_delimiters",
+      "protocol": "generic",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|0D 0A 0D 0A|",
+        "\r\n\r\n"
+      ],
+      "description": "HTTP Header/Body boundary separator",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "DELIM_NULL_BYTE",
+      "category": "generic_delimiters",
+      "protocol": "generic",
+      "policy": "hard_exclude",
+      "raw_patterns": [
+        "|00|",
+        "\u0000"
+      ],
+      "description": "Null terminator byte",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_AUTH_BASIC",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "Basic"
+      ],
+      "description": "HTTP Basic Authentication scheme. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_AUTH_BEARER",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "Bearer"
+      ],
+      "description": "HTTP Bearer Token scheme. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_AUTH_DIGEST",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "Digest"
+      ],
+      "description": "HTTP Digest Authentication scheme. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_AUTH_NTLM",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "NTLM"
+      ],
+      "description": "NTLM Authentication scheme. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_ADMIN",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "admin"
+      ],
+      "description": "Generic administrative username. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_PASSWORD",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "password"
+      ],
+      "description": "Generic credential parameter. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_LOGIN",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "login"
+      ],
+      "description": "Generic authentication endpoint/action. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_TRUE",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "true"
+      ],
+      "description": "Generic JSON/boolean literal. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_FALSE",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "false"
+      ],
+      "description": "Generic JSON/boolean literal. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    },
+    {
+      "name": "GENERIC_STR_NULL",
+      "category": "generic_application_string",
+      "protocol": "generic",
+      "policy": "contextual_exclude",
+      "raw_patterns": [
+        "null"
+      ],
+      "description": "Generic JSON/boolean literal. Requires contextual pairing with distinctive malicious indicator.",
+      "buffer_scope": null,
+      "iana_reference": null
+    }
+  ]
+}

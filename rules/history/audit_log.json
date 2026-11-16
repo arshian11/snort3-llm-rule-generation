@@ -1,0 +1,10 @@
+[
+  {
+    "action": "ROLLBACK_RULESET",
+    "target_version": "v1",
+    "resulting_version": "v4",
+    "analyst": "SOC-Lead",
+    "reason": "False positive mitigation",
+    "timestamp": "2026-11-16T00:49:12.935691"
+  }
+]

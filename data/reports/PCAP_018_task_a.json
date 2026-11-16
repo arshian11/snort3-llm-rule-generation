@@ -1,0 +1,6 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_018",
+  "signature_evaluations": [],
+  "overall_detection_gaps": "Zero existing Snort community or baseline signatures triggered on this capture (Redline Stealer / RigEK). Complete detection evasion: 3 HTTP sessions and 0 DNS queries in InfoStealer / Credential Harvesting activity bypassed existing rules entirely. High-priority candidate rule synthesis required to establish detection coverage."
+}

@@ -1,0 +1,278 @@
+{
+  "catalogue_version": "3.13.2.0",
+  "source_reference": "asset/snort_upgrade.text",
+  "official_manual": "https://github.com/snort3/snort3/blob/master/doc/upgrade/snort_upgrade.text",
+  "total_entries": 27,
+  "entries": [
+    {
+      "snort2_item": "uricontent",
+      "status": "replaced_renamed",
+      "snort3_alternative": "http_uri; content:\"<pattern>\";",
+      "category": "rule_option",
+      "description": "Removed content modifier. Replaced by sticky buffer http_uri; preceding content: match.",
+      "example_snort2": "alert tcp any any -> any 80 ( msg:\"URI Test\"; uricontent:\"/login\"; sid:1; )",
+      "example_snort3": "alert tcp any any -> any 80 ( msg:\"URI Test\"; http_uri; content:\"/login\"; sid:1; )",
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "urilen",
+      "status": "replaced_renamed",
+      "snort3_alternative": "http_uri; bufferlen:<expr>; or http_raw_uri; bufferlen:<expr>;",
+      "category": "rule_option",
+      "description": "urilen raw/norm replaced with generic bufferlen applying to current sticky buffer.",
+      "example_snort2": "urilen:>100,norm;",
+      "example_snort3": "http_uri; bufferlen:>100;",
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "rawbytes",
+      "status": "replaced_renamed",
+      "snort3_alternative": "raw_data; (or pkt_data;)",
+      "category": "rule_option",
+      "description": "rawbytes modifier replaced with raw_data sticky buffer.",
+      "example_snort2": "alert tcp any any -> any any ( msg:\"Telnet NOP\"; rawbytes; content:\"|FF F1|\"; sid:2; )",
+      "example_snort3": "alert tcp any any -> any any ( msg:\"Telnet NOP\"; raw_data; content:\"|FF F1|\"; sid:2; )",
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "http_encode",
+      "status": "removed",
+      "snort3_alternative": "None (Inspector normalization)",
+      "category": "rule_option",
+      "description": "Unused option eliminated. Use appropriate HTTP inspector buffers.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "threshold",
+      "status": "replaced_renamed",
+      "snort3_alternative": "detection_filter:track <by_src|by_dst>,count <N>,seconds <S>;",
+      "category": "rule_option",
+      "description": "In-rule threshold keyword removed in Snort 3. Replaced by detection_filter or Lua event_filter.",
+      "example_snort2": "threshold:type threshold, track by_src, count 5, seconds 10;",
+      "example_snort3": "detection_filter:track by_src,count 5,seconds 10;",
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "metadata:service",
+      "status": "replaced_renamed",
+      "snort3_alternative": "service:<svc1>[, <svc2>];",
+      "category": "rule_option",
+      "description": "Service declaration moved from metadata to standalone detection option.",
+      "example_snort2": "metadata:service http, service smtp;",
+      "example_snort3": "service:http, smtp;",
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "sd_pattern",
+      "status": "replaced_renamed",
+      "snort3_alternative": "sd_pattern:\"<pattern>\",threshold <N>;",
+      "category": "rule_option",
+      "description": "SDF preprocessor replaced by Snort 3 IPS sd_pattern powered by Hyperscan regex engine.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "activate / dynamic",
+      "status": "removed",
+      "snort3_alternative": "Standard rule actions (alert, block, drop)",
+      "category": "header_action",
+      "description": "Activate and dynamic rule actions deleted in Snort 3.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "fast_pattern:only",
+      "status": "syntax_changed",
+      "snort3_alternative": "fast_pattern",
+      "category": "rule_option",
+      "description": "fast_pattern:only removed. Simply specify 'fast_pattern' (automatic optimization).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "fast_pattern:<offset>,<length>",
+      "status": "syntax_changed",
+      "snort3_alternative": "fast_pattern,fast_pattern_offset <offset>,fast_pattern_length <length>",
+      "category": "rule_option",
+      "description": "Comma-separated offset/length arguments separated into dedicated suboptions.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "offset:<val>",
+      "status": "syntax_changed",
+      "snort3_alternative": "offset <val>",
+      "category": "rule_option",
+      "description": "Modernized syntax: offset now uses space separator instead of colon (e.g. 'offset 5').",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "depth:<val>",
+      "status": "syntax_changed",
+      "snort3_alternative": "depth <val>",
+      "category": "rule_option",
+      "description": "Modernized syntax: depth now uses space separator instead of colon (e.g. 'depth 5').",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "distance:<val>",
+      "status": "syntax_changed",
+      "snort3_alternative": "distance <val>",
+      "category": "rule_option",
+      "description": "Modernized syntax: distance now uses space separator instead of colon (e.g. 'distance 5').",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "within:<val>",
+      "status": "syntax_changed",
+      "snort3_alternative": "within <val>",
+      "category": "rule_option",
+      "description": "Modernized syntax: within now uses space separator instead of colon (e.g. 'within 5').",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "soid inside metadata",
+      "status": "replaced_renamed",
+      "snort3_alternative": "soid:<gid>|<sid>|<rev>;",
+      "category": "rule_option",
+      "description": "soid is now a standalone option, not declared inside metadata.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "byte_test: =<",
+      "status": "syntax_changed",
+      "snort3_alternative": "byte_test: <= ...",
+      "category": "rule_option",
+      "description": "Symbol =< is recognized as syntax error in Snort 3; correct operator is <=.",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../B",
+      "status": "pcre_deleted",
+      "snort3_alternative": "pkt_data; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /B deleted. Raw packet/body payload inspection (replace with pkt_data or raw_data).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../U",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_uri; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /U deleted. HTTP normalized URI buffer (replace with sticky http_uri;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../P",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_client_body; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /P deleted. HTTP client request body (replace with sticky http_client_body;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../H",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_header; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /H deleted. HTTP normalized request/response headers (replace with sticky http_header;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../M",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_method; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /M deleted. HTTP request method token (replace with sticky http_method;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../C",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_cookie; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /C deleted. HTTP request/response cookie (replace with sticky http_cookie;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../I",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_raw_uri; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /I deleted. HTTP unnormalized raw URI (replace with sticky http_raw_uri;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../D",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_raw_header; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /D deleted. HTTP unnormalized raw header (replace with sticky http_raw_header;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../K",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_raw_cookie; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /K deleted. HTTP unnormalized raw cookie (replace with sticky http_raw_cookie;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../S",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_stat_code; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /S deleted. HTTP response status code (replace with sticky http_stat_code;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    },
+    {
+      "snort2_item": "pcre: /.../Y",
+      "status": "pcre_deleted",
+      "snort3_alternative": "http_stat_msg; pcre:\"/.../\"",
+      "category": "pcre_modifier",
+      "description": "Snort 2 PCRE modifier /Y deleted. HTTP response status message (replace with sticky http_stat_msg;).",
+      "example_snort2": null,
+      "example_snort3": null,
+      "doc_section": "2.6 Rules"
+    }
+  ]
+}

@@ -1,0 +1,5160 @@
+{
+  "capture_id": "PCAP_006",
+  "filename": "2013-09-28_capture-win19.pcap",
+  "malware_family": "CTU-13 Botnet",
+  "threat_category": "Botnet Traffic",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 6,
+    "unique_signatures": 3,
+    "pcap_hash": "d985aa44c1eee4c502d4ebbfa399438f001a20dfd24fec90d2373f72619a39cc",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [
+    {
+      "gid": 1,
+      "sid": 402,
+      "rev": 16,
+      "count": 3,
+      "priority": 3,
+      "protocol": "ICMP",
+      "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+      "triggering_packets": [
+        86,
+        8866,
+        8881
+      ]
+    },
+    {
+      "gid": 1,
+      "sid": 2100366,
+      "rev": 8,
+      "count": 2,
+      "priority": 3,
+      "protocol": "ICMP",
+      "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+      "triggering_packets": [
+        86,
+        8881
+      ]
+    },
+    {
+      "gid": 1,
+      "sid": 254,
+      "rev": 17,
+      "count": 1,
+      "priority": 3,
+      "protocol": "UDP",
+      "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+      "triggering_packets": [
+        23
+      ]
+    }
+  ],
+  "network_behaviour": {
+    "dns_queries": [
+      {
+        "pkt_num": 16,
+        "time_epoch": 15.540363,
+        "query_name": "dns.msftncsi.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.203,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8"
+      },
+      {
+        "pkt_num": 21,
+        "time_epoch": 16.539694,
+        "query_name": "dns.msftncsi.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.203,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4"
+      },
+      {
+        "pkt_num": 23,
+        "time_epoch": 16.792802,
+        "query_name": "dns.msftncsi.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": 4,
+        "resolved_ip": "131.107.255.255",
+        "rcode": "0",
+        "entropy": 3.203,
+        "src_ip": "8.8.4.4",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 24,
+        "time_epoch": 16.793261,
+        "query_name": "dns.msftncsi.com",
+        "query_type": "28",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.203,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4"
+      },
+      {
+        "pkt_num": 25,
+        "time_epoch": 17.045852,
+        "query_name": "dns.msftncsi.com",
+        "query_type": "28",
+        "is_response": false,
+        "ttl": 1048,
+        "resolved_ip": null,
+        "rcode": "0",
+        "entropy": 3.203,
+        "src_ip": "8.8.4.4",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 59,
+        "time_epoch": 2082.368202,
+        "query_name": "wpad",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.0,
+        "src_ip": "",
+        "dst_ip": ""
+      },
+      {
+        "pkt_num": 60,
+        "time_epoch": 2082.368383,
+        "query_name": "wpad",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.0,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "224.0.0.252"
+      },
+      {
+        "pkt_num": 62,
+        "time_epoch": 2082.459734,
+        "query_name": "wpad",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.0,
+        "src_ip": "",
+        "dst_ip": ""
+      },
+      {
+        "pkt_num": 63,
+        "time_epoch": 2082.459882,
+        "query_name": "wpad",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.0,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "224.0.0.252"
+      },
+      {
+        "pkt_num": 70,
+        "time_epoch": 2085.636672,
+        "query_name": "www.qq5.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 2.664,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8"
+      },
+      {
+        "pkt_num": 71,
+        "time_epoch": 2086.258877,
+        "query_name": "www.qq5.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": 600,
+        "resolved_ip": "61.147.82.83",
+        "rcode": "0",
+        "entropy": 2.664,
+        "src_ip": "8.8.8.8",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 81,
+        "time_epoch": 2108.531085,
+        "query_name": "d1.kuai8.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.418,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8"
+      },
+      {
+        "pkt_num": 82,
+        "time_epoch": 2109.528929,
+        "query_name": "d1.kuai8.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.418,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4"
+      },
+      {
+        "pkt_num": 83,
+        "time_epoch": 2109.830608,
+        "query_name": "d1.kuai8.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "122.226.120.191,122.226.120.190",
+        "rcode": "0",
+        "entropy": 3.418,
+        "src_ip": "8.8.8.8",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 85,
+        "time_epoch": 2110.010636,
+        "query_name": "d1.kuai8.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "122.226.120.191,122.226.120.190",
+        "rcode": "0",
+        "entropy": 3.418,
+        "src_ip": "8.8.4.4",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 86,
+        "time_epoch": 2110.010801,
+        "query_name": "d1.kuai8.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "122.226.120.191,122.226.120.190",
+        "rcode": "0",
+        "entropy": 3.418,
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119"
+      },
+      {
+        "pkt_num": 8861,
+        "time_epoch": 2943.283563,
+        "query_name": "dl.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.577,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8"
+      },
+      {
+        "pkt_num": 8862,
+        "time_epoch": 2944.278948,
+        "query_name": "dl.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.577,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4"
+      },
+      {
+        "pkt_num": 8863,
+        "time_epoch": 2944.468066,
+        "query_name": "dl.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.108.23.135",
+        "rcode": "0",
+        "entropy": 3.577,
+        "src_ip": "8.8.8.8",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 8865,
+        "time_epoch": 2944.774839,
+        "query_name": "dl.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.108.23.135",
+        "rcode": "0",
+        "entropy": 3.577,
+        "src_ip": "8.8.4.4",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 8866,
+        "time_epoch": 2944.774973,
+        "query_name": "dl.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.108.23.135",
+        "rcode": "0",
+        "entropy": 3.577,
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119"
+      },
+      {
+        "pkt_num": 8876,
+        "time_epoch": 2946.2077,
+        "query_name": "cdn.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.546,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8"
+      },
+      {
+        "pkt_num": 8877,
+        "time_epoch": 2947.203061,
+        "query_name": "cdn.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.546,
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4"
+      },
+      {
+        "pkt_num": 8878,
+        "time_epoch": 2947.365187,
+        "query_name": "cdn.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "61.155.165.25,61.155.165.24",
+        "rcode": "0",
+        "entropy": 3.546,
+        "src_ip": "8.8.8.8",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 8880,
+        "time_epoch": 2947.67548,
+        "query_name": "cdn.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "61.155.165.25,61.155.165.24",
+        "rcode": "0",
+        "entropy": 3.546,
+        "src_ip": "8.8.4.4",
+        "dst_ip": "10.0.2.119"
+      },
+      {
+        "pkt_num": 8881,
+        "time_epoch": 2947.675611,
+        "query_name": "cdn.client.baidu.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "61.155.165.25,61.155.165.24",
+        "rcode": "0",
+        "entropy": 3.546,
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119"
+      }
+    ],
+    "http_requests": [
+      {
+        "pkt_num": 75,
+        "time_epoch": 2086.928878,
+        "method": "GET",
+        "host": "www.qq5.com",
+        "uri": "/new/rar.xml",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "61.147.82.83",
+        "dst_port": 80
+      },
+      {
+        "pkt_num": 89,
+        "time_epoch": 2110.626847,
+        "method": "GET",
+        "host": "d1.kuai8.com",
+        "uri": "/setup/kuai8_rjaz.exe",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "122.226.120.191",
+        "dst_port": 80
+      },
+      {
+        "pkt_num": 8869,
+        "time_epoch": 2945.348232,
+        "method": "GET",
+        "host": "dl.client.baidu.com",
+        "uri": "/union/getbdbrowser.php?tn=39005028_224",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "202.108.23.135",
+        "dst_port": 80
+      },
+      {
+        "pkt_num": 8884,
+        "time_epoch": 2948.143321,
+        "method": "GET",
+        "host": "cdn.client.baidu.com",
+        "uri": "/browser/repository/4_7_0_1908/bdbrowser_setup_mini-39005028_224-4_7_0_1908-4580.exe",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "61.155.165.25",
+        "dst_port": 80
+      }
+    ],
+    "tcp_connections": [
+      {
+        "flow_id": "10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "122.226.120.191",
+        "src_port": 49159,
+        "dst_port": 80,
+        "duration_sec": 833.414,
+        "packet_count": 8761,
+        "byte_count": 8351760,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0011",
+          "0x0012",
+          "0x0018"
+        ],
+        "zeek_conn_state": "SF",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "61.155.165.25",
+        "src_port": 49161,
+        "dst_port": 80,
+        "duration_sec": 125.902,
+        "packet_count": 1113,
+        "byte_count": 1194389,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.0.2.119:49160<->202.108.23.135:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "202.108.23.135",
+        "src_port": 49160,
+        "dst_port": 80,
+        "duration_sec": 1.737,
+        "packet_count": 10,
+        "byte_count": 949,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0011",
+          "0x0012",
+          "0x0018"
+        ],
+        "zeek_conn_state": "SF",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.0.2.119:49158<->61.147.82.83:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "61.147.82.83",
+        "src_port": 49158,
+        "dst_port": 80,
+        "duration_sec": 1.4,
+        "packet_count": 9,
+        "byte_count": 2400,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.0.2.119:137<->10.0.2.255:137/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "10.0.2.255",
+        "src_port": 137,
+        "dst_port": 137,
+        "duration_sec": 1.502,
+        "packet_count": 3,
+        "byte_count": 276,
+        "tcp_flags": [],
+        "zeek_conn_state": "S0",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:62971<->8.8.4.4:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4",
+        "src_port": 62971,
+        "dst_port": 53,
+        "duration_sec": 0.253,
+        "packet_count": 2,
+        "byte_count": 168,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:60874<->8.8.4.4:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4",
+        "src_port": 60874,
+        "dst_port": 53,
+        "duration_sec": 0.253,
+        "packet_count": 2,
+        "byte_count": 180,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:52369<->224.0.0.252:5355/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "224.0.0.252",
+        "src_port": 52369,
+        "dst_port": 5355,
+        "duration_sec": 0.091,
+        "packet_count": 2,
+        "byte_count": 128,
+        "tcp_flags": [],
+        "zeek_conn_state": "S0",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119,224.0.0.252",
+        "dst_ip": "10.0.2.2,10.0.2.119",
+        "src_port": 5355,
+        "dst_port": 52369,
+        "duration_sec": 0.092,
+        "packet_count": 2,
+        "byte_count": 184,
+        "tcp_flags": [],
+        "zeek_conn_state": "",
+        "zeek_service": ""
+      },
+      {
+        "flow_id": "10.0.2.119:58464<->8.8.8.8:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8",
+        "src_port": 58464,
+        "dst_port": 53,
+        "duration_sec": 0.622,
+        "packet_count": 2,
+        "byte_count": 158,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:64512<->8.8.8.8:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8",
+        "src_port": 64512,
+        "dst_port": 53,
+        "duration_sec": 1.3,
+        "packet_count": 2,
+        "byte_count": 219,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:64512<->8.8.4.4:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4",
+        "src_port": 64512,
+        "dst_port": 53,
+        "duration_sec": 0.482,
+        "packet_count": 2,
+        "byte_count": 219,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:59260<->8.8.8.8:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8",
+        "src_port": 59260,
+        "dst_port": 53,
+        "duration_sec": 1.185,
+        "packet_count": 2,
+        "byte_count": 207,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:59260<->8.8.4.4:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4",
+        "src_port": 59260,
+        "dst_port": 53,
+        "duration_sec": 0.496,
+        "packet_count": 2,
+        "byte_count": 207,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:52999<->8.8.8.8:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8",
+        "src_port": 52999,
+        "dst_port": 53,
+        "duration_sec": 1.157,
+        "packet_count": 2,
+        "byte_count": 219,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:52999<->8.8.4.4:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.4.4",
+        "src_port": 52999,
+        "dst_port": 53,
+        "duration_sec": 0.472,
+        "packet_count": 2,
+        "byte_count": 219,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119:62971<->8.8.8.8:53/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "8.8.8.8",
+        "src_port": 62971,
+        "dst_port": 53,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 76,
+        "tcp_flags": [],
+        "zeek_conn_state": "S0",
+        "zeek_service": "dns"
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "src_port": 53,
+        "dst_port": 64512,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 175,
+        "tcp_flags": [],
+        "zeek_conn_state": "",
+        "zeek_service": ""
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "src_port": 53,
+        "dst_port": 59260,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 156,
+        "tcp_flags": [],
+        "zeek_conn_state": "",
+        "zeek_service": ""
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+        "proto": "UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "src_port": 53,
+        "dst_port": 52999,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 167,
+        "tcp_flags": [],
+        "zeek_conn_state": "",
+        "zeek_service": ""
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "10.0.2.119:52369<->224.0.0.252:5355/UDP",
+        "src_ip": "10.0.2.119",
+        "dst_ip": "224.0.0.252",
+        "dst_port": 5355,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 5355"
+        ],
+        "packets": [
+          60,
+          63
+        ]
+      },
+      {
+        "flow_id": "10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+        "src_ip": "10.0.2.119,224.0.0.252",
+        "dst_ip": "10.0.2.2,10.0.2.119",
+        "dst_port": 52369,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 52369"
+        ],
+        "packets": [
+          61,
+          64
+        ]
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "dst_port": 64512,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 64512"
+        ],
+        "packets": [
+          86
+        ]
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "dst_port": 59260,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 59260"
+        ],
+        "packets": [
+          8866
+        ]
+      },
+      {
+        "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+        "src_ip": "10.0.2.119,8.8.4.4",
+        "dst_ip": "8.8.4.4,10.0.2.119",
+        "dst_port": 52999,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 52999"
+        ],
+        "packets": [
+          8881
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 2237,
+      "connection_states": {
+        "S0": 2218,
+        "SF": 11,
+        "OTH": 6,
+        "RSTO": 2
+      },
+      "detected_services": {
+        "dns": 13,
+        "other": 2220,
+        "http": 4
+      },
+      "files_transferred": [
+        {
+          "fuid": "FBbIET43j5Ap7njF2",
+          "uid": "CZQiKA2pnFeqVFxYH",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.147.82.83",
+          "source": "HTTP",
+          "mime_type": "text/plain",
+          "filename": "",
+          "total_bytes": 1588
+        },
+        {
+          "fuid": "FcHyF2qzWN4FKfEb7",
+          "uid": "CY6rNj1pPIiONpa0Ld",
+          "orig_h": "10.0.2.119",
+          "resp_h": "122.226.120.191",
+          "source": "HTTP",
+          "mime_type": "application/x-dosexec",
+          "filename": "",
+          "total_bytes": 9098376
+        },
+        {
+          "fuid": "FefAQu3K4h1t3jct75",
+          "uid": "CrDQw54wI3NZm1CmYi",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.155.165.25",
+          "source": "HTTP",
+          "mime_type": "application/x-dosexec",
+          "filename": "",
+          "total_bytes": 8992208
+        }
+      ],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": [
+        {
+          "uid": "COx21F4Ev4h43enWre",
+          "ts": 15.540363,
+          "orig_h": "10.0.2.119",
+          "orig_p": 62971,
+          "resp_h": "8.8.8.8",
+          "resp_p": 53,
+          "proto": "UDP",
+          "service": "dns",
+          "duration": 0.0,
+          "orig_bytes": 0,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 1,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "C1fR4k49EeBzIMwwWi",
+          "ts": 12.393549,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.021,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CQpnR3g0sKLDD9Kua",
+          "ts": 439.419722,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.018,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CeJGrJ1jja8u175bIa",
+          "ts": 866.564715,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.017,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "C7R5Jx15qdItrE52rl",
+          "ts": 1293.588399,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.018,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CzxpGo18mSBSCjsSXl",
+          "ts": 1720.883554,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.017,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CU3odb4IZUynaYLYQ8",
+          "ts": 2082.368202,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 62436,
+          "resp_h": "ff02::1:3",
+          "resp_p": 5355,
+          "proto": "UDP",
+          "service": "dns",
+          "duration": 0.092,
+          "orig_bytes": 44,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 2,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "C6x5Hm48dAYIixJ4Gk",
+          "ts": 2082.368383,
+          "orig_h": "10.0.2.119",
+          "orig_p": 52369,
+          "resp_h": "224.0.0.252",
+          "resp_p": 5355,
+          "proto": "UDP",
+          "service": "dns",
+          "duration": 0.091,
+          "orig_bytes": 44,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 2,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CZQiKA2pnFeqVFxYH",
+          "ts": 2086.259431,
+          "orig_h": "10.0.2.119",
+          "orig_p": 49158,
+          "resp_h": "61.147.82.83",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 1.4,
+          "orig_bytes": 72,
+          "resp_bytes": 1826,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 5,
+          "resp_pkts": 4
+        },
+        {
+          "uid": "C2ROJj1iXdaIxQNuJd",
+          "ts": 2082.660056,
+          "orig_h": "10.0.2.119",
+          "orig_p": 137,
+          "resp_h": "10.0.2.255",
+          "resp_p": 137,
+          "proto": "UDP",
+          "service": "dns",
+          "duration": 1.502,
+          "orig_bytes": 150,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 3,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CnYc6Q26MDgR8teFJ7",
+          "ts": 2148.477419,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.049,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CerbDp3FYv9mLCPz4",
+          "ts": 2575.530979,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.019,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "C5RChjmh1rY2ofOP5",
+          "ts": 3002.555096,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.018,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CbIMGUOjZ9gC17yJk",
+          "ts": 3430.258928,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.199,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CrDQw54wI3NZm1CmYi",
+          "ts": 2947.365605,
+          "orig_h": "10.0.2.119",
+          "orig_p": 49161,
+          "resp_h": "61.155.165.25",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 1010.973,
+          "orig_bytes": 153,
+          "resp_bytes": 8992473,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 2371,
+          "resp_pkts": 6336
+        },
+        {
+          "uid": "CqN9dz2FjRvEWakLhf",
+          "ts": 3857.474045,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.218,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CqaSbb4Vt4CelizSIa",
+          "ts": 4285.134032,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.023,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CcFsOV164O6Yh1XOra",
+          "ts": 4712.163416,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.018,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CeBg634LM763H8s064",
+          "ts": 5139.233629,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.012,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CprWok4GhjkV7MEib4",
+          "ts": 5566.251461,
+          "orig_h": "fe80::45f6:82cd:198c:6a1a",
+          "orig_p": 546,
+          "resp_h": "ff02::1:2",
+          "resp_p": 547,
+          "proto": "UDP",
+          "service": "other",
+          "duration": 63.018,
+          "orig_bytes": 595,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "D",
+          "orig_pkts": 7,
+          "resp_pkts": 0
+        }
+      ]
+    }
+  },
+  "correlations": [
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'www.qq5.com' resolved to 61.147.82.83, followed within 0.001s by TCP traffic to port 80",
+      "domain": "www.qq5.com",
+      "resolved_ip": "61.147.82.83",
+      "target_port": 80,
+      "time_delta_sec": 0.001,
+      "evidence_packets": [
+        71,
+        72,
+        73,
+        74,
+        75,
+        76
+      ],
+      "evidence_summary": "Packet 71 queried www.qq5.com -> 61.147.82.83; flow 10.0.2.119:49158<->61.147.82.83:80/TCP initiated immediately."
+    },
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'd1.kuai8.com' resolved to 122.226.120.191, followed within 0.001s by TCP traffic to port 80",
+      "domain": "d1.kuai8.com",
+      "resolved_ip": "122.226.120.191",
+      "target_port": 80,
+      "time_delta_sec": 0.001,
+      "evidence_packets": [
+        83,
+        84,
+        87,
+        88,
+        89,
+        90
+      ],
+      "evidence_summary": "Packet 83 queried d1.kuai8.com -> 122.226.120.191; flow 10.0.2.119:49159<->122.226.120.191:80/TCP initiated immediately."
+    },
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'dl.client.baidu.com' resolved to 202.108.23.135, followed within 0.001s by TCP traffic to port 80",
+      "domain": "dl.client.baidu.com",
+      "resolved_ip": "202.108.23.135",
+      "target_port": 80,
+      "time_delta_sec": 0.001,
+      "evidence_packets": [
+        8863,
+        8864,
+        8867,
+        8868,
+        8869,
+        8870
+      ],
+      "evidence_summary": "Packet 8863 queried dl.client.baidu.com -> 202.108.23.135; flow 10.0.2.119:49160<->202.108.23.135:80/TCP initiated immediately."
+    },
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'cdn.client.baidu.com' resolved to 61.155.165.25, followed within 0.0s by TCP traffic to port 80",
+      "domain": "cdn.client.baidu.com",
+      "resolved_ip": "61.155.165.25",
+      "target_port": 80,
+      "time_delta_sec": 0.0,
+      "evidence_packets": [
+        8878,
+        8879,
+        8882,
+        8883,
+        8884,
+        8885
+      ],
+      "evidence_summary": "Packet 8878 queried cdn.client.baidu.com -> 61.155.165.25; flow 10.0.2.119:49161<->61.155.165.25:80/TCP initiated immediately."
+    },
+    {
+      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+      "confidence": "very_high",
+      "description": "Host 10.0.2.119 downloaded suspicious file '' (application/x-dosexec) from 122.226.120.191, followed by outbound communication to 61.155.165.25",
+      "client_ip": "10.0.2.119",
+      "file_server": "122.226.120.191",
+      "filename": "",
+      "mime_type": "application/x-dosexec",
+      "file_size": 9098376,
+      "evidence_packets": [
+        8879,
+        8882,
+        8883,
+        8884,
+        8885
+      ],
+      "evidence_summary": "Zeek extracted file  (FUID FcHyF2qzWN4FKfEb7) from 122.226.120.191; client subsequently connected to 15 external hosts."
+    },
+    {
+      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+      "confidence": "very_high",
+      "description": "Host 10.0.2.119 downloaded suspicious file '' (application/x-dosexec) from 61.155.165.25, followed by outbound communication to 122.226.120.191",
+      "client_ip": "10.0.2.119",
+      "file_server": "61.155.165.25",
+      "filename": "",
+      "mime_type": "application/x-dosexec",
+      "file_size": 8992208,
+      "evidence_packets": [
+        84,
+        87,
+        88,
+        89,
+        90
+      ],
+      "evidence_summary": "Zeek extracted file  (FUID FefAQu3K4h1t3jct75) from 61.155.165.25; client subsequently connected to 15 external hosts."
+    },
+    {
+      "type": "ZEEK_RECONNAISSANCE_PORT_SCAN",
+      "confidence": "high",
+      "description": "Zeek recorded 25 rejected/unanswered connection attempts (S0/REJ/RSTO) from ['fe80::45f6:82cd:198c:6a1a', '10.0.2.119'] targeting ports [547, 137, 5355, 80, 53]",
+      "source_hosts": [
+        "fe80::45f6:82cd:198c:6a1a",
+        "10.0.2.119"
+      ],
+      "scanned_ports": [
+        547,
+        137,
+        5355,
+        80,
+        53
+      ],
+      "failure_count": 25,
+      "evidence_packets": [],
+      "evidence_summary": "Repeated connection failures across ports [547, 137, 5355, 80, 53] indicative of scanning activity."
+    }
+  ],
+  "packet_evidence": [
+    {
+      "pkt_num": 16,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dns.msftncsi.com (TTL=None, Entropy=3.203)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.8.8"
+    },
+    {
+      "pkt_num": 21,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dns.msftncsi.com (TTL=None, Entropy=3.203)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.4.4"
+    },
+    {
+      "pkt_num": 23,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dns.msftncsi.com (TTL=4, Entropy=3.203)",
+      "proto": "UDP/53",
+      "src": "8.8.4.4",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 24,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dns.msftncsi.com (TTL=None, Entropy=3.203)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.4.4"
+    },
+    {
+      "pkt_num": 25,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dns.msftncsi.com (TTL=1048, Entropy=3.203)",
+      "proto": "UDP/53",
+      "src": "8.8.4.4",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 59,
+      "source": "dns_protocol",
+      "summary": "DNS Query: wpad (TTL=None, Entropy=2.0)",
+      "proto": "UDP/53",
+      "src": "",
+      "dst": ""
+    },
+    {
+      "pkt_num": 60,
+      "source": "dns_protocol",
+      "summary": "DNS Query: wpad (TTL=None, Entropy=2.0)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "224.0.0.252"
+    },
+    {
+      "pkt_num": 62,
+      "source": "dns_protocol",
+      "summary": "DNS Query: wpad (TTL=None, Entropy=2.0)",
+      "proto": "UDP/53",
+      "src": "",
+      "dst": ""
+    },
+    {
+      "pkt_num": 63,
+      "source": "dns_protocol",
+      "summary": "DNS Query: wpad (TTL=None, Entropy=2.0)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "224.0.0.252"
+    },
+    {
+      "pkt_num": 70,
+      "source": "dns_protocol",
+      "summary": "DNS Query: www.qq5.com (TTL=None, Entropy=2.664)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.8.8"
+    },
+    {
+      "pkt_num": 71,
+      "source": "dns_protocol",
+      "summary": "DNS Query: www.qq5.com (TTL=600, Entropy=2.664)",
+      "proto": "UDP/53",
+      "src": "8.8.8.8",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 75,
+      "source": "http_protocol",
+      "summary": "HTTP GET www.qq5.com/new/rar.xml (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.0.2.119",
+      "dst": "61.147.82.83:80"
+    },
+    {
+      "pkt_num": 81,
+      "source": "dns_protocol",
+      "summary": "DNS Query: d1.kuai8.com (TTL=None, Entropy=3.418)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.8.8"
+    },
+    {
+      "pkt_num": 82,
+      "source": "dns_protocol",
+      "summary": "DNS Query: d1.kuai8.com (TTL=None, Entropy=3.418)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.4.4"
+    },
+    {
+      "pkt_num": 83,
+      "source": "dns_protocol",
+      "summary": "DNS Query: d1.kuai8.com (TTL=None, Entropy=3.418)",
+      "proto": "UDP/53",
+      "src": "8.8.8.8",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 85,
+      "source": "dns_protocol",
+      "summary": "DNS Query: d1.kuai8.com (TTL=None, Entropy=3.418)",
+      "proto": "UDP/53",
+      "src": "8.8.4.4",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 86,
+      "source": "dns_protocol",
+      "summary": "DNS Query: d1.kuai8.com (TTL=None, Entropy=3.418)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119,8.8.4.4",
+      "dst": "8.8.4.4,10.0.2.119"
+    },
+    {
+      "pkt_num": 89,
+      "source": "http_protocol",
+      "summary": "HTTP GET d1.kuai8.com/setup/kuai8_rjaz.exe (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.0.2.119",
+      "dst": "122.226.120.191:80"
+    },
+    {
+      "pkt_num": 8861,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dl.client.baidu.com (TTL=None, Entropy=3.577)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.8.8"
+    },
+    {
+      "pkt_num": 8862,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dl.client.baidu.com (TTL=None, Entropy=3.577)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.4.4"
+    },
+    {
+      "pkt_num": 8863,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dl.client.baidu.com (TTL=None, Entropy=3.577)",
+      "proto": "UDP/53",
+      "src": "8.8.8.8",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 8865,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dl.client.baidu.com (TTL=None, Entropy=3.577)",
+      "proto": "UDP/53",
+      "src": "8.8.4.4",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 8866,
+      "source": "dns_protocol",
+      "summary": "DNS Query: dl.client.baidu.com (TTL=None, Entropy=3.577)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119,8.8.4.4",
+      "dst": "8.8.4.4,10.0.2.119"
+    },
+    {
+      "pkt_num": 8869,
+      "source": "http_protocol",
+      "summary": "HTTP GET dl.client.baidu.com/union/getbdbrowser.php?tn=39005028_224 (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.0.2.119",
+      "dst": "202.108.23.135:80"
+    },
+    {
+      "pkt_num": 8876,
+      "source": "dns_protocol",
+      "summary": "DNS Query: cdn.client.baidu.com (TTL=None, Entropy=3.546)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.8.8"
+    },
+    {
+      "pkt_num": 8877,
+      "source": "dns_protocol",
+      "summary": "DNS Query: cdn.client.baidu.com (TTL=None, Entropy=3.546)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119",
+      "dst": "8.8.4.4"
+    },
+    {
+      "pkt_num": 8878,
+      "source": "dns_protocol",
+      "summary": "DNS Query: cdn.client.baidu.com (TTL=None, Entropy=3.546)",
+      "proto": "UDP/53",
+      "src": "8.8.8.8",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 8880,
+      "source": "dns_protocol",
+      "summary": "DNS Query: cdn.client.baidu.com (TTL=None, Entropy=3.546)",
+      "proto": "UDP/53",
+      "src": "8.8.4.4",
+      "dst": "10.0.2.119"
+    },
+    {
+      "pkt_num": 8881,
+      "source": "dns_protocol",
+      "summary": "DNS Query: cdn.client.baidu.com (TTL=None, Entropy=3.546)",
+      "proto": "UDP/53",
+      "src": "10.0.2.119,8.8.4.4",
+      "dst": "8.8.4.4,10.0.2.119"
+    },
+    {
+      "pkt_num": 8884,
+      "source": "http_protocol",
+      "summary": "HTTP GET cdn.client.baidu.com/browser/repository/4_7_0_1908/bdbrowser_setup_mini-39005028_224-4_7_0_1908-4580.exe (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.0.2.119",
+      "dst": "61.155.165.25:80"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:254:23",
+        "label": "Alert: PROTOCOL-DNS SPOOF query respo...",
+        "type": "alert",
+        "details": {
+          "sid": 254,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              23
+            ],
+            "alert_sid": 254,
+            "gid": 1,
+            "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+            "proto": "UDP",
+            "src_ip": "8.8.4.4",
+            "dst_ip": "10.0.2.119",
+            "timestamp": "01/01-05:30:16.792802"
+          }
+        }
+      },
+      {
+        "id": "ip:8.8.4.4",
+        "label": "8.8.4.4",
+        "type": "entity_ip",
+        "details": {
+          "ip": "8.8.4.4"
+        }
+      },
+      {
+        "id": "ip:10.0.2.119",
+        "label": "10.0.2.119",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.0.2.119"
+        }
+      },
+      {
+        "id": "alert:1:402:86",
+        "label": "Alert: PROTOCOL-ICMP destination unre...",
+        "type": "alert",
+        "details": {
+          "sid": 402,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              86
+            ],
+            "alert_sid": 402,
+            "gid": 1,
+            "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+            "proto": "ICMP",
+            "src_ip": "10.0.2.119",
+            "dst_ip": "8.8.4.4",
+            "timestamp": "01/01-06:05:10.010801"
+          }
+        }
+      },
+      {
+        "id": "alert:1:2100366:86",
+        "label": "Alert: GPL ICMP Large ICMP Packet Pin...",
+        "type": "alert",
+        "details": {
+          "sid": 2100366,
+          "priority": 3,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              86
+            ],
+            "alert_sid": 2100366,
+            "gid": 1,
+            "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+            "proto": "ICMP",
+            "src_ip": "10.0.2.119",
+            "dst_ip": "8.8.4.4",
+            "timestamp": "01/01-06:05:10.010801"
+          }
+        }
+      },
+      {
+        "id": "alert:1:402:8866",
+        "label": "Alert: PROTOCOL-ICMP destination unre...",
+        "type": "alert",
+        "details": {
+          "sid": 402,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8866
+            ],
+            "alert_sid": 402,
+            "gid": 1,
+            "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+            "proto": "ICMP",
+            "src_ip": "10.0.2.119",
+            "dst_ip": "8.8.4.4",
+            "timestamp": "01/01-06:19:04.774973"
+          }
+        }
+      },
+      {
+        "id": "alert:1:402:8881",
+        "label": "Alert: PROTOCOL-ICMP destination unre...",
+        "type": "alert",
+        "details": {
+          "sid": 402,
+          "priority": 3,
+          "classification": "unknown",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8881
+            ],
+            "alert_sid": 402,
+            "gid": 1,
+            "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+            "proto": "ICMP",
+            "src_ip": "10.0.2.119",
+            "dst_ip": "8.8.4.4",
+            "timestamp": "01/01-06:19:07.675611"
+          }
+        }
+      },
+      {
+        "id": "alert:1:2100366:8881",
+        "label": "Alert: GPL ICMP Large ICMP Packet Pin...",
+        "type": "alert",
+        "details": {
+          "sid": 2100366,
+          "priority": 3,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8881
+            ],
+            "alert_sid": 2100366,
+            "gid": 1,
+            "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+            "proto": "ICMP",
+            "src_ip": "10.0.2.119",
+            "dst_ip": "8.8.4.4",
+            "timestamp": "01/01-06:19:07.675611"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "label": "Flow: TCP 80 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "122.226.120.191",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:49159<->122.226.120.191:80/TCP",
+            "packets": [
+              84,
+              87,
+              88,
+              89,
+              90,
+              91,
+              92,
+              93,
+              94,
+              95
+            ],
+            "byte_count": 8351760,
+            "packet_count": 8761,
+            "duration": 833.414,
+            "start_time": 2109.831114,
+            "end_time": 2943.245063,
+            "zeek_conn_state": "SF",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:122.226.120.191",
+        "label": "122.226.120.191",
+        "type": "entity_ip",
+        "details": {
+          "ip": "122.226.120.191"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "61.155.165.25",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:49161<->61.155.165.25:80/TCP",
+            "packets": [
+              8879,
+              8882,
+              8883,
+              8884,
+              8885,
+              8886,
+              8887,
+              8888,
+              8889,
+              8890
+            ],
+            "byte_count": 1194389,
+            "packet_count": 1113,
+            "duration": 125.902,
+            "start_time": 2947.365605,
+            "end_time": 3073.267606,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:61.155.165.25",
+        "label": "61.155.165.25",
+        "type": "entity_ip",
+        "details": {
+          "ip": "61.155.165.25"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:49160<->202.108.23.135:80/TCP",
+        "label": "Flow: TCP 80 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "202.108.23.135",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:49160<->202.108.23.135:80/TCP",
+            "packets": [
+              8864,
+              8867,
+              8868,
+              8869,
+              8870,
+              8871,
+              8872,
+              8873,
+              8874,
+              8875
+            ],
+            "byte_count": 949,
+            "packet_count": 10,
+            "duration": 1.737,
+            "start_time": 2944.468825,
+            "end_time": 2946.206319,
+            "zeek_conn_state": "SF",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:202.108.23.135",
+        "label": "202.108.23.135",
+        "type": "entity_ip",
+        "details": {
+          "ip": "202.108.23.135"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:49158<->61.147.82.83:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "61.147.82.83",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:49158<->61.147.82.83:80/TCP",
+            "packets": [
+              72,
+              73,
+              74,
+              75,
+              76,
+              77,
+              78,
+              79,
+              80
+            ],
+            "byte_count": 2400,
+            "packet_count": 9,
+            "duration": 1.4,
+            "start_time": 2086.259431,
+            "end_time": 2087.65972,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:61.147.82.83",
+        "label": "61.147.82.83",
+        "type": "entity_ip",
+        "details": {
+          "ip": "61.147.82.83"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:137<->10.0.2.255:137/UDP",
+        "label": "Flow: UDP 137 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "10.0.2.255",
+          "dst_port": 137,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:137<->10.0.2.255:137/UDP",
+            "packets": [
+              65,
+              66,
+              67
+            ],
+            "byte_count": 276,
+            "packet_count": 3,
+            "duration": 1.502,
+            "start_time": 2082.660056,
+            "end_time": 2084.162266,
+            "zeek_conn_state": "S0",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:10.0.2.255",
+        "label": "10.0.2.255",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.0.2.255"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:62971<->8.8.4.4:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:62971<->8.8.4.4:53/UDP",
+            "packets": [
+              21,
+              23
+            ],
+            "byte_count": 168,
+            "packet_count": 2,
+            "duration": 0.253,
+            "start_time": 16.539694,
+            "end_time": 16.792802,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:60874<->8.8.4.4:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:60874<->8.8.4.4:53/UDP",
+            "packets": [
+              24,
+              25
+            ],
+            "byte_count": 180,
+            "packet_count": 2,
+            "duration": 0.253,
+            "start_time": 16.793261,
+            "end_time": 17.045852,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:52369<->224.0.0.252:5355/UDP",
+        "label": "Flow: UDP 5355 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "224.0.0.252",
+          "dst_port": 5355,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:52369<->224.0.0.252:5355/UDP",
+            "packets": [
+              60,
+              63
+            ],
+            "byte_count": 128,
+            "packet_count": 2,
+            "duration": 0.091,
+            "start_time": 2082.368383,
+            "end_time": 2082.459882,
+            "zeek_conn_state": "S0",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:224.0.0.252",
+        "label": "224.0.0.252",
+        "type": "entity_ip",
+        "details": {
+          "ip": "224.0.0.252"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+        "label": "Flow: UDP 52369",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119,224.0.0.252",
+          "dst_ip": "10.0.2.2,10.0.2.119",
+          "dst_port": 52369,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+            "packets": [
+              61,
+              64
+            ],
+            "byte_count": 184,
+            "packet_count": 2,
+            "duration": 0.092,
+            "start_time": 2082.368453,
+            "end_time": 2082.460005,
+            "zeek_conn_state": "",
+            "zeek_service": ""
+          }
+        }
+      },
+      {
+        "id": "ip:10.0.2.119,224.0.0.252",
+        "label": "10.0.2.119,224.0.0.252",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.0.2.119,224.0.0.252"
+        }
+      },
+      {
+        "id": "ip:10.0.2.2,10.0.2.119",
+        "label": "10.0.2.2,10.0.2.119",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.0.2.2,10.0.2.119"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:58464<->8.8.8.8:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.8.8",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:58464<->8.8.8.8:53/UDP",
+            "packets": [
+              70,
+              71
+            ],
+            "byte_count": 158,
+            "packet_count": 2,
+            "duration": 0.622,
+            "start_time": 2085.636672,
+            "end_time": 2086.258877,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:8.8.8.8",
+        "label": "8.8.8.8",
+        "type": "entity_ip",
+        "details": {
+          "ip": "8.8.8.8"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:64512<->8.8.8.8:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.8.8",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:64512<->8.8.8.8:53/UDP",
+            "packets": [
+              81,
+              83
+            ],
+            "byte_count": 219,
+            "packet_count": 2,
+            "duration": 1.3,
+            "start_time": 2108.531085,
+            "end_time": 2109.830608,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:64512<->8.8.4.4:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:64512<->8.8.4.4:53/UDP",
+            "packets": [
+              82,
+              85
+            ],
+            "byte_count": 219,
+            "packet_count": 2,
+            "duration": 0.482,
+            "start_time": 2109.528929,
+            "end_time": 2110.010636,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:59260<->8.8.8.8:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.8.8",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:59260<->8.8.8.8:53/UDP",
+            "packets": [
+              8861,
+              8863
+            ],
+            "byte_count": 207,
+            "packet_count": 2,
+            "duration": 1.185,
+            "start_time": 2943.283563,
+            "end_time": 2944.468066,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:59260<->8.8.4.4:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:59260<->8.8.4.4:53/UDP",
+            "packets": [
+              8862,
+              8865
+            ],
+            "byte_count": 207,
+            "packet_count": 2,
+            "duration": 0.496,
+            "start_time": 2944.278948,
+            "end_time": 2944.774839,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:52999<->8.8.8.8:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.8.8",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:52999<->8.8.8.8:53/UDP",
+            "packets": [
+              8876,
+              8878
+            ],
+            "byte_count": 219,
+            "packet_count": 2,
+            "duration": 1.157,
+            "start_time": 2946.2077,
+            "end_time": 2947.365187,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:52999<->8.8.4.4:53/UDP",
+        "label": "Flow: UDP 53 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:52999<->8.8.4.4:53/UDP",
+            "packets": [
+              8877,
+              8880
+            ],
+            "byte_count": 219,
+            "packet_count": 2,
+            "duration": 0.472,
+            "start_time": 2947.203061,
+            "end_time": 2947.67548,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119:62971<->8.8.8.8:53/UDP",
+        "label": "Flow: UDP 53 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.8.8",
+          "dst_port": 53,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119:62971<->8.8.8.8:53/UDP",
+            "packets": [
+              16
+            ],
+            "byte_count": 76,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 15.540363,
+            "end_time": 15.540363,
+            "zeek_conn_state": "S0",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+        "label": "Flow: UDP 64512",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119,8.8.4.4",
+          "dst_ip": "8.8.4.4,10.0.2.119",
+          "dst_port": 64512,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+            "packets": [
+              86
+            ],
+            "byte_count": 175,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 2110.010801,
+            "end_time": 2110.010801,
+            "zeek_conn_state": "",
+            "zeek_service": ""
+          }
+        }
+      },
+      {
+        "id": "ip:10.0.2.119,8.8.4.4",
+        "label": "10.0.2.119,8.8.4.4",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.0.2.119,8.8.4.4"
+        }
+      },
+      {
+        "id": "ip:8.8.4.4,10.0.2.119",
+        "label": "8.8.4.4,10.0.2.119",
+        "type": "entity_ip",
+        "details": {
+          "ip": "8.8.4.4,10.0.2.119"
+        }
+      },
+      {
+        "id": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+        "label": "Flow: UDP 59260",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119,8.8.4.4",
+          "dst_ip": "8.8.4.4,10.0.2.119",
+          "dst_port": 59260,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+            "packets": [
+              8866
+            ],
+            "byte_count": 156,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 2944.774973,
+            "end_time": 2944.774973,
+            "zeek_conn_state": "",
+            "zeek_service": ""
+          }
+        }
+      },
+      {
+        "id": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+        "label": "Flow: UDP 52999",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.0.2.119,8.8.4.4",
+          "dst_ip": "8.8.4.4,10.0.2.119",
+          "dst_port": 52999,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+            "packets": [
+              8881
+            ],
+            "byte_count": 167,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 2947.675611,
+            "end_time": 2947.675611,
+            "zeek_conn_state": "",
+            "zeek_service": ""
+          }
+        }
+      },
+      {
+        "id": "dns:16",
+        "label": "DNS: dns.msftncsi.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dns.msftncsi.com",
+          "entropy": 3.203,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              16
+            ],
+            "query_name": "dns.msftncsi.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.203,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:dns.msftncsi.com",
+        "label": "dns.msftncsi.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.203
+        }
+      },
+      {
+        "id": "dns:21",
+        "label": "DNS: dns.msftncsi.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dns.msftncsi.com",
+          "entropy": 3.203,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              21
+            ],
+            "query_name": "dns.msftncsi.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.203,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:23",
+        "label": "DNS: dns.msftncsi.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dns.msftncsi.com",
+          "entropy": 3.203,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              23
+            ],
+            "query_name": "dns.msftncsi.com",
+            "resolved_ip": "131.107.255.255",
+            "ttl": 4,
+            "entropy": 3.203,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "ip:131.107.255.255",
+        "label": "131.107.255.255",
+        "type": "entity_ip",
+        "details": {
+          "ip": "131.107.255.255"
+        }
+      },
+      {
+        "id": "dns:24",
+        "label": "DNS: dns.msftncsi.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dns.msftncsi.com",
+          "entropy": 3.203,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              24
+            ],
+            "query_name": "dns.msftncsi.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.203,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:25",
+        "label": "DNS: dns.msftncsi.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dns.msftncsi.com",
+          "entropy": 3.203,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              25
+            ],
+            "query_name": "dns.msftncsi.com",
+            "resolved_ip": null,
+            "ttl": 1048,
+            "entropy": 3.203,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:59",
+        "label": "DNS: wpad",
+        "type": "dns_event",
+        "details": {
+          "query_name": "wpad",
+          "entropy": 2.0,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              59
+            ],
+            "query_name": "wpad",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.0,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:wpad",
+        "label": "wpad",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 2.0
+        }
+      },
+      {
+        "id": "dns:60",
+        "label": "DNS: wpad",
+        "type": "dns_event",
+        "details": {
+          "query_name": "wpad",
+          "entropy": 2.0,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              60
+            ],
+            "query_name": "wpad",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.0,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:62",
+        "label": "DNS: wpad",
+        "type": "dns_event",
+        "details": {
+          "query_name": "wpad",
+          "entropy": 2.0,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              62
+            ],
+            "query_name": "wpad",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.0,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:63",
+        "label": "DNS: wpad",
+        "type": "dns_event",
+        "details": {
+          "query_name": "wpad",
+          "entropy": 2.0,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              63
+            ],
+            "query_name": "wpad",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.0,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:70",
+        "label": "DNS: www.qq5.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "www.qq5.com",
+          "entropy": 2.664,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              70
+            ],
+            "query_name": "www.qq5.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 2.664,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:www.qq5.com",
+        "label": "www.qq5.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 2.664
+        }
+      },
+      {
+        "id": "dns:71",
+        "label": "DNS: www.qq5.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "www.qq5.com",
+          "entropy": 2.664,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              71
+            ],
+            "query_name": "www.qq5.com",
+            "resolved_ip": "61.147.82.83",
+            "ttl": 600,
+            "entropy": 2.664,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:81",
+        "label": "DNS: d1.kuai8.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "d1.kuai8.com",
+          "entropy": 3.418,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              81
+            ],
+            "query_name": "d1.kuai8.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.418,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:d1.kuai8.com",
+        "label": "d1.kuai8.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.418
+        }
+      },
+      {
+        "id": "dns:82",
+        "label": "DNS: d1.kuai8.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "d1.kuai8.com",
+          "entropy": 3.418,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              82
+            ],
+            "query_name": "d1.kuai8.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.418,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:83",
+        "label": "DNS: d1.kuai8.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "d1.kuai8.com",
+          "entropy": 3.418,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              83
+            ],
+            "query_name": "d1.kuai8.com",
+            "resolved_ip": "122.226.120.191,122.226.120.190",
+            "ttl": null,
+            "entropy": 3.418,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "ip:122.226.120.190",
+        "label": "122.226.120.190",
+        "type": "entity_ip",
+        "details": {
+          "ip": "122.226.120.190"
+        }
+      },
+      {
+        "id": "dns:85",
+        "label": "DNS: d1.kuai8.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "d1.kuai8.com",
+          "entropy": 3.418,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              85
+            ],
+            "query_name": "d1.kuai8.com",
+            "resolved_ip": "122.226.120.191,122.226.120.190",
+            "ttl": null,
+            "entropy": 3.418,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:86",
+        "label": "DNS: d1.kuai8.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "d1.kuai8.com",
+          "entropy": 3.418,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              86
+            ],
+            "query_name": "d1.kuai8.com",
+            "resolved_ip": "122.226.120.191,122.226.120.190",
+            "ttl": null,
+            "entropy": 3.418,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8861",
+        "label": "DNS: dl.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dl.client.baidu.com",
+          "entropy": 3.577,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8861
+            ],
+            "query_name": "dl.client.baidu.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.577,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:dl.client.baidu.com",
+        "label": "dl.client.baidu.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.577
+        }
+      },
+      {
+        "id": "dns:8862",
+        "label": "DNS: dl.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dl.client.baidu.com",
+          "entropy": 3.577,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8862
+            ],
+            "query_name": "dl.client.baidu.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.577,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8863",
+        "label": "DNS: dl.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dl.client.baidu.com",
+          "entropy": 3.577,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8863
+            ],
+            "query_name": "dl.client.baidu.com",
+            "resolved_ip": "202.108.23.135",
+            "ttl": null,
+            "entropy": 3.577,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8865",
+        "label": "DNS: dl.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dl.client.baidu.com",
+          "entropy": 3.577,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8865
+            ],
+            "query_name": "dl.client.baidu.com",
+            "resolved_ip": "202.108.23.135",
+            "ttl": null,
+            "entropy": 3.577,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8866",
+        "label": "DNS: dl.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "dl.client.baidu.com",
+          "entropy": 3.577,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8866
+            ],
+            "query_name": "dl.client.baidu.com",
+            "resolved_ip": "202.108.23.135",
+            "ttl": null,
+            "entropy": 3.577,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8876",
+        "label": "DNS: cdn.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "cdn.client.baidu.com",
+          "entropy": 3.546,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8876
+            ],
+            "query_name": "cdn.client.baidu.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.546,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:cdn.client.baidu.com",
+        "label": "cdn.client.baidu.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.546
+        }
+      },
+      {
+        "id": "dns:8877",
+        "label": "DNS: cdn.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "cdn.client.baidu.com",
+          "entropy": 3.546,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8877
+            ],
+            "query_name": "cdn.client.baidu.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.546,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8878",
+        "label": "DNS: cdn.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "cdn.client.baidu.com",
+          "entropy": 3.546,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8878
+            ],
+            "query_name": "cdn.client.baidu.com",
+            "resolved_ip": "61.155.165.25,61.155.165.24",
+            "ttl": null,
+            "entropy": 3.546,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "ip:61.155.165.24",
+        "label": "61.155.165.24",
+        "type": "entity_ip",
+        "details": {
+          "ip": "61.155.165.24"
+        }
+      },
+      {
+        "id": "dns:8880",
+        "label": "DNS: cdn.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "cdn.client.baidu.com",
+          "entropy": 3.546,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8880
+            ],
+            "query_name": "cdn.client.baidu.com",
+            "resolved_ip": "61.155.165.25,61.155.165.24",
+            "ttl": null,
+            "entropy": 3.546,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:8881",
+        "label": "DNS: cdn.client.baidu.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "cdn.client.baidu.com",
+          "entropy": 3.546,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8881
+            ],
+            "query_name": "cdn.client.baidu.com",
+            "resolved_ip": "61.155.165.25,61.155.165.24",
+            "ttl": null,
+            "entropy": 3.546,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "http:75",
+        "label": "HTTP: GET /new/rar.xml",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "www.qq5.com",
+          "uri": "/new/rar.xml",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              75
+            ],
+            "method": "GET",
+            "host": "www.qq5.com",
+            "uri": "/new/rar.xml",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "http:89",
+        "label": "HTTP: GET /setup/kuai8_rjaz.ex",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "d1.kuai8.com",
+          "uri": "/setup/kuai8_rjaz.exe",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              89
+            ],
+            "method": "GET",
+            "host": "d1.kuai8.com",
+            "uri": "/setup/kuai8_rjaz.exe",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "http:8869",
+        "label": "HTTP: GET /union/getbdbrowser.",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "dl.client.baidu.com",
+          "uri": "/union/getbdbrowser.php?tn=39005028_224",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8869
+            ],
+            "method": "GET",
+            "host": "dl.client.baidu.com",
+            "uri": "/union/getbdbrowser.php?tn=39005028_224",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "http:8884",
+        "label": "HTTP: GET /browser/repository/",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "cdn.client.baidu.com",
+          "uri": "/browser/repository/4_7_0_1908/bdbrowser_setup_mini-39005028_224-4_7_0_1908-4580.exe",
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "packets": [
+              8884
+            ],
+            "method": "GET",
+            "host": "cdn.client.baidu.com",
+            "uri": "/browser/repository/4_7_0_1908/bdbrowser_setup_mini-39005028_224-4_7_0_1908-4580.exe",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "file:FBbIET43j5Ap7njF2",
+        "label": "File: text/plain",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/plain",
+          "size_bytes": 1588,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "fuid": "FBbIET43j5Ap7njF2",
+            "filename": "",
+            "mime_type": "text/plain",
+            "total_bytes": 1588,
+            "source": "HTTP",
+            "orig_h": "10.0.2.119",
+            "resp_h": "61.147.82.83"
+          }
+        }
+      },
+      {
+        "id": "file:FcHyF2qzWN4FKfEb7",
+        "label": "File: application/x-dosexec",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "size_bytes": 9098376,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "fuid": "FcHyF2qzWN4FKfEb7",
+            "filename": "",
+            "mime_type": "application/x-dosexec",
+            "total_bytes": 9098376,
+            "source": "HTTP",
+            "orig_h": "10.0.2.119",
+            "resp_h": "122.226.120.191"
+          }
+        }
+      },
+      {
+        "id": "file:FefAQu3K4h1t3jct75",
+        "label": "File: application/x-dosexec",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "size_bytes": 8992208,
+          "evidence": {
+            "capture_id": "PCAP_006",
+            "fuid": "FefAQu3K4h1t3jct75",
+            "filename": "",
+            "mime_type": "application/x-dosexec",
+            "total_bytes": 8992208,
+            "source": "HTTP",
+            "orig_h": "10.0.2.119",
+            "resp_h": "61.155.165.25"
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "alert:1:254:23",
+        "target": "ip:10.0.2.119",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            23
+          ],
+          "alert_sid": 254,
+          "gid": 1,
+          "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+          "proto": "UDP",
+          "src_ip": "8.8.4.4",
+          "dst_ip": "10.0.2.119",
+          "timestamp": "01/01-05:30:16.792802"
+        }
+      },
+      {
+        "source": "ip:8.8.4.4",
+        "target": "alert:1:254:23",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            23
+          ],
+          "alert_sid": 254,
+          "gid": 1,
+          "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+          "proto": "UDP",
+          "src_ip": "8.8.4.4",
+          "dst_ip": "10.0.2.119",
+          "timestamp": "01/01-05:30:16.792802"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "alert:1:402:86",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:05:10.010801"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "alert:1:2100366:86",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:05:10.010801"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "alert:1:402:8866",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8866
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:04.774973"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "alert:1:402:8881",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:07.675611"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "alert:1:2100366:8881",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:07.675611"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49159<->122.226.120.191:80/TCP",
+          "packets": [
+            84,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95
+          ],
+          "byte_count": 8351760,
+          "packet_count": 8761,
+          "duration": 833.414,
+          "start_time": 2109.831114,
+          "end_time": 2943.245063,
+          "zeek_conn_state": "SF",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49161<->61.155.165.25:80/TCP",
+          "packets": [
+            8879,
+            8882,
+            8883,
+            8884,
+            8885,
+            8886,
+            8887,
+            8888,
+            8889,
+            8890
+          ],
+          "byte_count": 1194389,
+          "packet_count": 1113,
+          "duration": 125.902,
+          "start_time": 2947.365605,
+          "end_time": 3073.267606,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:49160<->202.108.23.135:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49160<->202.108.23.135:80/TCP",
+          "packets": [
+            8864,
+            8867,
+            8868,
+            8869,
+            8870,
+            8871,
+            8872,
+            8873,
+            8874,
+            8875
+          ],
+          "byte_count": 949,
+          "packet_count": 10,
+          "duration": 1.737,
+          "start_time": 2944.468825,
+          "end_time": 2946.206319,
+          "zeek_conn_state": "SF",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:49158<->61.147.82.83:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49158<->61.147.82.83:80/TCP",
+          "packets": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ],
+          "byte_count": 2400,
+          "packet_count": 9,
+          "duration": 1.4,
+          "start_time": 2086.259431,
+          "end_time": 2087.65972,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:137<->10.0.2.255:137/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:137<->10.0.2.255:137/UDP",
+          "packets": [
+            65,
+            66,
+            67
+          ],
+          "byte_count": 276,
+          "packet_count": 3,
+          "duration": 1.502,
+          "start_time": 2082.660056,
+          "end_time": 2084.162266,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:62971<->8.8.4.4:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:62971<->8.8.4.4:53/UDP",
+          "packets": [
+            21,
+            23
+          ],
+          "byte_count": 168,
+          "packet_count": 2,
+          "duration": 0.253,
+          "start_time": 16.539694,
+          "end_time": 16.792802,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:60874<->8.8.4.4:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:60874<->8.8.4.4:53/UDP",
+          "packets": [
+            24,
+            25
+          ],
+          "byte_count": 180,
+          "packet_count": 2,
+          "duration": 0.253,
+          "start_time": 16.793261,
+          "end_time": 17.045852,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:52369<->224.0.0.252:5355/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52369<->224.0.0.252:5355/UDP",
+          "packets": [
+            60,
+            63
+          ],
+          "byte_count": 128,
+          "packet_count": 2,
+          "duration": 0.091,
+          "start_time": 2082.368383,
+          "end_time": 2082.459882,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:58464<->8.8.8.8:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:58464<->8.8.8.8:53/UDP",
+          "packets": [
+            70,
+            71
+          ],
+          "byte_count": 158,
+          "packet_count": 2,
+          "duration": 0.622,
+          "start_time": 2085.636672,
+          "end_time": 2086.258877,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:64512<->8.8.8.8:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:64512<->8.8.8.8:53/UDP",
+          "packets": [
+            81,
+            83
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 1.3,
+          "start_time": 2108.531085,
+          "end_time": 2109.830608,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:64512<->8.8.4.4:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:64512<->8.8.4.4:53/UDP",
+          "packets": [
+            82,
+            85
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 0.482,
+          "start_time": 2109.528929,
+          "end_time": 2110.010636,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:59260<->8.8.8.8:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:59260<->8.8.8.8:53/UDP",
+          "packets": [
+            8861,
+            8863
+          ],
+          "byte_count": 207,
+          "packet_count": 2,
+          "duration": 1.185,
+          "start_time": 2943.283563,
+          "end_time": 2944.468066,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:59260<->8.8.4.4:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:59260<->8.8.4.4:53/UDP",
+          "packets": [
+            8862,
+            8865
+          ],
+          "byte_count": 207,
+          "packet_count": 2,
+          "duration": 0.496,
+          "start_time": 2944.278948,
+          "end_time": 2944.774839,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:52999<->8.8.8.8:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52999<->8.8.8.8:53/UDP",
+          "packets": [
+            8876,
+            8878
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 1.157,
+          "start_time": 2946.2077,
+          "end_time": 2947.365187,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:52999<->8.8.4.4:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52999<->8.8.4.4:53/UDP",
+          "packets": [
+            8877,
+            8880
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 0.472,
+          "start_time": 2947.203061,
+          "end_time": 2947.67548,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.0.2.119",
+        "target": "flow:10.0.2.119:62971<->8.8.8.8:53/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:62971<->8.8.8.8:53/UDP",
+          "packets": [
+            16
+          ],
+          "byte_count": 76,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 15.540363,
+          "end_time": 15.540363,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "alert:1:402:86",
+        "target": "ip:8.8.4.4",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:05:10.010801"
+        }
+      },
+      {
+        "source": "alert:1:2100366:86",
+        "target": "ip:8.8.4.4",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:05:10.010801"
+        }
+      },
+      {
+        "source": "alert:1:402:8866",
+        "target": "ip:8.8.4.4",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8866
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:04.774973"
+        }
+      },
+      {
+        "source": "alert:1:402:8881",
+        "target": "ip:8.8.4.4",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "alert_sid": 402,
+          "gid": 1,
+          "msg": "PROTOCOL-ICMP destination unreachable port unreachable packet detected",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:07.675611"
+        }
+      },
+      {
+        "source": "alert:1:2100366:8881",
+        "target": "ip:8.8.4.4",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "alert_sid": 2100366,
+          "gid": 1,
+          "msg": "GPL ICMP Large ICMP Packet Ping Diagnostic",
+          "proto": "ICMP",
+          "src_ip": "10.0.2.119",
+          "dst_ip": "8.8.4.4",
+          "timestamp": "01/01-06:19:07.675611"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "target": "ip:122.226.120.191",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49159<->122.226.120.191:80/TCP",
+          "packets": [
+            84,
+            87,
+            88,
+            89,
+            90,
+            91,
+            92,
+            93,
+            94,
+            95
+          ],
+          "byte_count": 8351760,
+          "packet_count": 8761,
+          "duration": 833.414,
+          "start_time": 2109.831114,
+          "end_time": 2943.245063,
+          "zeek_conn_state": "SF",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:122.226.120.191",
+        "target": "file:FcHyF2qzWN4FKfEb7",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FcHyF2qzWN4FKfEb7",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 9098376,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "122.226.120.191"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "target": "ip:61.155.165.25",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49161<->61.155.165.25:80/TCP",
+          "packets": [
+            8879,
+            8882,
+            8883,
+            8884,
+            8885,
+            8886,
+            8887,
+            8888,
+            8889,
+            8890
+          ],
+          "byte_count": 1194389,
+          "packet_count": 1113,
+          "duration": 125.902,
+          "start_time": 2947.365605,
+          "end_time": 3073.267606,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:61.155.165.25",
+        "target": "file:FefAQu3K4h1t3jct75",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FefAQu3K4h1t3jct75",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 8992208,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.155.165.25"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:49160<->202.108.23.135:80/TCP",
+        "target": "ip:202.108.23.135",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49160<->202.108.23.135:80/TCP",
+          "packets": [
+            8864,
+            8867,
+            8868,
+            8869,
+            8870,
+            8871,
+            8872,
+            8873,
+            8874,
+            8875
+          ],
+          "byte_count": 949,
+          "packet_count": 10,
+          "duration": 1.737,
+          "start_time": 2944.468825,
+          "end_time": 2946.206319,
+          "zeek_conn_state": "SF",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:49158<->61.147.82.83:80/TCP",
+        "target": "ip:61.147.82.83",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:49158<->61.147.82.83:80/TCP",
+          "packets": [
+            72,
+            73,
+            74,
+            75,
+            76,
+            77,
+            78,
+            79,
+            80
+          ],
+          "byte_count": 2400,
+          "packet_count": 9,
+          "duration": 1.4,
+          "start_time": 2086.259431,
+          "end_time": 2087.65972,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:61.147.82.83",
+        "target": "file:FBbIET43j5Ap7njF2",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FBbIET43j5Ap7njF2",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 1588,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.147.82.83"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:137<->10.0.2.255:137/UDP",
+        "target": "ip:10.0.2.255",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:137<->10.0.2.255:137/UDP",
+          "packets": [
+            65,
+            66,
+            67
+          ],
+          "byte_count": 276,
+          "packet_count": 3,
+          "duration": 1.502,
+          "start_time": 2082.660056,
+          "end_time": 2084.162266,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:62971<->8.8.4.4:53/UDP",
+        "target": "ip:8.8.4.4",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:62971<->8.8.4.4:53/UDP",
+          "packets": [
+            21,
+            23
+          ],
+          "byte_count": 168,
+          "packet_count": 2,
+          "duration": 0.253,
+          "start_time": 16.539694,
+          "end_time": 16.792802,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:60874<->8.8.4.4:53/UDP",
+        "target": "ip:8.8.4.4",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:60874<->8.8.4.4:53/UDP",
+          "packets": [
+            24,
+            25
+          ],
+          "byte_count": 180,
+          "packet_count": 2,
+          "duration": 0.253,
+          "start_time": 16.793261,
+          "end_time": 17.045852,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:52369<->224.0.0.252:5355/UDP",
+        "target": "ip:224.0.0.252",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52369<->224.0.0.252:5355/UDP",
+          "packets": [
+            60,
+            63
+          ],
+          "byte_count": 128,
+          "packet_count": 2,
+          "duration": 0.091,
+          "start_time": 2082.368383,
+          "end_time": 2082.459882,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+        "target": "ip:10.0.2.2,10.0.2.119",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+          "packets": [
+            61,
+            64
+          ],
+          "byte_count": 184,
+          "packet_count": 2,
+          "duration": 0.092,
+          "start_time": 2082.368453,
+          "end_time": 2082.460005,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "ip:10.0.2.119,224.0.0.252",
+        "target": "flow:10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,224.0.0.252:5355<->10.0.2.2,10.0.2.119:52369/UDP",
+          "packets": [
+            61,
+            64
+          ],
+          "byte_count": 184,
+          "packet_count": 2,
+          "duration": 0.092,
+          "start_time": 2082.368453,
+          "end_time": 2082.460005,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:58464<->8.8.8.8:53/UDP",
+        "target": "ip:8.8.8.8",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:58464<->8.8.8.8:53/UDP",
+          "packets": [
+            70,
+            71
+          ],
+          "byte_count": 158,
+          "packet_count": 2,
+          "duration": 0.622,
+          "start_time": 2085.636672,
+          "end_time": 2086.258877,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:64512<->8.8.8.8:53/UDP",
+        "target": "ip:8.8.8.8",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:64512<->8.8.8.8:53/UDP",
+          "packets": [
+            81,
+            83
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 1.3,
+          "start_time": 2108.531085,
+          "end_time": 2109.830608,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:64512<->8.8.4.4:53/UDP",
+        "target": "ip:8.8.4.4",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:64512<->8.8.4.4:53/UDP",
+          "packets": [
+            82,
+            85
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 0.482,
+          "start_time": 2109.528929,
+          "end_time": 2110.010636,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:59260<->8.8.8.8:53/UDP",
+        "target": "ip:8.8.8.8",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:59260<->8.8.8.8:53/UDP",
+          "packets": [
+            8861,
+            8863
+          ],
+          "byte_count": 207,
+          "packet_count": 2,
+          "duration": 1.185,
+          "start_time": 2943.283563,
+          "end_time": 2944.468066,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:59260<->8.8.4.4:53/UDP",
+        "target": "ip:8.8.4.4",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:59260<->8.8.4.4:53/UDP",
+          "packets": [
+            8862,
+            8865
+          ],
+          "byte_count": 207,
+          "packet_count": 2,
+          "duration": 0.496,
+          "start_time": 2944.278948,
+          "end_time": 2944.774839,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:52999<->8.8.8.8:53/UDP",
+        "target": "ip:8.8.8.8",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52999<->8.8.8.8:53/UDP",
+          "packets": [
+            8876,
+            8878
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 1.157,
+          "start_time": 2946.2077,
+          "end_time": 2947.365187,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:52999<->8.8.4.4:53/UDP",
+        "target": "ip:8.8.4.4",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:52999<->8.8.4.4:53/UDP",
+          "packets": [
+            8877,
+            8880
+          ],
+          "byte_count": 219,
+          "packet_count": 2,
+          "duration": 0.472,
+          "start_time": 2947.203061,
+          "end_time": 2947.67548,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119:62971<->8.8.8.8:53/UDP",
+        "target": "ip:8.8.8.8",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119:62971<->8.8.8.8:53/UDP",
+          "packets": [
+            16
+          ],
+          "byte_count": 76,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 15.540363,
+          "end_time": 15.540363,
+          "zeek_conn_state": "S0",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+        "target": "ip:8.8.4.4,10.0.2.119",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+          "packets": [
+            86
+          ],
+          "byte_count": 175,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2110.010801,
+          "end_time": 2110.010801,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "ip:10.0.2.119,8.8.4.4",
+        "target": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:64512/UDP",
+          "packets": [
+            86
+          ],
+          "byte_count": 175,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2110.010801,
+          "end_time": 2110.010801,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "ip:10.0.2.119,8.8.4.4",
+        "target": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+          "packets": [
+            8866
+          ],
+          "byte_count": 156,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2944.774973,
+          "end_time": 2944.774973,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "ip:10.0.2.119,8.8.4.4",
+        "target": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+          "packets": [
+            8881
+          ],
+          "byte_count": 167,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2947.675611,
+          "end_time": 2947.675611,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+        "target": "ip:8.8.4.4,10.0.2.119",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:59260/UDP",
+          "packets": [
+            8866
+          ],
+          "byte_count": 156,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2944.774973,
+          "end_time": 2944.774973,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "flow:10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+        "target": "ip:8.8.4.4,10.0.2.119",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "flow_id": "10.0.2.119,8.8.4.4:53<->8.8.4.4,10.0.2.119:52999/UDP",
+          "packets": [
+            8881
+          ],
+          "byte_count": 167,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 2947.675611,
+          "end_time": 2947.675611,
+          "zeek_conn_state": "",
+          "zeek_service": ""
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "dns:16",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            16
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "dns:21",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            21
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "dns:23",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            23
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": "131.107.255.255",
+          "ttl": 4,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "ip:131.107.255.255",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            23
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": "131.107.255.255",
+          "ttl": 4,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "dns:24",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            24
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dns.msftncsi.com",
+        "target": "dns:25",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            25
+          ],
+          "query_name": "dns.msftncsi.com",
+          "resolved_ip": null,
+          "ttl": 1048,
+          "entropy": 3.203,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:wpad",
+        "target": "dns:59",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            59
+          ],
+          "query_name": "wpad",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.0,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:wpad",
+        "target": "dns:60",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            60
+          ],
+          "query_name": "wpad",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.0,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:wpad",
+        "target": "dns:62",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            62
+          ],
+          "query_name": "wpad",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.0,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:wpad",
+        "target": "dns:63",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            63
+          ],
+          "query_name": "wpad",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.0,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:www.qq5.com",
+        "target": "dns:70",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            70
+          ],
+          "query_name": "www.qq5.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 2.664,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:www.qq5.com",
+        "target": "dns:71",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            71
+          ],
+          "query_name": "www.qq5.com",
+          "resolved_ip": "61.147.82.83",
+          "ttl": 600,
+          "entropy": 2.664,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:www.qq5.com",
+        "target": "ip:61.147.82.83",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            71
+          ],
+          "query_name": "www.qq5.com",
+          "resolved_ip": "61.147.82.83",
+          "ttl": 600,
+          "entropy": 2.664,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:www.qq5.com",
+        "target": "http:75",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            75
+          ],
+          "method": "GET",
+          "host": "www.qq5.com",
+          "uri": "/new/rar.xml",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "dns:71",
+        "target": "flow:10.0.2.119:49158<->61.147.82.83:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'www.qq5.com' resolved to 61.147.82.83, followed within 0.001s by TCP traffic to port 80",
+          "domain": "www.qq5.com",
+          "resolved_ip": "61.147.82.83",
+          "target_port": 80,
+          "time_delta_sec": 0.001,
+          "evidence_packets": [
+            71,
+            72,
+            73,
+            74,
+            75,
+            76
+          ],
+          "evidence_summary": "Packet 71 queried www.qq5.com -> 61.147.82.83; flow 10.0.2.119:49158<->61.147.82.83:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "dns:81",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            81
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "dns:82",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            82
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "dns:83",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            83
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.191",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            83
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.191",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            85
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.191",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.190",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            83
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.190",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            85
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "ip:122.226.120.190",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "dns:85",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            85
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "dns:86",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            86
+          ],
+          "query_name": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191,122.226.120.190",
+          "ttl": null,
+          "entropy": 3.418,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:d1.kuai8.com",
+        "target": "http:89",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            89
+          ],
+          "method": "GET",
+          "host": "d1.kuai8.com",
+          "uri": "/setup/kuai8_rjaz.exe",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "dns:83",
+        "target": "flow:10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'd1.kuai8.com' resolved to 122.226.120.191, followed within 0.001s by TCP traffic to port 80",
+          "domain": "d1.kuai8.com",
+          "resolved_ip": "122.226.120.191",
+          "target_port": 80,
+          "time_delta_sec": 0.001,
+          "evidence_packets": [
+            83,
+            84,
+            87,
+            88,
+            89,
+            90
+          ],
+          "evidence_summary": "Packet 83 queried d1.kuai8.com -> 122.226.120.191; flow 10.0.2.119:49159<->122.226.120.191:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "dns:8861",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8861
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "dns:8862",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8862
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "dns:8863",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8863
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "ip:202.108.23.135",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8863
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "ip:202.108.23.135",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8865
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "ip:202.108.23.135",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8866
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "dns:8865",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8865
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "dns:8866",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8866
+          ],
+          "query_name": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "ttl": null,
+          "entropy": 3.577,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:dl.client.baidu.com",
+        "target": "http:8869",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8869
+          ],
+          "method": "GET",
+          "host": "dl.client.baidu.com",
+          "uri": "/union/getbdbrowser.php?tn=39005028_224",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "dns:8863",
+        "target": "flow:10.0.2.119:49160<->202.108.23.135:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'dl.client.baidu.com' resolved to 202.108.23.135, followed within 0.001s by TCP traffic to port 80",
+          "domain": "dl.client.baidu.com",
+          "resolved_ip": "202.108.23.135",
+          "target_port": 80,
+          "time_delta_sec": 0.001,
+          "evidence_packets": [
+            8863,
+            8864,
+            8867,
+            8868,
+            8869,
+            8870
+          ],
+          "evidence_summary": "Packet 8863 queried dl.client.baidu.com -> 202.108.23.135; flow 10.0.2.119:49160<->202.108.23.135:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "dns:8876",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8876
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "dns:8877",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8877
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "dns:8878",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8878
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.25",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8878
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.25",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8880
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.25",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.24",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8878
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.24",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8880
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "ip:61.155.165.24",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "dns:8880",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8880
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "dns:8881",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8881
+          ],
+          "query_name": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25,61.155.165.24",
+          "ttl": null,
+          "entropy": 3.546,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:cdn.client.baidu.com",
+        "target": "http:8884",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "packets": [
+            8884
+          ],
+          "method": "GET",
+          "host": "cdn.client.baidu.com",
+          "uri": "/browser/repository/4_7_0_1908/bdbrowser_setup_mini-39005028_224-4_7_0_1908-4580.exe",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "dns:8878",
+        "target": "flow:10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'cdn.client.baidu.com' resolved to 61.155.165.25, followed within 0.0s by TCP traffic to port 80",
+          "domain": "cdn.client.baidu.com",
+          "resolved_ip": "61.155.165.25",
+          "target_port": 80,
+          "time_delta_sec": 0.0,
+          "evidence_packets": [
+            8878,
+            8879,
+            8882,
+            8883,
+            8884,
+            8885
+          ],
+          "evidence_summary": "Packet 8878 queried cdn.client.baidu.com -> 61.155.165.25; flow 10.0.2.119:49161<->61.155.165.25:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "file:FBbIET43j5Ap7njF2",
+        "target": "ip:10.0.2.119",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FBbIET43j5Ap7njF2",
+          "filename": "",
+          "mime_type": "text/plain",
+          "total_bytes": 1588,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.147.82.83"
+        }
+      },
+      {
+        "source": "file:FcHyF2qzWN4FKfEb7",
+        "target": "ip:10.0.2.119",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FcHyF2qzWN4FKfEb7",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 9098376,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "122.226.120.191"
+        }
+      },
+      {
+        "source": "file:FcHyF2qzWN4FKfEb7",
+        "target": "flow:10.0.2.119:49161<->61.155.165.25:80/TCP",
+        "relation": "PRECEDED_C2_FLOW",
+        "evidence": {
+          "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+          "confidence": "very_high",
+          "description": "Host 10.0.2.119 downloaded suspicious file '' (application/x-dosexec) from 122.226.120.191, followed by outbound communication to 61.155.165.25",
+          "client_ip": "10.0.2.119",
+          "file_server": "122.226.120.191",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "file_size": 9098376,
+          "evidence_packets": [
+            8879,
+            8882,
+            8883,
+            8884,
+            8885
+          ],
+          "evidence_summary": "Zeek extracted file  (FUID FcHyF2qzWN4FKfEb7) from 122.226.120.191; client subsequently connected to 15 external hosts."
+        }
+      },
+      {
+        "source": "file:FefAQu3K4h1t3jct75",
+        "target": "ip:10.0.2.119",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_006",
+          "fuid": "FefAQu3K4h1t3jct75",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 8992208,
+          "source": "HTTP",
+          "orig_h": "10.0.2.119",
+          "resp_h": "61.155.165.25"
+        }
+      },
+      {
+        "source": "file:FefAQu3K4h1t3jct75",
+        "target": "flow:10.0.2.119:49159<->122.226.120.191:80/TCP",
+        "relation": "PRECEDED_C2_FLOW",
+        "evidence": {
+          "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+          "confidence": "very_high",
+          "description": "Host 10.0.2.119 downloaded suspicious file '' (application/x-dosexec) from 61.155.165.25, followed by outbound communication to 122.226.120.191",
+          "client_ip": "10.0.2.119",
+          "file_server": "61.155.165.25",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "file_size": 8992208,
+          "evidence_packets": [
+            84,
+            87,
+            88,
+            89,
+            90
+          ],
+          "evidence_summary": "Zeek extracted file  (FUID FefAQu3K4h1t3jct75) from 61.155.165.25; client subsequently connected to 15 external hosts."
+        }
+      }
+    ]
+  }
+}

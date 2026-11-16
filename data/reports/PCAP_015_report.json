@@ -1,0 +1,1054 @@
+{
+  "capture_id": "PCAP_015",
+  "filename": "2021-10-20-TA551-pushes-Sliver.pcap",
+  "malware_family": "Sliver C2",
+  "threat_category": "Command and Control",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 0,
+    "unique_signatures": 0,
+    "pcap_hash": "f9a1b8b9e3bfe610e0cf8cb59eb15b9e367ee57bdc4af7c7aa0704d8630b1bd4",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [],
+  "network_behaviour": {
+    "dns_queries": [
+      {
+        "pkt_num": 1,
+        "time_epoch": 1634749350.915087,
+        "query_name": "carwaded.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.085,
+        "src_ip": "10.10.20.101",
+        "dst_ip": "10.10.20.1"
+      },
+      {
+        "pkt_num": 2,
+        "time_epoch": 1634749351.078551,
+        "query_name": "carwaded.com",
+        "query_type": "1",
+        "is_response": false,
+        "ttl": 300,
+        "resolved_ip": "185.53.46.50",
+        "rcode": "0",
+        "entropy": 3.085,
+        "src_ip": "10.10.20.1",
+        "dst_ip": "10.10.20.101"
+      }
+    ],
+    "http_requests": [
+      {
+        "pkt_num": 6,
+        "time_epoch": 1634749351.248739,
+        "method": "GET",
+        "host": "carwaded.com",
+        "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+        "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)",
+        "status_code": "",
+        "src_ip": "10.10.20.101",
+        "dst_ip": "185.53.46.50",
+        "dst_port": 80
+      }
+    ],
+    "tcp_connections": [
+      {
+        "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.10.20.101",
+        "dst_ip": "185.53.46.50",
+        "src_port": 53204,
+        "dst_port": 80,
+        "duration_sec": 19.129,
+        "packet_count": 4998,
+        "byte_count": 4358120,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "proto": "UDP",
+        "src_ip": "10.10.20.1",
+        "dst_ip": "10.10.20.101",
+        "src_port": 53,
+        "dst_port": 51048,
+        "duration_sec": 0.163,
+        "packet_count": 2,
+        "byte_count": 160,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "src_ip": "10.10.20.1",
+        "dst_ip": "10.10.20.101",
+        "dst_port": 51048,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 51048"
+        ],
+        "packets": [
+          1,
+          2
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 97,
+      "connection_states": {
+        "SF": 87,
+        "RSTO": 10
+      },
+      "detected_services": {
+        "dns": 5,
+        "http": 1,
+        "ssl": 91
+      },
+      "files_transferred": [
+        {
+          "fuid": "FKrEyx4Tp73rFRS9h3",
+          "uid": "CGAl5I3vxk0I02UlWc",
+          "orig_h": "10.10.20.101",
+          "resp_h": "185.53.46.50",
+          "source": "HTTP",
+          "mime_type": "application/x-dosexec",
+          "filename": "zes2",
+          "total_bytes": 10616965
+        }
+      ],
+      "ssl_certificates": [],
+      "ssl_sessions": [
+        {
+          "uid": "CYmBTh3bCIZEL9P342",
+          "ts": 1634749464.600896,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53222,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CTgLUf14ppHpRYWui6",
+          "ts": 1634749465.069819,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53225,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CBEJNm3vn4sjtF1oX2",
+          "ts": 1634749585.240773,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53229,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CPDBta38Sp4YiIboX7",
+          "ts": 1634749645.223865,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53231,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CDwNANrMIEsdmsqib",
+          "ts": 1634749705.217969,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53232,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CBN5uCNwXi1k9GIHc",
+          "ts": 1634749765.116632,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53233,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CrNGkH3fbF2BfYTcke",
+          "ts": 1634749825.228938,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53234,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "Cyh97gUDeCtPV2nJj",
+          "ts": 1634749885.123772,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53240,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "C7N6LC2Gqx4aVVAyFe",
+          "ts": 1634749945.170405,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53241,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CVpsfDqsb38juQRw9",
+          "ts": 1634750005.146913,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53242,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "Cj88NM1u58mOFToeBh",
+          "ts": 1634750065.155533,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53243,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "Chjsgi2fb7z9xY9wj1",
+          "ts": 1634750125.554077,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53244,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CHPMfx1h5RlKyKvfQe",
+          "ts": 1634750186.364714,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53245,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CwLU3a2RwLXjp33RGj",
+          "ts": 1634750245.29949,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53246,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CYddjZ01bWtF4Q7Hg",
+          "ts": 1634750305.301858,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53248,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "Crxrsg1LinWKU75RTe",
+          "ts": 1634750365.227584,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53249,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "C9waLE3VL7fVhmC1X4",
+          "ts": 1634750425.269694,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53250,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CTH5ah3ruoDR3ttKa4",
+          "ts": 1634750485.266208,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53251,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "CUp1VP3lgy0KFOehS4",
+          "ts": 1634750545.26595,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53252,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        },
+        {
+          "uid": "C0Jjgd4cb9XSPnofn4",
+          "ts": 1634750605.417944,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53253,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "version": "TLSv13",
+          "cipher": "TLS_AES_128_GCM_SHA256",
+          "server_name": "ruwejo.com",
+          "established": true,
+          "cert_chain_fps": [],
+          "sni_matches_cert": null
+        }
+      ],
+      "failed_connections": [
+        {
+          "uid": "CGAl5I3vxk0I02UlWc",
+          "ts": 1634749351.084034,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53204,
+          "resp_h": "185.53.46.50",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 113.274,
+          "orig_bytes": 552,
+          "resp_bytes": 10617377,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 5668,
+          "resp_pkts": 7635
+        },
+        {
+          "uid": "CYmBTh3bCIZEL9P342",
+          "ts": 1634749464.526228,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53222,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.575,
+          "orig_bytes": 1406,
+          "resp_bytes": 9537,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 16,
+          "resp_pkts": 19
+        },
+        {
+          "uid": "CBEJNm3vn4sjtF1oX2",
+          "ts": 1634749584.997654,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53229,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.545,
+          "orig_bytes": 625,
+          "resp_bytes": 4182,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CUp1VP3lgy0KFOehS4",
+          "ts": 1634750545.167819,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53252,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.659,
+          "orig_bytes": 618,
+          "resp_bytes": 4181,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CxLV1G4crYhwzvFyeb",
+          "ts": 1634751685.336013,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53290,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.528,
+          "orig_bytes": 621,
+          "resp_bytes": 4182,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CTTUut3PynKKI9mYx4",
+          "ts": 1634752105.420935,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53299,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.559,
+          "orig_bytes": 622,
+          "resp_bytes": 4183,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CsXaU5wllegwkTJZf",
+          "ts": 1634753245.564825,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53327,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.513,
+          "orig_bytes": 625,
+          "resp_bytes": 4181,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CUVTxJJrgb5SRe7ka",
+          "ts": 1634753485.609699,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53331,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.628,
+          "orig_bytes": 624,
+          "resp_bytes": 4183,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CMCgUA3dU8r4FsLBmc",
+          "ts": 1634753545.615586,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53332,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.447,
+          "orig_bytes": 629,
+          "resp_bytes": 4182,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        },
+        {
+          "uid": "CHQQdb1trJgYdHFVX9",
+          "ts": 1634753725.65131,
+          "orig_h": "10.10.20.101",
+          "orig_p": 53335,
+          "resp_h": "23.152.0.91",
+          "resp_p": 443,
+          "proto": "TCP",
+          "service": "ssl",
+          "duration": 60.474,
+          "orig_bytes": 618,
+          "resp_bytes": 4182,
+          "conn_state": "RSTO",
+          "history": "ShADadTFR",
+          "orig_pkts": 12,
+          "resp_pkts": 12
+        }
+      ]
+    }
+  },
+  "correlations": [
+    {
+      "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+      "confidence": "high",
+      "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.005s by TCP traffic to port 80",
+      "domain": "carwaded.com",
+      "resolved_ip": "185.53.46.50",
+      "target_port": 80,
+      "time_delta_sec": 0.005,
+      "evidence_packets": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "evidence_summary": "Packet 2 queried carwaded.com -> 185.53.46.50; flow 10.10.20.101:53204<->185.53.46.50:80/TCP initiated immediately."
+    },
+    {
+      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+      "confidence": "very_high",
+      "description": "Host 10.10.20.101 downloaded suspicious file 'zes2' (application/x-dosexec) from 185.53.46.50, followed by outbound communication to external destination",
+      "client_ip": "10.10.20.101",
+      "file_server": "185.53.46.50",
+      "filename": "zes2",
+      "mime_type": "application/x-dosexec",
+      "file_size": 10616965,
+      "evidence_packets": [],
+      "evidence_summary": "Zeek extracted file zes2 (FUID FKrEyx4Tp73rFRS9h3) from 185.53.46.50; client subsequently connected to 0 external hosts."
+    },
+    {
+      "type": "ZEEK_RECONNAISSANCE_PORT_SCAN",
+      "confidence": "high",
+      "description": "Zeek recorded 10 rejected/unanswered connection attempts (S0/REJ/RSTO) from ['10.10.20.101'] targeting ports [80, 443]",
+      "source_hosts": [
+        "10.10.20.101"
+      ],
+      "scanned_ports": [
+        80,
+        443
+      ],
+      "failure_count": 10,
+      "evidence_packets": [],
+      "evidence_summary": "Repeated connection failures across ports [80, 443] indicative of scanning activity."
+    }
+  ],
+  "packet_evidence": [
+    {
+      "pkt_num": 1,
+      "source": "dns_protocol",
+      "summary": "DNS Query: carwaded.com (TTL=None, Entropy=3.085)",
+      "proto": "UDP/53",
+      "src": "10.10.20.101",
+      "dst": "10.10.20.1"
+    },
+    {
+      "pkt_num": 2,
+      "source": "dns_protocol",
+      "summary": "DNS Query: carwaded.com (TTL=300, Entropy=3.085)",
+      "proto": "UDP/53",
+      "src": "10.10.20.1",
+      "dst": "10.10.20.101"
+    },
+    {
+      "pkt_num": 6,
+      "source": "http_protocol",
+      "summary": "HTTP GET carwaded.com/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ (UA=Mozilla/4.0 (compatible; MSIE )",
+      "proto": "TCP/HTTP",
+      "src": "10.10.20.101",
+      "dst": "185.53.46.50:80"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.10.20.101",
+          "dst_ip": "185.53.46.50",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+            "packets": [
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10,
+              11,
+              12
+            ],
+            "byte_count": 4358120,
+            "packet_count": 4998,
+            "duration": 19.129,
+            "start_time": 1634749351.084034,
+            "end_time": 1634749370.212732,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:10.10.20.101",
+        "label": "10.10.20.101",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.10.20.101"
+        }
+      },
+      {
+        "id": "ip:185.53.46.50",
+        "label": "185.53.46.50",
+        "type": "entity_ip",
+        "details": {
+          "ip": "185.53.46.50"
+        }
+      },
+      {
+        "id": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "label": "Flow: UDP 51048 (SF)",
+        "type": "flow",
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.10.20.1",
+          "dst_ip": "10.10.20.101",
+          "dst_port": 51048,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+            "packets": [
+              1,
+              2
+            ],
+            "byte_count": 160,
+            "packet_count": 2,
+            "duration": 0.163,
+            "start_time": 1634749350.915087,
+            "end_time": 1634749351.078551,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:10.10.20.1",
+        "label": "10.10.20.1",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.10.20.1"
+        }
+      },
+      {
+        "id": "dns:1",
+        "label": "DNS: carwaded.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "carwaded.com",
+          "entropy": 3.085,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "packets": [
+              1
+            ],
+            "query_name": "carwaded.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.085,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:carwaded.com",
+        "label": "carwaded.com",
+        "type": "entity_domain",
+        "details": {
+          "entropy": 3.085
+        }
+      },
+      {
+        "id": "dns:2",
+        "label": "DNS: carwaded.com",
+        "type": "dns_event",
+        "details": {
+          "query_name": "carwaded.com",
+          "entropy": 3.085,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "packets": [
+              2
+            ],
+            "query_name": "carwaded.com",
+            "resolved_ip": "185.53.46.50",
+            "ttl": 300,
+            "entropy": 3.085,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "http:6",
+        "label": "HTTP: GET /cbfsd/24347/41EodPr",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "carwaded.com",
+          "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "packets": [
+              6
+            ],
+            "method": "GET",
+            "host": "carwaded.com",
+            "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+            "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)"
+          }
+        }
+      },
+      {
+        "id": "file:FKrEyx4Tp73rFRS9h3",
+        "label": "File: zes2",
+        "type": "entity_file",
+        "details": {
+          "filename": "zes2",
+          "mime_type": "application/x-dosexec",
+          "size_bytes": 10616965,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "fuid": "FKrEyx4Tp73rFRS9h3",
+            "filename": "zes2",
+            "mime_type": "application/x-dosexec",
+            "total_bytes": 10616965,
+            "source": "HTTP",
+            "orig_h": "10.10.20.101",
+            "resp_h": "185.53.46.50"
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "target": "ip:185.53.46.50",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+          "packets": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "byte_count": 4358120,
+          "packet_count": 4998,
+          "duration": 19.129,
+          "start_time": 1634749351.084034,
+          "end_time": 1634749370.212732,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.10.20.101",
+        "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+          "packets": [
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12
+          ],
+          "byte_count": 4358120,
+          "packet_count": 4998,
+          "duration": 19.129,
+          "start_time": 1634749351.084034,
+          "end_time": 1634749370.212732,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:185.53.46.50",
+        "target": "file:FKrEyx4Tp73rFRS9h3",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "fuid": "FKrEyx4Tp73rFRS9h3",
+          "filename": "zes2",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 10616965,
+          "source": "HTTP",
+          "orig_h": "10.10.20.101",
+          "resp_h": "185.53.46.50"
+        }
+      },
+      {
+        "source": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "target": "ip:10.10.20.101",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+          "packets": [
+            1,
+            2
+          ],
+          "byte_count": 160,
+          "packet_count": 2,
+          "duration": 0.163,
+          "start_time": 1634749350.915087,
+          "end_time": 1634749351.078551,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:10.10.20.1",
+        "target": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+          "packets": [
+            1,
+            2
+          ],
+          "byte_count": 160,
+          "packet_count": 2,
+          "duration": 0.163,
+          "start_time": 1634749350.915087,
+          "end_time": 1634749351.078551,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "dns:1",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            1
+          ],
+          "query_name": "carwaded.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.085,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "dns:2",
+        "relation": "OBSERVED_IN_QUERY",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            2
+          ],
+          "query_name": "carwaded.com",
+          "resolved_ip": "185.53.46.50",
+          "ttl": 300,
+          "entropy": 3.085,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "ip:185.53.46.50",
+        "relation": "RESOLVES_TO",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            2
+          ],
+          "query_name": "carwaded.com",
+          "resolved_ip": "185.53.46.50",
+          "ttl": 300,
+          "entropy": 3.085,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "http:6",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            6
+          ],
+          "method": "GET",
+          "host": "carwaded.com",
+          "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+          "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)"
+        }
+      },
+      {
+        "source": "dns:2",
+        "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.005s by TCP traffic to port 80",
+          "domain": "carwaded.com",
+          "resolved_ip": "185.53.46.50",
+          "target_port": 80,
+          "time_delta_sec": 0.005,
+          "evidence_packets": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7
+          ],
+          "evidence_summary": "Packet 2 queried carwaded.com -> 185.53.46.50; flow 10.10.20.101:53204<->185.53.46.50:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "file:FKrEyx4Tp73rFRS9h3",
+        "target": "ip:10.10.20.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "fuid": "FKrEyx4Tp73rFRS9h3",
+          "filename": "zes2",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 10616965,
+          "source": "HTTP",
+          "orig_h": "10.10.20.101",
+          "resp_h": "185.53.46.50"
+        }
+      }
+    ]
+  }
+}

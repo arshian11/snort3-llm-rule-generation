@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-OTHER Hancitor Loader HTTP POST to malicious PHP loader endpoint"; flow:to_server,established; http_uri; content:"/ls5/forum.php",nocase,fast_pattern; content:"/mlu/forum.php",nocase; classtype:web-application-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family Hancitor_Loader__IcedID___ZLoader_; sid:1000204; rev:1; )

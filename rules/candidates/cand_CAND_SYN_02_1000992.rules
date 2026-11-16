@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any ( msg:"TEST Invalid"; broken_unknown_option:123; sid:1000992; rev:1; )

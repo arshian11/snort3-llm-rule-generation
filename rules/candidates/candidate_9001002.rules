@@ -1,0 +1,1 @@
+alert http ( msg:"WEB-APPLICATION-ATTACK Generic SQL Injection Meta-Character in Request URI"; flow:to_server,established; http_uri; content:"'",fast_pattern; pcre:"/(%27|')(\s*or\s*|\s*union\s*)/i"; classtype:web-application-attack; sid:9001002; rev:1; )

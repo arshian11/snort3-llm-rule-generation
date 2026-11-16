@@ -1,0 +1,46 @@
+{
+  "task": "Executive AI SOC Investigation Report",
+  "capture_id": "PCAP_005",
+  "verdict": "MALICIOUS INTRUSION DETECTED",
+  "severity": "CRITICAL",
+  "confidence": "HIGH",
+  "executive_summary": "The PCAP reveals a compromised internal Windows host (10.0.2.16) that performed rapid DNS lookups to legitimate domains (www.msftncsi.com, www.google.com, www.google.cz) and immediately opened HTTP connections to the resolved IPs, a classic blending technique used by the CTU\u201113 botnet to hide C2 traffic in normal web traffic. The host also beacons on a ~14\u2011hour cadence to an external IP (66.36.228.41) and generated anomalous ICMP traffic (large packets, destination\u2011unreachable and TTL\u2011exceeded messages). The adversary\u2019s objective is to maintain a stealthy command\u2011and\u2011control channel and potentially receive additional payloads or instructions.",
+  "attack_stage": "C2 Callback / Beaconing",
+  "patient_zero": "10.0.2.16",
+  "primary_attacker_source": "66.36.228.41",
+  "c2_infrastructure": [
+    "66.36.228.41",
+    "193.45.10.144",
+    "173.194.70.106",
+    "173.194.70.94"
+  ],
+  "top_pivots": [
+    {
+      "label": "DNS Beacon to msftncsi.com/google.com",
+      "role": "C2 Communication (DNS)",
+      "pagerank_score": 0.92
+    },
+    {
+      "label": "HTTP Beacon to resolved IPs",
+      "role": "C2 Communication (HTTP)",
+      "pagerank_score": 0.88
+    }
+  ],
+  "attack_timeline": [
+    {
+      "step": 1,
+      "phase": "Initial Access",
+      "description": "DNS query for www.msftncsi.com resolves to 193.45.10.144."
+    },
+    {
+      "step": 2,
+      "phase": "Command and Control",
+      "description": "TCP connection from 10.0.2.16 to 193.45.10.144:80 within 0.077\u202fs."
+    },
+    {
+      "step": 3,
+      "phase": "Command and Control",
+      "description": "Second DNS query for www.msftncsi.com resolves again to 193.45.10.144; TCP connection follows within 0.001\u202fs."
+    }
+  ]
+}

@@ -1,0 +1,471 @@
+{
+  "capture_id": "PCAP_003",
+  "filename": "scenario3_ssh_scan.pcap",
+  "malware_family": "SSH Recon",
+  "threat_category": "Reconnaissance / Port Scan",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 1,
+    "unique_signatures": 1,
+    "pcap_hash": "19caf4010ae3d5da2b45456f84d3068928c0bf5a31c4f04e67bebc549e93467e",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [
+    {
+      "gid": 1,
+      "sid": 2010935,
+      "rev": 2,
+      "count": 1,
+      "priority": 2,
+      "protocol": "TCP",
+      "msg": "ET SCAN Potential SSH Scan",
+      "triggering_packets": [
+        1
+      ]
+    }
+  ],
+  "network_behaviour": {
+    "dns_queries": [],
+    "http_requests": [],
+    "tcp_connections": [
+      {
+        "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "proto": "TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "src_port": 22,
+        "dst_port": 51230,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 54,
+        "tcp_flags": [
+          "0x0002"
+        ],
+        "zeek_conn_state": "S0",
+        "zeek_service": "other"
+      },
+      {
+        "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
+        "proto": "TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "src_port": 2222,
+        "dst_port": 51230,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 54,
+        "tcp_flags": [
+          "0x0002"
+        ],
+        "zeek_conn_state": "S0",
+        "zeek_service": "other"
+      },
+      {
+        "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
+        "proto": "TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "src_port": 2022,
+        "dst_port": 51230,
+        "duration_sec": 0.0,
+        "packet_count": 1,
+        "byte_count": 54,
+        "tcp_flags": [
+          "0x0002"
+        ],
+        "zeek_conn_state": "S0",
+        "zeek_service": "other"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "dst_port": 51230,
+        "proto": "TCP",
+        "reasons": [
+          "Unusual destination port 51230"
+        ],
+        "packets": [
+          1
+        ]
+      },
+      {
+        "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "dst_port": 51230,
+        "proto": "TCP",
+        "reasons": [
+          "Unusual destination port 51230"
+        ],
+        "packets": [
+          2
+        ]
+      },
+      {
+        "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
+        "src_ip": "192.168.1.20",
+        "dst_ip": "45.142.166.12",
+        "dst_port": 51230,
+        "proto": "TCP",
+        "reasons": [
+          "Unusual destination port 51230"
+        ],
+        "packets": [
+          3
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 3,
+      "connection_states": {
+        "S0": 3
+      },
+      "detected_services": {
+        "other": 3
+      },
+      "files_transferred": [],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": [
+        {
+          "uid": "CR8ZV23HhZyIGbV7W8",
+          "ts": 1794652564.0,
+          "orig_h": "45.142.166.12",
+          "orig_p": 51230,
+          "resp_h": "192.168.1.20",
+          "resp_p": 22,
+          "proto": "TCP",
+          "service": "other",
+          "duration": 0.0,
+          "orig_bytes": 0,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "S",
+          "orig_pkts": 1,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CJniJG2X2uSNkeO4Rb",
+          "ts": 1794652565.001,
+          "orig_h": "45.142.166.12",
+          "orig_p": 51230,
+          "resp_h": "192.168.1.20",
+          "resp_p": 2222,
+          "proto": "TCP",
+          "service": "other",
+          "duration": 0.0,
+          "orig_bytes": 0,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "S",
+          "orig_pkts": 1,
+          "resp_pkts": 0
+        },
+        {
+          "uid": "CaS9WG1XgbVurlJq4h",
+          "ts": 1794652566.002,
+          "orig_h": "45.142.166.12",
+          "orig_p": 51230,
+          "resp_h": "192.168.1.20",
+          "resp_p": 2022,
+          "proto": "TCP",
+          "service": "other",
+          "duration": 0.0,
+          "orig_bytes": 0,
+          "resp_bytes": 0,
+          "conn_state": "S0",
+          "history": "S",
+          "orig_pkts": 1,
+          "resp_pkts": 0
+        }
+      ]
+    }
+  },
+  "correlations": [],
+  "packet_evidence": [
+    {
+      "pkt_num": 1,
+      "source": "snort_alert",
+      "summary": "SID 2010935: ET SCAN Potential SSH Scan",
+      "proto": "TCP",
+      "src": "45.142.166.12:51230",
+      "dst": "192.168.1.20:22"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:2010935:1",
+        "label": "Alert: ET SCAN Potential SSH Scan...",
+        "type": "alert",
+        "details": {
+          "sid": 2010935,
+          "priority": 2,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_003",
+            "packets": [
+              1
+            ],
+            "alert_sid": 2010935,
+            "gid": 1,
+            "msg": "ET SCAN Potential SSH Scan",
+            "proto": "TCP",
+            "src_ip": "45.142.166.12",
+            "dst_ip": "192.168.1.20",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "ip:45.142.166.12",
+        "label": "45.142.166.12",
+        "type": "entity_ip",
+        "details": {
+          "ip": "45.142.166.12"
+        }
+      },
+      {
+        "id": "ip:192.168.1.20",
+        "label": "192.168.1.20",
+        "type": "entity_ip",
+        "details": {
+          "ip": "192.168.1.20"
+        }
+      },
+      {
+        "id": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "label": "Flow: TCP 51230 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "192.168.1.20",
+          "dst_ip": "45.142.166.12",
+          "dst_port": 51230,
+          "evidence": {
+            "capture_id": "PCAP_003",
+            "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+            "packets": [
+              1
+            ],
+            "byte_count": 54,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652564.0,
+            "end_time": 1794652564.0,
+            "zeek_conn_state": "S0",
+            "zeek_service": "other"
+          }
+        }
+      },
+      {
+        "id": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
+        "label": "Flow: TCP 51230 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "192.168.1.20",
+          "dst_ip": "45.142.166.12",
+          "dst_port": 51230,
+          "evidence": {
+            "capture_id": "PCAP_003",
+            "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
+            "packets": [
+              2
+            ],
+            "byte_count": 54,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652565.001,
+            "end_time": 1794652565.001,
+            "zeek_conn_state": "S0",
+            "zeek_service": "other"
+          }
+        }
+      },
+      {
+        "id": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
+        "label": "Flow: TCP 51230 (S0)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "192.168.1.20",
+          "dst_ip": "45.142.166.12",
+          "dst_port": 51230,
+          "evidence": {
+            "capture_id": "PCAP_003",
+            "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
+            "packets": [
+              3
+            ],
+            "byte_count": 54,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652566.002,
+            "end_time": 1794652566.002,
+            "zeek_conn_state": "S0",
+            "zeek_service": "other"
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "alert:1:2010935:1",
+        "target": "ip:192.168.1.20",
+        "relation": "TARGETED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2010935,
+          "gid": 1,
+          "msg": "ET SCAN Potential SSH Scan",
+          "proto": "TCP",
+          "src_ip": "45.142.166.12",
+          "dst_ip": "192.168.1.20",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:45.142.166.12",
+        "target": "alert:1:2010935:1",
+        "relation": "ORIGINATED_ALERT",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2010935,
+          "gid": 1,
+          "msg": "ET SCAN Potential SSH Scan",
+          "proto": "TCP",
+          "src_ip": "45.142.166.12",
+          "dst_ip": "192.168.1.20",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:192.168.1.20",
+        "target": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:192.168.1.20",
+        "target": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
+          "packets": [
+            2
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652565.001,
+          "end_time": 1794652565.001,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:192.168.1.20",
+        "target": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
+          "packets": [
+            3
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652566.002,
+          "end_time": 1794652566.002,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "target": "ip:45.142.166.12",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
+        "target": "ip:45.142.166.12",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
+          "packets": [
+            2
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652565.001,
+          "end_time": 1794652565.001,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
+        "target": "ip:45.142.166.12",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
+          "packets": [
+            3
+          ],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652566.002,
+          "end_time": 1794652566.002,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      }
+    ]
+  }
+}

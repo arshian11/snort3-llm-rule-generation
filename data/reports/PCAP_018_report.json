@@ -1,0 +1,999 @@
+{
+  "capture_id": "PCAP_018",
+  "filename": "2023-03-02-RigEK-to-malware-loader-to-Redline-Stealer.pcap",
+  "malware_family": "Redline Stealer / RigEK",
+  "threat_category": "InfoStealer / Credential Harvesting",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 0,
+    "unique_signatures": 0,
+    "pcap_hash": "4c2221125f001678b19d274dcba6d07030b6b1f71911153424768e0539408abf",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [],
+  "network_behaviour": {
+    "dns_queries": [],
+    "http_requests": [
+      {
+        "pkt_num": 4,
+        "time_epoch": 1677790427.541662,
+        "method": "GET",
+        "host": "188.227.106.13",
+        "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+        "user_agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko",
+        "status_code": "",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "188.227.106.13",
+        "dst_port": 80
+      },
+      {
+        "pkt_num": 33,
+        "time_epoch": 1677790428.518591,
+        "method": "GET",
+        "host": "188.227.106.13",
+        "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+        "user_agent": "1",
+        "status_code": "",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "188.227.106.13",
+        "dst_port": 80
+      },
+      {
+        "pkt_num": 1648,
+        "time_epoch": 1677790437.119133,
+        "method": "GET",
+        "host": "62.204.41.175",
+        "uri": "/putingods.exe",
+        "user_agent": "",
+        "status_code": "",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "62.204.41.175",
+        "dst_port": 80
+      }
+    ],
+    "tcp_connections": [
+      {
+        "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "proto": "TCP",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "62.204.41.175",
+        "src_port": 49176,
+        "dst_port": 44271,
+        "duration_sec": 5.222,
+        "packet_count": 2284,
+        "byte_count": 1755574,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "other"
+      },
+      {
+        "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "188.227.106.13",
+        "src_port": 49170,
+        "dst_port": 80,
+        "duration_sec": 6.118,
+        "packet_count": 1615,
+        "byte_count": 1596146,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "62.204.41.175",
+        "src_port": 49174,
+        "dst_port": 80,
+        "duration_sec": 9.905,
+        "packet_count": 841,
+        "byte_count": 832692,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      },
+      {
+        "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
+        "proto": "TCP",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "188.227.106.13",
+        "src_port": 49169,
+        "dst_port": 80,
+        "duration_sec": 0.854,
+        "packet_count": 29,
+        "byte_count": 23015,
+        "tcp_flags": [
+          "0x0002",
+          "0x0010",
+          "0x0012",
+          "0x0014",
+          "0x0018"
+        ],
+        "zeek_conn_state": "RSTO",
+        "zeek_service": "http"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "src_ip": "10.3.2.101",
+        "dst_ip": "62.204.41.175",
+        "dst_port": 44271,
+        "proto": "TCP",
+        "reasons": [
+          "Unusual destination port 44271"
+        ],
+        "packets": [
+          2485,
+          2486,
+          2487,
+          2488,
+          2489
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 4,
+      "connection_states": {
+        "RSTO": 4
+      },
+      "detected_services": {
+        "http": 3,
+        "other": 1
+      },
+      "files_transferred": [
+        {
+          "fuid": "FvNhDzTQqCquxzvf9",
+          "uid": "C2QAUDyJBTaat2u8i",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13",
+          "source": "HTTP",
+          "mime_type": "text/html",
+          "filename": "",
+          "total_bytes": 36335
+        },
+        {
+          "fuid": "FJpFUV2uQVFZ255r8",
+          "uid": "CwGBG11TOJPSceHGcg",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13",
+          "source": "HTTP",
+          "mime_type": "",
+          "filename": "",
+          "total_bytes": 1508352
+        },
+        {
+          "fuid": "Fe8Qd92VoEDz6DyH7h",
+          "uid": "Cslzjn3ukGwF5vQGA",
+          "orig_h": "10.3.2.101",
+          "resp_h": "62.204.41.175",
+          "source": "HTTP",
+          "mime_type": "application/x-dosexec",
+          "filename": "",
+          "total_bytes": 786944
+        }
+      ],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": [
+        {
+          "uid": "C2QAUDyJBTaat2u8i",
+          "ts": 1677790427.484026,
+          "orig_h": "10.3.2.101",
+          "orig_p": 49169,
+          "resp_h": "188.227.106.13",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 0.854,
+          "orig_bytes": 523,
+          "resp_bytes": 20910,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 10,
+          "resp_pkts": 19
+        },
+        {
+          "uid": "CwGBG11TOJPSceHGcg",
+          "ts": 1677790428.46038,
+          "orig_h": "10.3.2.101",
+          "orig_p": 49170,
+          "resp_h": "188.227.106.13",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 6.118,
+          "orig_bytes": 351,
+          "resp_bytes": 1508569,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 392,
+          "resp_pkts": 1223
+        },
+        {
+          "uid": "CR2zWU1UUt6aNXKVWg",
+          "ts": 1677790441.623717,
+          "orig_h": "10.3.2.101",
+          "orig_p": 49176,
+          "resp_h": "62.204.41.175",
+          "resp_p": 44271,
+          "proto": "TCP",
+          "service": "other",
+          "duration": 5.222,
+          "orig_bytes": 1625545,
+          "resp_bytes": 6677,
+          "conn_state": "RSTO",
+          "history": "ShADadwwR",
+          "orig_pkts": 1125,
+          "resp_pkts": 1159
+        },
+        {
+          "uid": "Cslzjn3ukGwF5vQGA",
+          "ts": 1677790436.940375,
+          "orig_h": "10.3.2.101",
+          "orig_p": 49174,
+          "resp_h": "62.204.41.175",
+          "resp_p": 80,
+          "proto": "TCP",
+          "service": "http",
+          "duration": 9.905,
+          "orig_bytes": 76,
+          "resp_bytes": 787186,
+          "conn_state": "RSTO",
+          "history": "ShADadR",
+          "orig_pkts": 199,
+          "resp_pkts": 642
+        }
+      ]
+    }
+  },
+  "correlations": [
+    {
+      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+      "confidence": "very_high",
+      "description": "Host 10.3.2.101 downloaded suspicious file '' (application/x-dosexec) from 62.204.41.175, followed by outbound communication to 188.227.106.13",
+      "client_ip": "10.3.2.101",
+      "file_server": "62.204.41.175",
+      "filename": "",
+      "mime_type": "application/x-dosexec",
+      "file_size": 786944,
+      "evidence_packets": [
+        30,
+        31,
+        32,
+        33,
+        34
+      ],
+      "evidence_summary": "Zeek extracted file  (FUID Fe8Qd92VoEDz6DyH7h) from 62.204.41.175; client subsequently connected to 2 external hosts."
+    }
+  ],
+  "packet_evidence": [
+    {
+      "pkt_num": 4,
+      "source": "http_protocol",
+      "summary": "HTTP GET 188.227.106.13/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA== (UA=Mozilla/5.0 (Windows NT 6.1; W)",
+      "proto": "TCP/HTTP",
+      "src": "10.3.2.101",
+      "dst": "188.227.106.13:80"
+    },
+    {
+      "pkt_num": 33,
+      "source": "http_protocol",
+      "summary": "HTTP GET 188.227.106.13/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw== (UA=1)",
+      "proto": "TCP/HTTP",
+      "src": "10.3.2.101",
+      "dst": "188.227.106.13:80"
+    },
+    {
+      "pkt_num": 1648,
+      "source": "http_protocol",
+      "summary": "HTTP GET 62.204.41.175/putingods.exe (UA=)",
+      "proto": "TCP/HTTP",
+      "src": "10.3.2.101",
+      "dst": "62.204.41.175:80"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "label": "Flow: TCP 44271 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "62.204.41.175",
+          "dst_port": 44271,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+            "packets": [
+              2485,
+              2486,
+              2487,
+              2488,
+              2489,
+              2490,
+              2491,
+              2492,
+              2493,
+              2494
+            ],
+            "byte_count": 1755574,
+            "packet_count": 2284,
+            "duration": 5.222,
+            "start_time": 1677790441.623717,
+            "end_time": 1677790446.845488,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "other"
+          }
+        }
+      },
+      {
+        "id": "ip:10.3.2.101",
+        "label": "10.3.2.101",
+        "type": "entity_ip",
+        "details": {
+          "ip": "10.3.2.101"
+        }
+      },
+      {
+        "id": "ip:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_ip",
+        "details": {
+          "ip": "62.204.41.175"
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "188.227.106.13",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+            "packets": [
+              30,
+              31,
+              32,
+              33,
+              34,
+              35,
+              36,
+              37,
+              38,
+              39
+            ],
+            "byte_count": 1596146,
+            "packet_count": 1615,
+            "duration": 6.118,
+            "start_time": 1677790428.46038,
+            "end_time": 1677790434.578783,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_ip",
+        "details": {
+          "ip": "188.227.106.13"
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "62.204.41.175",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+            "packets": [
+              1645,
+              1646,
+              1647,
+              1648,
+              1649,
+              1650,
+              1651,
+              1652,
+              1653,
+              1654
+            ],
+            "byte_count": 832692,
+            "packet_count": 841,
+            "duration": 9.905,
+            "start_time": 1677790436.940375,
+            "end_time": 1677790446.844966,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "188.227.106.13",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
+            "packets": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "byte_count": 23015,
+            "packet_count": 29,
+            "duration": 0.854,
+            "start_time": 1677790427.484026,
+            "end_time": 1677790428.338502,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "http:4",
+        "label": "HTTP: GET /?MTkzMjU=&bcjcojSX&",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              4
+            ],
+            "method": "GET",
+            "host": "188.227.106.13",
+            "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+            "user_agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"
+          }
+        }
+      },
+      {
+        "id": "domain:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_domain",
+        "details": {}
+      },
+      {
+        "id": "http:33",
+        "label": "HTTP: GET /?NDA2MTQ=&zBXaC&cxv",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              33
+            ],
+            "method": "GET",
+            "host": "188.227.106.13",
+            "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+            "user_agent": "1"
+          }
+        }
+      },
+      {
+        "id": "http:1648",
+        "label": "HTTP: GET /putingods.exe",
+        "type": "http_event",
+        "details": {
+          "method": "GET",
+          "host": "62.204.41.175",
+          "uri": "/putingods.exe",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              1648
+            ],
+            "method": "GET",
+            "host": "62.204.41.175",
+            "uri": "/putingods.exe",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "domain:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_domain",
+        "details": {}
+      },
+      {
+        "id": "file:FvNhDzTQqCquxzvf9",
+        "label": "File: text/html",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "text/html",
+          "size_bytes": 36335,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "fuid": "FvNhDzTQqCquxzvf9",
+            "filename": "",
+            "mime_type": "text/html",
+            "total_bytes": 36335,
+            "source": "HTTP",
+            "orig_h": "10.3.2.101",
+            "resp_h": "188.227.106.13"
+          }
+        }
+      },
+      {
+        "id": "file:FJpFUV2uQVFZ255r8",
+        "label": "File: FJpFUV2uQVFZ255r8",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "",
+          "size_bytes": 1508352,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "fuid": "FJpFUV2uQVFZ255r8",
+            "filename": "",
+            "mime_type": "",
+            "total_bytes": 1508352,
+            "source": "HTTP",
+            "orig_h": "10.3.2.101",
+            "resp_h": "188.227.106.13"
+          }
+        }
+      },
+      {
+        "id": "file:Fe8Qd92VoEDz6DyH7h",
+        "label": "File: application/x-dosexec",
+        "type": "entity_file",
+        "details": {
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "size_bytes": 786944,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "fuid": "Fe8Qd92VoEDz6DyH7h",
+            "filename": "",
+            "mime_type": "application/x-dosexec",
+            "total_bytes": 786944,
+            "source": "HTTP",
+            "orig_h": "10.3.2.101",
+            "resp_h": "62.204.41.175"
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "target": "ip:62.204.41.175",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+          "packets": [
+            2485,
+            2486,
+            2487,
+            2488,
+            2489,
+            2490,
+            2491,
+            2492,
+            2493,
+            2494
+          ],
+          "byte_count": 1755574,
+          "packet_count": 2284,
+          "duration": 5.222,
+          "start_time": 1677790441.623717,
+          "end_time": 1677790446.845488,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+          "packets": [
+            2485,
+            2486,
+            2487,
+            2488,
+            2489,
+            2490,
+            2491,
+            2492,
+            2493,
+            2494
+          ],
+          "byte_count": 1755574,
+          "packet_count": 2284,
+          "duration": 5.222,
+          "start_time": 1677790441.623717,
+          "end_time": 1677790446.845488,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+          "packets": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "byte_count": 1596146,
+          "packet_count": 1615,
+          "duration": 6.118,
+          "start_time": 1677790428.46038,
+          "end_time": 1677790434.578783,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+          "packets": [
+            1645,
+            1646,
+            1647,
+            1648,
+            1649,
+            1650,
+            1651,
+            1652,
+            1653,
+            1654
+          ],
+          "byte_count": 832692,
+          "packet_count": 841,
+          "duration": 9.905,
+          "start_time": 1677790436.940375,
+          "end_time": 1677790446.844966,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 23015,
+          "packet_count": 29,
+          "duration": 0.854,
+          "start_time": 1677790427.484026,
+          "end_time": 1677790428.338502,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:62.204.41.175",
+        "target": "file:Fe8Qd92VoEDz6DyH7h",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "Fe8Qd92VoEDz6DyH7h",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 786944,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "62.204.41.175"
+        }
+      },
+      {
+        "source": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "target": "ip:188.227.106.13",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+          "packets": [
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39
+          ],
+          "byte_count": 1596146,
+          "packet_count": 1615,
+          "duration": 6.118,
+          "start_time": 1677790428.46038,
+          "end_time": 1677790434.578783,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:188.227.106.13",
+        "target": "file:FvNhDzTQqCquxzvf9",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "FvNhDzTQqCquxzvf9",
+          "filename": "",
+          "mime_type": "text/html",
+          "total_bytes": 36335,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13"
+        }
+      },
+      {
+        "source": "ip:188.227.106.13",
+        "target": "file:FJpFUV2uQVFZ255r8",
+        "relation": "DELIVERED_FILE",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "FJpFUV2uQVFZ255r8",
+          "filename": "",
+          "mime_type": "",
+          "total_bytes": 1508352,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13"
+        }
+      },
+      {
+        "source": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "target": "ip:62.204.41.175",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+          "packets": [
+            1645,
+            1646,
+            1647,
+            1648,
+            1649,
+            1650,
+            1651,
+            1652,
+            1653,
+            1654
+          ],
+          "byte_count": 832692,
+          "packet_count": 841,
+          "duration": 9.905,
+          "start_time": 1677790436.940375,
+          "end_time": 1677790446.844966,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
+        "target": "ip:188.227.106.13",
+        "relation": "DELIVERED_TO",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 23015,
+          "packet_count": 29,
+          "duration": 0.854,
+          "start_time": 1677790427.484026,
+          "end_time": 1677790428.338502,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "domain:188.227.106.13",
+        "target": "http:4",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            4
+          ],
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+          "user_agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"
+        }
+      },
+      {
+        "source": "domain:188.227.106.13",
+        "target": "http:33",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            33
+          ],
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+          "user_agent": "1"
+        }
+      },
+      {
+        "source": "domain:62.204.41.175",
+        "target": "http:1648",
+        "relation": "SERVES_HTTP",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            1648
+          ],
+          "method": "GET",
+          "host": "62.204.41.175",
+          "uri": "/putingods.exe",
+          "user_agent": ""
+        }
+      },
+      {
+        "source": "file:FvNhDzTQqCquxzvf9",
+        "target": "ip:10.3.2.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "FvNhDzTQqCquxzvf9",
+          "filename": "",
+          "mime_type": "text/html",
+          "total_bytes": 36335,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13"
+        }
+      },
+      {
+        "source": "file:FJpFUV2uQVFZ255r8",
+        "target": "ip:10.3.2.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "FJpFUV2uQVFZ255r8",
+          "filename": "",
+          "mime_type": "",
+          "total_bytes": 1508352,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "188.227.106.13"
+        }
+      },
+      {
+        "source": "file:Fe8Qd92VoEDz6DyH7h",
+        "target": "ip:10.3.2.101",
+        "relation": "DOWNLOADED_BY",
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "fuid": "Fe8Qd92VoEDz6DyH7h",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "total_bytes": 786944,
+          "source": "HTTP",
+          "orig_h": "10.3.2.101",
+          "resp_h": "62.204.41.175"
+        }
+      },
+      {
+        "source": "file:Fe8Qd92VoEDz6DyH7h",
+        "target": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "relation": "PRECEDED_C2_FLOW",
+        "evidence": {
+          "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
+          "confidence": "very_high",
+          "description": "Host 10.3.2.101 downloaded suspicious file '' (application/x-dosexec) from 62.204.41.175, followed by outbound communication to 188.227.106.13",
+          "client_ip": "10.3.2.101",
+          "file_server": "62.204.41.175",
+          "filename": "",
+          "mime_type": "application/x-dosexec",
+          "file_size": 786944,
+          "evidence_packets": [
+            30,
+            31,
+            32,
+            33,
+            34
+          ],
+          "evidence_summary": "Zeek extracted file  (FUID Fe8Qd92VoEDz6DyH7h) from 62.204.41.175; client subsequently connected to 2 external hosts."
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,1 @@
+alert tcp any any -> any any ( msg:"HTTP traffic"; service:http; sid:100003; )

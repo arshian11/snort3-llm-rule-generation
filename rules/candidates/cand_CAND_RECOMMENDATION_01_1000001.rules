@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any ( msg:"SERVER-WEBAPP Apache Log4j JNDI Exploit Attempt"; flow:to_server,established; content:"${jndi:ldap://",nocase,fast_pattern; classtype:web-application-attack; sid:1000001; rev:1; )

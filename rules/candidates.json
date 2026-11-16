@@ -1,0 +1,709 @@
+{
+  "9001013": {
+    "rule_id": 9001013,
+    "rule_text": "alert http (msg:\"Cobalt Strike Beacon GET request\"; flow:to_server,established; http_uri; content:\"/api/v2/beacon?id=\",nocase,fast_pattern; pcre:\"/\\/api\\/v2\\/beacon\\?id=\\d+/i\"; classtype:trojan-activity; sid:9001013; rev:1; )",
+    "rule_objective": "Detect outbound Cobalt\u202fStrike beacon GET requests that use the invariant URI pattern /api/v2/beacon?id=<numeric_id>, indicating post\u2011exploitation command\u2011and\u2011control activity.",
+    "evidence": {
+      "pcaps": [
+        "PCAP_001"
+      ],
+      "packets": [
+        5
+      ],
+      "summary": "Packet 5 (GET /api/v2/beacon?id=4821) from 185.220.101.5 to 192.168.1.50:443 shows the exact beacon URI used by the observed Cobalt\u202fStrike malleable C2 profile."
+    },
+    "matching_logic": {
+      "header": "alert http ( ... )",
+      "options_explanation": "flow:to_server,established; \u2013 ensures the rule only fires on server\u2011bound HTTP traffic with a TCP session already established. http_uri; \u2013 selects the URI buffer where the beacon path resides. content:\"/api/v2/beacon?id=\",nocase,fast_pattern; \u2013 primary fast\u2011pattern anchor on the longest stable literal of the beacon. pcre:\"/\\/api\\/v2\\/beacon\\?id=\\d+/i\"; \u2013 anchored PCRE that validates the numeric id parameter without scanning the whole payload. classtype:trojan-activity; \u2013 categorizes the alert. sid:9001013; rev:1; \u2013 unique identifier and revision."
+    },
+    "generalization": "The rule targets the protocol\u2011level beacon endpoint, not the specific attacker IP (185.220.101.5) or victim host (192.168.1.50). Any host that issues a GET request matching the URI pattern on any HTTP service (including HTTPS when TLS is terminated) will be flagged, making the detection reusable across environments and campaigns.",
+    "limitations": "Will not detect the beacon if traffic is encrypted end\u2011to\u2011end and TLS inspection is not performed, or if the attacker customizes the URI path beyond the /api/v2/beacon pattern. Also, the rule does not trigger on POST\u2011based beacons or other HTTP methods.",
+    "false_positive_risks": "Legitimate applications that expose a /api/v2/beacon endpoint (e.g., health\u2011check or monitoring services) could generate alerts. Mitigation: add a whitelist rule for known benign hosts or refine the rule with additional context such as a specific User\u2011Agent or referer header, or combine with a threshold to require multiple hits within a short window.",
+    "confidence": "high",
+    "status": "FAILED_NO_TRIGGER",
+    "source_pcap": "PCAP_001",
+    "created_at": "2026-11-16T17:04:19.104149",
+    "duplicate_check": {
+      "has_conflicts": false,
+      "duplicate_in_local": false,
+      "conflicts": []
+    },
+    "validation_results": {
+      "rule_id": 9001013,
+      "rule_text": "alert http (msg:\"Cobalt Strike Beacon GET request\"; flow:to_server,established; http_uri; content:\"/api/v2/beacon?id=\",nocase,fast_pattern; pcre:\"/\\/api\\/v2\\/beacon\\?id=\\d+/i\"; classtype:trojan-activity; sid:9001013; rev:1; )",
+      "overall_status": "FAILED_NO_TRIGGER",
+      "stage1_syntax": {
+        "stage": 1,
+        "name": "Syntax Validation",
+        "passed": true,
+        "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001013.rules",
+        "return_code": 0,
+        "error_output": ""
+      },
+      "stage2_positive": {
+        "stage": 2,
+        "name": "Positive PCAP Testing",
+        "tested_pcaps_count": 1,
+        "detected_pcaps_count": 0,
+        "missed_pcaps_count": 1,
+        "total_alerts": 0,
+        "detected": [],
+        "missed": [
+          {
+            "capture_id": "PCAP_001",
+            "filename": "scenario1_log4j_c2_chain.pcap"
+          }
+        ]
+      },
+      "stage3_negative": {
+        "stage": 3,
+        "name": "Negative PCAP Testing (False Positives)",
+        "tested_benign_count": 2,
+        "false_positive_pcaps_count": 0,
+        "benign_clean_pcaps_count": 2,
+        "total_fp_alerts": 0,
+        "false_positive_details": [],
+        "clean_captures": [
+          {
+            "capture_id": "BENIGN_033",
+            "filename": "casual_traffic.pcapng"
+          },
+          {
+            "capture_id": "BENIGN_034",
+            "filename": "yt_watch_40_min.pcapng"
+          }
+        ]
+      },
+      "stage4_generalization": {
+        "stage": 4,
+        "name": "Generalization Testing",
+        "status": "SKIPPED",
+        "target_family": "Log4j RCE & Cobalt Strike C2",
+        "reason": "No matching malware family in holdout split for 'Log4j RCE & Cobalt Strike C2'",
+        "tested_holdout_count": 0,
+        "detected_pcaps_count": 0,
+        "missed_pcaps_count": 0,
+        "cross_family_clean_count": 0,
+        "cross_family_fp_count": 0,
+        "total_alerts": 0,
+        "detected": [],
+        "missed": [],
+        "cross_family_results": {
+          "clean_true_negatives": [],
+          "unexpected_false_positives": []
+        }
+      },
+      "metrics": {
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "true_negatives": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      }
+    },
+    "analyst_review": null,
+    "hdirc_stage1": {
+      "candidate_id": "CAND_PCAP_001",
+      "hypothesis_id": "HYP_PCAP_001_01",
+      "status": "hypothesis_approved",
+      "current_stage": 2,
+      "hypothesis": {
+        "hypothesis_id": "HYP_PCAP_001_01",
+        "capture_id": "PCAP_001",
+        "target_behaviour": "Log4j JNDI LDAP payload injection via HTTP User-Agent",
+        "target_protocol": "HTTP",
+        "communication_direction": "inbound_exploit",
+        "flow_intent": "to_server",
+        "invariant_indicators": [
+          {
+            "type": "header",
+            "value": "jndi:ldap://",
+            "confidence": "high"
+          }
+        ],
+        "brittle_indicators_to_avoid": [
+          "185.220.101.5",
+          "443"
+        ],
+        "evidence": {
+          "triggering_packets": [
+            4
+          ],
+          "flow_ids": [
+            "flow_1"
+          ],
+          "summary": "HTTP POST request from external attacker contains User-Agent with jndi:ldap:// payload, matching Log4j RCE pattern."
+        },
+        "family_context": {
+          "malware_family": "Log4j RCE & Cobalt Strike C2",
+          "threat_category": "Web Exploit & C2",
+          "cve": "CVE-2021-44228"
+        },
+        "detection_objective": "Detect HTTP requests where the User-Agent header contains a JNDI LDAP string indicative of Log4j remote code execution attempts.",
+        "rule_viability": {
+          "needs_snort_rule": true,
+          "disposition": "PROCEED_TO_RULE",
+          "disposition_rationale": "Stable header indicator provides a reliable signature; no reliance on transient IPs or ports."
+        },
+        "validation_status": "VALIDATED",
+        "validation_notes": []
+      },
+      "components": {
+        "header": null,
+        "msg": null,
+        "flow": null,
+        "detection": [],
+        "metadata": [],
+        "references": [],
+        "classification": null,
+        "sid": null,
+        "rev": null
+      },
+      "ast": {
+        "header": {
+          "action": "alert",
+          "header_type": "traditional",
+          "protocol": "tcp",
+          "service": null,
+          "source": {
+            "address": "$HOME_NET",
+            "port": "any"
+          },
+          "direction": "->",
+          "destination": {
+            "address": "$EXTERNAL_NET",
+            "port": "$HTTP_PORTS"
+          }
+        },
+        "options": []
+      },
+      "component_validation": {
+        "stage1_hypothesis": {
+          "timestamp": "2026-11-16T17:04:15.815311",
+          "passed": true,
+          "errors": [],
+          "details": {
+            "verdict": "PROCEED_TO_RULE",
+            "errors": []
+          }
+        }
+      },
+      "evidence_mapping": {},
+      "stage_retry_counts": {
+        "stage1_hypothesis": 0,
+        "stage2_header": 0,
+        "stage3_msg": 0,
+        "stage4_flow": 0,
+        "stage5_detection": 0,
+        "stage6_metadata": 0,
+        "stage7_assembly": 0
+      },
+      "stage_results": {
+        "stage1_hypothesis": {
+          "status": "success",
+          "component": "hypothesis",
+          "generated_value": {
+            "hypothesis_id": "HYP_PCAP_001_01",
+            "capture_id": "PCAP_001",
+            "target_behaviour": "Log4j JNDI LDAP payload injection via HTTP User-Agent",
+            "target_protocol": "HTTP",
+            "communication_direction": "inbound_exploit",
+            "flow_intent": "to_server",
+            "invariant_indicators": [
+              {
+                "type": "header",
+                "value": "jndi:ldap://",
+                "confidence": "high"
+              }
+            ],
+            "brittle_indicators_to_avoid": [
+              "185.220.101.5",
+              "443"
+            ],
+            "evidence": {
+              "triggering_packets": [
+                4
+              ],
+              "flow_ids": [
+                "flow_1"
+              ],
+              "summary": "HTTP POST request from external attacker contains User-Agent with jndi:ldap:// payload, matching Log4j RCE pattern."
+            },
+            "family_context": {
+              "malware_family": "Log4j RCE & Cobalt Strike C2",
+              "threat_category": "Web Exploit & C2",
+              "cve": "CVE-2021-44228"
+            },
+            "detection_objective": "Detect HTTP requests where the User-Agent header contains a JNDI LDAP string indicative of Log4j remote code execution attempts.",
+            "rule_viability": {
+              "needs_snort_rule": true,
+              "disposition": "PROCEED_TO_RULE",
+              "disposition_rationale": "Stable header indicator provides a reliable signature; no reliance on transient IPs or ports."
+            },
+            "validation_status": "VALIDATED",
+            "validation_notes": []
+          },
+          "evidence_refs": [
+            4
+          ],
+          "validation_errors": [],
+          "reasoning_summary": "Formulated and validated detection hypothesis for Log4j RCE & Cobalt Strike C2."
+        }
+      },
+      "last_stage_result": {
+        "status": "success",
+        "component": "hypothesis",
+        "generated_value": {
+          "hypothesis_id": "HYP_PCAP_001_01",
+          "capture_id": "PCAP_001",
+          "target_behaviour": "Log4j JNDI LDAP payload injection via HTTP User-Agent",
+          "target_protocol": "HTTP",
+          "communication_direction": "inbound_exploit",
+          "flow_intent": "to_server",
+          "invariant_indicators": [
+            {
+              "type": "header",
+              "value": "jndi:ldap://",
+              "confidence": "high"
+            }
+          ],
+          "brittle_indicators_to_avoid": [
+            "185.220.101.5",
+            "443"
+          ],
+          "evidence": {
+            "triggering_packets": [
+              4
+            ],
+            "flow_ids": [
+              "flow_1"
+            ],
+            "summary": "HTTP POST request from external attacker contains User-Agent with jndi:ldap:// payload, matching Log4j RCE pattern."
+          },
+          "family_context": {
+            "malware_family": "Log4j RCE & Cobalt Strike C2",
+            "threat_category": "Web Exploit & C2",
+            "cve": "CVE-2021-44228"
+          },
+          "detection_objective": "Detect HTTP requests where the User-Agent header contains a JNDI LDAP string indicative of Log4j remote code execution attempts.",
+          "rule_viability": {
+            "needs_snort_rule": true,
+            "disposition": "PROCEED_TO_RULE",
+            "disposition_rationale": "Stable header indicator provides a reliable signature; no reliance on transient IPs or ports."
+          },
+          "validation_status": "VALIDATED",
+          "validation_notes": []
+        },
+        "evidence_refs": [
+          4
+        ],
+        "validation_errors": [],
+        "reasoning_summary": "Formulated and validated detection hypothesis for Log4j RCE & Cobalt Strike C2."
+      },
+      "checkpoints": {
+        "1": {
+          "stage": 1,
+          "status": "hypothesis_approved",
+          "timestamp": "2026-11-16T17:04:15.816053",
+          "components": {
+            "header": null,
+            "msg": null,
+            "flow": null,
+            "detection": [],
+            "metadata": [],
+            "references": [],
+            "classification": null,
+            "sid": null,
+            "rev": null
+          },
+          "ast": {
+            "header": {
+              "action": "alert",
+              "header_type": "traditional",
+              "protocol": "tcp",
+              "service": null,
+              "source": {
+                "address": "$HOME_NET",
+                "port": "any"
+              },
+              "direction": "->",
+              "destination": {
+                "address": "$EXTERNAL_NET",
+                "port": "$HTTP_PORTS"
+              }
+            },
+            "options": []
+          },
+          "rendered_rule_text": "alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (  )"
+        }
+      },
+      "history": [
+        {
+          "timestamp": "2026-11-16T17:04:13.321061",
+          "status": "hypothesis_pending",
+          "reason": "Initialized Rule State"
+        },
+        {
+          "timestamp": "2026-11-16T17:04:15.815216",
+          "status": "hypothesis_approved",
+          "reason": "Passed all hypothesis evidence and direction checks"
+        }
+      ],
+      "rendered_rule_text": "alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (  )"
+    }
+  },
+  "9001014": {
+    "rule_id": 9001014,
+    "rule_text": "alert http (msg:\"WEB-APPLICATION-ATTACK SQL Injection attempt - unescaped single quote in URI\"; flow:to_server,established; http_uri; content:\"'\",fast_pattern,nocase; classtype:web-application-attack; sid:9001014; rev:1; )",
+    "rule_objective": "Detect HTTP requests that contain an unescaped single\u2011quote (') in the URI query string, a classic invariant indicator of SQL injection attempts.",
+    "evidence": {
+      "pcaps": [
+        "PCAP_002"
+      ],
+      "packets": [
+        1
+      ],
+      "summary": "Packet 1 (GET /products?id=1' from 103.251.167.20 to 192.168.1.50:80) shows the malicious URI with a trailing single\u2011quote, triggering the existing IDS alert 2101424."
+    },
+    "matching_logic": {
+      "header": "alert http ( ... ) \u2013 matches any HTTP traffic regardless of port or IP, focusing on the application layer.",
+      "options_explanation": "msg sets a clear description; flow:to_server,established ensures the request is inbound to a web server; http_uri selects the URI buffer; content:\"'\",fast_pattern,nocase anchors on the single\u2011quote, providing the fastest bail\u2011early match; classtype:web-application-attack categorizes the alert; sid and rev uniquely identify the rule."
+    },
+    "generalization": "The rule targets the protocol\u2011level payload characteristic (unescaped single\u2011quote in a query string) that is stable across SQL\u2011injection campaigns, avoiding hard\u2011coded IPs, hostnames, or specific vulnerable parameters.",
+    "limitations": "Will not detect SQLi over encrypted HTTPS without decryption; may miss attacks that use alternative encoding (e.g., %27) or multi\u2011stage payloads that do not place the quote in the URI.",
+    "false_positive_risks": "Legitimate URLs that legitimately contain a single\u2011quote in a query parameter (rare but possible, e.g., search terms with apostrophes) could trigger. Mitigation: tune with a secondary negative content check for common benign patterns or add a pcre that requires the quote to appear after an = sign (e.g., pcre:\"/=[^&]*'/smi\").",
+    "confidence": "high",
+    "status": "FAILED_NO_TRIGGER",
+    "source_pcap": "PCAP_002",
+    "created_at": "2026-11-16T17:09:12.707483",
+    "duplicate_check": {
+      "has_conflicts": false,
+      "duplicate_in_local": false,
+      "conflicts": []
+    },
+    "validation_results": {
+      "rule_id": 9001014,
+      "rule_text": "alert http (msg:\"WEB-APPLICATION-ATTACK SQL Injection attempt - unescaped single quote in URI\"; flow:to_server,established; http_uri; content:\"'\",fast_pattern,nocase; classtype:web-application-attack; sid:9001014; rev:1; )",
+      "overall_status": "FAILED_NO_TRIGGER",
+      "stage1_syntax": {
+        "stage": 1,
+        "name": "Syntax Validation",
+        "passed": true,
+        "rule_file_wsl": "/mnt/d/GitHub/snort3/rules/candidates/candidate_9001014.rules",
+        "return_code": 0,
+        "error_output": ""
+      },
+      "stage2_positive": {
+        "stage": 2,
+        "name": "Positive PCAP Testing",
+        "tested_pcaps_count": 1,
+        "detected_pcaps_count": 0,
+        "missed_pcaps_count": 1,
+        "total_alerts": 0,
+        "detected": [],
+        "missed": [
+          {
+            "capture_id": "PCAP_002",
+            "filename": "scenario2_web_sqli.pcap"
+          }
+        ]
+      },
+      "stage3_negative": {
+        "stage": 3,
+        "name": "Negative PCAP Testing (False Positives)",
+        "tested_benign_count": 2,
+        "false_positive_pcaps_count": 0,
+        "benign_clean_pcaps_count": 2,
+        "total_fp_alerts": 0,
+        "false_positive_details": [],
+        "clean_captures": [
+          {
+            "capture_id": "BENIGN_033",
+            "filename": "casual_traffic.pcapng"
+          },
+          {
+            "capture_id": "BENIGN_034",
+            "filename": "yt_watch_40_min.pcapng"
+          }
+        ]
+      },
+      "stage4_generalization": {
+        "stage": 4,
+        "name": "Generalization Testing",
+        "status": "SKIPPED",
+        "target_family": "SQL Injection",
+        "reason": "No matching malware family in holdout split for 'SQL Injection'",
+        "tested_holdout_count": 0,
+        "detected_pcaps_count": 0,
+        "missed_pcaps_count": 0,
+        "cross_family_clean_count": 0,
+        "cross_family_fp_count": 0,
+        "total_alerts": 0,
+        "detected": [],
+        "missed": [],
+        "cross_family_results": {
+          "clean_true_negatives": [],
+          "unexpected_false_positives": []
+        }
+      },
+      "metrics": {
+        "true_positives": 0,
+        "false_positives": 0,
+        "false_negatives": 1,
+        "true_negatives": 2,
+        "precision": 0.0,
+        "recall": 0.0,
+        "f1_score": 0.0
+      }
+    },
+    "analyst_review": null,
+    "hdirc_stage1": {
+      "candidate_id": "CAND_PCAP_002",
+      "hypothesis_id": "HYP_PCAP_002_01",
+      "status": "hypothesis_approved",
+      "current_stage": 2,
+      "hypothesis": {
+        "hypothesis_id": "HYP_PCAP_002_01",
+        "capture_id": "PCAP_002",
+        "target_behaviour": "SQL Injection attempt via URI parameter",
+        "target_protocol": "HTTP",
+        "communication_direction": "inbound_exploit",
+        "flow_intent": "to_server",
+        "invariant_indicators": [
+          {
+            "type": "uri_path",
+            "value": "single_quote_in_query",
+            "confidence": "high"
+          }
+        ],
+        "brittle_indicators_to_avoid": [
+          "103.251.167.20",
+          "192.168.1.50",
+          "80"
+        ],
+        "evidence": {
+          "triggering_packets": [
+            1
+          ],
+          "flow_ids": [],
+          "summary": "Packet 1 is an HTTP GET from an external host to the internal web server where the URI contains an unescaped single\u2011quote character in the query string (\"/products?id=1'\"). This pattern matches the classic SQL\u2011injection payload and is the sole observable artifact of the attack."
+        },
+        "family_context": {
+          "malware_family": "SQL Injection",
+          "threat_category": "Web Exploit",
+          "cve": null
+        },
+        "detection_objective": "Detect HTTP requests that contain an unescaped single\u2011quote character in the URI query string, indicative of a SQL injection attempt.",
+        "rule_viability": {
+          "needs_snort_rule": true,
+          "disposition": "PROCEED_TO_RULE",
+          "disposition_rationale": "The presence of a single\u2011quote in the URI query string is a stable, protocol\u2011level indicator of SQL injection and can be matched on a single packet, making a Snort rule both feasible and low\u2011false\u2011positive."
+        },
+        "validation_status": "VALIDATED",
+        "validation_notes": []
+      },
+      "components": {
+        "header": null,
+        "msg": null,
+        "flow": null,
+        "detection": [],
+        "metadata": [],
+        "references": [],
+        "classification": null,
+        "sid": null,
+        "rev": null
+      },
+      "ast": {
+        "header": {
+          "action": "alert",
+          "header_type": "traditional",
+          "protocol": "tcp",
+          "service": null,
+          "source": {
+            "address": "$HOME_NET",
+            "port": "any"
+          },
+          "direction": "->",
+          "destination": {
+            "address": "$EXTERNAL_NET",
+            "port": "$HTTP_PORTS"
+          }
+        },
+        "options": []
+      },
+      "component_validation": {
+        "stage1_hypothesis": {
+          "timestamp": "2026-11-16T17:09:09.402764",
+          "passed": true,
+          "errors": [],
+          "details": {
+            "verdict": "PROCEED_TO_RULE",
+            "errors": []
+          }
+        }
+      },
+      "evidence_mapping": {},
+      "stage_retry_counts": {
+        "stage1_hypothesis": 0,
+        "stage2_header": 0,
+        "stage3_msg": 0,
+        "stage4_flow": 0,
+        "stage5_detection": 0,
+        "stage6_metadata": 0,
+        "stage7_assembly": 0
+      },
+      "stage_results": {
+        "stage1_hypothesis": {
+          "status": "success",
+          "component": "hypothesis",
+          "generated_value": {
+            "hypothesis_id": "HYP_PCAP_002_01",
+            "capture_id": "PCAP_002",
+            "target_behaviour": "SQL Injection attempt via URI parameter",
+            "target_protocol": "HTTP",
+            "communication_direction": "inbound_exploit",
+            "flow_intent": "to_server",
+            "invariant_indicators": [
+              {
+                "type": "uri_path",
+                "value": "single_quote_in_query",
+                "confidence": "high"
+              }
+            ],
+            "brittle_indicators_to_avoid": [
+              "103.251.167.20",
+              "192.168.1.50",
+              "80"
+            ],
+            "evidence": {
+              "triggering_packets": [
+                1
+              ],
+              "flow_ids": [],
+              "summary": "Packet 1 is an HTTP GET from an external host to the internal web server where the URI contains an unescaped single\u2011quote character in the query string (\"/products?id=1'\"). This pattern matches the classic SQL\u2011injection payload and is the sole observable artifact of the attack."
+            },
+            "family_context": {
+              "malware_family": "SQL Injection",
+              "threat_category": "Web Exploit",
+              "cve": null
+            },
+            "detection_objective": "Detect HTTP requests that contain an unescaped single\u2011quote character in the URI query string, indicative of a SQL injection attempt.",
+            "rule_viability": {
+              "needs_snort_rule": true,
+              "disposition": "PROCEED_TO_RULE",
+              "disposition_rationale": "The presence of a single\u2011quote in the URI query string is a stable, protocol\u2011level indicator of SQL injection and can be matched on a single packet, making a Snort rule both feasible and low\u2011false\u2011positive."
+            },
+            "validation_status": "VALIDATED",
+            "validation_notes": []
+          },
+          "evidence_refs": [
+            1
+          ],
+          "validation_errors": [],
+          "reasoning_summary": "Formulated and validated detection hypothesis for SQL Injection."
+        }
+      },
+      "last_stage_result": {
+        "status": "success",
+        "component": "hypothesis",
+        "generated_value": {
+          "hypothesis_id": "HYP_PCAP_002_01",
+          "capture_id": "PCAP_002",
+          "target_behaviour": "SQL Injection attempt via URI parameter",
+          "target_protocol": "HTTP",
+          "communication_direction": "inbound_exploit",
+          "flow_intent": "to_server",
+          "invariant_indicators": [
+            {
+              "type": "uri_path",
+              "value": "single_quote_in_query",
+              "confidence": "high"
+            }
+          ],
+          "brittle_indicators_to_avoid": [
+            "103.251.167.20",
+            "192.168.1.50",
+            "80"
+          ],
+          "evidence": {
+            "triggering_packets": [
+              1
+            ],
+            "flow_ids": [],
+            "summary": "Packet 1 is an HTTP GET from an external host to the internal web server where the URI contains an unescaped single\u2011quote character in the query string (\"/products?id=1'\"). This pattern matches the classic SQL\u2011injection payload and is the sole observable artifact of the attack."
+          },
+          "family_context": {
+            "malware_family": "SQL Injection",
+            "threat_category": "Web Exploit",
+            "cve": null
+          },
+          "detection_objective": "Detect HTTP requests that contain an unescaped single\u2011quote character in the URI query string, indicative of a SQL injection attempt.",
+          "rule_viability": {
+            "needs_snort_rule": true,
+            "disposition": "PROCEED_TO_RULE",
+            "disposition_rationale": "The presence of a single\u2011quote in the URI query string is a stable, protocol\u2011level indicator of SQL injection and can be matched on a single packet, making a Snort rule both feasible and low\u2011false\u2011positive."
+          },
+          "validation_status": "VALIDATED",
+          "validation_notes": []
+        },
+        "evidence_refs": [
+          1
+        ],
+        "validation_errors": [],
+        "reasoning_summary": "Formulated and validated detection hypothesis for SQL Injection."
+      },
+      "checkpoints": {
+        "1": {
+          "stage": 1,
+          "status": "hypothesis_approved",
+          "timestamp": "2026-11-16T17:09:09.402828",
+          "components": {
+            "header": null,
+            "msg": null,
+            "flow": null,
+            "detection": [],
+            "metadata": [],
+            "references": [],
+            "classification": null,
+            "sid": null,
+            "rev": null
+          },
+          "ast": {
+            "header": {
+              "action": "alert",
+              "header_type": "traditional",
+              "protocol": "tcp",
+              "service": null,
+              "source": {
+                "address": "$HOME_NET",
+                "port": "any"
+              },
+              "direction": "->",
+              "destination": {
+                "address": "$EXTERNAL_NET",
+                "port": "$HTTP_PORTS"
+              }
+            },
+            "options": []
+          },
+          "rendered_rule_text": "alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (  )"
+        }
+      },
+      "history": [
+        {
+          "timestamp": "2026-11-16T17:09:06.671814",
+          "status": "hypothesis_pending",
+          "reason": "Initialized Rule State"
+        },
+        {
+          "timestamp": "2026-11-16T17:09:09.402697",
+          "status": "hypothesis_approved",
+          "reason": "Passed all hypothesis evidence and direction checks"
+        }
+      ],
+      "rendered_rule_text": "alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS (  )"
+    }
+  }
+}

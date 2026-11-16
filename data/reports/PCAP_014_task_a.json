@@ -1,0 +1,19 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_014",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 254,
+      "msg": "PROTOCOL-DNS SPOOF query response with TTL of 1 min. and no authority",
+      "triggering_packets": [
+        132
+      ],
+      "matching_conditions": "flow:stateless; content:\"|00 01 00 01|\"; threshold:type limit, track by_src, count 1, seconds 60;",
+      "activity_relationship": "Triggered during the Sliver C2 execution chain. Represents initial detection artifact matching known Command and Control baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Sliver C2.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 26 DNS queries or secondary command channels not matched by SID 254."
+    }
+  ],
+  "overall_detection_gaps": "Existing signatures detect 1 specific signature indicators for Sliver C2, but lack comprehensive session lifecycle coverage. Missing detections include 26 related DNS queries, unmonitored payload parameters across 2 HTTP requests, and timing-based beaconing intervals across network flows. Attackers altering URIs or using randomized headers easily evade this baseline without novel candidate rules."
+}

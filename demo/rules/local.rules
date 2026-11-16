@@ -1,0 +1,6 @@
+alert tcp any any -> any any (msg:"ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)"; content:"${jndi:"; priority:1; sid:2034647; rev:1;)
+alert tcp any any -> any 80 (msg:"GPL SQL UNION SELECT Blind SQL Injection Attempt"; content:"UNION SELECT"; priority:1; sid:2101424; rev:5;)
+alert tcp any any -> any 22 (msg:"ET SCAN Potential SSH Scan"; flags:S; priority:2; sid:2010935; rev:2;)
+alert tcp any any -> any 443 (msg:"ET MALWARE Cobalt Strike Malleable C2 Beaconing"; content:"/api/v2/beacon"; priority:1; sid:2024897; rev:2;)
+alert icmp any any -> any any (msg:"GPL ICMP Large ICMP Packet Ping Diagnostic"; dsize:>100; priority:3; sid:2100366; rev:8;)
+alert udp any any -> any 53 (msg:"ET TROJAN Suspicious Dynamic DNS Query (duckdns.org)"; content:"duckdns.org"; priority:2; sid:2008432; rev:2;)

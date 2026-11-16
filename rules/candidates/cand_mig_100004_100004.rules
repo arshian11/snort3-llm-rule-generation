@@ -1,0 +1,1 @@
+alert tcp any any -> any 22 ( msg:"SSH Scan"; flow:to_server; detection_filter:track by_src,count 5,seconds 10; sid:100004; )

@@ -1,0 +1,26 @@
+{
+  "task": "Existing Signature Analysis",
+  "capture_id": "PCAP_020",
+  "signature_evaluations": [
+    {
+      "gid": 1,
+      "sid": 560,
+      "msg": "APP-DETECT VNC server response",
+      "triggering_packets": [
+        826,
+        1443,
+        3352,
+        3369,
+        3744,
+        3759,
+        14484,
+        14486
+      ],
+      "matching_conditions": "Rule Header: alert tcp with flow:to_server,established. Content and regex match against payload buffer on triggering packet(s) [826, 1443, 3352, 3369, 3744, 3759, 14484, 14486].",
+      "activity_relationship": "Triggered during the Cobalt Strike execution chain. Represents initial detection artifact matching known C2 Communication baseline.",
+      "coverage_limitations": "Pinpointed strictly to explicit pattern string or protocol header. Does not inspect encrypted transport, polymorphic variants, or alternate headers/URIs used by Cobalt Strike.",
+      "uncovered_related_events": "Subsequent outbound data exfiltration, lateral network movements, and 30 DNS queries or secondary command channels not matched by SID 560."
+    }
+  ],
+  "overall_detection_gaps": "Existing signatures detect 1 specific signature indicators for Cobalt Strike, but lack comprehensive session lifecycle coverage. Missing detections include 30 related DNS queries, unmonitored payload parameters across 30 HTTP requests, and timing-based beaconing intervals across network flows. Attackers altering URIs or using randomized headers easily evade this baseline without novel candidate rules."
+}

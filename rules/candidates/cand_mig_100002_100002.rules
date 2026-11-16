@@ -1,0 +1,1 @@
+alert tcp any any -> any any ( msg:"Telnet NOP"; raw_data; content:"|FF F1|"; sid:100002; )

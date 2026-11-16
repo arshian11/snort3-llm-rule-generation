@@ -1,0 +1,1 @@
+alert tcp any any -> any 80 ( msg:"Complex Rule"; http_uri; content:"/test",fast_pattern,offset 2,depth 10; bufferlen:>50; sid:100006; )

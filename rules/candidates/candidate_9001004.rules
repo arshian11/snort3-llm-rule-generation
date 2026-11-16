@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC Anomalous URI Pattern Containing Multiple Square Brackets"; flow:to_server,established; http_uri; content:"?[[[[[",fast_pattern,nocase; classtype:trojan-activity; sid:9001004; rev:1; )

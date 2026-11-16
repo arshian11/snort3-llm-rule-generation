@@ -1,0 +1,21 @@
+{
+  "task": "Behavioural Pattern Discovery",
+  "static_indicators": [],
+  "protocol_indicators": [
+    "TCP SYN packets targeting port 22 (SSH)",
+    "Connection state S0 (SYN sent, no response or RST received)"
+  ],
+  "behavioural_indicators": [
+    "Multiple rapid TCP SYN attempts to port 22 from a single source",
+    "Lack of established connections (all connections in S0 state)"
+  ],
+  "campaign_specific_indicators": [],
+  "reusable_patterns": [
+    {
+      "pattern_name": "SSH Port Scan Detection",
+      "protocol": "TCP",
+      "stable_characteristics": "Multiple TCP SYN packets sent to port 22 from the same source IP within a short time window, with no subsequent established connections (S0 state only).",
+      "generalization_rationale": "This pattern is reusable because it detects the behavior of scanning for SSH services without relying on specific IP addresses or hostnames. It leverages the protocol (TCP), port (22), and connection state (S0) to identify reconnaissance activity."
+    }
+  ]
+}
