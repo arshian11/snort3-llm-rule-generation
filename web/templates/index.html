@@ -1,0 +1,2010 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cobalt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Snort 3 — Live NIDS/NIPS Console</title>
+  <script>
+    // Prevent theme flash before first paint
+    document.documentElement.setAttribute('data-theme', localStorage.getItem('snort.theme') || 'cobalt');
+  </script>
+  <link rel="icon" type="image/png" href="/static/img/snort_logo.png?v=3">
+  <link rel="icon" type="image/svg+xml" href="/static/img/favicon.svg?v=3">
+  <link rel="stylesheet" href="/static/css/themes.css?v=3">
+  <link rel="stylesheet" href="/static/css/snort.css?v=3">
+</head>
+<body>
+
+<div id="app-frame">
+
+  <!-- ── Left Sidebar ────────────────────────────────────────────── -->
+  <aside id="sidebar">
+    <div class="sidebar-brand">
+      <div class="brand-row">
+        <img src="/static/img/snort_logo.png" alt="Snort Logo" class="brand-logo">
+        <span class="brand-name">SNORT 3</span>
+      </div>
+      <span class="brand-tagline">Network Defense Engine</span>
+    </div>
+
+    <!-- Live Stream Controls -->
+    <div class="sidebar-section">
+      <div class="sidebar-section-title">Stream Engine</div>
+      <div class="sidebar-btn-row">
+        <button class="sb-btn primary" id="upload-log-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          Ingest Snort Log File
+        </button>
+        <input type="file" id="log-file-input" style="display:none;" accept=".txt,.log,.json,.csv">
+        <button class="sb-btn dim" id="clear-alerts-btn">Clear Storage</button>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <!-- Views Navigation -->
+    <div class="sidebar-section-title" style="padding: 0 14px; margin-bottom: 6px;">Views</div>
+    <nav id="views-nav">
+      <button class="view-btn active" data-tab="dashboard">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1.5"></rect><rect x="14" y="3" width="7" height="5" rx="1.5"></rect><rect x="14" y="12" width="7" height="9" rx="1.5"></rect><rect x="3" y="16" width="7" height="5" rx="1.5"></rect></svg>
+          <span>Dashboard</span>
+        </div>
+      </button>
+
+      <button class="view-btn" data-tab="alerts">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+          <span>PCAP Alerts</span>
+        </div>
+        <span class="view-count" id="nav-count-alerts">—</span>
+      </button>
+
+      <button class="view-btn" data-tab="correlations">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+          <span>Alert Correlation</span>
+        </div>
+        <span class="view-count" id="nav-count-corr">—</span>
+      </button>
+
+      <button class="view-btn" data-tab="signatures">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <span>Unique Signatures</span>
+        </div>
+        <span class="view-count" id="nav-count-sigs">—</span>
+      </button>
+
+      <button class="view-btn" data-tab="ground_truth">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <span>Ground Truth</span>
+        </div>
+        <span class="view-count" id="nav-count-gt" title="Malicious True Positives">—</span>
+      </button>
+
+      <button class="view-btn" data-tab="pipeline">
+        <div class="view-label-group">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+          <span>Autonomous Rule Studio</span>
+        </div>
+        <span class="view-count" id="nav-count-candidates">—</span>
+      </button>
+    </nav>
+
+    <!-- Sidebar Bottom Status Box -->
+    <div class="sidebar-bottom">
+      <div class="sidebar-divider"></div>
+      <div class="sidebar-status-box">
+        <div class="status-row">
+          <span class="status-label">Engine:</span>
+          <span class="status-val">Snort 3.x (Offline)</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">DAQ Mode:</span>
+          <span class="status-val" style="color:var(--ok);">PCAP File Replay</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">Capture:</span>
+          <span class="status-val" style="color:var(--fg-muted);">Network Disabled</span>
+        </div>
+        <div class="status-row">
+          <span class="status-label">LLM Engine:</span>
+          <span class="status-val" style="color:var(--accent);">Groq LPU</span>
+        </div>
+      </div>
+      <div class="sidebar-groq-attribution" style="margin-top:14px;padding:2px 0;text-align:center;">
+        <a href="https://groq.com" target="_blank" rel="noopener noreferrer" title="Powered by Groq for fast inference." style="display:inline-block;opacity:0.85;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+          <img
+            src="https://console.groq.com/powered-by-groq-dark.svg"
+            alt="Powered by Groq for fast inference."
+            style="height:24px;width:auto;"
+          />
+        </a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ── Main Column ─────────────────────────────────────────────── -->
+  <div id="main-column">
+
+    <!-- ── Topbar ────────────────────────────────────────────────── -->
+    <header id="topbar">
+      <div class="topbar-stream-info">
+        <span id="stream-health-dot" class="health-dot health-live" title="Dataset Synchronized"></span>
+        <span id="stream-status-text" class="stream-status-text">PCAP Analysis Engine</span>
+        <span id="stream-rate-badge" class="stream-rate" style="display:none;">0 alerts/sec</span>
+      </div>
+
+      <div class="topbar-spacer"></div>
+
+      <div class="topbar-actions">
+        <!-- Theme Picker -->
+        <label for="theme-select" style="font-size:11.5px;color:var(--fg-muted);">Theme:</label>
+        <select id="theme-select" class="theme-select">
+          <option value="cobalt">Cobalt (Default)</option>
+          <option value="phosphor">Phosphor Green</option>
+          <option value="gh-dark">GitHub Dark</option>
+          <option value="blackout">Blackout OLED</option>
+          <option value="boardroom">Boardroom</option>
+          <option value="vaporwave">Vaporwave</option>
+        </select>
+      </div>
+    </header>
+
+    <!-- ── Main Views Area ────────────────────────────────────────── -->
+    <main id="main">
+
+      <!-- ══════════════════════════════════════════════════════════════
+           TAB 1: DASHBOARD OVERVIEW
+      ═══════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel active" id="tab-dashboard">
+        <div class="view-header">
+          <div class="view-titles">
+            <h2>Snort Threat Intelligence Dashboard</h2>
+            <span>Live packet inspection, signature correlation, and ground truth validation</span>
+          </div>
+        </div>
+
+        <!-- Row 1: Executive KPI Cards Grid -->
+        <div class="dash-kpi-grid">
+          <!-- KPI 1: Total Alerts -->
+          <div class="dash-kpi-card" data-pivot-tab="alerts" title="Click to view all live alerts">
+            <div class="dash-kpi-header">
+              <span class="dash-kpi-title">Total Snort Alerts</span>
+              <div class="dash-kpi-icon-bubble bubble-alerts">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-val" id="dash-alerts-total">—</div>
+            <div class="dash-kpi-sub">
+              <span class="dash-sub-text">Real-time alert events</span>
+            </div>
+          </div>
+
+          <!-- KPI 2: Unique Signatures -->
+          <div class="dash-kpi-card" data-pivot-tab="signatures" title="Click to view distinct GID/SIDs">
+            <div class="dash-kpi-header">
+              <span class="dash-kpi-title">Unique Signatures</span>
+              <div class="dash-kpi-icon-bubble bubble-sigs">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-val" id="dash-sigs-total">—</div>
+            <div class="dash-kpi-sub">
+              <span class="dash-sub-text">Distinct GID/SID pairs</span>
+            </div>
+          </div>
+
+          <!-- KPI 3: Priority 1 (High/Critical) -->
+          <div class="dash-kpi-card" data-pivot-tab="alerts" data-pivot-prio="1" title="Click to filter Priority 1 alerts">
+            <div class="dash-kpi-header">
+              <span class="dash-kpi-title">Priority 1 (Critical)</span>
+              <div class="dash-kpi-icon-bubble bubble-p1">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2"></polygon><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-val" id="dash-p1-total">—</div>
+            <div class="dash-kpi-sub">
+              <span class="kpi-pill crit" id="dash-p1-sub">0% of total</span>
+            </div>
+          </div>
+
+          <!-- KPI 4: Alert Correlation -->
+          <div class="dash-kpi-card" data-pivot-tab="correlations" title="Click to view correlated flows">
+            <div class="dash-kpi-header">
+              <span class="dash-kpi-title">Correlated Connections</span>
+              <div class="dash-kpi-icon-bubble bubble-corr">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-val" id="dash-corr-total">—</div>
+            <div class="dash-kpi-sub">
+              <span class="dash-sub-text" id="dash-corr-sub">Multi-alert connection chains</span>
+            </div>
+          </div>
+
+          <!-- KPI 5: Ground Truth Malicious Rate -->
+          <div class="dash-kpi-card" data-pivot-tab="ground_truth" title="Click to view ground truth evaluation">
+            <div class="dash-kpi-header">
+              <span class="dash-kpi-title">Ground Truth Malicious</span>
+              <div class="dash-kpi-icon-bubble bubble-ground">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+              </div>
+            </div>
+            <div class="dash-kpi-val" id="dash-gt-total">—</div>
+            <div class="dash-kpi-sub">
+              <span class="dash-sub-text" id="dash-gt-sub">Evaluated True Positives</span>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Row 2: Priority & Protocol Analytics (2-col grid) -->
+        <div class="dash-analytics-grid">
+          <!-- Priority Distribution Card -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Priority Distribution</h3>
+                <span class="dash-card-subtitle">Snort rule severity tiers across all ingested alerts</span>
+              </div>
+            </div>
+            <!-- Segmented Meter Bar -->
+            <div class="segmented-meter-wrap">
+              <div class="segmented-meter">
+                <div class="segment-fill p1" id="seg-p1" style="width:0%" title="Priority 1 (Critical)"></div>
+                <div class="segment-fill p2" id="seg-p2" style="width:0%" title="Priority 2 (Medium)"></div>
+                <div class="segment-fill p3" id="seg-p3" style="width:0%" title="Priority 3 (Low)"></div>
+              </div>
+            </div>
+            <!-- Priority Legend Cards -->
+            <div class="sev-legend-grid">
+              <div class="sev-legend-item" onclick="App.filterBySource(''); App.inspectAlert ? App.inspectAlert : null;" data-pivot-prio="1">
+                <span class="sev-dot p1"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Priority 1 (Critical)</span>
+                  <strong class="sev-item-val" id="p1-count">0</strong>
+                </div>
+              </div>
+              <div class="sev-legend-item" data-pivot-prio="2">
+                <span class="sev-dot p2"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Priority 2 (Medium)</span>
+                  <strong class="sev-item-val" id="p2-count">0</strong>
+                </div>
+              </div>
+              <div class="sev-legend-item" data-pivot-prio="3">
+                <span class="sev-dot p3"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Priority 3 (Low)</span>
+                  <strong class="sev-item-val" id="p3-count">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Protocol Distribution Card -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Protocol Distribution</h3>
+                <span class="dash-card-subtitle">Transport layer packet protocols: TCP, UDP, ICMP</span>
+              </div>
+            </div>
+            <div class="proto-meter-list">
+              <div class="proto-row">
+                <div class="proto-info">
+                  <span class="proto-name"><span class="proto-badge">TCP</span> Transmission Control Protocol</span>
+                  <strong id="val-tcp">0 (0%)</strong>
+                </div>
+                <div class="meter-track"><div class="meter-bar bar-tcp" id="meter-tcp" style="width:0%"></div></div>
+              </div>
+              <div class="proto-row">
+                <div class="proto-info">
+                  <span class="proto-name"><span class="proto-badge">UDP</span> User Datagram Protocol</span>
+                  <strong id="val-udp">0 (0%)</strong>
+                </div>
+                <div class="meter-track"><div class="meter-bar bar-udp" id="meter-udp" style="width:0%"></div></div>
+              </div>
+              <div class="proto-row">
+                <div class="proto-info">
+                  <span class="proto-name"><span class="proto-badge">ICMP</span> Internet Control Message Protocol</span>
+                  <strong id="val-icmp">0 (0%)</strong>
+                </div>
+                <div class="meter-track"><div class="meter-bar bar-icmp" id="meter-icmp" style="width:0%"></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Row 3: Top Talkers: Sources & Destinations (2-col grid) -->
+        <div class="dash-analytics-grid">
+          <!-- Top Alerting Sources -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Source IP Distribution</h3>
+                <span class="dash-card-subtitle">Most frequently alerting attacking sources</span>
+              </div>
+            </div>
+            <div class="rank-list" id="top-sources-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Top Targeted Destinations -->
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Destination IP Distribution</h3>
+                <span class="dash-card-subtitle">Most frequently targeted protected destinations</span>
+              </div>
+            </div>
+            <div class="rank-list" id="top-destinations-list">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════
+           TAB 2: LIVE ALERTS FEED & SEARCH
+      ═══════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-alerts">
+        <div class="view-header">
+          <div class="view-titles">
+            <h2>Live Alert Stream</h2>
+            <span>Streaming Snort detection events in real time with interactive triage</span>
+          </div>
+          <div class="view-header-stats">
+            <span class="kpi-pill crit" id="alerts-header-count">11 Alerts</span>
+          </div>
+        </div>
+
+        <!-- Search & Query Filter Bar -->
+        <div class="query-bar">
+          <div class="query-input-row">
+            <div class="query-input-wrap">
+              <input type="text" id="filter-query" class="query-input" placeholder="Search by IP, SID (e.g. 1:2034647), message, protocol, classification...">
+            </div>
+            <button class="filter-btn dim" id="reset-filter-btn">Clear Filter</button>
+          </div>
+          <!-- Filter Shortcut Chips -->
+          <div class="query-chips">
+            <span style="font-size:11.5px;color:var(--fg-muted);font-weight:600;">Priority:</span>
+            <button class="chip" data-filter-prio="1">Priority 1 (Critical)</button>
+            <button class="chip" data-filter-prio="2">Priority 2 (Medium)</button>
+            <button class="chip" data-filter-prio="3">Priority 3 (Low)</button>
+
+            <span style="font-size:11.5px;color:var(--fg-muted);font-weight:600;margin-left:8px;">Protocol:</span>
+            <button class="chip" data-filter-proto="TCP">TCP</button>
+            <button class="chip" data-filter-proto="UDP">UDP</button>
+            <button class="chip" data-filter-proto="ICMP">ICMP</button>
+
+            <span style="font-size:11.5px;color:var(--fg-muted);font-weight:600;margin-left:8px;">Ground Truth:</span>
+            <button class="chip active" data-filter-gt="threats" title="Default: Show suspicious or malicious alerts">Suspicious &amp; Malicious</button>
+            <button class="chip" data-filter-gt="Malicious" title="Show only confirmed Malicious alerts">Malicious</button>
+            <button class="chip" data-filter-gt="Suspicious" title="Show only unclassified Suspicious alerts">Suspicious</button>
+            <button class="chip" data-filter-gt="Benign" title="Show only Benign false alarms">Benign (FP)</button>
+            <button class="chip" data-filter-gt="all" title="Show all alerts without filtering">All Alerts</button>
+          </div>
+        </div>
+
+        <!-- Alerts Table Container -->
+        <div class="table-wrap">
+          <div class="table-toolbar">
+            <div class="table-toolbar-left" style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span id="alerts-table-count" class="table-count-text">Showing 1–100 of 985 alerts (filtered)</span>
+              <span style="color:var(--border);">•</span>
+              <span style="color:var(--fg-muted);font-size:12px;">Click any row to inspect raw packet payload, GID:SID, and correlation metadata</span>
+            </div>
+            <div class="table-toolbar-right" style="display:flex;align-items:center;gap:8px;">
+              <div class="alerts-mini-nav" style="display:flex;align-items:center;gap:5px;margin-right:4px;">
+                <button class="page-btn" id="alerts-prev-top" title="Previous Page" disabled>◀ Prev</button>
+                <span id="alerts-page-indicator-top" style="font-size:11.5px;color:var(--fg-muted);font-weight:600;min-width:65px;text-align:center;">Page 1 of 10</span>
+                <button class="page-btn" id="alerts-next-top" title="Next Page">Next ▶</button>
+              </div>
+              <button class="filter-btn" id="pause-stream-btn">Pause Table</button>
+              <button class="filter-btn dim" id="export-alerts-btn">Export JSON</button>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="alerts-table">
+              <thead>
+                <tr>
+                  <th style="width:70px;">Priority</th>
+                  <th style="width:110px;">GID:SID</th>
+                  <th>Rule Message / Signature</th>
+                  <th>Source → Destination</th>
+                  <th style="width:70px;">Proto</th>
+                  <th style="width:110px;">Ground Truth</th>
+                </tr>
+              </thead>
+              <tbody id="alerts-table-body">
+                <!-- Rows injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+          <!-- Alerts Pagination Footer Bar -->
+          <div class="table-pagination" id="alerts-pagination-bar">
+            <div class="pagination-info">
+              <span id="alerts-pagination-summary">Showing 1–100 of 985 alerts (filtered from 9,598 total)</span>
+              <span style="color:var(--border);">•</span>
+              <label style="display:inline-flex;align-items:center;gap:6px;font-size:11.5px;color:var(--fg-muted);">
+                Rows per page:
+                <select id="alerts-page-size" class="page-size-select">
+                  <option value="50">50</option>
+                  <option value="100" selected>100</option>
+                  <option value="150">150</option>
+                  <option value="250">250</option>
+                  <option value="500">500</option>
+                </select>
+              </label>
+            </div>
+            <div class="pagination-controls">
+              <button class="page-btn" id="alerts-first-btn" title="First Page" disabled>⏮ First</button>
+              <button class="page-btn" id="alerts-prev-btn" title="Previous Page" disabled>◀ Prev</button>
+              <div id="alerts-page-numbers" class="pagination-numbers" style="display:inline-flex;align-items:center;gap:3px;">
+                <!-- Page numbers rendered dynamically -->
+              </div>
+              <button class="page-btn" id="alerts-next-btn" title="Next Page">Next ▶</button>
+              <button class="page-btn" id="alerts-last-btn" title="Last Page">Last ⏭</button>
+              <span style="margin: 0 4px; color: var(--border);">|</span>
+              <span style="font-size:11.5px;color:var(--fg-muted);">Page:</span>
+              <input type="number" id="alerts-jump-input" min="1" max="10" value="1" style="width:48px;padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:var(--bg-elev-2);color:var(--fg-primary);font-size:11.5px;text-align:center;">
+              <button class="page-btn" id="alerts-jump-btn" style="padding:4px 8px;">Go</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════
+           TAB 3: ALERT CORRELATION (5-TUPLE CONNECTION CHAINS)
+      ═══════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-correlations">
+        <div class="view-header">
+          <div class="view-titles">
+            <h2>Alert Correlation Engine</h2>
+            <span>5-Tuple connection grouping clustering multiple alerts related to the same connection or session</span>
+          </div>
+          <div class="view-header-stats">
+            <span class="kpi-pill crit" id="corr-header-count">2 Correlated Sessions</span>
+            <span class="kpi-pill dim" id="corr-header-total">8 Total Active Flows</span>
+          </div>
+        </div>
+
+        <div style="background:var(--bg-elev-1);border:1px solid var(--border);border-radius:8px;padding:12px 16px;font-size:12.5px;color:var(--fg-secondary);line-height:1.6;">
+          <strong style="color:var(--accent);">Correlation Principle:</strong> When an attacker conducts reconnaissance, executes an exploit, and installs a backdoor/beacon over the same session, Snort triggers multiple signatures against the same 5-tuple (<code>src_ip:src_port → dst_ip:dst_port (proto)</code>). Below is the correlated view clustering alerts by connection.
+        </div>
+
+        <div class="corr-filter-bar">
+          <div class="corr-filter-chips">
+            <button class="chip active" id="corr-filter-multi" data-corr-filter="correlated">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span>Correlated Sessions (&gt;1 Alert) (<strong id="corr-chip-multi-count">2</strong>)</span>
+            </button>
+            <button class="chip" id="corr-filter-all" data-corr-filter="all">
+              <span>All Connection Flows (<strong id="corr-chip-all-count">8</strong>)</span>
+            </button>
+          </div>
+          <span class="corr-filter-hint" id="corr-filter-hint">Displaying multi-alert correlated sessions matching sidebar count</span>
+        </div>
+
+        <div id="correlations-list">
+          <!-- Correlated flow cards injected dynamically -->
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════
+           TAB 4: UNIQUE SIGNATURES INVENTORY
+      ═══════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-signatures">
+        <div class="view-header">
+          <div class="view-titles">
+            <h2>Unique Signatures Inventory</h2>
+            <span>Distinct Snort GID:SID combinations and rule frequency analysis</span>
+          </div>
+          <div class="view-header-stats">
+            <span class="kpi-pill ok" id="sigs-header-count">11 Unique Signatures</span>
+          </div>
+        </div>
+
+        <div class="table-wrap">
+          <div class="table-toolbar" style="padding:10px 14px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;">
+            <span class="table-count-text" id="sigs-table-count">Showing 11 distinct signatures detected across network traffic</span>
+            <input type="text" id="sigs-search-input" class="search-input" placeholder="Search signatures (SID, name, class)..." style="padding:5px 12px;font-size:12px;width:260px;border-radius:4px;border:1px solid var(--border);background:var(--bg-elev-1);color:var(--fg-primary);">
+          </div>
+          <div class="table-scroll">
+            <table class="data-table" id="signatures-table">
+              <thead>
+                <tr>
+                  <th style="width:110px;">GID:SID</th>
+                  <th>Signature Message</th>
+                  <th style="width:90px;">Priority</th>
+                  <th>Classification</th>
+                  <th style="width:110px;">Ground Truth</th>
+                  <th style="width:100px;">Alert Count</th>
+                </tr>
+              </thead>
+              <tbody id="signatures-table-body">
+                <!-- Injected dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════════════
+           TAB 5: GROUND TRUTH VALIDATION
+      ═══════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-ground_truth">
+        <div class="view-header">
+          <div class="view-titles">
+            <h2>Ground Truth Analysis &amp; Validation</h2>
+            <span>Evaluating whether underlying Snort triggers reflect truly malicious activity or benign false alarms</span>
+          </div>
+          <div class="view-header-stats">
+            <span class="kpi-pill crit" id="gt-header-mal">0 Malicious (True Positives)</span>
+            <span class="kpi-pill med" id="gt-header-sus">0 Suspicious (Unclassified)</span>
+            <span class="kpi-pill ok" id="gt-header-ben">0 Benign (False Alarms)</span>
+            <span class="kpi-pill dim" id="gt-header-total">0 Total Evaluated</span>
+          </div>
+        </div>
+
+        <div class="dash-analytics-grid">
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">Ground Truth Classification Breakdown</h3>
+                <span class="dash-card-subtitle">Categorization across dataset benchmark standards</span>
+              </div>
+            </div>
+            <div class="segmented-meter-wrap">
+              <div class="segmented-meter">
+                <div class="segment-fill" id="gt-bar-malicious" style="width:0%;background:var(--sev-critical);" title="Malicious (True Positives)"></div>
+                <div class="segment-fill" id="gt-bar-suspicious" style="width:0%;background:var(--sev-medium);" title="Suspicious (Unclassified)"></div>
+                <div class="segment-fill" id="gt-bar-benign" style="width:0%;background:var(--ok);" title="Benign (False Alarms)"></div>
+              </div>
+            </div>
+            <div class="sev-legend-grid">
+              <div class="sev-legend-item" style="cursor:pointer;" onclick="App.filterByGroundTruth('Malicious')" title="Click to view Malicious alerts">
+                <span class="sev-dot p1"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Malicious (True Positives)</span>
+                  <strong class="sev-item-val" id="gt-malicious-count">0</strong>
+                </div>
+              </div>
+              <div class="sev-legend-item" style="cursor:pointer;" onclick="App.filterByGroundTruth('Benign')" title="Click to view Benign false alarms">
+                <span class="sev-dot" style="background:var(--ok);"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Benign (False Alarms)</span>
+                  <strong class="sev-item-val" id="gt-benign-count">0</strong>
+                </div>
+              </div>
+              <div class="sev-legend-item" style="cursor:pointer;" onclick="App.filterByGroundTruth('Suspicious')" title="Click to view Suspicious alerts">
+                <span class="sev-dot" style="background:var(--sev-medium);"></span>
+                <div class="sev-item-text">
+                  <span class="sev-item-name">Suspicious (Unclassified)</span>
+                  <strong class="sev-item-val" id="gt-suspicious-count">0</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dash-card">
+            <div class="dash-card-header">
+              <div>
+                <h3 class="dash-card-title">SOC Triage Context</h3>
+                <span class="dash-card-subtitle">Understanding Snort alert precision and evasion</span>
+              </div>
+            </div>
+            <div style="font-size:12.5px;color:var(--fg-secondary);line-height:1.7;">
+              <p style="margin-bottom:8px;"><strong>True Positives (Malicious):</strong> Exploits (e.g. Log4j CVE-2021-44228), Cobalt Strike C2 beaconing, MySQL authentication bypass, and brute force attacks that pose actionable operational risk.</p>
+              <p style="margin-bottom:8px;"><strong>False Positives (Benign):</strong> Diagnostic ping sweeps, broad regex matches against binary font files (NOOP sled heuristics), and high-frequency cloud DNS queries that trigger generic Snort rules.</p>
+              <p>You can override the ground truth of any alert directly by opening its inspection modal from the Live Alerts table.</p>
+            </div>
+          </div>
+        </div>
+
+
+      </section>
+
+      <!-- ═════════════════════════════════════════════════════════════════
+           TAB 6: AUTONOMOUS LLM RULE ENGINEERING & INVESTIGATION STUDIO
+      ══════════════════════════════════════════════════════════════════ -->
+      <section class="tab-panel" id="tab-pipeline">
+        <div class="view-header studio-view-header">
+          <div class="view-titles">
+            <div class="studio-header-title-row">
+              <h2>Autonomous Snort 3 LLM Rule Engineering &amp; Validation Studio</h2>
+              <span class="studio-tag">Autonomous Engine</span>
+              <span class="kpi-pill ok" id="studio-header-candidates-count">5 Candidates</span>
+            </div>
+            <span class="studio-subtitle">Deep packet feature extraction, multi-stage behavioural correlation, LLM rule synthesis &amp; 4-stage safety validation</span>
+          </div>
+          <div class="studio-header-actions" style="display:flex;align-items:center;gap:12px;">
+            <a href="https://groq.com" target="_blank" rel="noopener noreferrer" title="Powered by Groq for fast inference." style="display:inline-flex;align-items:center;opacity:0.9;transition:opacity 0.2s;" onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.9'">
+              <img
+                src="https://console.groq.com/powered-by-groq-dark.svg"
+                alt="Powered by Groq for fast inference."
+                style="height:32px;width:auto;"
+              />
+            </a>
+            <button class="studio-btn primary sb-btn" id="btn-run-full-pipeline">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              <span>Run Autonomous Pipeline</span>
+            </button>
+            <button class="studio-btn sb-btn" id="btn-refresh-dataset">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+              <span>Refresh Dataset</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Pipeline Status Banner -->
+        <div id="pipeline-loading-banner" class="pipeline-loading-banner" style="display:none;">
+          <span class="health-dot health-live" style="animation:pulse 1.2s infinite;"></span>
+          <span id="pipeline-loading-text" class="pipeline-loading-text">Executing Snort 3 Pipeline...</span>
+        </div>
+
+        <!-- Selector Controls Toolbar -->
+        <div class="dash-card studio-toolbar-card">
+          <div class="studio-toolbar">
+            <div class="studio-pcap-group">
+              <label for="pipeline-pcap-select" class="studio-pcap-label">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Active PCAP:</span>
+              </label>
+              <div class="studio-select-wrapper">
+                <select id="pipeline-pcap-select" class="studio-select">
+                  <option value="">Loading captures...</option>
+                </select>
+                <div class="studio-select-arrow">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="studio-tasks-group">
+              <button class="studio-btn sb-btn" id="btn-run-task-a" title="Analyze existing Snort signatures and coverage gaps">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <span>Task A: Existing SIDs</span>
+              </button>
+              <button class="studio-btn sb-btn" id="btn-run-task-b" title="Mine behavioral and multi-vector attack patterns">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Task B: Pattern Discovery</span>
+              </button>
+              <button class="studio-btn sb-btn" id="btn-view-generated-reports" title="Open archive of previously generated investigation reports">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+                <span>Generated Reports</span>
+              </button>
+              <button class="studio-btn sb-btn" id="btn-run-hdirc-stage1" title="Formulate & Validate Detection Hypothesis (HDIRC Stage 1)" style="border-color: rgba(99, 102, 241, 0.4); background: rgba(99, 102, 241, 0.08);">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><circle cx="12" cy="14" r="3"></circle><line x1="12" y1="2" x2="12" y2="8"></line></svg>
+                <span>HDIRC Stage 1</span>
+              </button>
+              <button class="studio-btn primary sb-btn" id="btn-generate-rule" title="Synthesize candidate Snort 3 rule from evidence">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                <span>Task C: Generate Rule</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Executive Intelligence KPIs -->
+        <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); margin-bottom:16px;">
+          <div class="kpi-card">
+            <span class="kpi-label">Capture ID</span>
+            <span class="kpi-value" id="report-capture-id" style="font-size:18px;">—</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Malware Family</span>
+            <span class="kpi-value" id="report-malware-family" style="font-size:14px;color:var(--crit);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">—</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Threat Category</span>
+            <span class="kpi-value" id="report-threat-cat" style="font-size:13px;color:var(--fg-secondary);">—</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Snort Version</span>
+            <span class="kpi-value" id="report-snort-ver" style="font-size:16px;">3.13.2.0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Snort Alerts</span>
+            <span class="kpi-value" id="report-alerts-count" style="color:var(--crit);">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Unique SIDs</span>
+            <span class="kpi-value" id="report-sigs-count" style="color:var(--warn);">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Flows</span>
+            <span class="kpi-value" id="report-flows-count">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">DNS Queries</span>
+            <span class="kpi-value" id="report-dns-count">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">HTTP Reqs</span>
+            <span class="kpi-value" id="report-http-count">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Beaconing</span>
+            <span class="kpi-value" id="report-beacon-count" style="color:var(--ok);">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Zeek Conns</span>
+            <span class="kpi-value" id="report-zeek-conns-count" style="color:var(--accent);">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">Zeek Files</span>
+            <span class="kpi-value" id="report-zeek-files-count" style="color:var(--warn);">0</span>
+          </div>
+          <div class="kpi-card">
+            <span class="kpi-label">SSL Certs</span>
+            <span class="kpi-value" id="report-zeek-certs-count" style="color:var(--ok);">0</span>
+          </div>
+        </div>
+
+        <!-- 2-Column Studio Layout: Baseline Signatures & Telemetry -->
+        <div class="dash-grid-2col" style="margin-bottom:16px;">
+
+          <!-- Left Column: Snort Detections & Evidence References -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <!-- Alert Detections in Capture -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Snort Detections &amp; Existing Signatures</h3>
+                  <span class="dash-card-subtitle">Initial detection baseline from community and custom rules</span>
+                </div>
+              </div>
+              <div id="report-alert-summary-list" style="display:flex;flex-direction:column;gap:8px;max-height:260px;overflow-y:auto;">
+                <div style="color:var(--fg-muted);font-style:italic;">No alert data loaded.</div>
+              </div>
+            </div>
+
+            <!-- Packet Evidence Drawer -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Packet Evidence References</h3>
+                  <span class="dash-card-subtitle">Grounding evidence pointing back to original frame numbers and payloads</span>
+                </div>
+              </div>
+              <div id="report-evidence-list" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;">
+                <div style="color:var(--fg-muted);font-style:italic;">No evidence references loaded.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Zeek Telemetry & LLM Task Outputs -->
+          <div style="display:flex;flex-direction:column;gap:16px;">
+            <!-- Zeek Session & Artifact Telemetry -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Zeek Session &amp; Artifact Telemetry</h3>
+                  <span class="dash-card-subtitle">Stateful connection logs, extracted files, and TLS certificates</span>
+                </div>
+              </div>
+              <div id="report-zeek-telemetry-container" style="display:flex;flex-direction:column;gap:10px;max-height:260px;overflow-y:auto;">
+                <div style="color:var(--fg-muted);font-style:italic;">No Zeek telemetry loaded.</div>
+              </div>
+            </div>
+
+            <!-- Network Indicators & Behavioral Artifacts (Bottom-Right Panel) -->
+            <div class="dash-card">
+              <div class="dash-card-header">
+                <div>
+                  <h3 class="dash-card-title">Network Indicators &amp; Behavioral Artifacts</h3>
+                  <span class="dash-card-subtitle">Extracted C2 beaconing cadence, HTTP endpoints, DNS queries, and active flows</span>
+                </div>
+              </div>
+              <div id="report-network-indicators-list" style="display:flex;flex-direction:column;gap:6px;max-height:220px;overflow-y:auto;">
+                <div style="color:var(--fg-muted);font-style:italic;">No network indicators extracted.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Executive AI SOC Investigation Report Panel -->
+        <div class="dash-card" id="executive-soc-report-card" style="margin-bottom:16px;min-width:0;max-width:100%;border-left:4px solid var(--crit);">
+          <div class="dash-card-header" style="flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:10px;">
+              <div style="width:34px;height:34px;border-radius:6px;background:rgba(239,68,68,0.15);display:flex;align-items:center;justify-content:center;color:var(--crit);font-size:17px;">
+                🛡️
+              </div>
+              <div>
+                <div style="display:flex;align-items:center;gap:8px;">
+                  <h3 class="dash-card-title" style="font-size:15px;font-weight:700;">Executive AI SOC Investigation Report</h3>
+                  <span class="kpi-pill crit" id="soc-verdict-pill">MALICIOUS INTRUSION</span>
+                  <span class="kpi-pill warn" id="soc-severity-pill">CRITICAL SEVERITY</span>
+                </div>
+                <span class="dash-card-subtitle" id="soc-stage-subtitle">Autonomous incident triage, MITRE ATT&amp;CK mapping, and kill-chain timeline</span>
+              </div>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;">
+              <button class="studio-btn sb-btn" id="btn-refresh-soc-report" title="Regenerate Executive AI SOC Report" style="font-size:11px;height:26px;padding:0 8px;">
+                <span>↺ Re-Synthesize</span>
+              </button>
+              <button class="studio-btn sb-btn" id="btn-soc-hdirc-stage1" title="Formulate & Validate Detection Hypothesis (HDIRC Stage 1)" style="font-size:11px;height:26px;padding:0 10px;border-color:rgba(99,102,241,0.4);background:rgba(99,102,241,0.08);">
+                <span>HDIRC Stage 1</span>
+              </button>
+              <button class="studio-btn primary sb-btn" id="btn-soc-generate-rule" title="Directly generate Snort 3 rule from this investigation" style="font-size:11px;height:26px;padding:0 10px;">
+                <span>Generate Snort 3 Rule</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Executive Summary Body -->
+          <div style="padding:14px;background:var(--bg-elev-1);border-radius:6px;margin-bottom:14px;border:1px solid var(--border-subtle);">
+            <div style="font-size:11px;font-weight:600;color:var(--fg-muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px;">Incident Executive Briefing</div>
+            <p id="soc-executive-summary-text" style="font-size:13px;line-height:1.6;color:var(--fg-primary);margin:0;">
+              No investigation report loaded. Select a PCAP capture from the catalog or run analysis.
+            </p>
+          </div>
+
+          <!-- 3-Column Incident Details Grid: Key Pivots | MITRE ATT&CK | Kill Chain Timeline -->
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:14px;margin-bottom:14px;">
+            
+            <!-- Column 1: Pivots & Key Entities -->
+            <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:6px;padding:12px;">
+              <div style="font-size:11px;font-weight:700;color:var(--fg-secondary);text-transform:uppercase;margin-bottom:8px;display:flex;justify-content:space-between;">
+                <span>Key Incident Pivots</span>
+                <span style="font-size:9.5px;color:var(--fg-muted);">PageRank Seeded</span>
+              </div>
+              <div id="soc-pivots-container" style="display:flex;flex-direction:column;gap:6px;">
+                <div style="color:var(--fg-muted);font-size:12px;font-style:italic;">No pivot entities identified.</div>
+              </div>
+            </div>
+
+            <!-- Column 2: MITRE ATT&CK Matrix -->
+            <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:6px;padding:12px;">
+              <div style="font-size:11px;font-weight:700;color:var(--fg-secondary);text-transform:uppercase;margin-bottom:8px;">
+                <span>MITRE ATT&amp;CK Mapping</span>
+              </div>
+              <div id="soc-mitre-container" style="display:flex;flex-wrap:wrap;gap:6px;">
+                <div style="color:var(--fg-muted);font-size:12px;font-style:italic;">No techniques mapped.</div>
+              </div>
+            </div>
+
+            <!-- Column 3: Attack Timeline -->
+            <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:6px;padding:12px;">
+              <div style="font-size:11px;font-weight:700;color:var(--fg-secondary);text-transform:uppercase;margin-bottom:8px;">
+                <span>Kill-Chain Progression</span>
+              </div>
+              <div id="soc-timeline-container" style="display:flex;flex-direction:column;gap:6px;max-height:160px;overflow-y:auto;">
+                <div style="color:var(--fg-muted);font-size:12px;font-style:italic;">No timeline milestones.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Bar: Rule Recommendations & Gaps -->
+          <div style="display:flex;align-items:center;justify-content:space-between;background:var(--bg-elev-2);border:1px solid var(--border-subtle);border-radius:6px;padding:8px 14px;font-size:12px;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="color:var(--warn);font-weight:bold;">Detection Directives:</span>
+              <span id="soc-rule-directive-text" style="color:var(--fg-secondary);">Autonomous detection guidance aligned with invariant protocol indicators.</span>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Behavioral Attack Chains & Correlations (Full Horizontal Width) -->
+        <div class="dash-card" style="margin-bottom:16px;min-width:0;max-width:100%;">
+          <div class="dash-card-header">
+            <div>
+              <h3 class="dash-card-title">Behavioural Attack Story &amp; Correlation Graph</h3>
+              <span class="dash-card-subtitle">Temporal and entity correlations linking DNS, HTTP, and flow evidence</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+              <span class="kpi-pill ok" id="corr-graph-stats" style="font-size:11px;">0 Nodes · 0 Edges</span>
+              
+              <!-- Graph View Mode Toggle: Condensed Supernodes vs Full Telemetry -->
+              <div class="btn-group" style="display:flex;gap:2px;">
+                <button class="studio-btn sb-btn active" id="btn-graph-mode-condensed" title="Show condensed graph with folded Supernodes and pruned background noise" style="font-size:10.5px;padding:3px 8px;height:26px;">Condensed</button>
+                <button class="studio-btn sb-btn" id="btn-graph-mode-full" title="Show full unfiltered telemetry graph" style="font-size:10.5px;padding:3px 8px;height:26px;">Full Telemetry</button>
+              </div>
+
+              <!-- Threat Cluster Filter Tabs -->
+              <div id="corr-graph-cluster-tabs" style="display:flex;gap:3px;"></div>
+
+              <div class="btn-group" style="display:flex;gap:4px;">
+                <button class="studio-btn sb-btn active" id="btn-toggle-corr-graph" style="font-size:11px;padding:3px 10px;height:26px;">Visual Graph</button>
+                <button class="studio-btn sb-btn" id="btn-toggle-corr-story" style="font-size:11px;padding:3px 10px;height:26px;">Story Insights</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Visual Correlation Graph Container (Full Horizontal Available Width) -->
+          <div id="report-correlation-graph-container" style="display:block;background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;position:relative;overflow:hidden;margin-bottom:6px;width:100%;">
+            <div style="position:absolute;top:10px;right:10px;z-index:5;display:flex;gap:4px;">
+              <button class="studio-btn sb-btn" id="btn-graph-zoom-in" title="Zoom In" style="padding:0 8px;height:24px;font-size:13px;font-weight:bold;">+</button>
+              <button class="studio-btn sb-btn" id="btn-graph-zoom-out" title="Zoom Out" style="padding:0 8px;height:24px;font-size:13px;font-weight:bold;">−</button>
+              <button class="studio-btn sb-btn" id="btn-graph-zoom-reset" title="Fit to View" style="padding:0 8px;height:24px;font-size:11px;">Fit</button>
+            </div>
+            <div id="corr-graph-svg-wrapper" style="width:100%;height:380px;overflow:hidden;cursor:grab;">
+              <svg id="correlation-graph-svg" width="100%" height="100%" preserveAspectRatio="xMidYMid meet" style="display:block;"></svg>
+            </div>
+            <!-- Node Types Legend -->
+            <div style="display:flex;align-items:center;gap:14px;padding:8px 14px;background:var(--bg-elev-1);border-top:1px solid var(--border-subtle);font-size:11px;flex-wrap:wrap;">
+              <span style="color:var(--fg-muted);">Legend:</span>
+              <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;margin-right:4px;"></span>Snort Alert</span>
+              <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#3b82f6;margin-right:4px;"></span>IP Address</span>
+              <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#8b5cf6;margin-right:4px;"></span>Network Flow</span>
+              <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#14b8a6;margin-right:4px;"></span>Domain</span>
+              <span><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#f59e0b;margin-right:4px;"></span>HTTP Activity</span>
+              <span><span style="display:inline-block;padding:0 4px;font-size:9.5px;font-weight:bold;background:#38bdf8;color:#0f172a;border-radius:3px;margin-right:4px;">4x</span>Supernode</span>
+              <span><span style="display:inline-block;width:14px;height:3px;background:#ef4444;box-shadow:0 0 6px #ef4444;margin-right:4px;"></span>Critical Attack Path</span>
+            </div>
+          </div>
+
+          <!-- Story Insights List (Toggled via button) -->
+          <div id="report-correlations-list" style="display:none;flex-direction:column;gap:10px;max-height:360px;overflow-y:auto;">
+            <div style="color:var(--fg-muted);font-style:italic;">Select a capture to inspect correlations.</div>
+          </div>
+        </div>
+
+        <!-- Ingested Dataset Catalog (Full Width) -->
+        <div class="dash-card" style="margin-bottom:16px;min-width:0;max-width:100%;">
+          <div class="dash-card-header">
+            <div>
+              <h3 class="dash-card-title">PCAP Ingestion &amp; Dataset Catalog</h3>
+              <span class="dash-card-subtitle">Known malware captures, benign validation baselines, and generalization holdouts</span>
+            </div>
+          </div>
+          <div id="pipeline-dataset-table-container" style="max-height:300px;overflow-y:auto;overflow-x:auto;width:100%;max-width:100%;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width:110px;">Capture ID</th>
+                  <th>Family</th>
+                  <th>Category</th>
+                  <th style="width:110px;">Split</th>
+                  <th style="width:100px;">Truth</th>
+                  <th style="width:85px;">Packets</th>
+                  <th>Filename</th>
+                </tr>
+              </thead>
+              <tbody id="pipeline-dataset-tbody">
+                <tr><td colspan="7" style="text-align:center;">Loading dataset...</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Lifecycle Candidates & Audit Log (Full Width Below Dataset Catalog) -->
+        <div class="dash-card" style="margin-bottom:16px;min-width:0;max-width:100%;">
+          <div class="dash-card-header">
+            <div>
+              <h3 class="dash-card-title">Candidate Rules &amp; Version Audit Log</h3>
+              <span class="dash-card-subtitle">Versioned local.rules tracking, analyst reviews, and rollbacks</span>
+            </div>
+            <button class="studio-btn sb-btn" id="btn-rollback-rules" style="font-size:11px;height:28px;padding:0 10px;">↺ Rollback</button>
+          </div>
+          <div id="pipeline-candidates-table-container" style="margin-bottom:16px;overflow-x:auto;width:100%;max-width:100%;">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th style="width:110px;">SID</th>
+                  <th style="width:160px;">Status</th>
+                  <th>Objective</th>
+                  <th style="width:200px;">Source Capture</th>
+                  <th style="width:120px;">Created</th>
+                </tr>
+              </thead>
+              <tbody id="pipeline-candidates-tbody">
+                <tr><td colspan="5" style="text-align:center;">No candidates registered yet.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <h4 style="font-size:12px;color:var(--fg-muted);margin-bottom:8px;">Ruleset Version History &amp; Rollback Audit:</h4>
+          <div id="pipeline-audit-log" style="display:flex;flex-direction:column;gap:6px;margin-bottom:8px;overflow-x:auto;width:100%;max-width:100%;">
+            <div style="color:var(--fg-muted);font-style:italic;">No ruleset modifications yet.</div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ── Alert Detail Inspection Modal ─────────────────────────────── -->
+<div class="modal-overlay" id="alert-modal">
+  <div class="modal-window">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="modal-title">Snort Alert Inspection</span>
+        <span class="badge-sig" id="modal-alert-id">#1</span>
+      </div>
+      <button class="modal-close" id="modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div style="font-size:15px;font-weight:700;color:var(--fg-primary);" id="modal-alert-msg">—</div>
+
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-item-label">Timestamp</div>
+          <div class="detail-item-val" id="modal-alert-time">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">GID:SID</div>
+          <div class="detail-item-val" id="modal-alert-sig">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Priority Tier</div>
+          <div class="detail-item-val" id="modal-alert-prio">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Classification</div>
+          <div class="detail-item-val" id="modal-alert-class">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Source Host</div>
+          <div class="detail-item-val" id="modal-alert-src">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Destination Host</div>
+          <div class="detail-item-val" id="modal-alert-dst">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Protocol</div>
+          <div class="detail-item-val" id="modal-alert-proto">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Ground Truth Assessment</div>
+          <div class="detail-item-val" id="modal-alert-gt">—</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="detail-item-label" style="margin-bottom:6px;">Canonical Connection 5-Tuple</div>
+        <div class="conn-flow-tag" style="display:inline-block;padding:6px 10px;font-size:12.5px;" id="modal-alert-conn">—</div>
+      </div>
+
+      <!-- Ground Truth Override Action -->
+      <div style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:8px;padding:12px;">
+        <div class="detail-item-label" style="margin-bottom:8px;">Analyst Ground Truth Label Override</div>
+        <div style="display:flex;gap:8px;">
+          <button class="filter-btn gt-override-btn" data-gt="Malicious" style="border-color:var(--sev-critical);color:var(--sev-critical);">Mark Malicious (True Positive)</button>
+          <button class="filter-btn gt-override-btn" data-gt="Benign" style="border-color:var(--ok);color:var(--ok);">Mark Benign (False Alarm)</button>
+          <button class="filter-btn gt-override-btn" data-gt="Suspicious" style="border-color:var(--sev-medium);color:var(--sev-medium);">Mark Suspicious</button>
+        </div>
+      </div>
+
+      <div>
+        <div class="detail-item-label" style="margin-bottom:6px;">Raw Snort Packet Log / Rule Payload</div>
+        <pre class="raw-payload-box" id="modal-raw-payload">—</pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Zeek Telemetry Log Inspection Modal ──────────────────────────── -->
+<div class="modal-overlay" id="zeek-modal">
+  <div class="modal-window" style="max-width:850px;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="modal-title" id="zeek-modal-title">Zeek Session &amp; Artifact Telemetry</span>
+        <span class="badge-sig" id="zeek-modal-type">conn.log</span>
+      </div>
+      <button class="modal-close" id="zeek-modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:75vh;display:flex;flex-direction:column;gap:16px;">
+      <div id="zeek-modal-summary" style="font-size:14px;font-weight:600;color:var(--fg-primary);"></div>
+      <div class="detail-grid" id="zeek-modal-fields"></div>
+      <div>
+        <div class="detail-item-label" style="margin-bottom:6px;">Raw Zeek JSON Log Record</div>
+        <pre class="raw-payload-box" id="zeek-modal-raw" style="max-height:260px;overflow-y:auto;font-family:var(--font-mono);font-size:12px;"></pre>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Snort Signature & Associated Triggering Packets Modal ───────── -->
+<div class="modal-overlay" id="sid-modal">
+  <div class="modal-window" style="max-width:850px;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="modal-title">Snort Signature &amp; Triggering Evidence</span>
+        <span class="badge-priority p1" id="sid-modal-priority">Priority 1</span>
+        <span class="badge-sig" id="sid-modal-sid">SID 2034647</span>
+      </div>
+      <button class="modal-close" id="sid-modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:75vh;display:flex;flex-direction:column;gap:16px;">
+      <div style="font-size:15px;font-weight:700;color:var(--fg-primary);" id="sid-modal-msg">—</div>
+      
+      <div style="display:flex;gap:14px;flex-wrap:wrap;font-size:12px;background:var(--bg-base);padding:10px 14px;border-radius:6px;border:1px solid var(--border-subtle);">
+        <div><span style="color:var(--fg-muted);">Protocol:</span> <strong id="sid-modal-proto" style="color:var(--fg-bright);">TCP</strong></div>
+        <div><span style="color:var(--fg-muted);">GID:Rev:</span> <strong id="sid-modal-gidrev" style="color:var(--fg-bright);">1:1</strong></div>
+        <div><span style="color:var(--fg-muted);">Hit Count:</span> <strong id="sid-modal-count" style="color:var(--fg-bright);">1</strong></div>
+        <div><span style="color:var(--fg-muted);">Triggering Packets:</span> <strong id="sid-modal-pkts-summary" style="color:var(--accent);">[4]</strong></div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <div class="detail-item-label">Actual Snort 3 Signature Definition</div>
+          <button class="studio-btn sb-btn" id="sid-modal-copy-rule" style="font-size:11px;padding:2px 8px;height:24px;">Copy Rule</button>
+        </div>
+        <pre id="sid-modal-rule-code" style="background:var(--bg-elevated);color:var(--ok);padding:14px;border-radius:6px;font-family:var(--font-mono);font-size:12px;overflow-x:auto;white-space:pre-wrap;border:1px solid var(--border-subtle);"></pre>
+      </div>
+
+      <div>
+        <div class="detail-item-label" style="margin-bottom:8px;">Associated Triggering Packets &amp; Deep Frame Evidence</div>
+        <div id="sid-modal-packets-list" style="display:flex;flex-direction:column;gap:10px;">
+          <div style="color:var(--fg-muted);font-style:italic;">No triggering packets extracted.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Candidate Rule & 4-Stage Validation Inspection Modal ────────── -->
+<div class="modal-overlay" id="candidate-rule-modal">
+  <div class="modal-window" style="max-width:960px;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="modal-title" id="candidate-modal-sid">SID 9001001</span>
+        <span class="kpi-pill warn" id="candidate-modal-status">PROPOSED</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;">
+        <button class="studio-btn primary sb-btn" id="modal-btn-validate-rule">🛡️ Run 4-Stage Validation</button>
+        <button class="modal-close" id="candidate-modal-close-btn">&times;</button>
+      </div>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:80vh;display:flex;flex-direction:column;gap:16px;">
+      <div>
+        <div style="font-size:14px;font-weight:600;color:var(--fg-primary);margin-bottom:4px;" id="candidate-modal-objective">Candidate Snort 3 Detection Rule</div>
+        <div style="font-size:12px;color:var(--fg-muted);">Source Capture: <span class="badge-sig" id="candidate-modal-source">—</span></div>
+      </div>
+
+      <div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+          <div class="detail-item-label">Synthesized Snort 3 Rule Syntax</div>
+          <button class="studio-btn sb-btn" id="candidate-modal-copy-rule" style="font-size:11px;padding:2px 8px;height:24px;">Copy Rule</button>
+        </div>
+        <pre id="candidate-modal-text" style="background:var(--bg-elevated);color:var(--ok);padding:14px;border-radius:6px;font-family:var(--font-mono);font-size:12px;overflow-x:auto;white-space:pre-wrap;border:1px solid var(--border-subtle);"></pre>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:12px;">
+        <div style="background:var(--bg-base);padding:8px 10px;border-radius:6px;border:1px solid var(--border-subtle);">
+          <strong style="color:var(--fg-bright);display:block;margin-bottom:3px;">Generalization Rationale:</strong>
+          <span id="candidate-modal-generalization" style="color:var(--fg-secondary);">—</span>
+        </div>
+        <div style="background:var(--bg-base);padding:8px 10px;border-radius:6px;border:1px solid var(--border-subtle);">
+          <strong style="color:var(--fg-bright);display:block;margin-bottom:3px;">Matching Logic:</strong>
+          <span id="candidate-modal-logic" style="color:var(--fg-secondary);">—</span>
+        </div>
+        <div style="background:var(--bg-base);padding:8px 10px;border-radius:6px;border:1px solid var(--border-subtle);">
+          <strong style="color:var(--warn);display:block;margin-bottom:3px;">False Positive Risks:</strong>
+          <span id="candidate-modal-fp" style="color:var(--fg-secondary);">—</span>
+        </div>
+        <div style="background:var(--bg-base);padding:8px 10px;border-radius:6px;border:1px solid var(--border-subtle);">
+          <strong style="color:var(--crit);display:block;margin-bottom:3px;">Known Limitations:</strong>
+          <span id="candidate-modal-limitations" style="color:var(--fg-secondary);">—</span>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;font-size:12px;">
+        <span>Evidence Confidence: <strong id="candidate-modal-confidence" style="color:var(--ok);">HIGH</strong></span>
+      </div>
+
+      <div style="border-top:1px solid var(--border);padding-top:16px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+          <div>
+            <h4 style="font-size:14px;font-weight:700;color:var(--fg-primary);margin:0;">4-Stage Rule Validation Matrix</h4>
+            <span style="font-size:11.5px;color:var(--fg-muted);">Safety &amp; quality verification against positive, benign, and holdout captures</span>
+          </div>
+          <div style="display:flex;gap:8px;">
+            <button class="studio-btn ok sb-btn" id="modal-btn-approve-rule" disabled>✓ Approve &amp; Deploy (local.rules)</button>
+            <button class="studio-btn crit sb-btn" id="modal-btn-reject-rule" disabled>✕ Reject Rule</button>
+          </div>
+        </div>
+
+        <div style="display:grid;grid-template-columns: repeat(2, 1fr);gap:10px;margin-bottom:12px;">
+          <div class="corr-event-item" style="border-left:3px solid var(--accent);">
+            <div style="display:flex;justify-content:space-between;">
+              <strong>Stage 1: Syntax Validation</strong>
+              <span id="modal-val-stage1-status" class="kpi-pill dim">—</span>
+            </div>
+            <div id="modal-val-stage1-details" style="font-size:11.5px;color:var(--fg-muted);margin-top:4px;">Snort configuration test (-T)</div>
+          </div>
+
+          <div class="corr-event-item" style="border-left:3px solid var(--crit);">
+            <div style="display:flex;justify-content:space-between;">
+              <strong>Stage 2: Positive Malicious Replay</strong>
+              <span id="modal-val-stage2-status" class="kpi-pill dim">—</span>
+            </div>
+            <div id="modal-val-stage2-details" style="font-size:11.5px;color:var(--fg-muted);margin-top:4px;">Replay motivating malicious PCAPs</div>
+          </div>
+
+          <div class="corr-event-item" style="border-left:3px solid var(--ok);">
+            <div style="display:flex;justify-content:space-between;">
+              <strong>Stage 3: Negative Benign Replay (FP Test)</strong>
+              <span id="modal-val-stage3-status" class="kpi-pill dim">—</span>
+            </div>
+            <div id="modal-val-stage3-details" style="font-size:11.5px;color:var(--fg-muted);margin-top:4px;">Replay known benign traffic captures</div>
+          </div>
+
+          <div class="corr-event-item" style="border-left:3px solid var(--warn);">
+            <div style="display:flex;justify-content:space-between;">
+              <strong>Stage 4: Generalization Testing</strong>
+              <span id="modal-val-stage4-status" class="kpi-pill dim">—</span>
+            </div>
+            <div id="modal-val-stage4-details" style="font-size:11.5px;color:var(--fg-muted);margin-top:4px;">Replay holdout malicious captures</div>
+          </div>
+        </div>
+
+        <div style="display:flex;justify-content:space-around;background:var(--bg-elevated);padding:10px;border-radius:6px;text-align:center;">
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">True Positives</span>
+            <strong id="modal-metric-tp" style="font-size:16px;color:var(--ok);">0</strong>
+          </div>
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">False Positives</span>
+            <strong id="modal-metric-fp" style="font-size:16px;color:var(--crit);">0</strong>
+          </div>
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">False Negatives</span>
+            <strong id="modal-metric-fn" style="font-size:16px;color:var(--warn);">0</strong>
+          </div>
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">Precision</span>
+            <strong id="modal-metric-precision" style="font-size:16px;color:var(--fg-bright);">0.000</strong>
+          </div>
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">Recall</span>
+            <strong id="modal-metric-recall" style="font-size:16px;color:var(--fg-bright);">0.000</strong>
+          </div>
+          <div>
+            <span style="font-size:11px;color:var(--fg-muted);display:block;">F1-Score</span>
+            <strong id="modal-metric-f1" style="font-size:16px;color:var(--accent);">0.000</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PCAP Ingestion & Capture Inspection Modal ─────────────────── -->
+<div class="modal-overlay" id="pcap-modal">
+  <div class="modal-window" style="max-width:800px;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="modal-title" id="pcap-modal-title">PCAP Capture Inspection</span>
+        <span class="badge-sig" id="pcap-modal-cid">PCAP_001</span>
+        <span class="kpi-pill crit" id="pcap-modal-gt">Malicious</span>
+      </div>
+      <button class="modal-close" id="pcap-modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:75vh;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg-base);padding:14px 18px;border-radius:8px;border:1px solid var(--border-subtle);flex-wrap:wrap;gap:12px;">
+        <div>
+          <div style="font-size:16px;font-weight:700;color:var(--fg-primary);" id="pcap-modal-family">Log4j RCE &amp; Cobalt Strike C2</div>
+          <div style="font-size:12px;color:var(--fg-muted);margin-top:3px;">Threat Category: <span class="badge-sig" id="pcap-modal-cat">Exploit / C2</span></div>
+        </div>
+        <div>
+          <button class="studio-btn primary sb-btn" id="pcap-modal-btn-analyze" style="font-size:12.5px;padding:8px 16px;">
+            ⚡ Analyze &amp; Load Capture
+          </button>
+        </div>
+      </div>
+
+      <!-- Metadata Grid -->
+      <div class="detail-grid">
+        <div class="detail-item">
+          <div class="detail-item-label">Capture ID</div>
+          <div class="detail-item-val" id="pcap-modal-detail-cid">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Dataset Split</div>
+          <div class="detail-item-val" id="pcap-modal-detail-split">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Packet Count</div>
+          <div class="detail-item-val" id="pcap-modal-detail-packets">—</div>
+        </div>
+        <div class="detail-item">
+          <div class="detail-item-label">Ground Truth</div>
+          <div class="detail-item-val" id="pcap-modal-detail-truth">—</div>
+        </div>
+        <div class="detail-item" style="grid-column: span 2;">
+          <div class="detail-item-label">PCAP File Name</div>
+          <div class="detail-item-val" style="font-family:var(--font-mono);font-size:12px;" id="pcap-modal-detail-file">—</div>
+        </div>
+      </div>
+
+      <!-- Autonomous Studio Integration Overview -->
+      <div style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:8px;padding:14px;">
+        <div class="detail-item-label" style="margin-bottom:6px;">Autonomous Investigation Actions</div>
+        <p style="font-size:12.5px;color:var(--fg-secondary);line-height:1.5;margin-bottom:14px;">
+          Activating this capture loads full packet inspection, Snort 3 detection baseline, Zeek session extraction, and generates the visual attack story correlation graph across the full horizontal view.
+        </p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <button class="studio-btn primary sb-btn" id="pcap-modal-btn-inspect-now">Load &amp; View Investigation Report</button>
+          <button class="studio-btn sb-btn" id="pcap-modal-btn-task-a">Run Task A (Existing SIDs)</button>
+          <button class="studio-btn sb-btn" id="pcap-modal-btn-generate">Synthesize Candidate Rule</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Task A: Existing SIDs & Coverage Gaps Modal ─────────────────── -->
+<div class="modal-overlay" id="modal-task-a">
+  <div class="modal-window" style="max-width:880px;width:95%;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="modal-title">Task A: Existing Signature Analysis &amp; Coverage Gaps</span>
+        <span class="badge-sig" id="task-a-modal-cid">PCAP_001</span>
+        <span class="kpi-pill info" id="task-a-modal-cached-pill" style="display:none;">Cached Result</span>
+      </div>
+      <button class="modal-close" id="task-a-modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:78vh;display:flex;flex-direction:column;gap:14px;">
+      <!-- Loading indicator -->
+      <div id="task-a-modal-loading" style="display:none;text-align:center;padding:30px 20px;">
+        <div class="spinner" style="width:32px;height:32px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;margin:0 auto 12px;animation:spin 0.8s linear infinite;"></div>
+        <div style="font-size:14px;font-weight:600;color:var(--fg-primary);">Analyzing Existing Snort 3 Signatures...</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">Evaluating triggering conditions, packet groundings, and coverage limitations.</div>
+      </div>
+
+      <!-- Content Area -->
+      <div id="task-a-modal-content" style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Overview Banner -->
+        <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;color:var(--fg-primary);" id="task-a-modal-family">—</div>
+              <div style="font-size:12px;color:var(--fg-muted);margin-top:2px;" id="task-a-modal-summary-line">Evaluated against active capture baseline.</div>
+            </div>
+            <button class="studio-btn sb-btn" id="task-a-modal-btn-refresh" style="font-size:11.5px;padding:4px 10px;">
+              ↻ Re-run Analysis
+            </button>
+          </div>
+          <!-- Overall Coverage Gaps Callout -->
+          <div id="task-a-modal-gaps-container" style="margin-top:12px;background:rgba(239,68,68,0.06);border-left:3px solid var(--crit);border-radius:4px;padding:10px 12px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--crit);margin-bottom:3px;">Overall Detection Coverage Gaps</div>
+            <div id="task-a-modal-gaps-text" style="font-size:12.5px;color:var(--fg-secondary);line-height:1.5;">—</div>
+          </div>
+        </div>
+
+        <!-- Signature Evaluations List -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <span>Triggered Signatures &amp; Condition Evaluations</span>
+            <span class="kpi-pill ok" id="task-a-modal-eval-count" style="font-size:11px;">0 Signatures</span>
+          </div>
+          <div id="task-a-modal-evals-list" style="display:flex;flex-direction:column;gap:10px;">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+
+        <!-- Collapsible Raw JSON -->
+        <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;">
+          <summary style="font-size:12px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Complete Raw LLM JSON Response</summary>
+          <pre id="task-a-modal-raw-json" style="background:var(--bg-base);padding:10px;border-radius:6px;overflow-x:auto;max-height:240px;font-family:var(--font-mono);font-size:11.5px;margin-top:8px;border:1px solid var(--border-subtle);"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Task B: Behavioural Pattern Discovery Modal ─────────────────── -->
+<div class="modal-overlay" id="modal-task-b">
+  <div class="modal-window" style="max-width:920px;width:95%;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="modal-title">Task B: Behavioural Pattern Discovery &amp; Generalization</span>
+        <span class="kpi-pill info" id="task-b-modal-cached-pill" style="display:none;">Cached Result</span>
+      </div>
+      <button class="modal-close" id="task-b-modal-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:78vh;display:flex;flex-direction:column;gap:14px;">
+      <!-- Loading indicator -->
+      <div id="task-b-modal-loading" style="display:none;text-align:center;padding:30px 20px;">
+        <div class="spinner" style="width:32px;height:32px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;margin:0 auto 12px;animation:spin 0.8s linear infinite;"></div>
+        <div style="font-size:14px;font-weight:600;color:var(--fg-primary);">Discovering Reusable Behavioral Patterns...</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">Mining invariant protocol characteristics across multi-vector captures.</div>
+      </div>
+
+      <!-- Content Area -->
+      <div id="task-b-modal-content" style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Header Controls -->
+        <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:12px 16px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--fg-primary);">Cross-Capture Multi-Vector Pattern Mining</div>
+            <div style="font-size:12px;color:var(--fg-muted);">Separating ephemeral indicators from resilient, generalizable Snort 3 rule patterns.</div>
+          </div>
+          <button class="studio-btn sb-btn" id="task-b-modal-btn-refresh" style="font-size:11.5px;padding:4px 10px;">
+            ↻ Re-mine Patterns
+          </button>
+        </div>
+
+        <!-- 4-Category Indicator Breakdown Matrix -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;">Extracted Threat Indicators Taxonomy</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;">
+            <div class="corr-event-item" style="border-left:3px solid var(--crit);">
+              <div style="font-weight:700;font-size:12px;color:var(--crit);margin-bottom:4px;">1. Static Indicators (Brittle)</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">IPs, hostnames, file hashes</div>
+              <div id="task-b-modal-static-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:100px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--accent);">
+              <div style="font-weight:700;font-size:12px;color:var(--accent);margin-bottom:4px;">2. Protocol Indicators (General)</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">HTTP headers, URIs, DNS traits, TCP flags</div>
+              <div id="task-b-modal-protocol-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:100px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--ok);">
+              <div style="font-weight:700;font-size:12px;color:var(--ok);margin-bottom:4px;">3. Behavioural Indicators</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">Beaconing cadences, connection sequences</div>
+              <div id="task-b-modal-behavioural-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:100px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--warn);">
+              <div style="font-weight:700;font-size:12px;color:var(--warn);margin-bottom:4px;">4. Campaign-Specific</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">Transient infrastructure &amp; campaign artifacts</div>
+              <div id="task-b-modal-campaign-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:100px;overflow-y:auto;">—</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Reusable Patterns for Rule Synthesis -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <span>Identified Reusable Patterns</span>
+            <span class="kpi-pill ok" id="task-b-modal-pattern-count" style="font-size:11px;">0 Patterns</span>
+          </div>
+          <div id="task-b-modal-patterns-list" style="display:flex;flex-direction:column;gap:10px;">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+
+        <!-- Collapsible Raw JSON -->
+        <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;">
+          <summary style="font-size:12px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Complete Raw LLM JSON Response</summary>
+          <pre id="task-b-modal-raw-json" style="background:var(--bg-base);padding:10px;border-radius:6px;overflow-x:auto;max-height:240px;font-family:var(--font-mono);font-size:11.5px;margin-top:8px;border:1px solid var(--border-subtle);"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Task C: HDIRC Stage 1 (Hypothesis & Validation Gate) Modal ─────────────────── -->
+<div class="modal-overlay" id="modal-hdirc-stage1">
+  <div class="modal-window" style="max-width:960px;width:95%;">
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="modal-title">Task C — HDIRC Stage 1: Detection Hypothesis &amp; Validation Gate</span>
+        <span class="badge-sig" id="hdirc-s1-pcap-id">—</span>
+        <span class="kpi-pill ok" id="hdirc-s1-status-pill">Hypothesis Approved</span>
+      </div>
+      <button class="modal-close" id="hdirc-s1-close-btn">&times;</button>
+    </div>
+    <div class="modal-body" style="overflow-y:auto;max-height:78vh;display:flex;flex-direction:column;gap:14px;">
+      <!-- Loading indicator -->
+      <div id="hdirc-s1-loading" style="display:none;text-align:center;padding:30px 20px;">
+        <div class="spinner" style="width:32px;height:32px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;margin:0 auto 12px;animation:spin 0.8s linear infinite;"></div>
+        <div style="font-size:14px;font-weight:600;color:var(--fg-primary);">Formulating Detection Hypothesis &amp; Evaluating Feasibility Gate...</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">Grounded against PCAP packet evidence and Snort 3 rule option constraints.</div>
+      </div>
+
+      <!-- Content Area -->
+      <div id="hdirc-s1-content" style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Validation Gate Banner -->
+        <div id="hdirc-s1-gate-banner" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-size:12px;font-weight:700;text-transform:uppercase;color:var(--fg-muted);">Gate Decision:</span>
+              <span class="kpi-pill ok" id="hdirc-s1-disposition-pill" style="font-size:12px;font-weight:700;">PROCEED_TO_RULE</span>
+              <span class="kpi-pill info" id="hdirc-s1-hyp-id">HYP_001</span>
+            </div>
+            <div style="font-size:11.5px;color:var(--fg-muted);">
+              Candidate SID: <strong id="hdirc-s1-sid-text" style="color:var(--accent);">9001001</strong> · Revision: <strong>1</strong>
+            </div>
+          </div>
+          <div style="font-size:12.5px;color:var(--fg-secondary);line-height:1.5;" id="hdirc-s1-rationale">
+            Evaluating hypothesis feasibility against packet artifacts...
+          </div>
+        </div>
+
+        <!-- 2-Column Matrix: Target Behaviour & Protocol Direction -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;">
+          <!-- Card 1: Target Behaviour -->
+          <div class="corr-event-item" style="border-left:3px solid var(--accent);background:var(--bg-base);">
+            <div style="font-weight:700;font-size:12px;color:var(--accent);margin-bottom:6px;text-transform:uppercase;">
+              Target Malicious Behaviour &amp; Objective
+            </div>
+            <div style="font-size:13px;font-weight:600;color:var(--fg-primary);margin-bottom:6px;" id="hdirc-s1-behaviour">
+              —
+            </div>
+            <div style="font-size:12px;color:var(--fg-muted);" id="hdirc-s1-objective">
+              —
+            </div>
+          </div>
+
+          <!-- Card 2: Flow Constraints & Direction -->
+          <div class="corr-event-item" style="border-left:3px solid var(--ok);background:var(--bg-base);">
+            <div style="font-weight:700;font-size:12px;color:var(--ok);margin-bottom:6px;text-transform:uppercase;">
+              Protocol &amp; Direction Alignment
+            </div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px;">
+              <div>
+                <span style="color:var(--fg-muted);display:block;font-size:10.5px;">Protocol</span>
+                <strong id="hdirc-s1-protocol" style="color:var(--fg-primary);">TCP</strong>
+              </div>
+              <div>
+                <span style="color:var(--fg-muted);display:block;font-size:10.5px;">Service</span>
+                <strong id="hdirc-s1-service" style="color:var(--fg-primary);">http</strong>
+              </div>
+              <div>
+                <span style="color:var(--fg-muted);display:block;font-size:10.5px;">Communication Direction</span>
+                <strong id="hdirc-s1-direction" style="color:var(--fg-primary);">client_to_server</strong>
+              </div>
+              <div>
+                <span style="color:var(--fg-muted);display:block;font-size:10.5px;">Snort Flow Intent</span>
+                <strong id="hdirc-s1-flow-intent" style="color:var(--ok);">to_server</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Invariant Indicators & Evidence Packets -->
+        <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:12px;">
+          <!-- Invariant Indicators -->
+          <div class="corr-event-item" style="border-left:3px solid var(--warn);background:var(--bg-base);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-weight:700;font-size:12px;color:var(--warn);text-transform:uppercase;">
+                Resilient Invariant Indicators
+              </span>
+              <span style="font-size:10.5px;color:var(--fg-muted);">Non-brittle patterns</span>
+            </div>
+            <div id="hdirc-s1-indicators-list" style="display:flex;flex-wrap:wrap;gap:6px;min-height:36px;">
+              —
+            </div>
+          </div>
+
+          <!-- Grounding Evidence Packets -->
+          <div class="corr-event-item" style="border-left:3px solid #8b5cf6;background:var(--bg-base);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <span style="font-weight:700;font-size:12px;color:#8b5cf6;text-transform:uppercase;">
+                Grounded Packet References
+              </span>
+              <span style="font-size:10.5px;color:var(--fg-muted);">PCAP Packet Index</span>
+            </div>
+            <div id="hdirc-s1-evidence-pkts" style="display:flex;flex-wrap:wrap;gap:6px;min-height:36px;">
+              —
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Stage 2 Header Card (Visible once generated or executable) -->
+        <div id="hdirc-s2-header-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--accent);text-transform:uppercase;">
+                Stage 2: Rule Header (AST Node)
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s2-gate-pill" style="display:none;">HEADER_APPROVED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage2" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 2: Header Generation
+            </button>
+          </div>
+          <div id="hdirc-s2-header-body" style="display:none;flex-direction:column;gap:8px;">
+            <div style="background:var(--bg-elev-1);border:1px solid var(--border-subtle);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:13.5px;font-weight:700;color:var(--fg-bright);display:flex;align-items:center;justify-content:space-between;">
+              <span id="hdirc-s2-rendered-text">—</span>
+              <span class="badge-sig" id="hdirc-s2-type-badge" style="font-size:11px;">traditional</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;font-size:11.5px;padding-top:4px;">
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Action</span><strong id="hdirc-s2-action-val">alert</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Protocol/Service</span><strong id="hdirc-s2-proto-val">tcp</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Source Scope</span><strong id="hdirc-s2-src-val">$HOME_NET:any</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Direction</span><strong id="hdirc-s2-dir-val">-></strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Destination Scope</span><strong id="hdirc-s2-dst-val">$EXTERNAL_NET:$HTTP_PORTS</strong></div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Stage 3 Message Card (Visible once generated or executable) -->
+        <div id="hdirc-s3-msg-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--warn);text-transform:uppercase;">
+                Stage 3: Rule Alert Message (AST Option)
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s3-gate-pill" style="display:none;">MESSAGE_APPROVED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage3" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 3: Message Generation
+            </button>
+          </div>
+          <div id="hdirc-s3-msg-body" style="display:none;flex-direction:column;gap:8px;">
+            <div style="background:var(--bg-elev-1);border:1px solid var(--border-subtle);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--fg-bright);display:flex;align-items:center;justify-content:space-between;">
+              <span id="hdirc-s3-rendered-text">—</span>
+              <span class="badge-sig" id="hdirc-s3-prefix-badge" style="font-size:11px;">MALWARE-CNC</span>
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;font-size:11.5px;color:var(--fg-secondary);flex-wrap:wrap;">
+              <div><span style="color:var(--fg-muted);">Length:</span> <strong id="hdirc-s3-len-val">0 chars</strong></div>
+              <div><span style="color:var(--fg-muted);">Position:</span> <strong>AST Option #0 (First body option)</strong></div>
+              <div><span style="color:var(--fg-muted);">Attribution Tone:</span> <strong style="color:var(--ok);">Non-compromise activity/attempt</strong></div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Stage 4 Flow Card (Visible once generated or executable) -->
+        <div id="hdirc-s4-flow-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--info);text-transform:uppercase;">
+                Stage 4: Flow Constraints (AST Option)
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s4-gate-pill" style="display:none;">FLOW_APPROVED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage4" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 4: Flow Generation
+            </button>
+          </div>
+          <div id="hdirc-s4-flow-body" style="display:none;flex-direction:column;gap:8px;">
+            <div style="background:var(--bg-elev-1);border:1px solid var(--border-subtle);border-radius:6px;padding:10px 14px;font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--fg-bright);display:flex;align-items:center;justify-content:space-between;">
+              <span id="hdirc-s4-rendered-text">—</span>
+              <span class="badge-sig" id="hdirc-s4-type-badge" style="font-size:11px;">to_server,established</span>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;font-size:11.5px;padding-top:4px;">
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Direction</span><strong id="hdirc-s4-dir-val">to_server</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Connection State</span><strong id="hdirc-s4-conn-val">established</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Stream State</span><strong id="hdirc-s4-stream-val">default</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Fragment State</span><strong id="hdirc-s4-frag-val">default</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Position</span><strong>AST Option #1</strong></div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Stage 5 Detection Card (Visible once generated or executable) -->
+        <div id="hdirc-s5-detection-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--crit);text-transform:uppercase;">
+                Stage 5: Detection Conditions (Sticky Buffers &amp; Payload Options)
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s5-gate-pill" style="display:none;">DETECTION_APPROVED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage5" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 5: Detection Generation
+            </button>
+          </div>
+          <div id="hdirc-s5-detection-body" style="display:none;flex-direction:column;gap:8px;">
+            <div id="hdirc-s5-options-list" style="display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:12.5px;">
+              <!-- Populated dynamically with rendered detection clauses -->
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;font-size:11.5px;padding-top:4px;border-top:1px solid var(--border-subtle);">
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Buffers Scoped</span><strong id="hdirc-s5-buffer-val">pkt_data</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Fast Pattern</span><strong id="hdirc-s5-fp-val" style="color:var(--ok);">✓ Designated</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Positioning</span><strong id="hdirc-s5-pos-val">Relative Chains OK</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Total Conditions</span><strong id="hdirc-s5-count-val">2 nodes</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 6 Supporting Options Card -->
+        <div id="hdirc-s6-supporting-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--accent);text-transform:uppercase;">
+                Stage 6: Supporting Options (Classtype, References &amp; Identity)
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s6-gate-pill" style="display:none;">OPTIONS_COMMITTED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage6" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 6: Supporting Options
+            </button>
+          </div>
+          <div id="hdirc-s6-supporting-body" style="display:none;flex-direction:column;gap:8px;">
+            <div id="hdirc-s6-options-list" style="display:flex;flex-wrap:wrap;gap:6px;font-family:var(--font-mono);font-size:12.5px;">
+              <!-- Populated dynamically with rendered supporting options -->
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(130px, 1fr));gap:8px;font-size:11.5px;padding-top:4px;border-top:1px solid var(--border-subtle);">
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Classification</span><strong id="hdirc-s6-classtype-val">trojan-activity</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Signature ID (SID)</span><strong id="hdirc-s6-sid-val" style="color:var(--accent);">1000001</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Revision</span><strong id="hdirc-s6-rev-val">rev:1</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Verified References</span><strong id="hdirc-s6-ref-val">0 cited</strong></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stage 7 Final Rule Assembly & Verification Card -->
+        <div id="hdirc-s7-assembly-card" style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:10px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+            <div style="display:flex;align-items:center;gap:8px;">
+              <span style="font-weight:700;font-size:12px;color:var(--accent);text-transform:uppercase;">
+                Stage 7: Final Rule Assembly &amp; Dual-Pass Verification
+              </span>
+              <span class="kpi-pill ok" id="hdirc-s7-gate-pill" style="display:none;">RULE_APPROVED</span>
+            </div>
+            <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage7" style="font-size:11px;padding:3px 12px;height:26px;">
+              ⚡ Execute Stage 7: Assemble &amp; Verify
+            </button>
+          </div>
+          <div id="hdirc-s7-assembly-body" style="display:none;flex-direction:column;gap:10px;">
+            <div style="background:var(--bg-elev-1);border:1px solid var(--border);border-radius:6px;padding:10px;">
+              <div style="font-size:10.5px;font-weight:700;color:var(--fg-muted);margin-bottom:4px;text-transform:uppercase;">Canonical Snort 3 Rule (Multi-Line)</div>
+              <pre id="hdirc-s7-rendered-rule" style="margin:0;font-family:var(--font-mono);font-size:12px;color:var(--ok);white-space:pre-wrap;"></pre>
+            </div>
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));gap:8px;font-size:11.5px;padding-top:6px;border-top:1px solid var(--border-subtle);">
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Snort 3 Compiler (-T)</span><strong id="hdirc-s7-syntax-val" style="color:var(--ok);">✓ Passed (Exit 0)</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Conflict Check</span><strong id="hdirc-s7-conflict-val">✓ Clean (Unique SID)</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Pass 1: Malicious PCAP</span><strong id="hdirc-s7-tp-val" style="color:var(--accent);">✓ Alerts Detected</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Pass 2: Benign PCAP</span><strong id="hdirc-s7-fp-val" style="color:var(--ok);">✓ 0 False Positives</strong></div>
+            </div>
+            <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:4px;padding:6px 10px;">
+              <summary style="font-size:11px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Intermediate Structured Representation (JSON)</summary>
+              <pre id="hdirc-s7-structured-json" style="margin:6px 0 0 0;font-family:var(--font-mono);font-size:11px;max-height:160px;overflow-y:auto;"></pre>
+            </details>
+          </div>
+        </div>
+
+
+
+        <!-- Dependency Graph & Rule State AST Progress Tracker -->
+        <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:12px 16px;">
+          <div style="font-size:12px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;text-transform:uppercase;">
+            Iterative Rule State (AST) Construction Tracker
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(110px, 1fr));gap:8px;text-align:center;" id="hdirc-s1-ast-stages">
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--ok);background:var(--bg-elev-1);">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 1</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--ok);">Hypothesis</div>
+              <div style="font-size:10px;color:var(--ok);">✓ Approved</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 2</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Header</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 3</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Message</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 4</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Flow</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 5</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Detection</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 6</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Options</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+            <div class="corr-event-item" style="padding:8px 6px;border-top:3px solid var(--border-subtle);background:var(--bg-elev-1);opacity:0.65;">
+              <div style="font-size:10px;color:var(--fg-muted);text-transform:uppercase;">Stage 7</div>
+              <div style="font-size:11.5px;font-weight:700;color:var(--fg-primary);">Assembly</div>
+              <div style="font-size:10px;color:var(--fg-muted);">Placeholder</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Collapsible Raw Rule State JSON -->
+        <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;">
+          <summary style="font-size:12px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Complete Shared Rule State AST (JSON)</summary>
+          <pre id="hdirc-s1-raw-json" style="background:var(--bg-base);padding:10px;border-radius:6px;overflow-x:auto;max-height:240px;font-family:var(--font-mono);font-size:11.5px;margin-top:8px;border:1px solid var(--border-subtle);"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── Generated Reports Archive & Viewer Modal (Task A & Task B) ─────────────────── -->
+<div class="modal-overlay" id="modal-generated-reports">
+  <div class="modal-window" style="max-width:960px;width:95%;max-height:88vh;">
+    <!-- Modal Header -->
+    <div class="modal-header">
+      <div style="display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span class="modal-title">Generated PCAP Task Reports (Task A &amp; Task B)</span>
+        <span class="badge-sig" id="rep-modal-total-badge">16 Reports</span>
+        <span class="kpi-pill info" id="rep-modal-order-indicator" style="font-size:11px;">Report 1 of 16 (Chronological)</span>
+      </div>
+      <button class="modal-close" id="rep-modal-close-btn">&times;</button>
+    </div>
+
+    <!-- Navigation & Switching Toolbar -->
+    <div style="padding:10px 16px;background:var(--bg-elev-2);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;flex-wrap:nowrap;overflow-x:auto;">
+      <!-- Search Input -->
+      <div style="position:relative;width:180px;min-width:180px;max-width:180px;flex:0 0 180px;">
+        <input type="text" id="rep-modal-search" placeholder="Search capture, family..." class="studio-search-input" style="width:100%;font-size:12px;padding:6px 10px;height:32px;box-sizing:border-box;border-radius:6px;border:1px solid var(--border);background:var(--bg-base);color:var(--fg-primary);">
+      </div>
+
+      <!-- Dropdown Selector (Strict Fixed Width & Non-shrinking) -->
+      <div class="studio-select-wrapper" style="width:380px;min-width:380px;max-width:380px;flex:0 0 380px;position:relative;">
+        <select id="rep-modal-select" class="studio-select" style="width:100%;font-size:12px;padding:6px 28px 6px 10px;height:32px;border-radius:6px;background:var(--bg-base);border:1px solid var(--border);color:var(--fg-primary);text-overflow:ellipsis;white-space:nowrap;overflow:hidden;">
+          <option value="">Loading generated reports...</option>
+        </select>
+        <div class="studio-select-arrow" style="right:8px;">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+        </div>
+      </div>
+
+      <!-- Prev / Next Navigation Rotation Buttons (Strict Fixed Width & Non-shrinking) -->
+      <div style="display:flex;gap:6px;width:144px;min-width:144px;max-width:144px;flex:0 0 144px;">
+        <button id="rep-modal-btn-prev" class="studio-btn sb-btn" style="flex:1;font-size:12px;padding:4px 8px;height:32px;display:flex;align-items:center;justify-content:center;" title="Rotate to older generated report">◀ Prev</button>
+        <button id="rep-modal-btn-next" class="studio-btn sb-btn" style="flex:1;font-size:12px;padding:4px 8px;height:32px;display:flex;align-items:center;justify-content:center;" title="Rotate to newer generated report">Next ▶</button>
+      </div>
+
+      <!-- Quick Context Info (Right-Aligned) -->
+      <div style="font-size:11.5px;color:var(--fg-muted);display:flex;align-items:center;gap:6px;margin-left:auto;flex:0 0 auto;max-width:210px;overflow:hidden;">
+        <span class="badge-sig" id="rep-modal-detail-cid" style="font-weight:700;flex-shrink:0;">—</span>
+        <span id="rep-modal-detail-family" style="color:var(--fg-primary);font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:140px;" title="—">—</span>
+      </div>
+    </div>
+
+    <!-- Option Tab Switcher for Task A and Task B -->
+    <div style="display:flex;gap:8px;padding:10px 16px 0;background:var(--bg-elev-1);border-bottom:1px solid var(--border);flex-wrap:wrap;">
+      <button class="studio-btn sb-btn active gen-rep-tab-btn" id="gen-rep-tab-btn-a" data-task="a" style="font-size:12.5px;padding:7px 16px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Task A: Existing SIDs &amp; Coverage Gaps</span>
+      </button>
+      <button class="studio-btn sb-btn gen-rep-tab-btn" id="gen-rep-tab-btn-b" data-task="b" style="font-size:12.5px;padding:7px 16px;">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right:5px;"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+        <span>Task B: Behavioural Pattern Discovery</span>
+      </button>
+    </div>
+
+    <!-- Modal Body with Proper Scrolling -->
+    <div class="modal-body" style="overflow-y:auto;max-height:calc(85vh - 140px);padding:16px 20px;display:flex;flex-direction:column;gap:14px;">
+      <!-- Loading indicator -->
+      <div id="gen-rep-modal-loading" style="display:none;text-align:center;padding:30px 20px;">
+        <div class="spinner" style="width:32px;height:32px;border:3px solid var(--border);border-top:3px solid var(--accent);border-radius:50%;margin:0 auto 12px;animation:spin 0.8s linear infinite;"></div>
+        <div style="font-size:14px;font-weight:600;color:var(--fg-primary);">Loading Task Report...</div>
+        <div style="font-size:12px;color:var(--fg-muted);margin-top:4px;">Retrieving cached findings from storage.</div>
+      </div>
+
+      <!-- Task A Full Report Pane -->
+      <div id="gen-rep-pane-a" class="gen-rep-pane" style="display:flex;flex-direction:column;gap:14px;">
+        <!-- Overview Banner -->
+        <div style="background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:14px 16px;">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:10px;">
+            <div>
+              <div style="font-size:15px;font-weight:700;color:var(--fg-primary);" id="gen-rep-a-header-title">Task A: Existing Signature Analysis</div>
+              <div style="font-size:12px;color:var(--fg-muted);margin-top:2px;" id="gen-rep-a-header-meta">Capture: —</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:6px;">
+              <span class="kpi-pill info" id="gen-rep-a-cached-badge" style="font-size:11px;">Cached</span>
+              <button class="studio-btn sb-btn" id="gen-rep-a-btn-refresh" style="font-size:11.5px;padding:3px 8px;">↻ Re-run</button>
+            </div>
+          </div>
+          <!-- Overall Coverage Gaps Callout -->
+          <div id="gen-rep-a-gaps-container" style="margin-top:12px;background:rgba(239,68,68,0.06);border-left:3px solid var(--crit);border-radius:4px;padding:10px 12px;">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:var(--crit);margin-bottom:3px;">Overall Detection Coverage Gaps</div>
+            <div id="gen-rep-a-gaps-text" style="font-size:12.5px;color:var(--fg-secondary);line-height:1.5;">—</div>
+          </div>
+        </div>
+
+        <!-- Signature Evaluations List -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <span>Triggered Signatures &amp; Condition Evaluations</span>
+            <span class="kpi-pill ok" id="gen-rep-a-eval-count" style="font-size:11px;">0 Signatures</span>
+          </div>
+          <div id="gen-rep-a-evals-list" style="display:flex;flex-direction:column;gap:10px;">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+
+        <!-- Collapsible Raw JSON -->
+        <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;">
+          <summary style="font-size:12px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Complete Task A JSON Report</summary>
+          <pre id="gen-rep-a-raw-json" style="background:var(--bg-base);padding:10px;border-radius:6px;overflow-x:auto;max-height:260px;font-family:var(--font-mono);font-size:11.5px;margin-top:8px;border:1px solid var(--border-subtle);"></pre>
+        </details>
+      </div>
+
+      <!-- Task B Full Report Pane -->
+      <div id="gen-rep-pane-b" class="gen-rep-pane" style="display:none;flex-direction:column;gap:14px;">
+        <!-- Header Controls -->
+        <div style="display:flex;justify-content:space-between;align-items:center;background:var(--bg-base);border:1px solid var(--border-subtle);border-radius:8px;padding:12px 16px;flex-wrap:wrap;gap:10px;">
+          <div>
+            <div style="font-size:14px;font-weight:700;color:var(--fg-primary);" id="gen-rep-b-header-title">Task B: Behavioural Pattern Discovery</div>
+            <div style="font-size:12px;color:var(--fg-muted);" id="gen-rep-b-header-meta">Capture: —</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:6px;">
+            <span class="kpi-pill info" id="gen-rep-b-cached-badge" style="font-size:11px;">Cached</span>
+            <button class="studio-btn sb-btn" id="gen-rep-b-btn-refresh" style="font-size:11.5px;padding:3px 8px;">↻ Re-run</button>
+          </div>
+        </div>
+
+        <!-- 4-Category Indicator Breakdown Matrix -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;">Extracted Threat Indicators Taxonomy</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));gap:10px;">
+            <div class="corr-event-item" style="border-left:3px solid var(--crit);">
+              <div style="font-weight:700;font-size:12px;color:var(--crit);margin-bottom:4px;">1. Static Indicators (Brittle)</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">IPs, hostnames, file hashes</div>
+              <div id="gen-rep-b-static-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:110px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--accent);">
+              <div style="font-weight:700;font-size:12px;color:var(--accent);margin-bottom:4px;">2. Protocol Indicators (General)</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">HTTP headers, URIs, DNS traits, TCP flags</div>
+              <div id="gen-rep-b-protocol-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:110px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--ok);">
+              <div style="font-weight:700;font-size:12px;color:var(--ok);margin-bottom:4px;">3. Behavioural Indicators</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">Beaconing cadences, connection sequences</div>
+              <div id="gen-rep-b-behavioural-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:110px;overflow-y:auto;">—</div>
+            </div>
+            <div class="corr-event-item" style="border-left:3px solid var(--warn);">
+              <div style="font-weight:700;font-size:12px;color:var(--warn);margin-bottom:4px;">4. Campaign-Specific</div>
+              <div style="font-size:11px;color:var(--fg-muted);margin-bottom:6px;">Transient infrastructure &amp; campaign artifacts</div>
+              <div id="gen-rep-b-campaign-list" style="display:flex;flex-wrap:wrap;gap:4px;max-height:110px;overflow-y:auto;">—</div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!-- Reusable Patterns for Rule Synthesis -->
+        <div>
+          <div style="font-size:13px;font-weight:700;color:var(--fg-primary);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;">
+            <span>Identified Reusable Patterns</span>
+            <span class="kpi-pill ok" id="gen-rep-b-pattern-count" style="font-size:11px;">0 Patterns</span>
+          </div>
+          <div id="gen-rep-b-patterns-list" style="display:flex;flex-direction:column;gap:10px;">
+            <!-- Dynamically populated cards -->
+          </div>
+        </div>
+
+        <!-- Collapsible Raw JSON -->
+        <details style="background:var(--bg-elev-2);border:1px solid var(--border);border-radius:6px;padding:8px 12px;">
+          <summary style="font-size:12px;font-weight:600;color:var(--fg-muted);cursor:pointer;">View Complete Task B JSON Report</summary>
+          <pre id="gen-rep-b-raw-json" style="background:var(--bg-base);padding:10px;border-radius:6px;overflow-x:auto;max-height:260px;font-family:var(--font-mono);font-size:11.5px;margin-top:8px;border:1px solid var(--border-subtle);"></pre>
+        </details>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toast-container"></div>
+
+<!-- Scripts -->
+<script src="/static/js/sse.js?v=3"></script>
+<script src="/static/js/app.js?v=3"></script>
+<script src="/static/js/pipeline.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,569 @@
+/* ============================================================================
+   Archer — theme tokens
+   Single source of truth for all design tokens, shared by the app shell
+   (index.html → archer.css) and the pre-auth pages (login/register).
+
+   The DEFAULT skin (cobalt) lives on the base :root, so any unknown or missing
+   data-theme value harmlessly falls back to it — no allowlist needed in the
+   early-paint scripts. Every other skin is a :root[data-theme="..."] override.
+   The active skin is set on <html data-theme="..."> before first paint (early
+   inline script in each template, seeded from localStorage 'archer.theme').
+
+   Severity semantics are uniform across every skin: low is a neutral (green
+   reads as "safe" on a finding row) and info is a neutral distinct from the
+   accent (so info findings don't share a colour with links/focus/buttons).
+   --on-accent is the text colour for solid-accent surfaces (buttons, active
+   tabs); it's white by default and darkened in skins whose accent is light.
+============================================================================ */
+
+/* ── Base / default skin: cobalt — cool slate-blue ────────────────────────── */
+:root {
+  /* Surfaces (deepest → shallowest) */
+  --bg-base:        #0a0e15;
+  --bg-elev-1:      #10161f;
+  --bg-elev-2:      #161e2a;
+  --bg-elev-3:      #1d2735;
+  --bg-input:       #0d121a;
+
+  /* Foreground */
+  --fg-primary:     #e6ecf2;
+  --fg-secondary:   #b3c0d0;
+  --fg-muted:       #8b9aae;
+  --fg-faint:       #5a6678;
+
+  /* Borders / dividers */
+  --border-subtle:  rgba(148, 163, 184, 0.11);
+  --border:         rgba(148, 163, 184, 0.18);
+  --border-strong:  rgba(148, 163, 184, 0.24);
+
+  /* Accent */
+  --accent:         #4f8cff;
+  --accent-hover:   #6ba1ff;
+  --accent-active:  #3b75e8;
+  --accent-soft:    rgba(79, 140, 255, 0.14);
+  --accent-glow:    rgba(79, 140, 255, 0.32);
+  --on-accent:      #ffffff;
+
+  /* Severity */
+  --sev-critical:   #f43f5e;
+  --sev-high:       #f97316;
+  --sev-medium:     #eab308;
+  --sev-low:        #6d8aa0;
+  --sev-info:       #7d8ca0;
+  --ioc:            #c084fc;
+
+  /* Confirm / success — NOT a severity. Green (or each skin's cohesive
+     equivalent) for affirmative actions: the Acknowledge button text and
+     the success toast (PCAP filter copied). Severity low/info stay neutral
+     by design, so anything that should read "good" points here instead.
+     --on-ok is the text colour on a solid --ok surface (the toast). */
+  --ok:             #34d399;
+  --on-ok:          #06231a;
+
+  /* Row interaction */
+  --row-hover:      rgba(96, 165, 250, 0.05);
+  --row-selected:   rgba(79, 140, 255, 0.12);
+
+  /* Scrollbar */
+  --scrollbar-thumb:       rgba(148, 163, 184, 0.16);
+  --scrollbar-thumb-hover: rgba(148, 163, 184, 0.28);
+
+  /* Radii (theme-independent) */
+  --radius-xs:      4px;
+  --radius-sm:      6px;
+  --radius:         8px;
+  --radius-md:      10px;
+  --radius-lg:      14px;
+  --radius-xl:      18px;
+  --radius-pill:    9999px;
+
+  /* Motion (theme-independent) */
+  --dur-fast:       120ms;
+  --dur-med:        250ms;
+  --dur-slow:       400ms;
+  --ease-out:       cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Chart series (skins may override; defaults read on all dark/light bases) */
+  --chart-3:        #f0a040;
+  --chart-4:        #8ec07c;
+
+  /* Shadows (dark-skin default; light skins override these in their block) */
+  --shadow-xs:      0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-sm:      0 2px 6px rgba(0, 0, 0, 0.35);
+  --shadow-md:      0 6px 16px rgba(0, 0, 0, 0.45);
+  --shadow-lg:      0 12px 32px rgba(0, 0, 0, 0.55);
+  --shadow-xl:      0 20px 50px rgba(0, 0, 0, 0.65);
+
+  --font-mono:      ui-monospace, "SF Mono", "JetBrains Mono", Menlo, Monaco, Consolas, monospace;
+
+  /* UI font (phosphor / hollywood / spongebob override this) */
+  --font-ui:        -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI",
+                    "Helvetica Neue", Arial, sans-serif;
+
+  /* ── Backwards-compatible aliases ───────────────────────────────────────
+     Some inline styles in templates/JS still reference the legacy names; map
+     them onto the primary tokens. Custom-property substitution resolves at use
+     time, so they follow whichever data-theme is active — defined once here. */
+  --bg-dark:        var(--bg-base);
+  --bg-panel:       var(--bg-elev-1);
+  --bg-row-alt:     var(--bg-elev-1);
+  --bg-hover:       var(--row-hover);
+  --fg-text:        var(--fg-primary);
+  --fg-dim:         var(--fg-muted);
+  --fg-border:      var(--border);
+  --fg-sel:         var(--bg-elev-3);
+  --ioc-color:      var(--ioc);
+}
+
+/* ── phosphor — tactical phosphor (monospace UI) ──────────────────────────── */
+:root[data-theme="phosphor"] {
+  --bg-base:        #0a0d0c;
+  --bg-elev-1:      #0e1211;
+  --bg-elev-2:      #141a18;
+  --bg-elev-3:      #1b2320;
+  --bg-input:       #0b0f0e;
+
+  --fg-primary:     #d2d8d4;
+  --fg-secondary:   #a7b1ab;
+  --fg-muted:       #8a948e;
+  --fg-faint:       #5b665f;
+
+  --border-subtle:  rgba(150, 180, 165, 0.11);
+  --border:         rgba(150, 180, 165, 0.19);
+  --border-strong:  rgba(150, 180, 165, 0.26);
+
+  --accent:         #86d96a;
+  --accent-hover:   #9fe884;
+  --accent-active:  #6dc053;
+  --accent-soft:    rgba(134, 217, 106, 0.12);
+  --accent-glow:    rgba(134, 217, 106, 0.30);
+
+  --sev-critical:   #ff6b5e;
+  --sev-high:       #ffab47;
+  --sev-medium:     #eccf52;
+  --sev-low:        #7c8a84;
+  --sev-info:       #8a8f93;
+  --ioc:            #c9a0ff;
+
+  --ok:             #86d96a;
+  --on-ok:          #0c1a0a;
+
+  --row-hover:      rgba(134, 217, 106, 0.06);
+  --row-selected:   rgba(134, 217, 106, 0.12);
+
+  --scrollbar-thumb:       rgba(150, 180, 165, 0.16);
+  --scrollbar-thumb-hover: rgba(150, 180, 165, 0.30);
+
+  --font-ui:        ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* ── gh-dark — GitHub dark dimmed ─────────────────────────────────────────── */
+:root[data-theme="gh-dark"] {
+  --bg-base:        #1c2128;
+  --bg-elev-1:      #22272e;
+  --bg-elev-2:      #2d333b;
+  --bg-elev-3:      #373e47;
+  --bg-input:       #1c2128;
+
+  --fg-primary:     #adbac7;
+  --fg-secondary:   #909dab;
+  --fg-muted:       #768390;
+  --fg-faint:       #545d68;
+
+  --border-subtle:  #3e4651;
+  --border:         #4d5663;
+  --border-strong:  #586069;
+
+  --accent:         #539bf5;
+  --accent-hover:   #6cb0ff;
+  --accent-active:  #3a86e6;
+  --accent-soft:    rgba(83, 155, 245, 0.12);
+  --accent-glow:    rgba(83, 155, 245, 0.28);
+
+  --sev-critical:   #e5534b;
+  --sev-high:       #cc6b2c;
+  --sev-medium:     #c69026;
+  --sev-low:        #768390;
+  --sev-info:       #687482;
+  --ioc:            #b083f0;
+
+  --ok:             #57ab5a;
+  --on-ok:          #0a2b14;
+
+  --row-hover:      rgba(83, 155, 245, 0.06);
+  --row-selected:   rgba(83, 155, 245, 0.12);
+
+  --scrollbar-thumb:       rgba(173, 186, 199, 0.18);
+  --scrollbar-thumb-hover: rgba(173, 186, 199, 0.32);
+}
+
+/* ── boardroom — corporate light, low glare ───────────────────────────────────
+   For stakeholder / shareholder reporting: a soft neutral-gray canvas (not
+   stark white) with white cards, a restrained corporate navy accent, and a
+   muted severity ramp so a screenshot in a deck reads as a report rather than
+   a neon dashboard. */
+:root[data-theme="boardroom"] {
+  --bg-base:        #e8eaed;
+  --bg-elev-1:      #f6f7f9;
+  --bg-elev-2:      #ffffff;
+  --bg-elev-3:      #dde0e4;
+  --bg-input:       #ffffff;
+
+  --fg-primary:     #1c2530;
+  --fg-secondary:   #3d4754;
+  --fg-muted:       #626c78;
+  --fg-faint:       #8a929c;
+
+  --border-subtle:  #d7dbe0;
+  --border:         #bdc4cc;
+  --border-strong:  #aeb5bd;
+
+  --accent:         #2c5282;
+  --accent-hover:   #34629a;
+  --accent-active:  #21426b;
+  --accent-soft:    rgba(44, 82, 130, 0.10);
+  --accent-glow:    rgba(44, 82, 130, 0.20);
+
+  --sev-critical:   #b3261e;
+  --sev-high:       #b86e00;
+  --sev-medium:     #8a6d00;
+  --sev-low:        #5a6675;
+  --sev-info:       #6b7480;
+  --ioc:            #6b4fa3;
+
+  --ok:             #1a7f37;
+  --on-ok:          #ffffff;
+
+  --row-hover:      rgba(44, 82, 130, 0.05);
+  --row-selected:   rgba(44, 82, 130, 0.10);
+
+  --scrollbar-thumb:       rgba(28, 37, 48, 0.18);
+  --scrollbar-thumb-hover: rgba(28, 37, 48, 0.32);
+
+  --shadow-sm:      0 1px 0 rgba(28, 37, 48, 0.04);
+  --shadow-md:      0 2px 6px rgba(28, 37, 48, 0.08);
+  --shadow-lg:      0 8px 24px rgba(28, 37, 48, 0.12);
+}
+
+/* ── blackout — true black / OLED ─────────────────────────────────────────── */
+:root[data-theme="blackout"] {
+  --bg-base:        #000000;
+  --bg-elev-1:      #0a0a0c;
+  --bg-elev-2:      #121214;
+  --bg-elev-3:      #1b1b1e;
+  --bg-input:       #050506;
+
+  --fg-primary:     #f2f3f5;
+  --fg-secondary:   #c2c6cc;
+  --fg-muted:       #8c9099;
+  --fg-faint:       #5a5e66;
+
+  --border-subtle:  rgba(255, 255, 255, 0.09);
+  --border:         rgba(255, 255, 255, 0.16);
+  --border-strong:  rgba(255, 255, 255, 0.20);
+
+  --accent:         #5b93ff;
+  --accent-hover:   #79a8ff;
+  --accent-active:  #4a82f0;
+  --accent-soft:    rgba(91, 147, 255, 0.14);
+  --accent-glow:    rgba(91, 147, 255, 0.30);
+
+  --sev-critical:   #ff5470;
+  --sev-high:       #ff8a3d;
+  --sev-medium:     #ffd23f;
+  --sev-low:        #6d8aa0;
+  --sev-info:       #7d8ca0;
+  --ioc:            #c084fc;
+
+  --ok:             #3ddc97;
+  --on-ok:          #04140d;
+
+  --row-hover:      rgba(255, 255, 255, 0.04);
+  --row-selected:   rgba(91, 147, 255, 0.12);
+
+  --scrollbar-thumb:       rgba(255, 255, 255, 0.14);
+  --scrollbar-thumb-hover: rgba(255, 255, 255, 0.26);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   Novelty skins — loud on purpose. CRITICAL/HIGH are kept legible and low/info
+   stay neutral so triage survives the chaos.
+════════════════════════════════════════════════════════════════════════════ */
+
+/* ── spongebob — Bikini Bottom (full sponge-yellow, Comic Sans) ───────────── */
+:root[data-theme="spongebob"] {
+  --bg-base:        #f4d935;
+  --bg-elev-1:      #f8e25c;
+  --bg-elev-2:      #fbec8a;
+  --bg-elev-3:      #e6c01c;
+  --bg-input:       #fffae0;
+
+  --fg-primary:     #3a2a12;
+  --fg-secondary:   #5c4422;
+  --fg-muted:       #836a3c;
+  --fg-faint:       #a88e58;
+
+  --border-subtle:  rgba(90, 62, 24, 0.18);
+  --border:         rgba(90, 62, 24, 0.32);
+  --border-strong:  rgba(90, 62, 24, 0.46);
+
+  --accent:         #00a7c4;
+  --accent-hover:   #1fbcd8;
+  --accent-active:  #0089a3;
+  --accent-soft:    rgba(0, 167, 196, 0.16);
+  --accent-glow:    rgba(0, 167, 196, 0.34);
+  --on-accent:      #ffffff;
+
+  --sev-critical:   #d11f1f;
+  --sev-high:       #b5530a;
+  --sev-medium:     #8a6a00;
+  --sev-low:        #6b5e45;
+  --sev-info:       #7e7156;
+  --ioc:            #e85aa0;
+
+  --ok:             #1f8a3a;
+  --on-ok:          #ffffff;
+
+  --row-hover:      rgba(0, 167, 196, 0.10);
+  --row-selected:   rgba(0, 167, 196, 0.18);
+
+  --scrollbar-thumb:       rgba(58, 42, 18, 0.28);
+  --scrollbar-thumb-hover: rgba(58, 42, 18, 0.45);
+
+  --shadow-sm:      0 1px 0 rgba(58, 42, 18, 0.10);
+  --shadow-md:      0 2px 8px rgba(58, 42, 18, 0.18);
+  --shadow-lg:      0 10px 28px rgba(58, 42, 18, 0.24);
+
+  --font-ui:        "Comic Sans MS", "Comic Sans", "Chalkboard SE",
+                    "Comic Neue", cursive;
+}
+
+/* ── vaporwave — A E S T H E T I C ────────────────────────────────────────── */
+:root[data-theme="vaporwave"] {
+  --bg-base:        #1a0b2e;
+  --bg-elev-1:      #2a1245;
+  --bg-elev-2:      #371858;
+  --bg-elev-3:      #46206e;
+  --bg-input:       #150823;
+
+  --fg-primary:     #f5e6ff;
+  --fg-secondary:   #d9b8f0;
+  --fg-muted:       #b088d0;
+  --fg-faint:       #8a64ad;
+
+  --border-subtle:  rgba(255, 113, 206, 0.12);
+  --border:         rgba(255, 113, 206, 0.26);
+  --border-strong:  rgba(255, 113, 206, 0.42);
+
+  --accent:         #2de2e6;
+  --accent-hover:   #5cebee;
+  --accent-active:  #1ac3c7;
+  --accent-soft:    rgba(45, 226, 230, 0.14);
+  --accent-glow:    rgba(45, 226, 230, 0.34);
+  --on-accent:      #14233a;
+
+  --sev-critical:   #ff5470;
+  --sev-high:       #ff9e64;
+  --sev-medium:     #ffd166;
+  --sev-low:        #9a8cc0;
+  --sev-info:       #8f9ec4;
+  --ioc:            #ff71ce;
+
+  --ok:             #05ffa1;
+  --on-ok:          #102a20;
+
+  --row-hover:      rgba(45, 226, 230, 0.06);
+  --row-selected:   rgba(255, 113, 206, 0.14);
+
+  --scrollbar-thumb:       rgba(255, 113, 206, 0.22);
+  --scrollbar-thumb-hover: rgba(255, 113, 206, 0.40);
+}
+
+/* ── hotdog — Windows 3.1 "Hot Dog Stand" (red field, mustard accent) ─────── */
+:root[data-theme="hotdog"] {
+  --bg-base:        #c40d0d;
+  --bg-elev-1:      #d11d1d;
+  --bg-elev-2:      #e02e2e;
+  --bg-elev-3:      #a30909;
+  /* Dark input wells so the light (cream) foreground reads — the rest of the
+     skin is dark-red, so a pale input would hide the cream text. */
+  --bg-input:       #5e0606;
+
+  --fg-primary:     #fff8e0;
+  --fg-secondary:   #ffe7a0;
+  --fg-muted:       #f3c860;
+  --fg-faint:       #d6a23a;
+
+  --border-subtle:  rgba(255, 224, 0, 0.22);
+  --border:         rgba(255, 224, 0, 0.44);
+  --border-strong:  rgba(255, 224, 0, 0.64);
+
+  --accent:         #ffe000;
+  --accent-hover:   #fff04d;
+  --accent-active:  #e6c900;
+  --accent-soft:    rgba(255, 224, 0, 0.20);
+  --accent-glow:    rgba(255, 224, 0, 0.45);
+  --on-accent:      #3a1500;
+
+  --sev-critical:   #ff5a5a;
+  --sev-high:       #ffb84d;
+  --sev-medium:     #ffe39e;
+  --sev-low:        #e3b0b0;
+  --sev-info:       #d6bcbc;
+  --ioc:            #36e0ff;
+
+  --ok:             #aef25c;
+  --on-ok:          #1d3000;
+
+  --row-hover:      rgba(255, 224, 0, 0.10);
+  --row-selected:   rgba(255, 224, 0, 0.20);
+
+  --scrollbar-thumb:       rgba(255, 224, 0, 0.35);
+  --scrollbar-thumb-hover: rgba(255, 224, 0, 0.55);
+}
+
+/* ── hollywood — "I'M IN." movie-hacker green-on-black (monospace) ────────── */
+:root[data-theme="hollywood"] {
+  --bg-base:        #000000;
+  --bg-elev-1:      #020a02;
+  --bg-elev-2:      #03120a;
+  --bg-elev-3:      #051f0e;
+  --bg-input:       #000800;
+
+  --fg-primary:     #33ff66;
+  --fg-secondary:   #28cc52;
+  --fg-muted:       #1f9940;
+  --fg-faint:       #167030;
+
+  --border-subtle:  rgba(0, 255, 65, 0.12);
+  --border:         rgba(0, 255, 65, 0.26);
+  --border-strong:  rgba(0, 255, 65, 0.45);
+
+  --accent:         #00ff41;
+  --accent-hover:   #5cff7d;
+  --accent-active:  #00cc34;
+  --accent-soft:    rgba(0, 255, 65, 0.14);
+  --accent-glow:    rgba(0, 255, 65, 0.40);
+  --on-accent:      #001a05;
+
+  --sev-critical:   #ff3131;
+  --sev-high:       #ff8c00;
+  --sev-medium:     #ffe000;
+  --sev-low:        #9a8a6a;
+  --sev-info:       #8a8f80;
+  --ioc:            #ff5cf0;
+
+  --ok:             #00ff41;
+  --on-ok:          #001a05;
+
+  --row-hover:      rgba(0, 255, 65, 0.06);
+  --row-selected:   rgba(0, 255, 65, 0.14);
+
+  --scrollbar-thumb:       rgba(0, 255, 65, 0.20);
+  --scrollbar-thumb-hover: rgba(0, 255, 65, 0.40);
+
+  --font-ui:        ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+}
+
+/* ── hunterpink — Barbiecore (bubblegum field, hot-magenta accent) ────────── */
+:root[data-theme="hunterpink"] {
+  --bg-base:        #ffd1e8;
+  --bg-elev-1:      #ffe0f0;
+  --bg-elev-2:      #fff0f7;
+  --bg-elev-3:      #ffbcdd;
+  --bg-input:       #fff7fb;
+
+  --fg-primary:     #6e0a45;
+  --fg-secondary:   #8a1a5e;
+  --fg-muted:       #a8447e;
+  --fg-faint:       #c47aa3;
+
+  --border-subtle:  rgba(150, 20, 90, 0.16);
+  --border:         rgba(150, 20, 90, 0.28);
+  --border-strong:  rgba(150, 20, 90, 0.42);
+
+  --accent:         #ff1493;
+  --accent-hover:   #ff47ab;
+  --accent-active:  #e00d80;
+  --accent-soft:    rgba(255, 20, 147, 0.12);
+  --accent-glow:    rgba(255, 20, 147, 0.30);
+  --on-accent:      #ffffff;
+
+  --sev-critical:   #c1121f;
+  --sev-high:       #b5530a;
+  --sev-medium:     #8a6a00;
+  --sev-low:        #7a5e72;
+  --sev-info:       #806a80;
+  --ioc:            #7b2cbf;
+
+  --ok:             #0f8a52;
+  --on-ok:          #ffffff;
+
+  --row-hover:      rgba(255, 20, 147, 0.06);
+  --row-selected:   rgba(255, 20, 147, 0.12);
+
+  --scrollbar-thumb:       rgba(150, 20, 90, 0.25);
+  --scrollbar-thumb-hover: rgba(150, 20, 90, 0.40);
+
+  --shadow-sm:      0 1px 0 rgba(110, 10, 69, 0.06);
+  --shadow-md:      0 2px 8px rgba(110, 10, 69, 0.12);
+  --shadow-lg:      0 10px 28px rgba(110, 10, 69, 0.18);
+}
+
+/* ── nyancat — Bikini-Bottom-of-space rainbow (static watermark below) ─────── */
+:root[data-theme="nyancat"] {
+  --bg-base:        #0a0a2a;
+  --bg-elev-1:      #12123a;
+  --bg-elev-2:      #1a1a4a;
+  --bg-elev-3:      #24245e;
+  --bg-input:       #07071f;
+
+  --fg-primary:     #eaf0ff;
+  --fg-secondary:   #c4cdf0;
+  --fg-muted:       #9aa3d0;
+  --fg-faint:       #6a72a0;
+
+  --border-subtle:  rgba(150, 170, 255, 0.12);
+  --border:         rgba(150, 170, 255, 0.24);
+  --border-strong:  rgba(150, 170, 255, 0.40);
+
+  --accent:         #ff5fb0;
+  --accent-hover:   #ff85c6;
+  --accent-active:  #e63f95;
+  --accent-soft:    rgba(255, 95, 176, 0.14);
+  --accent-glow:    rgba(255, 95, 176, 0.34);
+  --on-accent:      #ffffff;
+
+  --sev-critical:   #ff3b5e;
+  --sev-high:       #ff9f1c;
+  --sev-medium:     #ffe000;
+  --sev-low:        #8a93c0;
+  --sev-info:       #9aa0c8;
+  --ioc:            #5ce1e6;
+
+  --ok:             #41f29b;
+  --on-ok:          #03200f;
+
+  --row-hover:      rgba(255, 95, 176, 0.07);
+  --row-selected:   rgba(255, 95, 176, 0.16);
+
+  --scrollbar-thumb:       rgba(150, 170, 255, 0.22);
+  --scrollbar-thumb-hover: rgba(150, 170, 255, 0.40);
+}
+
+/* Nyan Cat — the animated gif as a fixed, window-fitting, click-through
+   background wash. position:fixed pins it (no scroll drift); background-size:
+   contain fits the whole frame to the window without cropping; pointer-events
+   stays off so it never blocks clicks; <dialog> modals (top layer) sit above. */
+:root[data-theme="nyancat"] body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  background-image: url("/static/img/nyan-cat.gif");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.2;
+}
