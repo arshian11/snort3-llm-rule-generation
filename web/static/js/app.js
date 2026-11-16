@@ -1382,9 +1382,13 @@ const App = (() => {
     }, 3200);
   }
 
+  // Expose showToast globally
+  window.showToast = showToast;
+
   // Public Interface
   return {
     init,
+    showToast,
     filterBySource,
     filterByDestination,
     filterBySignature,

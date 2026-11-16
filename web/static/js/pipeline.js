@@ -2280,9 +2280,28 @@
           fpEl.textContent = "Clean";
         }
       }
+
+      // Candidate Registration Confirmation Banner
+      const candBadge = document.getElementById("hdirc-s7-candidate-registered-badge");
+      const candSid = document.getElementById("hdirc-s7-registered-sid");
+      const candBtn = document.getElementById("btn-hdirc-view-candidate");
+      const sid = (data.candidate && data.candidate.rule_id) || (state.components ? state.components.sid : null) || (state.ast && state.ast.options ? (state.ast.options.find(o => o.name === 'sid') || {}).value : null);
+      if (candBadge && sid) {
+        candBadge.style.display = "flex";
+        if (candSid) candSid.textContent = `SID ${sid}`;
+        if (candBtn) {
+          candBtn.onclick = () => {
+            const s1Modal = document.getElementById("modal-hdirc-stage1");
+            if (s1Modal) s1Modal.classList.remove("open");
+            if (window.selectCandidate) window.selectCandidate(sid);
+          };
+        }
+      }
     } else {
       if (s7Body) s7Body.style.display = "none";
       if (s7Pill) s7Pill.style.display = "none";
+      const candBadge = document.getElementById("hdirc-s7-candidate-registered-badge");
+      if (candBadge) candBadge.style.display = "none";
       if (s7Btn) {
         s7Btn.innerHTML = "⚡ Execute Stage 7: Assemble &amp; Verify";
         s7Btn.disabled = false;
@@ -2469,6 +2488,14 @@
       const data = await res.json();
       if (data.status === "success" && data.rule_state) {
         renderHdircStage1Result(data);
+        // Automatically reload candidates into the Candidate Rules & Version Audit Log section
+        await loadCandidates();
+        if (data.candidate && data.candidate.rule_id) {
+          const sid = data.candidate.rule_id;
+          if (window.showToast) {
+            window.showToast(`Candidate Rule SID ${sid} automatically added to Candidate Rules & Version Audit Log!`, "success");
+          }
+        }
       } else {
         alert("HDIRC Stage 7 Error: " + (data.message || "Failed to assemble and verify rule"));
         if (s7Btn) {

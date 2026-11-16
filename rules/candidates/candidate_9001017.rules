@@ -1,0 +1,1 @@
+alert http (msg:"CTU-13 Botnet HTTP beacon with distinctive User-Agent"; flow:to_server,established; http_method; content:"GET",nocase; http_header; content:"User-Agent|3a| ",nocase; content:"Media Center PC 6.0",fast_pattern,nocase; pcre:"/MSIE\s7\.0.*Media\sCenter\sPC\s6\.0/smi"; classtype:trojan-activity; sid:9001017; rev:1; )
