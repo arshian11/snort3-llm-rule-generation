@@ -948,7 +948,7 @@ You output strictly valid JSON without conversational text or codeblock wrappers
             "http_stat_msg", "http_version", "file_data", "pkt_data", "raw_data", "js_data",
             "vba_data", "base64_data", "content", "pcre", "regex", "byte_test", "byte_extract",
             "byte_math", "byte_jump", "isdataat", "bufferlen", "dsize", "ber_data", "ber_skip",
-            "tls_sni", "tls_cert_subject", "tls_cert_issuer", "dns_query"
+            "tls_sni", "tls_cert_subject", "tls_cert_issuer"
         ]
         detection_nodes = [o for o in state.ast.options if o.name in detection_names]
 

@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"PROTOCOL-DNS DNS tunneling high-entropy subdomain query to dns2tcp-key.com"; flow:to_server; dns_query; content:"dns2tcp-key.com",nocase,fast_pattern; pcre:"/^[a-f0-9]{20,}\\./i"; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family DNS_Tunneling; sid:9002027; rev:1; )

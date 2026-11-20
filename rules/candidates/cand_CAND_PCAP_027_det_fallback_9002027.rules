@@ -1,0 +1,1 @@
+alert dns any any -> any any (dns_query; content:"\x00\x19", offset 0, depth 2; pcre:"/[A-Za-z0-9]{10,}/"; sid:9002027; rev:1; )

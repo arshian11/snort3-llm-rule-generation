@@ -1,0 +1,4991 @@
+{
+  "capture_id": "PCAP_030",
+  "filename": "dns2tcp_txt_up.pcapng",
+  "malware_family": "DNS Tunneling",
+  "threat_category": "Data Exfiltration & Covert Channel",
+  "ground_truth": "malicious",
+  "snort": {
+    "version": "3.13.2.0",
+    "total_rules_loaded": 4246,
+    "total_alerts": 0,
+    "unique_signatures": 0,
+    "pcap_hash": "6cf6e4e1c24441b36a6090a78ab809fa0c5f2047ffe2f8390a4a144afbb2aca6",
+    "config_hash": "ab22a00754337af21eb55c4fbb1ed7fb91ce5ea88a52d5910118de204fc77eaa"
+  },
+  "alert_summary": [],
+  "network_behaviour": {
+    "dns_queries": [
+      {
+        "pkt_num": 1,
+        "time_epoch": 1556106848.432185,
+        "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.95,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 2,
+        "time_epoch": 1556106848.4322946,
+        "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.72,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 3,
+        "time_epoch": 1556106848.4323683,
+        "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.133,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 4,
+        "time_epoch": 1556106848.4324424,
+        "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.791,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 5,
+        "time_epoch": 1556106848.4325314,
+        "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 3.921,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 6,
+        "time_epoch": 1556106848.432619,
+        "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.647,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 7,
+        "time_epoch": 1556106848.4326885,
+        "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.133,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 8,
+        "time_epoch": 1556106848.4327612,
+        "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.768,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 9,
+        "time_epoch": 1556106848.43283,
+        "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.027,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 10,
+        "time_epoch": 1556106848.4329023,
+        "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.817,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 11,
+        "time_epoch": 1556106848.4329703,
+        "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.133,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 12,
+        "time_epoch": 1556106848.433053,
+        "query_name": "Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.861,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 13,
+        "time_epoch": 1556106848.4331172,
+        "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.027,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 14,
+        "time_epoch": 1556106848.4331846,
+        "query_name": "Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.749,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 15,
+        "time_epoch": 1556106848.4332492,
+        "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 4.056,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 16,
+        "time_epoch": 1556106848.433317,
+        "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.814,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 17,
+        "time_epoch": 1556106848.4333866,
+        "query_name": "Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.706,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 18,
+        "time_epoch": 1556106848.433456,
+        "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.755,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 19,
+        "time_epoch": 1556106848.4335248,
+        "query_name": "Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.777,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 20,
+        "time_epoch": 1556106848.433594,
+        "query_name": "Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.778,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 21,
+        "time_epoch": 1556106848.4336624,
+        "query_name": "Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.785,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 22,
+        "time_epoch": 1556106848.433732,
+        "query_name": "Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.674,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 23,
+        "time_epoch": 1556106848.433801,
+        "query_name": "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.773,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 24,
+        "time_epoch": 1556106848.43387,
+        "query_name": "Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": null,
+        "rcode": "",
+        "entropy": 5.792,
+        "src_ip": "198.41.0.128",
+        "dst_ip": "198.41.0.10"
+      },
+      {
+        "pkt_num": 25,
+        "time_epoch": 1556106848.4907303,
+        "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 5.72,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      },
+      {
+        "pkt_num": 26,
+        "time_epoch": 1556106848.4907534,
+        "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 3.95,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      },
+      {
+        "pkt_num": 27,
+        "time_epoch": 1556106848.4907558,
+        "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 4.133,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      },
+      {
+        "pkt_num": 28,
+        "time_epoch": 1556106848.4907582,
+        "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 3.921,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      },
+      {
+        "pkt_num": 29,
+        "time_epoch": 1556106848.490761,
+        "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 5.791,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      },
+      {
+        "pkt_num": 30,
+        "time_epoch": 1556106848.4907653,
+        "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "query_type": "16",
+        "is_response": false,
+        "ttl": null,
+        "resolved_ip": "202.10.10.11",
+        "rcode": "0",
+        "entropy": 5.768,
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128"
+      }
+    ],
+    "http_requests": [],
+    "tcp_connections": [
+      {
+        "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "proto": "UDP",
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128",
+        "src_port": 53,
+        "dst_port": 50380,
+        "duration_sec": 22.672,
+        "packet_count": 10000,
+        "byte_count": 2228413,
+        "tcp_flags": [],
+        "zeek_conn_state": "SF",
+        "zeek_service": "dns"
+      }
+    ],
+    "periodic_connections": [],
+    "suspicious_flows": [
+      {
+        "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "src_ip": "198.41.0.10",
+        "dst_ip": "198.41.0.128",
+        "dst_port": 50380,
+        "proto": "UDP",
+        "reasons": [
+          "Unusual destination port 50380"
+        ],
+        "packets": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ]
+      }
+    ],
+    "zeek": {
+      "total_connections": 1,
+      "connection_states": {
+        "SF": 1
+      },
+      "detected_services": {
+        "dns": 1
+      },
+      "files_transferred": [],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": []
+    }
+  },
+  "correlations": [
+    {
+      "type": "HIGH_ENTROPY_DNS_ANOMALY",
+      "confidence": "high",
+      "description": "Observed 50 high-entropy DNS queries (Shannon entropy >= 3.8) indicating possible DGA or DNS covert channel/exfiltration",
+      "sample_domains": [
+        "Y7sAXgB2BA.dns2tcp-txt.com",
+        "Y7sAXAB0BA.dns2tcp-txt.com",
+        "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+        "Y7sATABkBA.dns2tcp-txt.com",
+        "Y7sAQABYBA.dns2tcp-txt.com"
+      ],
+      "evidence_packets": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "evidence_summary": "Packets [1, 2, 3, 4, 5, 6, 7, 8, 9, 10] queried unusually random domain structures: Y7sAXgB2BA.dns2tcp-txt.com, Y7sAXAB0BA.dns2tcp-txt.com, Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com"
+    }
+  ],
+  "packet_evidence": [
+    {
+      "pkt_num": 1,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQABYBA.dns2tcp-txt.com (TTL=None, Entropy=3.95)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 2,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com (TTL=None, Entropy=5.72)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 3,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQgBaBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 4,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com (TTL=None, Entropy=5.791)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 5,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARABcBA.dns2tcp-txt.com (TTL=None, Entropy=3.921)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 6,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com (TTL=None, Entropy=5.647)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 7,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARgBeBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 8,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com (TTL=None, Entropy=5.768)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 9,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASABgBA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 10,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com (TTL=None, Entropy=5.817)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 11,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASgBiBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 12,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com (TTL=None, Entropy=5.861)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 13,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATABkBA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 14,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com (TTL=None, Entropy=5.749)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 15,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATgBmBA.dns2tcp-txt.com (TTL=None, Entropy=4.056)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 16,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com (TTL=None, Entropy=5.814)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 17,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com (TTL=None, Entropy=5.706)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 18,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com (TTL=None, Entropy=5.755)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 19,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com (TTL=None, Entropy=5.777)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 20,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com (TTL=None, Entropy=5.778)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 21,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com (TTL=None, Entropy=5.785)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 22,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com (TTL=None, Entropy=5.674)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 23,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com (TTL=None, Entropy=5.773)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 24,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com (TTL=None, Entropy=5.792)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 25,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com (TTL=None, Entropy=5.72)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 26,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQABYBA.dns2tcp-txt.com (TTL=None, Entropy=3.95)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 27,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQgBaBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 28,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARABcBA.dns2tcp-txt.com (TTL=None, Entropy=3.921)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 29,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com (TTL=None, Entropy=5.791)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 30,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com (TTL=None, Entropy=5.768)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 31,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARgBeBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 32,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASABgBA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 33,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com (TTL=None, Entropy=5.647)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 34,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com (TTL=None, Entropy=5.817)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 35,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sASgBiBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 36,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAWABwBA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 37,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com (TTL=None, Entropy=5.734)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 38,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAWgByBA.dns2tcp-txt.com (TTL=None, Entropy=4.133)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 39,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com (TTL=None, Entropy=5.834)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 40,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAXAB0BA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 41,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com (TTL=None, Entropy=5.789)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 42,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAXgB2BA.dns2tcp-txt.com (TTL=None, Entropy=4.056)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 43,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com (TTL=None, Entropy=5.818)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 44,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAYAB4BA.dns2tcp-txt.com (TTL=None, Entropy=3.95)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 45,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com (TTL=None, Entropy=5.728)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 46,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAYgB6BA.dns2tcp-txt.com (TTL=None, Entropy=4.056)",
+      "proto": "UDP/53",
+      "src": "198.41.0.128",
+      "dst": "198.41.0.10"
+    },
+    {
+      "pkt_num": 47,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com (TTL=None, Entropy=5.814)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 48,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com (TTL=None, Entropy=5.755)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 49,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATABkBA.dns2tcp-txt.com (TTL=None, Entropy=4.027)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    },
+    {
+      "pkt_num": 50,
+      "source": "dns_protocol",
+      "summary": "DNS Query: Y7sATgBmBA.dns2tcp-txt.com (TTL=None, Entropy=4.056)",
+      "proto": "UDP/53",
+      "src": "198.41.0.10",
+      "dst": "198.41.0.128"
+    }
+  ],
+  "event_graph": {
+    "nodes": [
+      {
+        "id": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "label": "Flow: UDP 50380 (SF)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0234,
+        "betweenness_score": 0.0009,
+        "details": {
+          "proto": "UDP",
+          "src_ip": "198.41.0.10",
+          "dst_ip": "198.41.0.128",
+          "dst_port": 50380,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+            "packets": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "byte_count": 2228413,
+            "packet_count": 10000,
+            "duration": 22.672,
+            "start_time": 1556106848.432185,
+            "end_time": 1556106871.1045513,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "dns_agg:Y7sAQABYBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sAQABYBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 3.95,
+          "packets": [
+            1,
+            26
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "label": "DNS: Y7sAQQBZCJ0sflppNY+v2c (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.72,
+          "packets": [
+            2,
+            25
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sAQgBaBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sAQgBaBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.133,
+          "packets": [
+            3,
+            27
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "label": "DNS: Y7sAQwBbCBSIL8HTSE3UOE (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.791,
+          "packets": [
+            4,
+            29
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sARABcBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sARABcBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 3.921,
+          "packets": [
+            5,
+            28
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "label": "DNS: Y7sARQBdCIp4wzwwBQEWM5 (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.647,
+          "packets": [
+            6,
+            33
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sARgBeBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sARgBeBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.133,
+          "packets": [
+            7,
+            31
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "label": "DNS: Y7sARwBfCOY/copSWjOqyB (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.768,
+          "packets": [
+            8,
+            30
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sASABgBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sASABgBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.027,
+          "packets": [
+            9,
+            32
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "label": "DNS: Y7sASQBhCH/3sHpb7MeXY3 (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.817,
+          "packets": [
+            10,
+            34
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sASgBiBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sASgBiBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.133,
+          "packets": [
+            11,
+            35
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sATABkBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sATABkBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.027,
+          "packets": [
+            13,
+            49
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sATgBmBA.dns2tcp-txt.com",
+        "label": "DNS: Y7sATgBmBA.dns2tcp-txt (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 4.056,
+          "packets": [
+            15,
+            50
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "label": "DNS: Y7sATwBnCATyBvF+mlfSAN (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.814,
+          "packets": [
+            16,
+            47
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "dns_agg:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "label": "DNS: Y7sAUQBpCGtmckR+O+ogyI (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0433,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "query_count": 2,
+          "entropy": 5.755,
+          "packets": [
+            18,
+            48
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "ip:198.41.0.10",
+        "label": "198.41.0.10",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "198.41.0.10"
+        }
+      },
+      {
+        "id": "ip:198.41.0.128",
+        "label": "198.41.0.128",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0325,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "198.41.0.128"
+        }
+      },
+      {
+        "id": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "label": "Y7sAQABYBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.95
+        }
+      },
+      {
+        "id": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "label": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.72
+        }
+      },
+      {
+        "id": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "label": "Y7sAQgBaBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "label": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.791
+        }
+      },
+      {
+        "id": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "label": "Y7sARABcBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.921
+        }
+      },
+      {
+        "id": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "label": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.647
+        }
+      },
+      {
+        "id": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "label": "Y7sARgBeBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "label": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.768
+        }
+      },
+      {
+        "id": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "label": "Y7sASABgBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "label": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.817
+        }
+      },
+      {
+        "id": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "label": "Y7sASgBiBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "label": "Y7sATABkBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "label": "Y7sATgBmBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.056
+        }
+      },
+      {
+        "id": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "label": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.814
+        }
+      },
+      {
+        "id": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "label": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0126,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.755
+        }
+      },
+      {
+        "id": "ip:202.10.10.11",
+        "label": "202.10.10.11",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0932,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "202.10.10.11"
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "target": "ip:198.41.0.128",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 2228413,
+          "packet_count": 10000,
+          "duration": 22.672,
+          "start_time": 1556106848.432185,
+          "end_time": 1556106871.1045513,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:198.41.0.10",
+        "target": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 2228413,
+          "packet_count": 10000,
+          "duration": 22.672,
+          "start_time": 1556106848.432185,
+          "end_time": 1556106871.1045513,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sAQABYBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            1
+          ],
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            26
+          ],
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            2
+          ],
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.72,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            25
+          ],
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.72,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sAQgBaBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            3
+          ],
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            27
+          ],
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            4
+          ],
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.791,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            29
+          ],
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.791,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sARABcBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            5
+          ],
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.921,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            28
+          ],
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.921,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            6
+          ],
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.647,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            33
+          ],
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.647,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sARgBeBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            7
+          ],
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            31
+          ],
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            8
+          ],
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.768,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            30
+          ],
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.768,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sASABgBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            9
+          ],
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            32
+          ],
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            10
+          ],
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.817,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            34
+          ],
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.817,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sASgBiBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            11
+          ],
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            35
+          ],
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sATABkBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            13
+          ],
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            49
+          ],
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sATgBmBA.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            15
+          ],
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            50
+          ],
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            16
+          ],
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.814,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            47
+          ],
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.814,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "target": "dns_agg:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            18
+          ],
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.755,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            48
+          ],
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.755,
+          "is_response": false
+        }
+      }
+    ]
+  },
+  "raw_graph": {
+    "nodes": [
+      {
+        "id": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "label": "Flow: UDP 50380 (SF)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "UDP",
+          "src_ip": "198.41.0.10",
+          "dst_ip": "198.41.0.128",
+          "dst_port": 50380,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+            "packets": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "byte_count": 2228413,
+            "packet_count": 10000,
+            "duration": 22.672,
+            "start_time": 1556106848.432185,
+            "end_time": 1556106871.1045513,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "ip:198.41.0.10",
+        "label": "198.41.0.10",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "198.41.0.10"
+        }
+      },
+      {
+        "id": "ip:198.41.0.128",
+        "label": "198.41.0.128",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "198.41.0.128"
+        }
+      },
+      {
+        "id": "dns:1",
+        "label": "DNS: Y7sAQABYBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "entropy": 3.95,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              1
+            ],
+            "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.95,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "label": "Y7sAQABYBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.95
+        }
+      },
+      {
+        "id": "dns:2",
+        "label": "DNS: Y7sAQQBZCJ0sflppNY+v2chJ2",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "entropy": 5.72,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              2
+            ],
+            "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.72,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "label": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.72
+        }
+      },
+      {
+        "id": "dns:3",
+        "label": "DNS: Y7sAQgBaBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              3
+            ],
+            "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "label": "Y7sAQgBaBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "dns:4",
+        "label": "DNS: Y7sAQwBbCBSIL8HTSE3UOEhIM",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "entropy": 5.791,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              4
+            ],
+            "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.791,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "label": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.791
+        }
+      },
+      {
+        "id": "dns:5",
+        "label": "DNS: Y7sARABcBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "entropy": 3.921,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              5
+            ],
+            "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.921,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "label": "Y7sARABcBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.921
+        }
+      },
+      {
+        "id": "dns:6",
+        "label": "DNS: Y7sARQBdCIp4wzwwBQEWM5DH0",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "entropy": 5.647,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              6
+            ],
+            "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.647,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "label": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.647
+        }
+      },
+      {
+        "id": "dns:7",
+        "label": "DNS: Y7sARgBeBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              7
+            ],
+            "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "label": "Y7sARgBeBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "dns:8",
+        "label": "DNS: Y7sARwBfCOY/copSWjOqyByH5",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "entropy": 5.768,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              8
+            ],
+            "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.768,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "label": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.768
+        }
+      },
+      {
+        "id": "dns:9",
+        "label": "DNS: Y7sASABgBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              9
+            ],
+            "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "label": "Y7sASABgBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "dns:10",
+        "label": "DNS: Y7sASQBhCH/3sHpb7MeXY3IBm",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "entropy": 5.817,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              10
+            ],
+            "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.817,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "label": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.817
+        }
+      },
+      {
+        "id": "dns:11",
+        "label": "DNS: Y7sASgBiBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              11
+            ],
+            "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "label": "Y7sASgBiBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "dns:12",
+        "label": "DNS: Y7sASwBjCGCJLX1I3C9zeXd2P",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+          "entropy": 5.861,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              12
+            ],
+            "query_name": "Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.861,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+        "label": "Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.861
+        }
+      },
+      {
+        "id": "dns:13",
+        "label": "DNS: Y7sATABkBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              13
+            ],
+            "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "label": "Y7sATABkBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "dns:14",
+        "label": "DNS: Y7sATQBlCHksN1paRn7lA8GFF",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+          "entropy": 5.749,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              14
+            ],
+            "query_name": "Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.749,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+        "label": "Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.749
+        }
+      },
+      {
+        "id": "dns:15",
+        "label": "DNS: Y7sATgBmBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "entropy": 4.056,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              15
+            ],
+            "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.056,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "label": "Y7sATgBmBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.056
+        }
+      },
+      {
+        "id": "dns:16",
+        "label": "DNS: Y7sATwBnCATyBvF+mlfSANK7h",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "entropy": 5.814,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              16
+            ],
+            "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.814,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "label": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.814
+        }
+      },
+      {
+        "id": "dns:17",
+        "label": "DNS: Y7sAUABoCDrj9s2OmPqccqt0K",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+          "entropy": 5.706,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              17
+            ],
+            "query_name": "Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.706,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+        "label": "Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.706
+        }
+      },
+      {
+        "id": "dns:18",
+        "label": "DNS: Y7sAUQBpCGtmckR+O+ogyIqE2",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "entropy": 5.755,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              18
+            ],
+            "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.755,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "label": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.755
+        }
+      },
+      {
+        "id": "dns:19",
+        "label": "DNS: Y7sAUgBqCHm9H/cylcn06dEFT",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+          "entropy": 5.777,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              19
+            ],
+            "query_name": "Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.777,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+        "label": "Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.777
+        }
+      },
+      {
+        "id": "dns:20",
+        "label": "DNS: Y7sAUwBrCE7rqoqs1MDSnKF63",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+          "entropy": 5.778,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              20
+            ],
+            "query_name": "Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.778,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+        "label": "Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.778
+        }
+      },
+      {
+        "id": "dns:21",
+        "label": "DNS: Y7sAVABsCCZIN9sohRQPvwVtR",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+          "entropy": 5.785,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              21
+            ],
+            "query_name": "Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.785,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+        "label": "Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.785
+        }
+      },
+      {
+        "id": "dns:22",
+        "label": "DNS: Y7sAVQBtCH0jAZQ1oGBJJcu80",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+          "entropy": 5.674,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              22
+            ],
+            "query_name": "Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.674,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+        "label": "Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.674
+        }
+      },
+      {
+        "id": "dns:23",
+        "label": "DNS: Y7sAVgBuCIC08p/rDj7hUEeZo",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+          "entropy": 5.773,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              23
+            ],
+            "query_name": "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.773,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+        "label": "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.773
+        }
+      },
+      {
+        "id": "dns:24",
+        "label": "DNS: Y7sAVwBvCIEt4zx/dGmfp7QTu",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+          "entropy": 5.792,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              24
+            ],
+            "query_name": "Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.792,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+        "label": "Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.792
+        }
+      },
+      {
+        "id": "dns:25",
+        "label": "DNS: Y7sAQQBZCJ0sflppNY+v2chJ2",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "entropy": 5.72,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              25
+            ],
+            "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.72,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "ip:202.10.10.11",
+        "label": "202.10.10.11",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "202.10.10.11"
+        }
+      },
+      {
+        "id": "dns:26",
+        "label": "DNS: Y7sAQABYBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "entropy": 3.95,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              26
+            ],
+            "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 3.95,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:27",
+        "label": "DNS: Y7sAQgBaBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              27
+            ],
+            "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:28",
+        "label": "DNS: Y7sARABcBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "entropy": 3.921,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              28
+            ],
+            "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 3.921,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:29",
+        "label": "DNS: Y7sAQwBbCBSIL8HTSE3UOEhIM",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "entropy": 5.791,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              29
+            ],
+            "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.791,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:30",
+        "label": "DNS: Y7sARwBfCOY/copSWjOqyByH5",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "entropy": 5.768,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              30
+            ],
+            "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.768,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:31",
+        "label": "DNS: Y7sARgBeBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              31
+            ],
+            "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:32",
+        "label": "DNS: Y7sASABgBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              32
+            ],
+            "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:33",
+        "label": "DNS: Y7sARQBdCIp4wzwwBQEWM5DH0",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "entropy": 5.647,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              33
+            ],
+            "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.647,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:34",
+        "label": "DNS: Y7sASQBhCH/3sHpb7MeXY3IBm",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "entropy": 5.817,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              34
+            ],
+            "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.817,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:35",
+        "label": "DNS: Y7sASgBiBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              35
+            ],
+            "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:36",
+        "label": "DNS: Y7sAWABwBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAWABwBA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              36
+            ],
+            "query_name": "Y7sAWABwBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAWABwBA.dns2tcp-txt.com",
+        "label": "Y7sAWABwBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "dns:37",
+        "label": "DNS: Y7sAWQBxCGnlcXdMo7lRuAVxC",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+          "entropy": 5.734,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              37
+            ],
+            "query_name": "Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.734,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+        "label": "Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.734
+        }
+      },
+      {
+        "id": "dns:38",
+        "label": "DNS: Y7sAWgByBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAWgByBA.dns2tcp-txt.com",
+          "entropy": 4.133,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              38
+            ],
+            "query_name": "Y7sAWgByBA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.133,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAWgByBA.dns2tcp-txt.com",
+        "label": "Y7sAWgByBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.133
+        }
+      },
+      {
+        "id": "dns:39",
+        "label": "DNS: Y7sAWwBzCJuO6BRT/m1k6WrlL",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+          "entropy": 5.834,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              39
+            ],
+            "query_name": "Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.834,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+        "label": "Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.834
+        }
+      },
+      {
+        "id": "dns:40",
+        "label": "DNS: Y7sAXAB0BA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAXAB0BA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              40
+            ],
+            "query_name": "Y7sAXAB0BA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAXAB0BA.dns2tcp-txt.com",
+        "label": "Y7sAXAB0BA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.027
+        }
+      },
+      {
+        "id": "dns:41",
+        "label": "DNS: Y7sAXQB1CAfmZJ808LNxozhlg",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+          "entropy": 5.789,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              41
+            ],
+            "query_name": "Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.789,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+        "label": "Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.789
+        }
+      },
+      {
+        "id": "dns:42",
+        "label": "DNS: Y7sAXgB2BA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAXgB2BA.dns2tcp-txt.com",
+          "entropy": 4.056,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              42
+            ],
+            "query_name": "Y7sAXgB2BA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.056,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAXgB2BA.dns2tcp-txt.com",
+        "label": "Y7sAXgB2BA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.056
+        }
+      },
+      {
+        "id": "dns:43",
+        "label": "DNS: Y7sAXwB3CGS+8pN1O94vhM2VE",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+          "entropy": 5.818,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              43
+            ],
+            "query_name": "Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.818,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+        "label": "Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.818
+        }
+      },
+      {
+        "id": "dns:44",
+        "label": "DNS: Y7sAYAB4BA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAYAB4BA.dns2tcp-txt.com",
+          "entropy": 3.95,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              44
+            ],
+            "query_name": "Y7sAYAB4BA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 3.95,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAYAB4BA.dns2tcp-txt.com",
+        "label": "Y7sAYAB4BA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.95
+        }
+      },
+      {
+        "id": "dns:45",
+        "label": "DNS: Y7sAYQB5CMmIsnichaGy6lhv8",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+          "entropy": 5.728,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              45
+            ],
+            "query_name": "Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 5.728,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+        "label": "Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 5.728
+        }
+      },
+      {
+        "id": "dns:46",
+        "label": "DNS: Y7sAYgB6BA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAYgB6BA.dns2tcp-txt.com",
+          "entropy": 4.056,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              46
+            ],
+            "query_name": "Y7sAYgB6BA.dns2tcp-txt.com",
+            "resolved_ip": null,
+            "ttl": null,
+            "entropy": 4.056,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "domain:Y7sAYgB6BA.dns2tcp-txt.com",
+        "label": "Y7sAYgB6BA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 4.056
+        }
+      },
+      {
+        "id": "dns:47",
+        "label": "DNS: Y7sATwBnCATyBvF+mlfSANK7h",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "entropy": 5.814,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              47
+            ],
+            "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.814,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:48",
+        "label": "DNS: Y7sAUQBpCGtmckR+O+ogyIqE2",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "entropy": 5.755,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              48
+            ],
+            "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 5.755,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:49",
+        "label": "DNS: Y7sATABkBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "entropy": 4.027,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              49
+            ],
+            "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.027,
+            "is_response": false
+          }
+        }
+      },
+      {
+        "id": "dns:50",
+        "label": "DNS: Y7sATgBmBA.dns2tcp-txt.co",
+        "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "entropy": 4.056,
+          "evidence": {
+            "capture_id": "PCAP_030",
+            "packets": [
+              50
+            ],
+            "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+            "resolved_ip": "202.10.10.11",
+            "ttl": null,
+            "entropy": 4.056,
+            "is_response": false
+          }
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "target": "ip:198.41.0.128",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 2228413,
+          "packet_count": 10000,
+          "duration": 22.672,
+          "start_time": 1556106848.432185,
+          "end_time": 1556106871.1045513,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "ip:198.41.0.10",
+        "target": "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "flow_id": "198.41.0.10:53<->198.41.0.128:50380/UDP",
+          "packets": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ],
+          "byte_count": 2228413,
+          "packet_count": 10000,
+          "duration": 22.672,
+          "start_time": 1556106848.432185,
+          "end_time": 1556106871.1045513,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "target": "dns:1",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            1
+          ],
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "target": "dns:26",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            26
+          ],
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            26
+          ],
+          "query_name": "Y7sAQABYBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "target": "dns:2",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            2
+          ],
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.72,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "target": "dns:25",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            25
+          ],
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.72,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            25
+          ],
+          "query_name": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.72,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "target": "dns:3",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            3
+          ],
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "target": "dns:27",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            27
+          ],
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            27
+          ],
+          "query_name": "Y7sAQgBaBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "target": "dns:4",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            4
+          ],
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.791,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "target": "dns:29",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            29
+          ],
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.791,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            29
+          ],
+          "query_name": "Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.791,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "target": "dns:5",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            5
+          ],
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.921,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "target": "dns:28",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            28
+          ],
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.921,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARABcBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            28
+          ],
+          "query_name": "Y7sARABcBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 3.921,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "target": "dns:6",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            6
+          ],
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.647,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "target": "dns:33",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            33
+          ],
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.647,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            33
+          ],
+          "query_name": "Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.647,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "target": "dns:7",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            7
+          ],
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "target": "dns:31",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            31
+          ],
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARgBeBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            31
+          ],
+          "query_name": "Y7sARgBeBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "target": "dns:8",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            8
+          ],
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.768,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "target": "dns:30",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            30
+          ],
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.768,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            30
+          ],
+          "query_name": "Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.768,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "target": "dns:9",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            9
+          ],
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "target": "dns:32",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            32
+          ],
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASABgBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            32
+          ],
+          "query_name": "Y7sASABgBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "target": "dns:10",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            10
+          ],
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.817,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "target": "dns:34",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            34
+          ],
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.817,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            34
+          ],
+          "query_name": "Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.817,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "target": "dns:11",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            11
+          ],
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "target": "dns:35",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            35
+          ],
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASgBiBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            35
+          ],
+          "query_name": "Y7sASgBiBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+        "target": "dns:12",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            12
+          ],
+          "query_name": "Y7sASwBjCGCJLX1I3C9zeXd2PtgdEV3IXiWIva0Dk8cow71jEexlXNrvlbPH1cz.Jjr4370Z4zzgeAor783z9UhpkR+bZe8P+UlRb5XjGAPGQY0fBgkwh/966/YD09M.kSysNyACWyFVoi0AHcBuM7D48cbTjuIAKJqV25kUlpPwwWxFPz.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.861,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "target": "dns:13",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            13
+          ],
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "target": "dns:49",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            49
+          ],
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATABkBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            49
+          ],
+          "query_name": "Y7sATABkBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+        "target": "dns:14",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            14
+          ],
+          "query_name": "Y7sATQBlCHksN1paRn7lA8GFFggrDVNaKG3dkkwGHnvGBXgGLTIUboARbJ7CBlm.gBbdhMWoNL+qLrVyKVP82Fcal7sYSbSosjCImOm++0FgrxmcVvC8qxheJ2LfMRy.OwgBKvCDV7YQcjCvZiD/zgkMr5RFbQQ/mKJeRH6pInDbC/QoGh.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.749,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "target": "dns:15",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            15
+          ],
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "target": "dns:50",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            50
+          ],
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATgBmBA.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            50
+          ],
+          "query_name": "Y7sATgBmBA.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "target": "dns:16",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            16
+          ],
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.814,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "target": "dns:47",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            47
+          ],
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.814,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            47
+          ],
+          "query_name": "Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.814,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+        "target": "dns:17",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            17
+          ],
+          "query_name": "Y7sAUABoCDrj9s2OmPqccqt0KTopE6symuIbRJ6b5kkENUQR3txW4jq89wkjGQ6.J5HrAn14+2oB/hjjvlDgD/FTGiO0IIUpKG52yJlpCbuTXxYy5zN6t3AsxcOaI6s.w9JUToNdhYXwstBg5F3m4GomIxCg/mj0B9AYtUFMT4OmBfbT1Y.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.706,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "target": "dns:18",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            18
+          ],
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.755,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "target": "dns:48",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            48
+          ],
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.755,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+        "target": "ip:202.10.10.11",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            48
+          ],
+          "query_name": "Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "resolved_ip": "202.10.10.11",
+          "ttl": null,
+          "entropy": 5.755,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+        "target": "dns:19",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            19
+          ],
+          "query_name": "Y7sAUgBqCHm9H/cylcn06dEFTEvWkUKvES3Js4ErrVKaXvfEgSb7TOBPPsDkwo2.uduHZyZ+JYbJ2Qcx+wuOxXim3FrL5YUclKEU3ILsbWFXDLj3fHhBmlahQc2FICm./HEZ53HIgkqY1ru8fQ7sSaaaZhMkyda5TqMUjaI5UVSpJfAe5X.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.777,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+        "target": "dns:20",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            20
+          ],
+          "query_name": "Y7sAUwBrCE7rqoqs1MDSnKF63guxsLQ5Q3H4IV8YXgabzdEroSq4D0T+BemvKx4.VFQsGj4F00NETEFfeunQXaevjST04s7/sfsNJcK6WkjLKJJhJCakliaUt0ye4C6.X8J8lhUY5CVYtDDm0XGHVo9DyQrLTXThrpy80H7zuNk/mYgwbx.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.778,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+        "target": "dns:21",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            21
+          ],
+          "query_name": "Y7sAVABsCCZIN9sohRQPvwVtRuk23OEH5z+SfJLwQV1vJ6pp0PDJBS0aWeFtDdb.WdSZS+zxiFAbOkpNEY1EsDh13Hq+yQxqxO4j13Se/ZDIkm6K0sSPGSBPCeL+9zp.vp3FbEEqGTToBJcAeoOrwDQCWNgAOoqUwUqSuJFRf2uwgInW57.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.785,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+        "target": "dns:22",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            22
+          ],
+          "query_name": "Y7sAVQBtCH0jAZQ1oGBJJcu80C/HDypqot2ZWEQdsIb9q7Xr87+SjmHWs1dgZ80.HI8FsM/GmbVZ0HWC9+XLISe2nFdpTshYJHxDgNpcVOMWcgkx8n+sMZxUtZhHcg+.2VCVc5w19BUB39oECNO4i01hqhZ4NiFuGBwtrOo9aoutruTXeq.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.674,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+        "target": "dns:23",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            23
+          ],
+          "query_name": "Y7sAVgBuCIC08p/rDj7hUEeZousZpVj7dNv8HrdsEy9QOLwnS1/kEslDeTr/V7r.ZtH1f4C+cJZwsDiDH757gqnMV8/+5NRSvqxU1ZP3jCp97DvLBElnE6JsThZdPsO.FenHVhaI9vY1qPvLXyVv7p0Db5+k9XQNLjmjFzUF4IkdykDtKT.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.773,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+        "target": "dns:24",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            24
+          ],
+          "query_name": "Y7sAVwBvCIEt4zx/dGmfp7QTuNWfshhDBFW3807XMFLoM1KvRzxOXFueMcsKxlT.aJMVkCaJ+5DXpqTo3ghFaBkVCYCElUO+H3O3tUliprP8w/arrPm5iyz9eZJW2F0.VwD43JCdedBAtlxURRHB+3rPaB6ILcsA3QoVXXAERFig3Bc8Ha.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.792,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAWABwBA.dns2tcp-txt.com",
+        "target": "dns:36",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            36
+          ],
+          "query_name": "Y7sAWABwBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+        "target": "dns:37",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            37
+          ],
+          "query_name": "Y7sAWQBxCGnlcXdMo7lRuAVxC7UoxRWVafjg4EWOZjq2l0zktmdIVU6uWUjafRC.I/39O2RWOFaNEv+ImSHGaI4TUj7LKe0RTfbNhxxHaD2emwWnRSE1cLei4BEpAut.nbI+YzraL4IhyW2b+Q+2uOlqUOVOWy+/jXxXJUB8BER29ghdac.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.734,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAWgByBA.dns2tcp-txt.com",
+        "target": "dns:38",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            38
+          ],
+          "query_name": "Y7sAWgByBA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.133,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+        "target": "dns:39",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            39
+          ],
+          "query_name": "Y7sAWwBzCJuO6BRT/m1k6WrlLLUZvGcwalz3224J/G1AhEBv49b+MxJMirJiaEn.mGMbVoy9/NpQqut2hbkMuaf5zASv151QCWH3jfLn5K519hNcl6jaH7g/pUGHBM5.3Ca05/P9Qk5fXYbHyAJZY8pUdHezOfVjf31RCcqXD0Vp0fAfTN.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.834,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAXAB0BA.dns2tcp-txt.com",
+        "target": "dns:40",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            40
+          ],
+          "query_name": "Y7sAXAB0BA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.027,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+        "target": "dns:41",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            41
+          ],
+          "query_name": "Y7sAXQB1CAfmZJ808LNxozhlgoTKJXRNFTX6KhfOoGFmsWCAKJnqFrDh/r4QhHn.Jat3Oi41yQPmW2YXWTcPq+OQJ/b9wYfKNM70fjcro/FQ7y6MZ76LKjGaRLXqTCw.21gg3BnItbMhsuBAYz9RjGyB0CeGFzmykl/U7PZ3MlPqQndkUy.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.789,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAXgB2BA.dns2tcp-txt.com",
+        "target": "dns:42",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            42
+          ],
+          "query_name": "Y7sAXgB2BA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+        "target": "dns:43",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            43
+          ],
+          "query_name": "Y7sAXwB3CGS+8pN1O94vhM2VEq9DDX3psL06nG7ffCy3h4ATpKKl0LWqDXO/4v6.3RRKfjX0wBRssevShla7g+luXHQPFv3IyeNfev1hW6rph5gXCy3TQN7jG/MTnHs.ZzhFKR2jrAkOKUcr+eQwzxh8OUF0+pYeDx+96e57Jk4I2KqTZF.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.818,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAYAB4BA.dns2tcp-txt.com",
+        "target": "dns:44",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            44
+          ],
+          "query_name": "Y7sAYAB4BA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.95,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+        "target": "dns:45",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            45
+          ],
+          "query_name": "Y7sAYQB5CMmIsnichaGy6lhv8Z4bJAX4OY3+HRNzxs7VhWs7LL6rUwT7eIvfkxh.f2POE3yWfwScf4x63hOtSfFf4FNSHDtOcXEaMhecey0e46ZkVY/0T8+MHFnYlhz.68DEZS/X3a4zGrTTMNvftRO6P8ZlLxKUM9ctzyBbYGS5mYNuLf.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 5.728,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:Y7sAYgB6BA.dns2tcp-txt.com",
+        "target": "dns:46",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_030",
+          "packets": [
+            46
+          ],
+          "query_name": "Y7sAYgB6BA.dns2tcp-txt.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 4.056,
+          "is_response": false
+        }
+      }
+    ]
+  },
+  "graph_summary": {
+    "total_raw_nodes": 89,
+    "total_raw_edges": 67,
+    "condensed_nodes": 34,
+    "condensed_edges": 32,
+    "pruned_nodes_count": 40,
+    "supernodes_count": 15,
+    "supernode_breakdown": {
+      "flows_folded": 0,
+      "dns_folded": 30,
+      "http_folded": 0,
+      "alerts_folded": 0,
+      "total_supernodes": 15
+    },
+    "threat_clusters_count": 2,
+    "clusters": [
+      {
+        "cluster_id": "cluster_0",
+        "threat_score": 2,
+        "alerts_count": 0,
+        "flows_count": 1,
+        "hosts_count": 2,
+        "nodes_count": 3,
+        "nodes": [
+          "flow:198.41.0.10:53<->198.41.0.128:50380/UDP",
+          "ip:198.41.0.10",
+          "ip:198.41.0.128"
+        ],
+        "title": "Primary Attack Incident"
+      },
+      {
+        "cluster_id": "cluster_1",
+        "threat_score": 0,
+        "alerts_count": 0,
+        "flows_count": 0,
+        "hosts_count": 1,
+        "nodes_count": 31,
+        "nodes": [
+          "domain:Y7sATgBmBA.dns2tcp-txt.com",
+          "dns_agg:Y7sATgBmBA.dns2tcp-txt.com",
+          "domain:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "domain:Y7sASgBiBA.dns2tcp-txt.com",
+          "domain:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "dns_agg:Y7sAQgBaBA.dns2tcp-txt.com",
+          "dns_agg:Y7sARgBeBA.dns2tcp-txt.com",
+          "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "domain:Y7sARABcBA.dns2tcp-txt.com",
+          "dns_agg:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+          "dns_agg:Y7sASQBhCH/3sHpb7MeXY3IBmpgiYr+2IinoJscoWqAhWd5efaZ7t5Kd/p1X4Rh.yIxnlBQ8T0vM7XX16y/kmVlhvD+G4WwVJOwymR9gy6tuoVxnRVutO5IOca4IQ5c.ON6T/Sps1/WHLvcF5eJX/gPgqyYTVUSsP4GfvmbZ6SvP3ziyjd.dns2tcp-txt.com",
+          "dns_agg:Y7sASgBiBA.dns2tcp-txt.com",
+          "dns_agg:Y7sARQBdCIp4wzwwBQEWM5DH0krmBX7w3ZT5IpHQUVRYCK7Xw/ZsxHJKJKKoEaX.0Kkxv7WxjQoA6GOVQfU6/mWfr7MDUmKnrVz/sQYTWMGOiLRQTn3LrOMr7VH0HJv.kN9e7cARv6THImf1m/lUkOJmOl57dU1yjzs755/hER74x3mogJ.dns2tcp-txt.com",
+          "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+          "dns_agg:Y7sARABcBA.dns2tcp-txt.com",
+          "domain:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "domain:Y7sATABkBA.dns2tcp-txt.com",
+          "domain:Y7sAQABYBA.dns2tcp-txt.com",
+          "ip:202.10.10.11",
+          "domain:Y7sASABgBA.dns2tcp-txt.com",
+          "domain:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "dns_agg:Y7sASABgBA.dns2tcp-txt.com",
+          "dns_agg:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com",
+          "dns_agg:Y7sAQABYBA.dns2tcp-txt.com",
+          "dns_agg:Y7sARwBfCOY/copSWjOqyByH5koBi+Hy4WW5VeoUbVaGwfrJ1Qvr0kwav1D5n6x.aPLLOR//mPUoujSNN0bSj7oRBl195WtT67YxTtv45gskhrdvdt+yXbXJPSUb+tN.x21AhJL7U+YKitvIimfq7JneObNiRrPLFyiybCTnl9sGKSNQLE.dns2tcp-txt.com",
+          "domain:Y7sARgBeBA.dns2tcp-txt.com",
+          "dns_agg:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "dns_agg:Y7sATwBnCATyBvF+mlfSANK7h1dn1T02F5U0rGrucxhfOTIXLSBKqU1bcf3khlc.WQ4NBc24WL/Q9r1p+zd16DR7+8m/RkVtULztqxd6zX1WGwECCzhgUiI4Ds/BqjF.vmbRiCcHLpM958DgHEJ9XkYLuQcRKo3YDY5mw4CMrtQQYE37SY.dns2tcp-txt.com",
+          "dns_agg:Y7sATABkBA.dns2tcp-txt.com",
+          "domain:Y7sAQwBbCBSIL8HTSE3UOEhIMhFQghmQQGTxc4F9U3BptcnKqcL+y/CvFaJZgYg.6T74sgPPHIBUrCibUa1JPtHfQ+qCm9G6WTAyuOR1tkhQwzopzOm7GbEdZXxV85G.FyPlPtn4kquhvh0wNvk7aQxvSfQZTg9STjGK6UPRnXHtAcqkJd.dns2tcp-txt.com",
+          "domain:Y7sAUQBpCGtmckR+O+ogyIqE2elRLNHvBTuAkQReZiphGBzJSV2WZyF+FKtNVzv.5lvkEEQmaN2mzhNk46/KRQJ4pKQhQN1XUdgB5B6P7PYC1+SDLJHPgt82yulkXac.0ztf5M3QCdRfMmTMmtdTxaVO64q1LdWnCqUdnEGmMVvR84Ltgl.dns2tcp-txt.com"
+        ],
+        "title": "Secondary Activity 1"
+      }
+    ],
+    "top_pivots": [
+      {
+        "node_id": "ip:202.10.10.11",
+        "label": "202.10.10.11",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.0932,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:198.41.0.128",
+        "label": "198.41.0.128",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.0325,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:198.41.0.10",
+        "label": "198.41.0.10",
+        "type": "entity_ip",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0126,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:Y7sAQABYBA.dns2tcp-txt.com",
+        "label": "Y7sAQABYBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0126,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "label": "Y7sAQQBZCJ0sflppNY+v2chJ2q5wOwDgK5zjsOtMHHCY+MzGifM3mWdRkWp+lUK./V3g/j1tP66sS/sbwujgWJQNLYdMeJCg2b9tfOtFulSttNUtrMOvqDqN6K6Nf96.xTOL9VnhFWH1vNKe4FvSNawopcHN9seeUhDAPFzden/hpW9Eug.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0126,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:Y7sAQgBaBA.dns2tcp-txt.com",
+        "label": "Y7sAQgBaBA.dns2tcp-txt.com",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0126,
+        "betweenness_score": 0.0
+      }
+    ],
+    "critical_attack_paths": []
+  },
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_030) ===\nGraph Scale: 89 raw nodes condensed into 34 high-signal nodes.\nReduction: Pruned 40 background nodes; folded 15 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 202.10.10.11 [Target Host] - PPR: 0.0932, Centrality: 0.0\n  \u2022 198.41.0.128 [Target Host] - PPR: 0.0325, Centrality: 0.0\n  \u2022 198.41.0.10 [Command & Control / Exfiltration Endpoint] - PPR: 0.0126, Centrality: 0.0\n  \u2022 Y7sAQABYBA.dns2tcp-txt.com [Command & Control / Exfiltration Endpoint] - PPR: 0.0126, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 2 | Alerts: 0 | Nodes: 3]\n[Secondary Activity 1 | Threat Score: 0 | Alerts: 0 | Nodes: 31]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:\n  - [HIGH_ENTROPY_DNS_ANOMALY] Observed 50 high-entropy DNS queries (Shannon entropy >= 3.8) indicating possible DGA or DNS covert channel/exfiltration"
+}

@@ -1085,8 +1085,12 @@
     });
 
     const width = 1180;
-    const height = 370;
+    const maxLayerCount = Math.max(1, ...layers.map(l => l.length));
+    const minCardSpacing = 44; // Minimum 44px vertical space per card (card height 36px) prevents overlap
+    const height = Math.max(380, (maxLayerCount + 1) * minCardSpacing);
     const layerX = [140, 440, 740, 1020];
+
+    svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
 
     layers.forEach((layerNodes, lIdx) => {
       const count = layerNodes.length;
@@ -2102,6 +2106,22 @@
       const bufEl = document.getElementById("hdirc-s5-buffer-val");
       const fpEl = document.getElementById("hdirc-s5-fp-val");
       const countEl = document.getElementById("hdirc-s5-count-val");
+      const s5SourceVal = document.getElementById("hdirc-s5-source-val");
+      const s5FallbackPill = document.getElementById("hdirc-s5-fallback-pill");
+      const s5FallbackBanner = document.getElementById("hdirc-s5-fallback-banner");
+
+      const isFallback = Boolean(
+        (state.components && (state.components.fallback_used || state.components.synthesis_source === "deterministic_fallback")) ||
+        (s5Val && s5Val.details && (s5Val.details.fallback_used || s5Val.details.synthesis_source === "deterministic_fallback")) ||
+        (state.stage_results && state.stage_results.stage5_detection && state.stage_results.stage5_detection.reasoning_summary && state.stage_results.stage5_detection.reasoning_summary.includes("fallback"))
+      );
+
+      if (s5FallbackPill) s5FallbackPill.style.display = isFallback ? "inline-block" : "none";
+      if (s5FallbackBanner) s5FallbackBanner.style.display = isFallback ? "flex" : "none";
+      if (s5SourceVal) {
+        s5SourceVal.textContent = isFallback ? "⚡ Telemetry Fallback" : "Autonomous LLM";
+        s5SourceVal.style.color = isFallback ? "var(--warn)" : "var(--ok)";
+      }
 
       const buffers = (s5Val && s5Val.details && s5Val.details.buffers_selected) || [];
       if (bufEl) bufEl.textContent = buffers.length > 0 ? buffers.join(", ") : "pkt_data";
@@ -2113,6 +2133,10 @@
     } else {
       if (s5Body) s5Body.style.display = "none";
       if (s5Pill) s5Pill.style.display = "none";
+      const s5FallbackPill = document.getElementById("hdirc-s5-fallback-pill");
+      const s5FallbackBanner = document.getElementById("hdirc-s5-fallback-banner");
+      if (s5FallbackPill) s5FallbackPill.style.display = "none";
+      if (s5FallbackBanner) s5FallbackBanner.style.display = "none";
       if (s5Btn) {
         s5Btn.innerHTML = "⚡ Execute Stage 5: Detection Generation";
         s5Btn.disabled = false;
@@ -3122,8 +3146,12 @@
             ? `<span class="kpi-pill crit">${c.status}</span>`
             : `<span class="kpi-pill dim">${c.status}</span>`;
 
+      const fbBadge = (c.fallback_used || c.synthesis_source === "deterministic_fallback")
+        ? '<span class="badge-sig" style="color:var(--warn);border-color:rgba(234,179,8,0.4);font-size:10px;margin-left:4px;" title="Synthesized via deterministic PCAP telemetry fallback">⚡ Fallback</span>'
+        : '';
+
       tr.innerHTML = `
-        <td style="font-family:var(--font-mono);font-weight:600;">SID ${c.rule_id}</td>
+        <td style="font-family:var(--font-mono);font-weight:600;">SID ${c.rule_id}${fbBadge}</td>
         <td>${statusBadge}</td>
         <td class="col-objective"><strong>${c.rule_objective || '—'}</strong></td>
         <td><span class="badge-sig">${c.source_pcap || '—'}</span></td>

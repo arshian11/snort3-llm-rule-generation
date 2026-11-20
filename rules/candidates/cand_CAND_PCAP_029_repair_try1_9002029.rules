@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $EXTERNAL_NET 53 (msg:"PROTOCOL-DNS DNS_TUNNELING DNS_QUERY data exfiltration"; content:"\x00\x10"; dns_query; detection_filter: track by_src, count <10, seconds <30; sid:9002029; rev:1; )

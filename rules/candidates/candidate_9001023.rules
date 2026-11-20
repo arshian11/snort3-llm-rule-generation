@@ -1,0 +1,1 @@
+alert http (msg:"WEB-ATTACK SQLi GET Parameter Quote"; flow:to_server,established; http_uri; content:"'",fast_pattern,nocase; classtype:web-application-attack; sid:9001023; rev:1; )

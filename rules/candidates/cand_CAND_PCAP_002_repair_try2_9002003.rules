@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS (msg:"EXPLOIT-WEB SQL Injection Blind UNION SELECT Attempt"; flow:to_server,established,only_stream; http_uri; pcre:"/UNION\\s+SELECT.*'/i"; service:http; classtype:web-application-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family SQL_Injection; sid:9002003; rev:1; )

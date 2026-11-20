@@ -1,0 +1,1 @@
+alert icmp $EXTERNAL_NET any -> $HOME_NET any ( msg:"PROTOCOL-ICMP Large ICMP Echo Request payload >1000 bytes"; itype:8; dsize:>1000; classtype:attempted-recon; sid:9002005; rev:1; )

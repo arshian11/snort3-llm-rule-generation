@@ -592,47 +592,15 @@
     {
       "type": "DNS_RESOLUTION_TO_COMMUNICATION",
       "confidence": "high",
-      "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.005s by TCP traffic to port 80",
+      "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.5s by TCP traffic to port 80",
       "domain": "carwaded.com",
       "resolved_ip": "185.53.46.50",
       "target_port": 80,
-      "time_delta_sec": 0.005,
+      "time_delta_sec": 0.5,
       "evidence_packets": [
-        2,
-        3,
-        4,
-        5,
-        6,
-        7
+        2
       ],
       "evidence_summary": "Packet 2 queried carwaded.com -> 185.53.46.50; flow 10.10.20.101:53204<->185.53.46.50:80/TCP initiated immediately."
-    },
-    {
-      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
-      "confidence": "very_high",
-      "description": "Host 10.10.20.101 downloaded suspicious file 'zes2' (application/x-dosexec) from 185.53.46.50, followed by outbound communication to external destination",
-      "client_ip": "10.10.20.101",
-      "file_server": "185.53.46.50",
-      "filename": "zes2",
-      "mime_type": "application/x-dosexec",
-      "file_size": 10616965,
-      "evidence_packets": [],
-      "evidence_summary": "Zeek extracted file zes2 (FUID FKrEyx4Tp73rFRS9h3) from 185.53.46.50; client subsequently connected to 0 external hosts."
-    },
-    {
-      "type": "ZEEK_RECONNAISSANCE_PORT_SCAN",
-      "confidence": "high",
-      "description": "Zeek recorded 10 rejected/unanswered connection attempts (S0/REJ/RSTO) from ['10.10.20.101'] targeting ports [80, 443]",
-      "source_hosts": [
-        "10.10.20.101"
-      ],
-      "scanned_ports": [
-        80,
-        443
-      ],
-      "failure_count": 10,
-      "evidence_packets": [],
-      "evidence_summary": "Repeated connection failures across ports [80, 443] indicative of scanning activity."
     }
   ],
   "packet_evidence": [
@@ -667,6 +635,10 @@
         "id": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
         "label": "Flow: TCP 80 (RSTO)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.2562,
+        "betweenness_score": 0.0952,
         "details": {
           "proto": "TCP",
           "src_ip": "10.10.20.101",
@@ -675,23 +647,304 @@
           "evidence": {
             "capture_id": "PCAP_015",
             "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
-            "packets": [
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10,
-              11,
-              12
-            ],
+            "packets": [],
             "byte_count": 4358120,
             "packet_count": 4998,
             "duration": 19.129,
-            "start_time": 1634749351.084034,
-            "end_time": 1634749370.212732,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "label": "Flow: UDP 51048 (SF)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0793,
+        "betweenness_score": 0.0714,
+        "details": {
+          "proto": "UDP",
+          "src_ip": "10.10.20.1",
+          "dst_ip": "10.10.20.101",
+          "dst_port": 51048,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+            "packets": [],
+            "byte_count": 160,
+            "packet_count": 2,
+            "duration": 0.163,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "SF",
+            "zeek_service": "dns"
+          }
+        }
+      },
+      {
+        "id": "dns_agg:carwaded.com",
+        "label": "DNS: carwaded.com (2x)",
+        "type": "dns_event",
+        "is_supernode": true,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.1407,
+        "betweenness_score": 0.0238,
+        "details": {
+          "query_name": "carwaded.com",
+          "query_count": 2,
+          "entropy": 3.085,
+          "packets": [
+            1,
+            2
+          ],
+          "is_supernode": true
+        }
+      },
+      {
+        "id": "http:6",
+        "label": "HTTP: GET /cbfsd/24347/41EodPr",
+        "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.055,
+        "betweenness_score": 0.0,
+        "details": {
+          "method": "GET",
+          "host": "carwaded.com",
+          "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "packets": [
+              6
+            ],
+            "method": "GET",
+            "host": "carwaded.com",
+            "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+            "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)"
+          }
+        }
+      },
+      {
+        "id": "ip:10.10.20.101",
+        "label": "10.10.20.101",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.1103,
+        "betweenness_score": 0.0952,
+        "details": {
+          "ip": "10.10.20.101"
+        }
+      },
+      {
+        "id": "ip:185.53.46.50",
+        "label": "185.53.46.50",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.2728,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "185.53.46.50"
+        }
+      },
+      {
+        "id": "ip:10.10.20.1",
+        "label": "10.10.20.1",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0429,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "10.10.20.1"
+        }
+      },
+      {
+        "id": "domain:carwaded.com",
+        "label": "carwaded.com",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0429,
+        "betweenness_score": 0.0,
+        "details": {
+          "entropy": 3.085
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "target": "ip:185.53.46.50",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+          "packets": [],
+          "byte_count": 4358120,
+          "packet_count": 4998,
+          "duration": 19.129,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "target": "ip:10.10.20.101",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+          "packets": [],
+          "byte_count": 160,
+          "packet_count": 2,
+          "duration": 0.163,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "dns_agg:carwaded.com",
+        "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "relation": "TRIGGERED_COMMUNICATION",
+        "is_attack_path": false,
+        "evidence": {
+          "type": "DNS_RESOLUTION_TO_COMMUNICATION",
+          "confidence": "high",
+          "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.5s by TCP traffic to port 80",
+          "domain": "carwaded.com",
+          "resolved_ip": "185.53.46.50",
+          "target_port": 80,
+          "time_delta_sec": 0.5,
+          "evidence_packets": [
+            2
+          ],
+          "evidence_summary": "Packet 2 queried carwaded.com -> 185.53.46.50; flow 10.10.20.101:53204<->185.53.46.50:80/TCP initiated immediately."
+        }
+      },
+      {
+        "source": "ip:10.10.20.101",
+        "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+          "packets": [],
+          "byte_count": 4358120,
+          "packet_count": 4998,
+          "duration": 19.129,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.10.20.1",
+        "target": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
+          "packets": [],
+          "byte_count": 160,
+          "packet_count": 2,
+          "duration": 0.163,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "SF",
+          "zeek_service": "dns"
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "dns_agg:carwaded.com",
+        "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            1
+          ],
+          "query_name": "carwaded.com",
+          "resolved_ip": null,
+          "ttl": null,
+          "entropy": 3.085,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "ip:185.53.46.50",
+        "relation": "RESOLVES_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            2
+          ],
+          "query_name": "carwaded.com",
+          "resolved_ip": "185.53.46.50",
+          "ttl": 300,
+          "entropy": 3.085,
+          "is_response": false
+        }
+      },
+      {
+        "source": "domain:carwaded.com",
+        "target": "http:6",
+        "relation": "SERVES_HTTP",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_015",
+          "packets": [
+            6
+          ],
+          "method": "GET",
+          "host": "carwaded.com",
+          "uri": "/cbfsd/24347/41EodPr8rdAPbi/rFjYEqQBN9BzlXOJ/co2DYqCcQatc3tAfiFpqO/kjCz20ymbCMJOn6FyZTDtGZBcaJ2NEXURT1Fv4LjjUwj/65781/h0ZG8aSvwTaxxnHLMlOEl0l9P5EKiO/nTsA9y9hdvZVFYOv4FXv/iRH894BQn5REjnyNNViZab9ri8KRve9vDsY32giK/Iix2kVOrJlJj1M9CMWpP73kUBQhklw6/zes2?ref=AuVcQ",
+          "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)"
+        }
+      }
+    ]
+  },
+  "raw_graph": {
+    "nodes": [
+      {
+        "id": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.10.20.101",
+          "dst_ip": "185.53.46.50",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_015",
+            "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
+            "packets": [],
+            "byte_count": 4358120,
+            "packet_count": 4998,
+            "duration": 19.129,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "RSTO",
             "zeek_service": "http"
           }
@@ -701,6 +954,10 @@
         "id": "ip:10.10.20.101",
         "label": "10.10.20.101",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "10.10.20.101"
         }
@@ -709,6 +966,10 @@
         "id": "ip:185.53.46.50",
         "label": "185.53.46.50",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "185.53.46.50"
         }
@@ -717,6 +978,10 @@
         "id": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
         "label": "Flow: UDP 51048 (SF)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "proto": "UDP",
           "src_ip": "10.10.20.1",
@@ -725,15 +990,12 @@
           "evidence": {
             "capture_id": "PCAP_015",
             "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
-            "packets": [
-              1,
-              2
-            ],
+            "packets": [],
             "byte_count": 160,
             "packet_count": 2,
             "duration": 0.163,
-            "start_time": 1634749350.915087,
-            "end_time": 1634749351.078551,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "SF",
             "zeek_service": "dns"
           }
@@ -743,6 +1005,10 @@
         "id": "ip:10.10.20.1",
         "label": "10.10.20.1",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "10.10.20.1"
         }
@@ -751,6 +1017,10 @@
         "id": "dns:1",
         "label": "DNS: carwaded.com",
         "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "query_name": "carwaded.com",
           "entropy": 3.085,
@@ -771,6 +1041,10 @@
         "id": "domain:carwaded.com",
         "label": "carwaded.com",
         "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "entropy": 3.085
         }
@@ -779,6 +1053,10 @@
         "id": "dns:2",
         "label": "DNS: carwaded.com",
         "type": "dns_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "query_name": "carwaded.com",
           "entropy": 3.085,
@@ -799,6 +1077,10 @@
         "id": "http:6",
         "label": "HTTP: GET /cbfsd/24347/41EodPr",
         "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "method": "GET",
           "host": "carwaded.com",
@@ -814,26 +1096,6 @@
             "user_agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 10.0; WOW64; Trident/7.0; .NET4.0C; .NET4.0E; .NET CLR 2.0.50727; .NET CLR 3.0.30729; .NET CLR 3.5.30729)"
           }
         }
-      },
-      {
-        "id": "file:FKrEyx4Tp73rFRS9h3",
-        "label": "File: zes2",
-        "type": "entity_file",
-        "details": {
-          "filename": "zes2",
-          "mime_type": "application/x-dosexec",
-          "size_bytes": 10616965,
-          "evidence": {
-            "capture_id": "PCAP_015",
-            "fuid": "FKrEyx4Tp73rFRS9h3",
-            "filename": "zes2",
-            "mime_type": "application/x-dosexec",
-            "total_bytes": 10616965,
-            "source": "HTTP",
-            "orig_h": "10.10.20.101",
-            "resp_h": "185.53.46.50"
-          }
-        }
       }
     ],
     "links": [
@@ -841,26 +1103,16 @@
         "source": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
         "target": "ip:185.53.46.50",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
-          "packets": [
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12
-          ],
+          "packets": [],
           "byte_count": 4358120,
           "packet_count": 4998,
           "duration": 19.129,
-          "start_time": 1634749351.084034,
-          "end_time": 1634749370.212732,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
         }
@@ -869,61 +1121,34 @@
         "source": "ip:10.10.20.101",
         "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "flow_id": "10.10.20.101:53204<->185.53.46.50:80/TCP",
-          "packets": [
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12
-          ],
+          "packets": [],
           "byte_count": 4358120,
           "packet_count": 4998,
           "duration": 19.129,
-          "start_time": 1634749351.084034,
-          "end_time": 1634749370.212732,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
-        }
-      },
-      {
-        "source": "ip:185.53.46.50",
-        "target": "file:FKrEyx4Tp73rFRS9h3",
-        "relation": "DELIVERED_FILE",
-        "evidence": {
-          "capture_id": "PCAP_015",
-          "fuid": "FKrEyx4Tp73rFRS9h3",
-          "filename": "zes2",
-          "mime_type": "application/x-dosexec",
-          "total_bytes": 10616965,
-          "source": "HTTP",
-          "orig_h": "10.10.20.101",
-          "resp_h": "185.53.46.50"
         }
       },
       {
         "source": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
         "target": "ip:10.10.20.101",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
-          "packets": [
-            1,
-            2
-          ],
+          "packets": [],
           "byte_count": 160,
           "packet_count": 2,
           "duration": 0.163,
-          "start_time": 1634749350.915087,
-          "end_time": 1634749351.078551,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "SF",
           "zeek_service": "dns"
         }
@@ -932,18 +1157,16 @@
         "source": "ip:10.10.20.1",
         "target": "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "flow_id": "10.10.20.1:53<->10.10.20.101:51048/UDP",
-          "packets": [
-            1,
-            2
-          ],
+          "packets": [],
           "byte_count": 160,
           "packet_count": 2,
           "duration": 0.163,
-          "start_time": 1634749350.915087,
-          "end_time": 1634749351.078551,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "SF",
           "zeek_service": "dns"
         }
@@ -952,6 +1175,7 @@
         "source": "domain:carwaded.com",
         "target": "dns:1",
         "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "packets": [
@@ -968,6 +1192,7 @@
         "source": "domain:carwaded.com",
         "target": "dns:2",
         "relation": "OBSERVED_IN_QUERY",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "packets": [
@@ -984,6 +1209,7 @@
         "source": "domain:carwaded.com",
         "target": "ip:185.53.46.50",
         "relation": "RESOLVES_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "packets": [
@@ -1000,6 +1226,7 @@
         "source": "domain:carwaded.com",
         "target": "http:6",
         "relation": "SERVES_HTTP",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_015",
           "packets": [
@@ -1015,40 +1242,95 @@
         "source": "dns:2",
         "target": "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
         "relation": "TRIGGERED_COMMUNICATION",
+        "is_attack_path": false,
         "evidence": {
           "type": "DNS_RESOLUTION_TO_COMMUNICATION",
           "confidence": "high",
-          "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.005s by TCP traffic to port 80",
+          "description": "DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.5s by TCP traffic to port 80",
           "domain": "carwaded.com",
           "resolved_ip": "185.53.46.50",
           "target_port": 80,
-          "time_delta_sec": 0.005,
+          "time_delta_sec": 0.5,
           "evidence_packets": [
-            2,
-            3,
-            4,
-            5,
-            6,
-            7
+            2
           ],
           "evidence_summary": "Packet 2 queried carwaded.com -> 185.53.46.50; flow 10.10.20.101:53204<->185.53.46.50:80/TCP initiated immediately."
         }
-      },
-      {
-        "source": "file:FKrEyx4Tp73rFRS9h3",
-        "target": "ip:10.10.20.101",
-        "relation": "DOWNLOADED_BY",
-        "evidence": {
-          "capture_id": "PCAP_015",
-          "fuid": "FKrEyx4Tp73rFRS9h3",
-          "filename": "zes2",
-          "mime_type": "application/x-dosexec",
-          "total_bytes": 10616965,
-          "source": "HTTP",
-          "orig_h": "10.10.20.101",
-          "resp_h": "185.53.46.50"
-        }
       }
     ]
-  }
+  },
+  "graph_summary": {
+    "total_raw_nodes": 9,
+    "total_raw_edges": 9,
+    "condensed_nodes": 8,
+    "condensed_edges": 8,
+    "pruned_nodes_count": 0,
+    "supernodes_count": 1,
+    "supernode_breakdown": {
+      "flows_folded": 0,
+      "dns_folded": 2,
+      "http_folded": 0,
+      "alerts_folded": 0,
+      "total_supernodes": 1
+    },
+    "threat_clusters_count": 1,
+    "clusters": [
+      {
+        "cluster_id": "cluster_0",
+        "threat_score": 4,
+        "alerts_count": 0,
+        "flows_count": 2,
+        "hosts_count": 3,
+        "nodes_count": 8,
+        "nodes": [
+          "domain:carwaded.com",
+          "http:6",
+          "flow:10.10.20.1:53<->10.10.20.101:51048/UDP",
+          "ip:185.53.46.50",
+          "ip:10.10.20.101",
+          "dns_agg:carwaded.com",
+          "flow:10.10.20.101:53204<->185.53.46.50:80/TCP",
+          "ip:10.10.20.1"
+        ],
+        "title": "Primary Attack Incident"
+      }
+    ],
+    "top_pivots": [
+      {
+        "node_id": "ip:185.53.46.50",
+        "label": "185.53.46.50",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.2728,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:10.10.20.101",
+        "label": "10.10.20.101",
+        "type": "entity_ip",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.1103,
+        "betweenness_score": 0.0952
+      },
+      {
+        "node_id": "ip:10.10.20.1",
+        "label": "10.10.20.1",
+        "type": "entity_ip",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0429,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:carwaded.com",
+        "label": "carwaded.com",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0429,
+        "betweenness_score": 0.0
+      }
+    ],
+    "critical_attack_paths": []
+  },
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_015) ===\nGraph Scale: 9 raw nodes condensed into 8 high-signal nodes.\nReduction: Pruned 0 background nodes; folded 1 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 185.53.46.50 [Target Host] - PPR: 0.2728, Centrality: 0.0\n  \u2022 10.10.20.101 [Command & Control / Exfiltration Endpoint] - PPR: 0.1103, Centrality: 0.0952\n  \u2022 10.10.20.1 [Command & Control / Exfiltration Endpoint] - PPR: 0.0429, Centrality: 0.0\n  \u2022 carwaded.com [Command & Control / Exfiltration Endpoint] - PPR: 0.0429, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 4 | Alerts: 0 | Nodes: 8]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:\n  - [DNS_RESOLUTION_TO_COMMUNICATION] DNS resolution for 'carwaded.com' resolved to 185.53.46.50, followed within 0.5s by TCP traffic to port 80",
+  "correlations_count": 1
 }

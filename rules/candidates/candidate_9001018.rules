@@ -1,0 +1,1 @@
+alert http (msg:"ET MALWARE Cobalt Strike HTTP Beacon"; flow:to_server,established; http_uri; content:"/api/v2/beacon?id=",nocase,fast_pattern; classtype:trojan-activity; sid:9001018; rev:1; )

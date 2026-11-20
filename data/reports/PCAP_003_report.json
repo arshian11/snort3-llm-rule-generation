@@ -188,61 +188,106 @@
     }
   },
   "correlations": [],
-  "packet_evidence": [
-    {
-      "pkt_num": 1,
-      "source": "snort_alert",
-      "summary": "SID 2010935: ET SCAN Potential SSH Scan",
-      "proto": "TCP",
-      "src": "45.142.166.12:51230",
-      "dst": "192.168.1.20:22"
-    }
-  ],
+  "packet_evidence": [],
   "event_graph": {
     "nodes": [
       {
-        "id": "alert:1:2010935:1",
-        "label": "Alert: ET SCAN Potential SSH Scan...",
-        "type": "alert",
+        "id": "flow_agg:192.168.1.20->45.142.166.12:51230:TCP",
+        "label": "Flows: TCP 51230 (3x, 162 B)",
+        "type": "flow",
+        "is_supernode": true,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.422,
+        "betweenness_score": 0.5,
         "details": {
-          "sid": 2010935,
-          "priority": 2,
-          "classification": "custom-detection",
-          "evidence": {
-            "capture_id": "PCAP_003",
-            "packets": [
-              1
-            ],
-            "alert_sid": 2010935,
-            "gid": 1,
-            "msg": "ET SCAN Potential SSH Scan",
-            "proto": "TCP",
-            "src_ip": "45.142.166.12",
-            "dst_ip": "192.168.1.20",
-            "timestamp": "11/14-16:06:04.000000"
-          }
-        }
-      },
-      {
-        "id": "ip:45.142.166.12",
-        "label": "45.142.166.12",
-        "type": "entity_ip",
-        "details": {
-          "ip": "45.142.166.12"
+          "src_ip": "192.168.1.20",
+          "dst_ip": "45.142.166.12",
+          "dst_port": 51230,
+          "proto": "TCP",
+          "total_flows": 3,
+          "total_bytes": 162,
+          "total_packets": 3,
+          "packets": [],
+          "zeek_conn_states": [
+            "S0"
+          ],
+          "is_supernode": true
         }
       },
       {
         "id": "ip:192.168.1.20",
         "label": "192.168.1.20",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.1096,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "192.168.1.20"
         }
       },
       {
+        "id": "ip:45.142.166.12",
+        "label": "45.142.166.12",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.4683,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "45.142.166.12"
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow_agg:192.168.1.20->45.142.166.12:51230:TCP",
+        "target": "ip:45.142.166.12",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+          "packets": [],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:192.168.1.20",
+        "target": "flow_agg:192.168.1.20->45.142.166.12:51230:TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_003",
+          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+          "packets": [],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
+        }
+      }
+    ]
+  },
+  "raw_graph": {
+    "nodes": [
+      {
         "id": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
         "label": "Flow: TCP 51230 (S0)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "proto": "TCP",
           "src_ip": "192.168.1.20",
@@ -251,23 +296,49 @@
           "evidence": {
             "capture_id": "PCAP_003",
             "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
-            "packets": [
-              1
-            ],
+            "packets": [],
             "byte_count": 54,
             "packet_count": 1,
             "duration": 0.0,
-            "start_time": 1794652564.0,
-            "end_time": 1794652564.0,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "S0",
             "zeek_service": "other"
           }
         }
       },
       {
+        "id": "ip:192.168.1.20",
+        "label": "192.168.1.20",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "192.168.1.20"
+        }
+      },
+      {
+        "id": "ip:45.142.166.12",
+        "label": "45.142.166.12",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "45.142.166.12"
+        }
+      },
+      {
         "id": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
         "label": "Flow: TCP 51230 (S0)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "proto": "TCP",
           "src_ip": "192.168.1.20",
@@ -276,14 +347,12 @@
           "evidence": {
             "capture_id": "PCAP_003",
             "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
-            "packets": [
-              2
-            ],
+            "packets": [],
             "byte_count": 54,
             "packet_count": 1,
             "duration": 0.0,
-            "start_time": 1794652565.001,
-            "end_time": 1794652565.001,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "S0",
             "zeek_service": "other"
           }
@@ -293,6 +362,10 @@
         "id": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
         "label": "Flow: TCP 51230 (S0)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "proto": "TCP",
           "src_ip": "192.168.1.20",
@@ -301,14 +374,12 @@
           "evidence": {
             "capture_id": "PCAP_003",
             "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
-            "packets": [
-              3
-            ],
+            "packets": [],
             "byte_count": 54,
             "packet_count": 1,
             "duration": 0.0,
-            "start_time": 1794652566.002,
-            "end_time": 1794652566.002,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "S0",
             "zeek_service": "other"
           }
@@ -317,56 +388,37 @@
     ],
     "links": [
       {
-        "source": "alert:1:2010935:1",
-        "target": "ip:192.168.1.20",
-        "relation": "TARGETED_ALERT",
+        "source": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
+        "target": "ip:45.142.166.12",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
-          "packets": [
-            1
-          ],
-          "alert_sid": 2010935,
-          "gid": 1,
-          "msg": "ET SCAN Potential SSH Scan",
-          "proto": "TCP",
-          "src_ip": "45.142.166.12",
-          "dst_ip": "192.168.1.20",
-          "timestamp": "11/14-16:06:04.000000"
-        }
-      },
-      {
-        "source": "ip:45.142.166.12",
-        "target": "alert:1:2010935:1",
-        "relation": "ORIGINATED_ALERT",
-        "evidence": {
-          "capture_id": "PCAP_003",
-          "packets": [
-            1
-          ],
-          "alert_sid": 2010935,
-          "gid": 1,
-          "msg": "ET SCAN Potential SSH Scan",
-          "proto": "TCP",
-          "src_ip": "45.142.166.12",
-          "dst_ip": "192.168.1.20",
-          "timestamp": "11/14-16:06:04.000000"
+          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
+          "packets": [],
+          "byte_count": 54,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "S0",
+          "zeek_service": "other"
         }
       },
       {
         "source": "ip:192.168.1.20",
         "target": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
           "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
-          "packets": [
-            1
-          ],
+          "packets": [],
           "byte_count": 54,
           "packet_count": 1,
           "duration": 0.0,
-          "start_time": 1794652564.0,
-          "end_time": 1794652564.0,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S0",
           "zeek_service": "other"
         }
@@ -375,17 +427,16 @@
         "source": "ip:192.168.1.20",
         "target": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
           "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
-          "packets": [
-            2
-          ],
+          "packets": [],
           "byte_count": 54,
           "packet_count": 1,
           "duration": 0.0,
-          "start_time": 1794652565.001,
-          "end_time": 1794652565.001,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S0",
           "zeek_service": "other"
         }
@@ -394,36 +445,16 @@
         "source": "ip:192.168.1.20",
         "target": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
           "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
-          "packets": [
-            3
-          ],
+          "packets": [],
           "byte_count": 54,
           "packet_count": 1,
           "duration": 0.0,
-          "start_time": 1794652566.002,
-          "end_time": 1794652566.002,
-          "zeek_conn_state": "S0",
-          "zeek_service": "other"
-        }
-      },
-      {
-        "source": "flow:192.168.1.20:22<->45.142.166.12:51230/TCP",
-        "target": "ip:45.142.166.12",
-        "relation": "DELIVERED_TO",
-        "evidence": {
-          "capture_id": "PCAP_003",
-          "flow_id": "192.168.1.20:22<->45.142.166.12:51230/TCP",
-          "packets": [
-            1
-          ],
-          "byte_count": 54,
-          "packet_count": 1,
-          "duration": 0.0,
-          "start_time": 1794652564.0,
-          "end_time": 1794652564.0,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S0",
           "zeek_service": "other"
         }
@@ -432,17 +463,16 @@
         "source": "flow:192.168.1.20:2222<->45.142.166.12:51230/TCP",
         "target": "ip:45.142.166.12",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
           "flow_id": "192.168.1.20:2222<->45.142.166.12:51230/TCP",
-          "packets": [
-            2
-          ],
+          "packets": [],
           "byte_count": 54,
           "packet_count": 1,
           "duration": 0.0,
-          "start_time": 1794652565.001,
-          "end_time": 1794652565.001,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S0",
           "zeek_service": "other"
         }
@@ -451,21 +481,73 @@
         "source": "flow:192.168.1.20:2022<->45.142.166.12:51230/TCP",
         "target": "ip:45.142.166.12",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_003",
           "flow_id": "192.168.1.20:2022<->45.142.166.12:51230/TCP",
-          "packets": [
-            3
-          ],
+          "packets": [],
           "byte_count": 54,
           "packet_count": 1,
           "duration": 0.0,
-          "start_time": 1794652566.002,
-          "end_time": 1794652566.002,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S0",
           "zeek_service": "other"
         }
       }
     ]
-  }
+  },
+  "graph_summary": {
+    "total_raw_nodes": 5,
+    "total_raw_edges": 6,
+    "condensed_nodes": 3,
+    "condensed_edges": 2,
+    "pruned_nodes_count": 0,
+    "supernodes_count": 1,
+    "supernode_breakdown": {
+      "flows_folded": 3,
+      "dns_folded": 0,
+      "http_folded": 0,
+      "alerts_folded": 0,
+      "total_supernodes": 1
+    },
+    "threat_clusters_count": 1,
+    "clusters": [
+      {
+        "cluster_id": "cluster_0",
+        "threat_score": 2,
+        "alerts_count": 0,
+        "flows_count": 1,
+        "hosts_count": 2,
+        "nodes_count": 3,
+        "nodes": [
+          "ip:45.142.166.12",
+          "ip:192.168.1.20",
+          "flow_agg:192.168.1.20->45.142.166.12:51230:TCP"
+        ],
+        "title": "Primary Attack Incident"
+      }
+    ],
+    "top_pivots": [
+      {
+        "node_id": "ip:45.142.166.12",
+        "label": "45.142.166.12",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.4683,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:192.168.1.20",
+        "label": "192.168.1.20",
+        "type": "entity_ip",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.1096,
+        "betweenness_score": 0.0
+      }
+    ],
+    "critical_attack_paths": []
+  },
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_003) ===\nGraph Scale: 5 raw nodes condensed into 3 high-signal nodes.\nReduction: Pruned 0 background nodes; folded 1 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 45.142.166.12 [Target Host] - PPR: 0.4683, Centrality: 0.0\n  \u2022 192.168.1.20 [Command & Control / Exfiltration Endpoint] - PPR: 0.1096, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 2 | Alerts: 0 | Nodes: 3]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:",
+  "correlations_count": 0
 }

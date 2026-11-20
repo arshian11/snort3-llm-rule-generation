@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS ( msg:"EXPLOIT-WEB SQL Injection attempt"; flow:to_server,established; http_uri; content:"/products?id=1'",fast_pattern,nocase; classtype:web-application-attack; sid:9002002; rev:1; )

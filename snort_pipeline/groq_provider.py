@@ -286,8 +286,8 @@ class GroqKeyManager:
 
     def get_active_key(self) -> Optional[str]:
         """
-        Returns the currently active API key.
-        If current key is disabled or on cooldown, scans forward to find an available key.
+        Returns the currently active API key, rotating round-robin across
+        all available non-cooldown keys to distribute load evenly across token quotas.
         If all valid keys are on cooldown, returns the one with earliest cooldown expiration.
         """
         valid_keys = [k for k in self.api_keys if k not in self._disabled_keys]
@@ -295,22 +295,18 @@ class GroqKeyManager:
             return None
 
         now = time.time()
-        # First check if the key at current index is usable
-        curr_key = valid_keys[self._current_idx % len(valid_keys)]
-        if self._cooldowns.get(curr_key, 0) <= now:
-            return curr_key
-
-        # Otherwise, search forward for any key not on cooldown
+        # Search starting from current_idx for the next available key not on cooldown
         for offset in range(len(valid_keys)):
             idx = (self._current_idx + offset) % len(valid_keys)
             k = valid_keys[idx]
             if self._cooldowns.get(k, 0) <= now:
-                self._current_idx = idx
+                # Advance pointer for next request to achieve true round-robin load distribution
+                self._current_idx = (idx + 1) % len(valid_keys)
                 return k
 
         # All keys currently on active cooldown; pick the one with earliest expiration
         earliest_key = min(valid_keys, key=lambda k: self._cooldowns.get(k, 0))
-        self._current_idx = valid_keys.index(earliest_key)
+        self._current_idx = (valid_keys.index(earliest_key) + 1) % len(valid_keys)
         return earliest_key
 
     def has_alternate_key(self, current_key: Optional[str] = None) -> bool:
@@ -668,6 +664,13 @@ class GroqClient:
         Execute chat completion with adaptive mitigation for all Groq status codes
         and dynamic key rotation.
         """
+        # Adaptive micro-pacing between completions to stay within TPM rate limits
+        if hasattr(self, "_last_call_time"):
+            elapsed = time.time() - self._last_call_time
+            if elapsed < 0.4:
+                time.sleep(0.4 - elapsed)
+        self._last_call_time = time.time()
+
         # Pre-flight check: ensure at least one valid API key exists
         if not self.key_manager.get_active_key():
             details = GroqErrorDetails(

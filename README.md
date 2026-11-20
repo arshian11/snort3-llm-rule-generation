@@ -94,6 +94,34 @@ wsl snort -V
 snort -V
 ```
 
+#### 6. Set Up Snort 3 Community Rules (Recommended)
+The pipeline utilizes the official Snort 3 Community Rules for baseline alert correlation, gap analysis (Task A), and preventing duplicate message strings (Stage 3). The pipeline and `./demo.sh` look for these files at `/usr/local/etc/snort/rules/`.
+
+Run the following commands in your Linux / WSL terminal:
+
+```bash
+# 1. Create the rules directory if it does not already exist
+sudo mkdir -p /usr/local/etc/snort/rules
+
+# 2. Download the official Snort 3 Community Rules tarball
+wget https://www.snort.org/downloads/community/snort3-community-rules.tar.gz
+
+# 3. Extract the archive
+tar -xzvf snort3-community-rules.tar.gz
+
+# 4. Copy the community rules and SID message map into place
+sudo cp snort3-community-rules/snort3-community.rules /usr/local/etc/snort/rules/
+sudo cp snort3-community-rules/sid-msg.map /usr/local/etc/snort/rules/
+
+# 5. Clean up temporary files (optional)
+rm -rf snort3-community-rules snort3-community-rules.tar.gz
+
+# 6. Verify Snort 3 loads the community rules without syntax errors
+snort -c /usr/local/etc/snort/snort.lua -R /usr/local/etc/snort/rules/snort3-community.rules
+```
+
+> **Note:** If community rules are not present at `/usr/local/etc/snort/rules/snort3-community.rules`, the pipeline will issue a warning and continue analyzing captures with your local rule definitions.
+
 ---
 
 ## 3. Where to Place Your PCAP Files

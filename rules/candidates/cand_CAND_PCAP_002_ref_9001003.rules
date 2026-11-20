@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any ( msg:"EXPLOIT-WEB SQL Injection blind GET request"; flow:to_server,established; content:"id=1'",fast_pattern; service:http; classtype:web-application-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family SQL_Injection; sid:9001003; rev:1; )

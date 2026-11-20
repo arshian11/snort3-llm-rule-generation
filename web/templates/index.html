@@ -11,10 +11,10 @@
     // Prevent theme flash before first paint
     document.documentElement.setAttribute('data-theme', localStorage.getItem('snort.theme') || 'cobalt');
   </script>
-  <link rel="icon" type="image/png" href="/static/img/snort_logo.png?v=5">
-  <link rel="icon" type="image/svg+xml" href="/static/img/favicon.svg?v=5">
-  <link rel="stylesheet" href="/static/css/themes.css?v=5">
-  <link rel="stylesheet" href="/static/css/snort.css?v=5">
+  <link rel="icon" type="image/png" href="/static/img/snort_logo.png?v=6">
+  <link rel="icon" type="image/svg+xml" href="/static/img/favicon.svg?v=6">
+  <link rel="stylesheet" href="/static/css/themes.css?v=6">
+  <link rel="stylesheet" href="/static/css/snort.css?v=6">
 </head>
 <body>
 
@@ -1699,12 +1699,17 @@
                 Stage 5: Detection Conditions (Sticky Buffers &amp; Payload Options)
               </span>
               <span class="kpi-pill ok" id="hdirc-s5-gate-pill" style="display:none;">DETECTION_APPROVED</span>
+              <span class="kpi-pill warn" id="hdirc-s5-fallback-pill" style="display:none;">⚡ SYNTHETIC FALLBACK</span>
             </div>
             <button class="studio-btn primary sb-btn" id="btn-advance-hdirc-stage5" style="font-size:11px;padding:3px 12px;height:26px;">
               ⚡ Execute Stage 5: Detection Generation
             </button>
           </div>
           <div id="hdirc-s5-detection-body" style="display:none;flex-direction:column;gap:8px;">
+            <div id="hdirc-s5-fallback-banner" style="display:none;background:rgba(234,179,8,0.12);border:1px solid rgba(234,179,8,0.35);border-radius:6px;padding:8px 12px;font-size:11.5px;color:var(--warn);align-items:center;gap:8px;">
+              <span style="font-weight:700;">⚡ Deterministic Telemetry Fallback Engaged:</span>
+              <span>Detection conditions were grounded directly from verified PCAP telemetry invariants (LLM generation was invalid or ungrounded).</span>
+            </div>
             <div id="hdirc-s5-options-list" style="display:flex;flex-direction:column;gap:6px;font-family:var(--font-mono);font-size:12.5px;">
               <!-- Populated dynamically with rendered detection clauses -->
             </div>
@@ -1713,6 +1718,7 @@
               <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Fast Pattern</span><strong id="hdirc-s5-fp-val" style="color:var(--ok);">✓ Designated</strong></div>
               <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Positioning</span><strong id="hdirc-s5-pos-val">Relative Chains OK</strong></div>
               <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Total Conditions</span><strong id="hdirc-s5-count-val">2 nodes</strong></div>
+              <div><span style="color:var(--fg-muted);display:block;font-size:10px;">Synthesis Source</span><strong id="hdirc-s5-source-val">Autonomous LLM</strong></div>
             </div>
           </div>
         </div>
@@ -2015,8 +2021,8 @@
 <div id="toast-container"></div>
 
 <!-- Scripts -->
-<script src="/static/js/sse.js?v=5"></script>
-<script src="/static/js/app.js?v=5"></script>
-<script src="/static/js/pipeline.js?v=5"></script>
+<script src="/static/js/sse.js?v=6"></script>
+<script src="/static/js/app.js?v=6"></script>
+<script src="/static/js/pipeline.js?v=6"></script>
 </body>
 </html>

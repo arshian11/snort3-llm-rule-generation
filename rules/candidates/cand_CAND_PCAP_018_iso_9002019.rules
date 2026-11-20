@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( msg:"MALWARE-OTHER-INFOSTEALER Redline Stealer HTTP GET .exe payload download"; flow:to_server,established; content:"/putingods.exe",nocase,fast_pattern; service:http; classtype:web-application-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family Redline_Stealer___RigEK; sid:9002019; rev:1; )

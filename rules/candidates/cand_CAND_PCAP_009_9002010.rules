@@ -1,0 +1,1 @@
+alert http $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"CTU-13 Botnet DNS Query for Command and Control Communication"; flow:to_server,established,only_stream,only_frag; http_uri; http_method; http_header; http_cookie; classtype:misc-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family CTU-13_Botnet; sid:9002010; rev:1; )

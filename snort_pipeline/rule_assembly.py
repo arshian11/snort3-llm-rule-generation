@@ -50,6 +50,8 @@ from snort_pipeline.snort2_to_snort3_migration import (
     Snort2CompatibilityValidator,
     Snort2ToSnort3Converter
 )
+from snort_pipeline.llm_engine import LLMClient, SYSTEM_PROMPT, normalize_snort3_syntax
+from snort_pipeline.detection_generator import FORBIDDEN_PLACEHOLDERS
 
 class RuleConflictDetector:
     """
@@ -526,17 +528,473 @@ class RuleAssemblyManager:
     """
     Stage 7 Orchestrator:
     Coordinates AST ordering, rendering (multi-line & single-line), conflict detection,
-    syntax testing, dual-pass PCAP verification, and persistent checkpointing.
+    syntax testing, self-healing LLM syntax repair (max 3 tries), dual-pass PCAP verification,
+    and persistent checkpointing.
     """
 
     def __init__(
         self,
         local_rules_path: Optional[Path] = None,
         snort_engine: Optional[SnortEngine] = None,
-        dataset_manager: Optional[PcapDatasetManager] = None
+        dataset_manager: Optional[PcapDatasetManager] = None,
+        llm_client: Optional[LLMClient] = None,
+        max_retries: int = 3
     ):
         self.conflict_detector = RuleConflictDetector(local_rules_path=local_rules_path)
         self.dual_pass_verifier = DualPassVerifier(snort_engine=snort_engine, dataset_manager=dataset_manager)
+        self.llm_client = llm_client
+        self.max_retries = max_retries
+
+    def _build_diagnostic_errors(
+        self,
+        syntax_res: Dict[str, Any],
+        compat_report: Optional[Any] = None,
+        wrong_rule: str = ""
+    ) -> Tuple[List[str], List[str]]:
+        """
+        Extract compiler errors, compatibility rejections, and generate actionable hints for the LLM.
+        """
+        raw_errors: List[str] = []
+        actionable_hints: List[str] = []
+
+        # Compiler errors from snort -T
+        if syntax_res.get("errors"):
+            for err in syntax_res["errors"]:
+                clean_err = str(err).strip()
+                if clean_err:
+                    raw_errors.append(clean_err)
+        elif not syntax_res.get("passed") and syntax_res.get("output"):
+            for line in str(syntax_res["output"]).splitlines():
+                line_s = line.strip()
+                if line_s and any(k in line_s.lower() for k in ["fatal", "error", "syntax", "unknown"]):
+                    raw_errors.append(line_s)
+
+        # Compatibility report violations
+        if compat_report and not compat_report.is_valid:
+            for rej in compat_report.rejection_errors:
+                raw_errors.append(f"Compatibility Rejection: {rej}")
+            for pcre_v in compat_report.pcre_violations:
+                raw_errors.append(f"PCRE Modifier Violation: {pcre_v}")
+
+        # Build specific actionable guidance based on identified error tokens
+        all_text = " ".join(raw_errors) + " " + wrong_rule
+
+        if "uricontent" in all_text.lower():
+            actionable_hints.append("REMOVED OPTION: 'uricontent' is obsolete in Snort 3. You MUST use 'http_uri;' followed by 'content:\"...\";'.")
+        if "urilen" in all_text.lower():
+            actionable_hints.append("REMOVED OPTION: 'urilen' is obsolete. Use 'http_uri; bufferlen:<N>;' or 'http_raw_uri; bufferlen:<N>;'.")
+        if "rawbytes" in all_text.lower():
+            actionable_hints.append("REPLACED OPTION: 'rawbytes' is obsolete. Use sticky buffer 'raw_data;' followed by 'content:\"...\";'.")
+        if "threshold" in all_text.lower() and "detection_filter" not in all_text.lower():
+            actionable_hints.append("REMOVED KEYWORD: Standalone 'threshold' is removed. Use 'detection_filter: track by_src, count <N>, seconds <S>;' inside rule options.")
+        if "fast_pattern" in all_text.lower() and re.search(r'content:\s*"[^"]+"\s*;\s*fast_pattern', wrong_rule):
+            actionable_hints.append("SYNTAX ERROR: Semicolon-separated suboptions are invalid in Snort 3. Modifiers MUST be comma-separated: 'content:\"...\",fast_pattern,nocase;'.")
+        if any(mod in all_text for mod in ["/U", "/B", "/P", "/H", "/M", "/C", "/I", "/D", "/K", "/S", "/Y"]):
+            actionable_hints.append("DELETED MODIFIER: Snort 2 PCRE modifiers (/U, /B, /P, etc.) were removed. Place the regex inside a sticky buffer instead (e.g. 'http_uri; pcre:\"/.../i\";').")
+        if "syntax error" in all_text.lower() or "fatal" in all_text.lower() or re.search(r'[^;\s]\s*\)$', wrong_rule):
+            actionable_hints.append("FORMAT REQUIREMENT: Every option inside the rule must end with a semicolon ';', including the final option before the closing parenthesis ')'.")
+
+        if not raw_errors:
+            raw_errors.append("Snort 3 compiler (-T) rejected the rule syntax.")
+
+        return raw_errors, actionable_hints
+
+    def repair_syntax_with_llm(
+        self,
+        state: RuleState,
+        wrong_rule: str,
+        syntax_res: Dict[str, Any],
+        compat_report: Optional[Any] = None,
+        sid: Optional[int] = None,
+        cand_id: Optional[str] = None,
+        max_retries: int = 3
+    ) -> Tuple[bool, str, Dict[str, Any]]:
+        """
+        Automated Self-Healing Syntax Retry Loop (Max 3 Tries).
+        Feeds back in a single prompt step:
+        1. Initial Hypothesis (Threat family, behavior, protocol, flow intent, invariants, evidence).
+        2. Wrong Syntax Rule (Exact rule string that failed).
+        3. Proper Useful Error (Snort 3 compiler stderr, compatibility rejections, and actionable hints).
+        Executes bounded retry loop (up to max_retries). On success, updates RuleState AST and returns.
+        """
+        effective_sid = sid or state.components.get("sid", 1000001)
+        cid = cand_id or state.candidate_id
+        client = self.llm_client or LLMClient()
+
+        # 1. Format Initial Hypothesis Block
+        hyp = state.hypothesis
+        threat_name = getattr(hyp, "threat_name", "Network Threat") if hyp else "Network Threat"
+        target_proto = getattr(hyp, "target_protocol", state.ast.header.protocol or "tcp") if hyp else (state.ast.header.protocol or "tcp")
+        flow_intent = getattr(hyp, "flow_intent", "inbound_to_service") if hyp else "inbound_to_service"
+        comm_dir = getattr(hyp, "communication_direction", "client_to_server") if hyp else "client_to_server"
+        behavior_desc = getattr(hyp, "behavior_description", "Suspicious attack communication observed in network traffic.") if hyp else "Suspicious network traffic."
+
+        invariants = []
+        if hyp and hyp.invariant_indicators:
+            for inv in hyp.invariant_indicators:
+                inv_val = inv.get("value") if isinstance(inv, dict) else str(inv)
+                invariants.append(inv_val)
+        invariants_str = ", ".join(f"'{i}'" for i in invariants) if invariants else "Payload attack pattern"
+
+        evidence_str = "Triggering packets in PCAP"
+        if hyp and hyp.evidence:
+            pkts = hyp.evidence.get("triggering_packets", [])
+            evidence_str = f"Packets {pkts}" if pkts else "Capture evidence"
+
+        current_rule = wrong_rule
+        current_syntax = syntax_res
+        current_compat = compat_report
+        retry_logs: List[Dict[str, Any]] = []
+
+        for attempt in range(1, max_retries + 1):
+            # 2 & 3: Extract proper useful error that helps the LLM
+            raw_errors, hints = self._build_diagnostic_errors(current_syntax, current_compat, current_rule)
+
+            error_block_lines = [f"- {e}" for e in raw_errors]
+            if hints:
+                error_block_lines.append("\nActionable Repair Guidance:")
+                for h in hints:
+                    error_block_lines.append(f"  * {h}")
+            formatted_errors = "\n".join(error_block_lines)
+
+            # Build single-step prompt
+            prompt = f"""### 1. INITIAL DETECTION HYPOTHESIS
+- Candidate ID: {cid}
+- Threat Family / Activity: {threat_name}
+- Target Protocol / Service: {target_proto}
+- Flow Intent & Direction: {flow_intent} ({comm_dir})
+- Behavioral Description: {behavior_desc}
+- Invariant Attack Indicators: {invariants_str}
+- Motivating Evidence: {evidence_str}
+
+### 2. FAILING SYNTAX RULE (ATTEMPT {attempt} of {max_retries})
+```snort
+{current_rule}
+```
+
+### 3. PROPER USEFUL ERRORS & COMPILER DIAGNOSTICS
+The Snort 3 syntax verification failed with the following error output:
+{formatted_errors}
+
+### 4. SNORT 3 SYNTAX SPECIFICATION
+- Content Suboptions: NEVER separate content modifiers with semicolons. Modifiers MUST be comma-separated: `content:"...",fast_pattern,nocase,offset 2;` (NOT `content:"..."; fast_pattern;`).
+- Sticky Buffers: Place sticky buffer keywords (`http_uri;`, `http_header;`, `http_client_body;`, `file_data;`, `raw_data;`) as separate preceding options before `content:`.
+- DNS Wire Format: Snort 3 core DOES NOT have a 'dns_query' keyword! For DNS on UDP port 53, NEVER write 'dns_query;'. Instead, match raw UDP payload using length-byte wire-format hex encoding, e.g. `content:"|08|carwaded|03|com|00|",fast_pattern,nocase;`.
+- ICMP Flow Prohibition: Snort 3 does NOT permit 'flow' tracking on ICMP rules. NEVER use `flow:` on ICMP. Use `itype:8;` (for echo request) and/or `dsize:>1000;`.
+- TCP Flags: NEVER write `content:"tcp_flags:SYN"`. Use dedicated Snort 3 keyword `flags:S;` or `flags:A;`.
+- Deprecated Keywords: Snort 2 options (`uricontent`, `urilen`, `rawbytes`, `threshold`) are obsolete. Use Snort 3 equivalents (`raw_data;`, `detection_filter: track by_src, count <N>, seconds <S>;`).
+- Deleted PCRE Modifiers: `/U`, `/B`, `/P`, etc. are removed. Place PCRE within sticky buffers instead.
+- Option Semicolons: EVERY option inside the rule must terminate with a semicolon `;`, including the last option before `)`.
+- Identity: Use sid:{effective_sid}; rev:1;
+
+### INSTRUCTION
+Analyze the compiler errors and the initial hypothesis. In a single step, output ONLY the fully repaired, syntactically valid Snort 3 rule enclosed in a ```snort ... ``` code block. Do NOT include explanations outside the code block."""
+
+            system_msg = (
+                "You are an expert Snort 3 rule engineer. A candidate rule failed Snort 3 compiler syntax (-T). "
+                "Output ONLY the corrected, syntactically valid Snort 3 rule inside a ```snort ... ``` code block."
+            )
+
+            # Query LLM in a single step
+            try:
+                resp = client.query(system=system_msg, user_prompt=prompt, temperature=0.1)
+            except Exception:
+                resp = ""
+
+            # Extract repaired rule from response
+            candidate_rule = ""
+            m = re.search(r"```(?:snort|rules?)?\s*([\s\S]*?)\s*```", resp, re.IGNORECASE)
+            if m:
+                candidate_rule = m.group(1).strip()
+            else:
+                m2 = re.search(r"(?:alert|drop|pass|reject|rewrite)\s+[\s\S]*?\)", resp, re.IGNORECASE)
+                if m2:
+                    candidate_rule = m2.group(0).strip()
+                else:
+                    candidate_rule = resp.strip()
+
+            # Normalization and sanity fixes
+            if candidate_rule:
+                candidate_rule = normalize_snort3_syntax(candidate_rule)
+                # Ensure trailing semicolon before ')'
+                candidate_rule = re.sub(r'([^;\s])\s*\)', r'\1; )', candidate_rule)
+                # Ensure SID is present
+                if "sid:" not in candidate_rule:
+                    candidate_rule = re.sub(r'\s*\)\s*$', f' sid:{effective_sid}; rev:1; )', candidate_rule)
+
+            # Test candidate rule with Snort2CompatibilityValidator
+            cand_compat = Snort2CompatibilityValidator.validate_rule(candidate_rule) if candidate_rule else None
+
+            # Test with Snort 3 compiler (-T)
+            cand_syntax = self.dual_pass_verifier.verify_syntax(
+                rule_text=candidate_rule,
+                candidate_id=f"{cid}_repair_try{attempt}",
+                sid=effective_sid
+            ) if candidate_rule else {"passed": False, "errors": ["Empty rule returned by LLM."]}
+
+            passed = bool(candidate_rule and cand_syntax.get("passed") and (cand_compat is None or cand_compat.is_valid))
+
+            retry_logs.append({
+                "attempt": attempt,
+                "proposed_rule": candidate_rule,
+                "syntax_passed": cand_syntax.get("passed", False),
+                "compat_valid": cand_compat.is_valid if cand_compat else False,
+                "compiler_errors": cand_syntax.get("errors", []),
+                "compiler_output": cand_syntax.get("output", "")
+            })
+
+            if passed:
+                # Self-healing succeeded! Reconstruct AST and update RuleState
+                try:
+                    ast = RuleRenderer.parse_rule_string(candidate_rule)
+                    state.ast = ast
+                except Exception:
+                    pass
+                state.rendered_rule_text = candidate_rule
+                state.stage_retry_counts["stage7_assembly"] = attempt
+                audit_details = {
+                    "status": "repaired",
+                    "attempts_used": attempt,
+                    "final_rule": candidate_rule,
+                    "retry_logs": retry_logs
+                }
+                state.record_validation(
+                    stage_name="stage7_syntax_repair",
+                    passed=True,
+                    details=audit_details
+                )
+                return True, candidate_rule, audit_details
+
+            # Not passed: prepare error context for next iteration
+            current_rule = candidate_rule or current_rule
+            current_syntax = cand_syntax
+            current_compat = cand_compat
+
+        # If LLM retries exhausted (max 3 tries), execute deterministic safety conversion
+        converted = Snort2ToSnort3Converter.convert_rule(current_rule)
+        conv_syntax = self.dual_pass_verifier.verify_syntax(
+            rule_text=converted,
+            candidate_id=f"{cid}_det_fallback",
+            sid=effective_sid
+        )
+        if conv_syntax.get("passed"):
+            try:
+                ast = RuleRenderer.parse_rule_string(converted)
+                state.ast = ast
+            except Exception:
+                pass
+            state.rendered_rule_text = converted
+            state.stage_retry_counts["stage7_assembly"] = max_retries
+            audit_details = {
+                "status": "repaired_by_converter",
+                "attempts_used": max_retries,
+                "final_rule": converted,
+                "retry_logs": retry_logs
+            }
+            state.record_validation(
+                stage_name="stage7_syntax_repair",
+                passed=True,
+                details=audit_details
+            )
+            return True, converted, audit_details
+
+        # Both LLM and deterministic fallback failed
+        state.stage_retry_counts["stage7_assembly"] = max_retries
+        audit_details = {
+            "status": "failed",
+            "attempts_used": max_retries,
+            "final_rule": current_rule,
+            "retry_logs": retry_logs
+        }
+        state.record_validation(
+            stage_name="stage7_syntax_repair",
+            passed=False,
+            errors=[f"LLM syntax self-healing retry exhausted ({max_retries} tries) and deterministic conversion failed."],
+            details=audit_details
+        )
+        return False, current_rule, audit_details
+
+    def _sanitize_protocol_options(
+        self,
+        state: RuleState,
+        report: Optional[Dict[str, Any]] = None
+    ) -> bool:
+        """
+        AST Sanitization & Protocol Normalization Engine.
+        Enforces Snort 3 invariant rules:
+        1. ICMP: Strip flow options (Snort 3 compiler forbids flow on ICMP).
+           Convert pseudo-content 'content:"ICMP type 8"' -> itype:8;.
+           Convert pseudo-content 'payload length > 1000' -> dsize:>1000;.
+        2. TCP: Convert pseudo-content 'content:"tcp_flags:SYN"' -> flags:S;.
+           Convert pseudo-content 'content:"tcp_flags:ACK"' -> flags:A;.
+        3. DNS: Strip 'dns_query;' keyword (unsupported in Snort 3 core).
+           Convert domain strings on UDP 53 to length-byte wire-format hex.
+        4. Placeholders: Strip synthetic LLM placeholders (e.g. 'malicious_artifact').
+        5. Mandatory Minimum Anchor Gate: If rule has no substantive detection conditions,
+           extract grounded invariants from report or transition to CORRELATION_ONLY.
+        """
+        proto = (state.ast.header.protocol or state.ast.header.service or "tcp").lower().strip()
+        dest_p = str(state.ast.header.dest_port or "").strip()
+        cleaned_options: List[RuleOptionAST] = []
+
+        # 1. ICMP Sanitization
+        if proto == "icmp":
+            has_itype = False
+            has_dsize = False
+            for opt in state.ast.options:
+                name = opt.name.lower().strip()
+                val = str(opt.value or "").strip()
+                val_lower = val.lower()
+
+                if name == "flow":
+                    continue  # Flow connection tracking prohibited on ICMP in Snort 3
+
+                if name == "itype":
+                    has_itype = True
+                    cleaned_options.append(opt)
+                    continue
+
+                if name == "dsize":
+                    has_dsize = True
+                    cleaned_options.append(opt)
+                    continue
+
+                if name == "content":
+                    if "type 8" in val_lower or "echo request" in val_lower:
+                        if not has_itype:
+                            cleaned_options.append(RuleOptionAST(name="itype", value="8"))
+                            has_itype = True
+                        continue
+                    elif "type 0" in val_lower or "echo reply" in val_lower:
+                        if not has_itype:
+                            cleaned_options.append(RuleOptionAST(name="itype", value="0"))
+                            has_itype = True
+                        continue
+                    elif "1000" in val_lower or "size" in val_lower or "large" in val_lower:
+                        if not has_dsize:
+                            cleaned_options.append(RuleOptionAST(name="dsize", value=">1000"))
+                            has_dsize = True
+                        continue
+                    elif val_lower in FORBIDDEN_PLACEHOLDERS:
+                        continue
+
+                cleaned_options.append(opt)
+
+            if not has_itype:
+                cleaned_options.append(RuleOptionAST(name="itype", value="8"))
+            if not has_dsize and state.hypothesis and any(k in (state.hypothesis.detection_objective or "").lower() for k in ["large", "size", "diagnostic", "1000"]):
+                cleaned_options.append(RuleOptionAST(name="dsize", value=">1000"))
+
+            state.ast.options = cleaned_options
+            return True
+
+        # 2. DNS Sanitization
+        is_dns = proto in ["dns", "udp"] and (dest_p in ["53", "$DNS_PORTS"] or proto == "dns")
+        if is_dns:
+            has_wire_content = False
+            http_buffers_to_drop = {"http_uri", "http_header", "http_client_body", "http_cookie", "http_method", "file_data"}
+            for opt in state.ast.options:
+                name = opt.name.lower().strip()
+                if name == "dns_query" or name in http_buffers_to_drop:
+                    continue  # Strip unsupported dns_query keyword and misapplied HTTP buffers on UDP
+
+                if name == "regex":
+                    opt.name = "pcre"
+
+                if name == "content" and opt.value:
+                    val_str = str(opt.value).strip().strip('"').strip("'")
+                    if val_str.lower() in FORBIDDEN_PLACEHOLDERS or any(ph in val_str.lower() for ph in ["malicious_path", "password=", "observed_pattern"]):
+                        continue
+                    if is_domain_name(val_str) and not (val_str.startswith("|") and val_str.endswith("|")):
+                        opt.value = encode_dns_wire_format(val_str)
+                        if opt.modifiers is None:
+                            opt.modifiers = {}
+                        opt.modifiers["fast_pattern"] = True
+                        opt.modifiers["nocase"] = True
+                        has_wire_content = True
+                    elif val_str.startswith("|") and val_str.endswith("|"):
+                        has_wire_content = True
+
+                cleaned_options.append(opt)
+
+            # If no wire domain content yet, search report for DNS query
+            if not has_wire_content:
+                target_dom = None
+                if report and report.get("network_behaviour", {}).get("dns_queries"):
+                    for dq in report["network_behaviour"]["dns_queries"]:
+                        qname = dq.get("query_name", "")
+                        if qname and is_domain_name(qname):
+                            parts = qname.strip(".").split(".")
+                            target_dom = ".".join(parts[-2:]) if len(parts) >= 2 else qname
+                            break
+                if target_dom:
+                    wire = encode_dns_wire_format(target_dom)
+                    cleaned_options.append(RuleOptionAST(
+                        name="content",
+                        value=wire,
+                        modifiers={"fast_pattern": True, "nocase": True}
+                    ))
+
+            state.ast.options = cleaned_options
+
+        # 3. TCP Sanitization
+        elif proto in ["tcp", "ip"]:
+            for opt in state.ast.options:
+                name = opt.name.lower().strip()
+                val = str(opt.value or "").strip()
+                val_lower = val.lower()
+
+                if name == "content":
+                    if "tcp_flags:syn" in val_lower or val_lower == "syn":
+                        cleaned_options.append(RuleOptionAST(name="flags", value="S"))
+                        continue
+                    elif "tcp_flags:ack" in val_lower or val_lower == "ack":
+                        cleaned_options.append(RuleOptionAST(name="flags", value="A"))
+                        continue
+                    elif val_lower in FORBIDDEN_PLACEHOLDERS:
+                        continue
+
+                cleaned_options.append(opt)
+            state.ast.options = cleaned_options
+
+        else:
+            # Other protocols: filter placeholders
+            for opt in state.ast.options:
+                if opt.name == "content" and str(opt.value or "").strip().lower() in FORBIDDEN_PLACEHOLDERS:
+                    continue
+                cleaned_options.append(opt)
+            state.ast.options = cleaned_options
+
+        # 4. Mandatory Minimum Anchor Gate Check
+        substantive = []
+        for opt in state.ast.options:
+            n = opt.name.lower().strip()
+            if n == "content" and opt.value:
+                cv = str(opt.value).strip().strip('"').strip("'")
+                if cv.lower() not in FORBIDDEN_PLACEHOLDERS and DEFAULT_FILTER.calculate_byte_length(cv) >= 4:
+                    substantive.append(opt)
+            elif n in ["pcre", "regex", "byte_test", "byte_extract", "byte_math", "itype", "icode", "flags", "dsize"]:
+                substantive.append(opt)
+
+        if not substantive:
+            # Fallback extraction from report
+            if report:
+                for hr in report.get("network_behaviour", {}).get("http_requests", []):
+                    u = hr.get("uri", "")
+                    if u and len(u) >= 4:
+                        state.ast.options.append(RuleOptionAST(name="http_uri", value=None))
+                        state.ast.options.append(RuleOptionAST(name="content", value=u, modifiers={"fast_pattern": True, "nocase": True}))
+                        substantive.append(u)
+                        break
+
+            if not substantive:
+                state.transition(
+                    ConstructionState.CORRELATION_ONLY,
+                    reason="Candidate rule lacks substantive detection anchor conditions (no content >= 4 bytes, pcre, byte_test, itype, flags, dsize). Transitioned to correlation incident to prevent false alarms."
+                )
+                return False
+
+        return True
 
     def assemble_and_validate(
         self,
@@ -548,14 +1006,29 @@ class RuleAssemblyManager:
     ) -> StageResult:
         """
         Execute full Stage 7 pipeline:
-        1. Guarantee canonical AST option ordering.
-        2. Render intermediate structured representation.
-        3. Render canonical multi-line and single-line Snort 3 rule syntax.
-        4. Run conflict & redundancy detection.
-        5. Run Snort 3 compiler (-T) syntax verification.
-        6. Execute dual-pass PCAP replay (TP and FP).
-        7. Record validation outcome, checkpoint state, and return StageResult.
+        1. Sanitize protocol options & enforce mandatory minimum anchor.
+        2. Guarantee canonical AST option ordering.
+        3. Render intermediate structured representation.
+        4. Render canonical multi-line and single-line Snort 3 rule syntax.
+        5. Run conflict & redundancy detection.
+        6. Run Snort 3 compiler (-T) syntax verification.
+        7. Execute dual-pass PCAP replay (TP and FP).
+        8. Record validation outcome, checkpoint state, and return StageResult.
         """
+        # Step 0: Protocol sanitization and mandatory minimum anchor enforcement
+        is_viable = self._sanitize_protocol_options(state, report)
+        if not is_viable or state.status == ConstructionState.CORRELATION_ONLY:
+            fail_result = StageResult(
+                status="correlation_only",
+                component="assembly",
+                generated_value=None,
+                evidence_refs=[],
+                validation_errors=["Candidate rule lacks substantive detection anchor. Transitioned to correlation incident to prevent false alarms."],
+                reasoning_summary="Rule assembly transitioned to correlation-only: missing substantive detection anchor."
+            )
+            state.stage_results["stage7_assembly"] = fail_result.to_dict()
+            state.last_stage_result = fail_result.to_dict()
+            return fail_result
         # Step 1: Ensure canonical AST ordering
         self._ensure_canonical_ast_order(state)
 
@@ -603,6 +1076,32 @@ class RuleAssemblyManager:
         syntax_res = self.dual_pass_verifier.verify_syntax(rendered_singleline, cand_id, sid)
         candidate_rules_file = Path(syntax_res["rule_file"])
 
+        # Step 5.1: Self-Healing LLM Syntax Repair Loop (Max 3 Tries)
+        if not syntax_res.get("passed") or not compat_report.is_valid:
+            repaired, repaired_rule, repair_audit = self.repair_syntax_with_llm(
+                state=state,
+                wrong_rule=rendered_singleline,
+                syntax_res=syntax_res,
+                compat_report=compat_report,
+                sid=sid,
+                cand_id=cand_id,
+                max_retries=self.max_retries
+            )
+            if repaired:
+                rendered_singleline = repaired_rule
+                rendered_multiline = RuleRenderer.render_multiline(state)
+                state.rendered_rule_text = rendered_singleline
+                structured_repr = RuleRenderer.to_structured_representation(state)
+                # Re-verify syntax on the repaired rule
+                syntax_res = self.dual_pass_verifier.verify_syntax(rendered_singleline, f"{cand_id}_repaired", sid)
+                candidate_rules_file = Path(syntax_res["rule_file"])
+                # Re-verify compatibility on healed rule and purge stale compatibility rejection errors
+                new_compat = Snort2CompatibilityValidator.validate_rule(rendered_singleline)
+                conflict_errors = [e for e in conflict_errors if not e.startswith("Category") and "Snort 2" not in e and "PCRE" not in e and "compiler" not in e]
+                if not new_compat.is_valid:
+                    conflict_errors.extend(new_compat.rejection_errors)
+                    conflict_errors.extend(new_compat.pcre_violations)
+
         # Step 6: Dual-Pass PCAP Verification (if enabled and syntax passed)
         tp_res = None
         fp_res = None
@@ -623,54 +1122,57 @@ class RuleAssemblyManager:
                 domain_opt = next((o for o in state.ast.options if o.name == "content" and is_domain_name(str(o.value or ""))), None)
 
                 if is_dns and domain_opt:
-                    # Attempt 1A: Inject dns_query sticky buffer
-                    dns_options = []
-                    if not any(o.name == "dns_query" for o in state.ast.options):
-                        dns_options.append(RuleOptionAST(name="dns_query", value=None))
+                    # DNS wire length byte encoding (|08|domain|03|tld|00|) on raw UDP
+                    raw_dom = str(domain_opt.value).strip().strip('"').strip("'")
+                    wire_enc = encode_dns_wire_format(raw_dom)
+                    wire_opts = []
                     for o in state.ast.options:
-                        dns_options.append(RuleOptionAST.from_dict(o.to_dict()))
-                    
-                    state.ast.options = dns_options
+                        if o.name == "dns_query":
+                            continue
+                        opt_copy = RuleOptionAST.from_dict(o.to_dict())
+                        if opt_copy.name == "content" and is_domain_name(str(opt_copy.value or "")):
+                            opt_copy.value = wire_enc
+                            if opt_copy.modifiers is None:
+                                opt_copy.modifiers = {}
+                            opt_copy.modifiers["fast_pattern"] = True
+                            opt_copy.modifiers["nocase"] = True
+                        wire_opts.append(opt_copy)
+                    state.ast.options = wire_opts
                     self._ensure_canonical_ast_order(state)
-                    dns_single = RuleRenderer.render_singleline(state)
-                    dns_syn = self.dual_pass_verifier.verify_syntax(dns_single, f"{cand_id}_dq", sid)
-                    if dns_syn.get("passed"):
-                        dns_file = Path(dns_syn["rule_file"])
-                        dns_tp = self.dual_pass_verifier.verify_true_positive(dns_file, f"{cand_id}_dq", sid, target_pcap)
-                        if dns_tp.get("passed"):
-                            tp_res = dns_tp
-                            syntax_res = dns_syn
-                            candidate_rules_file = dns_file
-                            rendered_singleline = dns_single
+                    wire_single = RuleRenderer.render_singleline(state)
+                    wire_syn = self.dual_pass_verifier.verify_syntax(wire_single, f"{cand_id}_wire", sid)
+                    if wire_syn.get("passed"):
+                        wire_file = Path(wire_syn["rule_file"])
+                        wire_tp = self.dual_pass_verifier.verify_true_positive(wire_file, f"{cand_id}_wire", sid, target_pcap)
+                        if wire_tp.get("passed"):
+                            tp_res = wire_tp
+                            syntax_res = wire_syn
+                            candidate_rules_file = wire_file
+                            rendered_singleline = wire_single
                             rendered_multiline = RuleRenderer.render_multiline(state)
-                            state.rendered_rule_text = dns_single
+                            state.rendered_rule_text = wire_single
                             structured_repr = RuleRenderer.to_structured_representation(state)
                         else:
-                            # Attempt 1B: DNS wire length byte encoding (|08|domain|03|tld|00|)
-                            raw_dom = str(domain_opt.value).strip().strip('"').strip("'")
-                            wire_enc = encode_dns_wire_format(raw_dom)
-                            wire_opts = []
-                            for o in state.ast.options:
-                                if o.name == "dns_query":
-                                    continue
-                                opt_copy = RuleOptionAST.from_dict(o.to_dict())
-                                if opt_copy.name == "content" and is_domain_name(str(opt_copy.value or "")):
-                                    opt_copy.value = wire_enc
-                                wire_opts.append(opt_copy)
-                            state.ast.options = wire_opts
+                            # Isolate to clean single DNS wire content anchor on UDP 53
+                            iso_opts = [
+                                o for o in wire_opts
+                                if o.name not in ["pcre", "regex", "byte_test", "byte_extract", "http_uri", "http_client_body", "http_header"]
+                                and (o.name != "content" or (o.value and str(o.value).startswith("|") and str(o.value).endswith("|")))
+                            ]
+                            state.ast.options = iso_opts
                             self._ensure_canonical_ast_order(state)
-                            wire_single = RuleRenderer.render_singleline(state)
-                            wire_syn = self.dual_pass_verifier.verify_syntax(wire_single, f"{cand_id}_wire", sid)
-                            if wire_syn.get("passed"):
-                                wire_file = Path(wire_syn["rule_file"])
-                                wire_tp = self.dual_pass_verifier.verify_true_positive(wire_file, f"{cand_id}_wire", sid, target_pcap)
-                                if wire_tp.get("passed"):
-                                    tp_res = wire_tp
-                                    syntax_res = wire_syn
-                                    candidate_rules_file = wire_file
-                                    rendered_singleline = wire_single
+                            iso_single = RuleRenderer.render_singleline(state)
+                            iso_syn = self.dual_pass_verifier.verify_syntax(iso_single, f"{cand_id}_wireiso", sid)
+                            if iso_syn.get("passed"):
+                                iso_file = Path(iso_syn["rule_file"])
+                                iso_tp = self.dual_pass_verifier.verify_true_positive(iso_file, f"{cand_id}_wireiso", sid, target_pcap)
+                                if iso_tp.get("passed"):
+                                    tp_res = iso_tp
+                                    syntax_res = iso_syn
+                                    candidate_rules_file = iso_file
+                                    rendered_singleline = iso_single
                                     rendered_multiline = RuleRenderer.render_multiline(state)
-                                    state.rendered_rule_text = wire_single
+                                    state.rendered_rule_text = iso_single
                                     structured_repr = RuleRenderer.to_structured_representation(state)
 
             # Adaptation 2: General transport and payload relaxation
@@ -951,6 +1453,13 @@ class RuleAssemblyManager:
             else:
                 # Payload buffer or content option
                 detection_opts.append(opt)
+
+        # Safeguard: Prohibit flow on ICMP rules
+        if (state.ast.header.protocol or "").lower().strip() == "icmp":
+            flow_opt = None
+
+        # Safeguard: Strip any unsupported dns_query keyword
+        detection_opts = [o for o in detection_opts if o.name.lower().strip() != "dns_query"]
 
         reordered: List[RuleOptionAST] = []
         if msg_opt:

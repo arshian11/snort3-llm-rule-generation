@@ -51,6 +51,15 @@ from snort_pipeline.protocol_constants import (
 )
 from snort_pipeline.llm_engine import LLMClient
 
+# Forbidden LLM hallucination placeholders and pseudo-keywords
+FORBIDDEN_PLACEHOLDERS: Set[str] = {
+    "malicious_artifact", "observed_pattern", "suspicious_payload",
+    "attack_signature", "malicious_payload", "distinctive_c2_pattern",
+    "malicious-c2-beacon.domain", "placeholder", "test_payload",
+    "sample_payload", "example_payload", "dummy_payload",
+    "tcp_flags:syn", "tcp_flags:ack", "icmp type 8", "icmp type 0"
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
 # 5.1 SUB-STAGE A: BUFFER SELECTION
 # ─────────────────────────────────────────────────────────────────────────────
@@ -132,9 +141,9 @@ def select_detection_buffer(
             return "tls_sni"
         return "ssl_state"
 
-    # 3. DNS Buffers
+    # 3. DNS Buffers: Snort 3 core has no dns_query keyword. DNS matches against raw UDP packet data using wire format.
     elif proto == "dns" or any(k in elem for k in ["dns", "domain", "query", "hostname"]):
-        return "dns_query"
+        return None
 
     # 4. SIP Buffers
     elif proto == "sip":
@@ -794,10 +803,101 @@ class DetectionValidator:
         detection_ops = [o for o in options if o.name not in ["msg", "flow", "classtype", "sid", "rev", "metadata", "reference"]]
         if not detection_ops:
             errors.append("Empty detection: Stage 5 requires at least one content, buffer, regex, or byte test condition.")
-            return False, errors, details
+            return ValidationResult(
+                status="failed",
+                component="detection",
+                error=errors[0],
+                evidence_required=True,
+                details=details
+            )
 
-        # Gate 1.1: Deprecated Snort 2 Keywords & Syntax Hallucinations
+        # Gate 1.0: Mandatory Minimum Anchor Gate (Preventing Broad FP Rules)
+        # Any rule must possess at least one substantive inspection condition:
+        # content (>= 4 non-generic bytes, not in FORBIDDEN_PLACEHOLDERS), pcre, regex, byte_test, byte_extract, byte_math, itype, flags, dsize
+        substantive_anchors = []
+        for opt in detection_ops:
+            o_name = opt.name.lower().strip()
+            if o_name == "content" and opt.value:
+                clean_v = str(opt.value).strip().strip('"').strip("'")
+                clean_lower = clean_v.lower()
+                if clean_lower not in FORBIDDEN_PLACEHOLDERS and not any(ph in clean_lower for ph in ["malicious_artifact", "observed_pattern", "tcp_flags:", "icmp type"]):
+                    if DEFAULT_FILTER.calculate_byte_length(clean_v) >= 4:
+                        substantive_anchors.append(opt)
+            elif o_name in ["pcre", "regex", "byte_test", "byte_extract", "byte_math", "itype", "icode", "flags", "dsize"]:
+                substantive_anchors.append(opt)
+
+        if not substantive_anchors:
+            errors.append(
+                "Mandatory Minimum Anchor Violation: Rule has no substantive detection conditions "
+                "(content >= 4 non-generic bytes, pcre, regex, byte_test, itype, flags, dsize). "
+                "Rules specifying only sticky buffers or empty headers produce catastrophic false positives across benign traffic."
+            )
+
+        # Gate 1.1: Repetition & Loop Guard
+        if len(detection_ops) > 15:
+            errors.append(
+                f"Excessive detection nodes ({len(detection_ops)} options). Safety threshold is 15 options; "
+                f"this indicates an autoregressive model repetition loop."
+            )
+
+        # Consecutive duplicate options
+        for idx in range(1, len(detection_ops)):
+            if detection_ops[idx].name.lower().strip() == detection_ops[idx - 1].name.lower().strip():
+                errors.append(
+                    f"Repetitive declaration loop: option '{detection_ops[idx].name}' declared multiple times consecutively."
+                )
+
+        # Duplicate buffer declarations
+        seen_bufs: Set[str] = set()
+        for opt in detection_ops:
+            b_name = opt.name.lower().strip()
+            if opt.value is None or is_valid_buffer(b_name):
+                if b_name in seen_bufs:
+                    errors.append(
+                        f"Duplicate buffer declaration: Sticky buffer '{opt.name};' declared multiple times in detection conditions."
+                    )
+                seen_bufs.add(b_name)
+
+        # Consecutive sticky buffers without intervening content / inspection conditions
+        for idx in range(1, len(detection_ops)):
+            prev_opt = detection_ops[idx - 1]
+            curr_opt = detection_ops[idx]
+            if (prev_opt.value is None or is_valid_buffer(prev_opt.name.lower().strip())) and \
+               (curr_opt.value is None or is_valid_buffer(curr_opt.name.lower().strip())):
+                errors.append(
+                    f"Degenerate buffer chain: Sticky buffer '{curr_opt.name};' directly follows buffer '{prev_opt.name};' "
+                    f"without an intervening content match or inspection condition."
+                )
+
+        # Gate 1.2: Strict Buffer Whitelist & Unknown Keyword Validation
+        known_option_names: Set[str] = VALID_STICKY_BUFFERS | VALID_NUMERIC_BINARY_OPTIONS | {
+            "content", "pcre", "regex", "isdataat", "bufferlen", "dsize", "flags",
+            "itype", "icode", "msg", "flow", "classtype", "sid", "rev", "metadata",
+            "reference", "service", "priority", "detection_filter", "tag", "replace",
+            "ttl", "tos", "ip_proto", "icmp_id", "icmp_seq", "fast_pattern", "nocase",
+            "offset", "depth", "distance", "within", "ssl_state", "ssl_version", "tls_sni"
+        }
+        for opt in detection_ops:
+            o_name = opt.name.lower().strip()
+            if opt.value is None and not is_valid_buffer(o_name):
+                errors.append(
+                    f"Invalid Snort 3 sticky buffer keyword: '{opt.name};' is not a recognized Snort 3 sticky buffer. "
+                    f"Allowed buffers: {', '.join(sorted(VALID_STICKY_BUFFERS))}."
+                )
+            elif o_name not in known_option_names:
+                errors.append(
+                    f"Unrecognized Snort 3 option keyword: '{opt.name}'. This option does not exist in Snort 3."
+                )
+
+        # Gate 1.3: Deprecated Snort 2 Keywords & Unsupported Keywords (e.g. dns_query)
         for opt in options:
+            o_name = opt.name.lower().strip()
+            if o_name == "dns_query":
+                errors.append(
+                    "Invalid keyword: 'dns_query;' is not supported in Snort 3 core. "
+                    "DNS queries on UDP 53 must match directly against raw UDP payload using length-byte wire-format hex encoding "
+                    "(e.g. content:\"|08|carwaded|03|com|00|\",fast_pattern,nocase;)."
+                )
             dep_msg = check_deprecated_snort2_option(opt.name)
             if dep_msg:
                 errors.append(f"Deprecated Snort 2 Option '{opt.name}': {dep_msg}")
@@ -823,9 +923,15 @@ class DetectionValidator:
         if fp_count > 1:
             errors.append(f"Multiple fast_pattern modifiers specified ({fp_count}). Snort 3 permits at most one fast_pattern per rule.")
 
-        # Gate 2.1: Invariant Sanitization & Brittle Single-Character Anchor Check
+        # Gate 2.1: Invariant Sanitization & Ban Hallucinated Placeholders
         for opt in content_ops:
             val_clean = str(opt.value or "").strip().strip('"').strip("'")
+            val_lower = val_clean.lower()
+            if val_lower in FORBIDDEN_PLACEHOLDERS or any(ph in val_lower for ph in ["malicious_artifact", "observed_pattern", "tcp_flags:", "icmp type"]):
+                errors.append(
+                    f"Forbidden placeholder pattern '{opt.value}': Detection rules must be grounded in "
+                    f"real packet payload invariants, not synthetic LLM placeholders or pseudo-keywords."
+                )
             if val_clean.startswith("!"):
                 val_clean = val_clean[1:].strip()
             c_len = DEFAULT_FILTER.calculate_byte_length(val_clean)
@@ -862,12 +968,15 @@ class DetectionValidator:
 
         # B. DNS Wire-Format Enforcement: Prohibit raw ASCII dot matching on UDP/53
         if proto in ["dns", "udp"] and (dest_port in ["53", "$DNS_PORTS"] or proto == "dns"):
-            has_dns_query = "dns_query" in [b.lower() for b in details["buffers_selected"]]
             for opt in content_ops:
                 val_clean = str(opt.value or "").strip().strip('"').strip("'")
-                if "." in val_clean and not has_dns_query and not (val_clean.startswith("|") and val_clean.endswith("|")):
+                if is_domain_name(val_clean) and not (val_clean.startswith("|") and val_clean.endswith("|")):
                     encoded_example = encode_dns_wire_format(val_clean)
-                    errors.append(f"DNS Wire-Format Violation: Searching for raw domain '{val_clean}' with dots on UDP/53 fails because DNS packets encode domain labels with length bytes. Use 'dns_query;' sticky buffer or wire length encoding (e.g. {encoded_example}).")
+                    errors.append(
+                        f"DNS Wire-Format Violation: Searching for raw domain '{val_clean}' with dots on UDP/53 fails "
+                        f"because DNS packets encode domain labels with length bytes. "
+                        f"Encode domain in length-byte wire format (e.g. {encoded_example})."
+                    )
 
         # Gate 3.2: Protocol Constant Blacklist Evaluation (asset/Protocol Constant Blacklist.txt)
         for opt in content_ops:
@@ -891,8 +1000,22 @@ class DetectionValidator:
         if not bin_ok:
             errors.extend(bin_errors)
 
-        # Gate 6: Protocol Suitability
+        # Gate 6: Protocol Suitability & Non-TCP Transport Sanitization
         proto = (header.service or header.protocol if header else hypothesis.target_protocol) or "tcp"
+        proto = proto.lower().strip()
+
+        if proto == "icmp":
+            for opt in options:
+                if opt.name.lower().strip() == "flow":
+                    errors.append("Protocol conflict: The 'flow' option is prohibited on ICMP rules. Snort 3 does not support flow tracking for ICMP traffic.")
+                if opt.name.lower().strip() == "content" and "icmp" in str(opt.value or "").lower():
+                    errors.append("Invalid ICMP syntax: Do not use content:\"ICMP type X\". Use dedicated Snort 3 options 'itype:8;' and/or 'dsize:>1000;'.")
+
+        if proto in ["tcp", "ip"]:
+            for opt in content_ops:
+                if "tcp_flags" in str(opt.value or "").lower():
+                    errors.append("Invalid TCP syntax: Do not use content:\"tcp_flags:...\". Use dedicated Snort 3 options 'flags:S;' or 'flags:A;'.")
+
         proto_ok, proto_errors = validate_protocol_specific_options(detection_ops, proto)
         if not proto_ok:
             errors.extend(proto_errors)
@@ -986,6 +1109,10 @@ class DetectionGenerator:
             if passed:
                 # Commit detection nodes to RuleState components
                 state.components["detection"] = [node.to_dict() for node in proposed_nodes]
+                state.components["synthesis_source"] = "llm"
+                state.components["fallback_used"] = False
+                details["synthesis_source"] = "llm"
+                details["fallback_used"] = False
 
                 # Update AST options (insert detection nodes after msg and flow)
                 self._update_ast_detection_options(state, proposed_nodes)
@@ -1015,10 +1142,19 @@ class DetectionGenerator:
 
         # Retries exhausted: Fall back to deterministic detection synthesizer
         fallback_nodes = self._synthesize_fallback_detection(hyp, header, report)
-        passed, errors, details = self.validator.validate(fallback_nodes, hyp, header)
+        passed = False
+        errors = ["No grounded invariants available"]
+        details = {}
+        if fallback_nodes:
+            passed, errors, details = self.validator.validate(fallback_nodes, hyp, header)
 
         if passed:
             state.components["detection"] = [node.to_dict() for node in fallback_nodes]
+            state.components["synthesis_source"] = "deterministic_fallback"
+            state.components["fallback_used"] = True
+            details["synthesis_source"] = "deterministic_fallback"
+            details["fallback_used"] = True
+
             self._update_ast_detection_options(state, fallback_nodes)
             state.record_validation("stage5_detection", passed=True, details=details)
             state.transition(ConstructionState.DETECTION_GENERATED, reason=f"Deterministic fallback detection ({len(fallback_nodes)} nodes) committed.")
@@ -1030,26 +1166,115 @@ class DetectionGenerator:
                 generated_value=[node.to_dict() for node in fallback_nodes],
                 evidence_refs=[inv.get("value") for inv in (hyp.invariant_indicators or []) if isinstance(inv, dict)],
                 validation_errors=[],
-                reasoning_summary=f"Synthesized fallback detection ({len(fallback_nodes)} AST nodes)."
+                reasoning_summary=f"Synthesized deterministic telemetry fallback detection ({len(fallback_nodes)} AST nodes) grounded in verified PCAP telemetry invariants."
             )
             state.stage_results["stage5_detection"] = stage_result.to_dict()
             state.last_stage_result = stage_result.to_dict()
             state.save_checkpoint(5)
             return state
 
-        # Complete failure
-        state.transition(ConstructionState.CONSTRUCTION_FAILED, reason=f"Stage 5 Detection generation failed validation: {'; '.join(validation_errors)}")
+        # If fallback validation failed or no distinctive invariant was found:
+        # Transition to CORRELATION_ONLY to avoid synthesizing empty or broad rules that fire false alarms on benign traffic.
+        state.transition(
+            ConstructionState.CORRELATION_ONLY,
+            reason=f"No distinctive payload or transport invariants discovered in PCAP evidence: {'; '.join(validation_errors or errors)}. Preserved as correlation incident."
+        )
         fail_result = StageResult(
-            status="failed",
+            status="correlation_only",
             component="detection",
             generated_value=None,
             evidence_refs=[inv.get("value") for inv in (hyp.invariant_indicators or []) if isinstance(inv, dict)],
-            validation_errors=validation_errors,
-            reasoning_summary="Stage 5 Detection generation failed validation retries and fallback."
+            validation_errors=validation_errors or errors,
+            reasoning_summary="Detection generation transitioned to correlation-only: insufficient discriminative payload invariants."
         )
         state.stage_results["stage5_detection"] = fail_result.to_dict()
         state.last_stage_result = fail_result.to_dict()
         return state
+
+    @staticmethod
+    def _extract_payload_candidates(report: Optional[Dict[str, Any]], hypothesis: DetectionHypothesis) -> List[Dict[str, Any]]:
+        """
+        Extract verified, grounded packet payload substrings and DNS wire encodings
+        from report telemetry so the LLM has hard evidence to anchor its rules.
+        """
+        candidates: List[Dict[str, Any]] = []
+        seen: Set[str] = set()
+
+        if not report:
+            return candidates
+
+        net_behav = report.get("network_behaviour", {})
+
+        # 1. DNS queries -> extract wire format hex
+        dns_queries = net_behav.get("dns_queries", [])
+        for dq in dns_queries:
+            qname = dq.get("query_name", "")
+            if qname and is_domain_name(qname):
+                parts = qname.strip(".").split(".")
+                domain_list = [qname]
+                if len(parts) >= 2:
+                    parent_domain = ".".join(parts[-2:])
+                    if parent_domain not in domain_list:
+                        domain_list.append(parent_domain)
+                for d in domain_list:
+                    wire = encode_dns_wire_format(d)
+                    if wire not in seen:
+                        seen.add(wire)
+                        candidates.append({
+                            "type": "dns_wire_format",
+                            "domain": d,
+                            "wire_hex": wire,
+                            "recommended_content": wire,
+                            "notes": f"DNS query wire format for '{d}' (use content:\"{wire}\",fast_pattern,nocase; on UDP 53)"
+                        })
+
+        # 2. HTTP requests -> extract URIs and headers
+        http_reqs = net_behav.get("http_requests", [])
+        for hr in http_reqs:
+            uri = hr.get("uri", "")
+            if uri and len(uri) >= 3 and uri not in seen:
+                seen.add(uri)
+                candidates.append({
+                    "type": "http_uri",
+                    "value": uri,
+                    "recommended_buffer": "http_uri",
+                    "notes": f"Observed HTTP URI path: {uri}"
+                })
+            host = hr.get("host", "")
+            if host and host not in seen:
+                seen.add(host)
+                candidates.append({
+                    "type": "http_header",
+                    "value": f"Host: {host}",
+                    "recommended_buffer": "http_header",
+                    "notes": f"Observed HTTP Host header: {host}"
+                })
+            ua = hr.get("user_agent", "")
+            if ua and len(ua) >= 5 and ua not in seen:
+                seen.add(ua)
+                candidates.append({
+                    "type": "http_header",
+                    "value": ua,
+                    "recommended_buffer": "http_header",
+                    "notes": f"Observed User-Agent header: {ua}"
+                })
+
+        # 3. Packet evidence / raw payloads
+        pkt_ev = report.get("packet_evidence", [])
+        for pkt in pkt_ev:
+            payload = pkt.get("payload", "") or pkt.get("data", "")
+            if payload:
+                tokens = re.findall(r"[A-Za-z0-9_\-\.\/]{5,}", payload)
+                for t in tokens[:5]:
+                    if t not in seen and not t.isdigit() and t.lower() not in FORBIDDEN_PLACEHOLDERS:
+                        seen.add(t)
+                        candidates.append({
+                            "type": "packet_payload_substring",
+                            "value": t,
+                            "notes": f"Observed packet payload substring from packet #{pkt.get('packet_number', '?')}"
+                        })
+
+        return candidates[:12]
 
     def _propose_detection_llm(
         self,
@@ -1070,6 +1295,7 @@ class DetectionGenerator:
         header_str = header.render() if header else "alert tcp $EXTERNAL_NET any -> $HOME_NET any"
         stage5_catalogue = format_stage_catalogue_for_llm(5)
         ev_refs = hypothesis.evidence.get("triggering_packets", [])
+        payload_candidates = self._extract_payload_candidates(report, hypothesis)
 
         msg_part = f'msg:"{msg_str}"; ' if msg_str else ""
         flow_part = f'flow:{flow_str}; ' if flow_str else ""
@@ -1089,6 +1315,9 @@ Please strictly fix these issues:
 4. Do not combine 'distance' and 'depth' on the same content match.
 5. If using 'within', ensure within value is >= the length of the string pattern.
 6. If using relative modifiers (distance, within), ensure there is a preceding content match in the same buffer.
+7. NEVER invent placeholders like 'malicious_artifact' or 'observed_pattern'.
+8. DNS rules: DO NOT use 'dns_query;'. Use raw UDP length-byte wire format hex (e.g. '|08|carwaded|03|com|00|').
+9. ICMP rules: DO NOT use 'flow:'. Use 'itype:8;' and/or 'dsize:>1000;'.
 """
 
         user_prompt = f"""You are the Snort 3 Rule Engineer operating Stage 5: Detection Generation.
@@ -1120,6 +1349,16 @@ Output strictly valid JSON array conforming to this schema:
   - Option #1 (flow): {flow_str or 'Omitted'}
 - Current Rule Prefix:
   {rule_prefix}
+
+4. GROUND TRUTH EVIDENCE CANDIDATES (FROM PCAP TELEMETRY):
+{json.dumps(payload_candidates, indent=2)}
+
+CRITICAL GROUNDING & SYNTAX RULES:
+1. You MUST anchor content patterns in the real extracted payload candidates above or verified invariant indicators. NEVER hallucinate strings like "malicious_artifact", "observed_pattern", or "suspicious_payload".
+2. DNS Rules: Snort 3 core DOES NOT support 'dns_query;'. For DNS queries on UDP 53, DO NOT write 'dns_query;'. Instead, match on raw UDP payload using length-byte wire format (e.g. '|08|carwaded|03|com|00|') provided in payload_candidates.
+3. ICMP Rules: Snort 3 DOES NOT support 'flow' tracking for ICMP traffic. NEVER include 'flow:' on ICMP rules. Use dedicated Snort 3 options 'itype:8;' (for echo request) and/or 'dsize:>1000;' (for packet payload size).
+4. TCP Flags: NEVER write content:"tcp_flags:SYN". Use the dedicated keyword 'flags:S;' or 'flags:A;'.
+5. HTTP Rules: Always use dedicated sticky buffers (http_uri, http_header, http_client_body).
 {retry_feedback}
 """
 
@@ -1158,6 +1397,7 @@ You output strictly valid JSON array without conversational text or codeblock wr
         Deterministic, high-fidelity detection synthesizer.
         Extracts verified invariant indicators and constructs compliant Snort 3 detection AST nodes.
         Enforces protocol constant filtering, minimum length, and protocol-aware sticky buffers.
+        Grounded in real packet telemetry, zero hallucinated placeholders.
         """
         nodes: List[RuleOptionAST] = []
         invariants = hypothesis.invariant_indicators or []
@@ -1165,23 +1405,78 @@ You output strictly valid JSON array without conversational text or codeblock wr
         proto = (header.service or header.protocol if header else hypothesis.target_protocol) or "tcp"
         proto = proto.lower().strip()
         dest_port = str(header.dest_port) if header else ""
+        obj_lower = (hypothesis.detection_objective or "").lower()
+        beh_lower = (hypothesis.target_behaviour or "").lower()
+        fam_lower = (getattr(hypothesis, "malware_family", "") or "").lower()
 
-        # 1. Determine primary buffer with protocol-awareness
+        # 1. ICMP Fallback (itype / dsize, no flow)
+        if proto == "icmp" or "icmp" in obj_lower or "ping" in obj_lower:
+            nodes.append(RuleOptionAST(name="itype", value="8"))
+            if any(k in obj_lower or k in beh_lower for k in ["large", "size", "1000", "diagnostic"]):
+                nodes.append(RuleOptionAST(name="dsize", value=">1000"))
+            return nodes
+
+        # 2. TCP Port Scan / SYN Scan Fallback (flags:S)
+        if proto == "tcp" and (any(k in beh_lower or k in obj_lower or k in fam_lower for k in ["scan", "syn", "recon", "probe"]) or dest_port in ["22", "2222", "2022"]):
+            nodes.append(RuleOptionAST(name="flags", value="S"))
+            return nodes
+
+        # 3. DNS Traffic on UDP/53 (Wire-Format Encoding on raw UDP, NO dns_query;)
+        if proto in ["dns", "udp"] and (dest_port in ["53", "$DNS_PORTS"] or proto == "dns"):
+            target_domain = None
+            if report and report.get("network_behaviour", {}).get("dns_queries"):
+                for dq in report["network_behaviour"]["dns_queries"]:
+                    qname = dq.get("query_name", "")
+                    if qname and is_domain_name(qname):
+                        parts = qname.strip(".").split(".")
+                        if len(parts) >= 2:
+                            target_domain = ".".join(parts[-2:])
+                        else:
+                            target_domain = qname
+                        break
+            if not target_domain:
+                for inv in invariants:
+                    v = str(inv.get("value", "") if isinstance(inv, dict) else str(inv)).strip()
+                    if is_domain_name(v):
+                        target_domain = v
+                        break
+
+            if target_domain:
+                wire_val = encode_dns_wire_format(target_domain)
+                nodes.append(RuleOptionAST(
+                    name="content",
+                    value=wire_val,
+                    modifiers={"fast_pattern": True, "nocase": True}
+                ))
+                return nodes
+
+        # 4. HTTP Traffic
+        has_http_traffic = bool(report and report.get("network_behaviour", {}).get("http_requests"))
         buf = select_detection_buffer(hypothesis, header)
-        if (proto == "dns" or dest_port in ["53", "$DNS_PORTS"]) and buf in [None, "pkt_data"]:
-            buf = "dns_query"
-        elif (proto == "http" or dest_port in ["$HTTP_PORTS", "80", "8080"]) and buf in [None, "pkt_data"]:
+        if (proto == "http" or dest_port in ["$HTTP_PORTS", "80", "8080"] or has_http_traffic) and buf in [None, "pkt_data"]:
             buf = "http_uri"
 
         if buf and buf != "pkt_data":
             nodes.append(RuleOptionAST(name=buf, value=None))
 
-        # 2. Extract and filter invariants through ProtocolConstantFilter
+        # 5. Extract real patterns from invariants and report
         patterns: List[Tuple[str, str]] = []
+
+        # Grounded HTTP request URIs from telemetry (e.g. PCAP_002 /products?id=1')
+        if (buf == "http_uri" or proto == "http" or has_http_traffic) and report and report.get("network_behaviour", {}).get("http_requests"):
+            for hr in report["network_behaviour"]["http_requests"]:
+                uri = hr.get("uri", "")
+                if uri and len(uri) >= 4 and uri != "/":
+                    patterns.append((uri, "content"))
+                    break
+
         for inv in invariants:
             val = str(inv.get("value", "") if isinstance(inv, dict) else str(inv)).strip()
             inv_type = str(inv.get("type", "content") if isinstance(inv, dict) else "content")
             if not val or len(val) < 2:
+                continue
+
+            if val.lower() in FORBIDDEN_PLACEHOLDERS or any(ph in val.lower() for ph in ["malicious_artifact", "observed_pattern", "tcp_flags:"]):
                 continue
 
             # Evaluate with Protocol Constant Filter
@@ -1191,24 +1486,20 @@ You output strictly valid JSON array without conversational text or codeblock wr
                 buffer_name=buf,
                 is_standalone=False
             )
-            # Skip hard protocol constants (e.g. |00 01 00 01|, GET, Mozilla/5.0)
             if eval_res.is_hard_exclusion:
                 continue
 
-            # Format domain if on raw UDP without dns_query
-            if is_domain_name(val) and buf != "dns_query" and proto in ["dns", "udp"]:
+            if is_domain_name(val) and proto in ["dns", "udp"]:
                 val = encode_dns_wire_format(val)
 
-            # Enforce minimum length >= 4 bytes
             if DEFAULT_FILTER.calculate_byte_length(val) >= 4:
-                patterns.append((val, inv_type))
+                if not any(p[0] == val for p in patterns):
+                    patterns.append((val, inv_type))
 
         if not patterns:
-            # Fallback distinctive indicator if all invariants were protocol constants
-            fallback_val = "distinctive_c2_pattern"
-            if proto == "dns" or dest_port in ["53", "$DNS_PORTS"]:
-                fallback_val = "malicious-c2-beacon.domain"
-            patterns.append((fallback_val, "content"))
+            # Cannot synthesize a grounded rule without telemetry evidence
+            # Returning empty nodes triggers transition to CORRELATION_ONLY
+            return []
 
         # Primary anchor content match
         primary_val, primary_type = patterns[0]
@@ -1218,7 +1509,7 @@ You output strictly valid JSON array without conversational text or codeblock wr
             modifiers={"fast_pattern": True, "nocase": True}
         ))
 
-        # Secondary chained content match (relative positioning) only if both patterns co-occur in same packet evidence
+        # Secondary match if co-occurs in same packet evidence
         if len(patterns) > 1:
             sec_val, sec_type = patterns[1]
             co_occurs = False

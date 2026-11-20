@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"PROTOCOL-DNS Qakbot DNS spoofing attempt detected"; flow:to_server; pkt_data; content:"|04|wpad|0A|mytallbeer|03|com|00|",nocase,fast_pattern; content:"|00|00|00|3C|",nocase; service:dns; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family Qakbot_Banking_Trojan; sid:9002035; rev:1; )

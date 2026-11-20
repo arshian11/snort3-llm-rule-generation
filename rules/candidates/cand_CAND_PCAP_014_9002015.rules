@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC-SLIVER HTTP beacon outbound GET /333g100/ payload retrieval"; flow:to_server,established,only_stream,no_frag; http_uri; content:"/333g100/",nocase,fast_pattern; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family Sliver_C2; sid:9002015; rev:1; )

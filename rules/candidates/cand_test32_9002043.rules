@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"PROTOCOL-DNS ozymandns-txt.com query"; flow:to_server; content:"|0E|ozymandns-txt|03|com|00|",fast_pattern,nocase; classtype:trojan-activity; sid:9002043; rev:1; )

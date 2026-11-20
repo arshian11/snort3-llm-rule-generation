@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET 80 ( msg:"EXPLOIT-WEB SQL Injection attempt"; content:"UNION SELECT",fast_pattern,nocase; classtype:web-application-attack; sid:9002002; rev:1; )

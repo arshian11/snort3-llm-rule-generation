@@ -55,11 +55,26 @@
         "byte_count": 145,
         "tcp_flags": [
           "0x0018"
-        ]
+        ],
+        "zeek_conn_state": "OTH",
+        "zeek_service": "other"
       }
     ],
     "periodic_connections": [],
-    "suspicious_flows": []
+    "suspicious_flows": [],
+    "zeek": {
+      "total_connections": 1,
+      "connection_states": {
+        "OTH": 1
+      },
+      "detected_services": {
+        "other": 1
+      },
+      "files_transferred": [],
+      "ssl_certificates": [],
+      "ssl_sessions": [],
+      "failed_connections": []
+    }
   },
   "correlations": [],
   "packet_evidence": [
@@ -75,9 +90,42 @@
   "event_graph": {
     "nodes": [
       {
+        "id": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "label": "Flow: TCP 80 (OTH)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0596,
+        "betweenness_score": 0.0833,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_002",
+            "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+            "packets": [
+              1
+            ],
+            "byte_count": 145,
+            "packet_count": 1,
+            "duration": 0.0,
+            "start_time": 1794652564.0,
+            "end_time": 1794652564.0,
+            "zeek_conn_state": "OTH",
+            "zeek_service": "other"
+          }
+        }
+      },
+      {
         "id": "alert:1:2101424:1",
         "label": "Alert: GPL SQL UNION SELECT Blind SQL...",
         "type": "alert",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.4358,
+        "betweenness_score": 0.0833,
         "details": {
           "sid": 2101424,
           "priority": 1,
@@ -101,6 +149,10 @@
         "id": "ip:103.251.167.20",
         "label": "103.251.167.20",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0418,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "103.251.167.20"
         }
@@ -109,14 +161,157 @@
         "id": "ip:192.168.1.50",
         "label": "192.168.1.50",
         "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.4628,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "192.168.1.50"
+        }
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "target": "ip:192.168.1.50",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 145,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "OTH",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "alert:1:2101424:1",
+        "target": "ip:192.168.1.50",
+        "relation": "TARGETED_ALERT",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2101424,
+          "gid": 1,
+          "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:103.251.167.20",
+        "target": "alert:1:2101424:1",
+        "relation": "ORIGINATED_ALERT",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "packets": [
+            1
+          ],
+          "alert_sid": 2101424,
+          "gid": 1,
+          "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+          "proto": "TCP",
+          "src_ip": "103.251.167.20",
+          "dst_ip": "192.168.1.50",
+          "timestamp": "11/14-16:06:04.000000"
+        }
+      },
+      {
+        "source": "ip:103.251.167.20",
+        "target": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_002",
+          "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
+          "packets": [
+            1
+          ],
+          "byte_count": 145,
+          "packet_count": 1,
+          "duration": 0.0,
+          "start_time": 1794652564.0,
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "OTH",
+          "zeek_service": "other"
+        }
+      }
+    ]
+  },
+  "raw_graph": {
+    "nodes": [
+      {
+        "id": "alert:1:2101424:1",
+        "label": "Alert: GPL SQL UNION SELECT Blind SQL...",
+        "type": "alert",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "sid": 2101424,
+          "priority": 1,
+          "classification": "custom-detection",
+          "evidence": {
+            "capture_id": "PCAP_002",
+            "packets": [
+              1
+            ],
+            "alert_sid": 2101424,
+            "gid": 1,
+            "msg": "GPL SQL UNION SELECT Blind SQL Injection Attempt",
+            "proto": "TCP",
+            "src_ip": "103.251.167.20",
+            "dst_ip": "192.168.1.50",
+            "timestamp": "11/14-16:06:04.000000"
+          }
+        }
+      },
+      {
+        "id": "ip:103.251.167.20",
+        "label": "103.251.167.20",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "103.251.167.20"
+        }
+      },
+      {
+        "id": "ip:192.168.1.50",
+        "label": "192.168.1.50",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "ip": "192.168.1.50"
         }
       },
       {
         "id": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
-        "label": "Flow: TCP 80",
+        "label": "Flow: TCP 80 (OTH)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "proto": "TCP",
           "src_ip": "103.251.167.20",
@@ -132,7 +327,9 @@
             "packet_count": 1,
             "duration": 0.0,
             "start_time": 1794652564.0,
-            "end_time": 1794652564.0
+            "end_time": 1794652564.0,
+            "zeek_conn_state": "OTH",
+            "zeek_service": "other"
           }
         }
       },
@@ -140,6 +337,10 @@
         "id": "http:1",
         "label": "HTTP: GET /products?id=1'",
         "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "method": "GET",
           "host": "db.corp",
@@ -160,6 +361,10 @@
         "id": "domain:db.corp",
         "label": "db.corp",
         "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {}
       }
     ],
@@ -168,6 +373,7 @@
         "source": "alert:1:2101424:1",
         "target": "ip:192.168.1.50",
         "relation": "TARGETED_ALERT",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_002",
           "packets": [
@@ -186,6 +392,7 @@
         "source": "ip:103.251.167.20",
         "target": "alert:1:2101424:1",
         "relation": "ORIGINATED_ALERT",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_002",
           "packets": [
@@ -204,6 +411,7 @@
         "source": "ip:103.251.167.20",
         "target": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_002",
           "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
@@ -214,13 +422,16 @@
           "packet_count": 1,
           "duration": 0.0,
           "start_time": 1794652564.0,
-          "end_time": 1794652564.0
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "OTH",
+          "zeek_service": "other"
         }
       },
       {
         "source": "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
         "target": "ip:192.168.1.50",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_002",
           "flow_id": "103.251.167.20:39114<->192.168.1.50:80/TCP",
@@ -231,13 +442,16 @@
           "packet_count": 1,
           "duration": 0.0,
           "start_time": 1794652564.0,
-          "end_time": 1794652564.0
+          "end_time": 1794652564.0,
+          "zeek_conn_state": "OTH",
+          "zeek_service": "other"
         }
       },
       {
         "source": "domain:db.corp",
         "target": "http:1",
         "relation": "SERVES_HTTP",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_002",
           "packets": [
@@ -250,5 +464,58 @@
         }
       }
     ]
-  }
+  },
+  "graph_summary": {
+    "total_raw_nodes": 6,
+    "total_raw_edges": 5,
+    "condensed_nodes": 4,
+    "condensed_edges": 4,
+    "pruned_nodes_count": 2,
+    "supernodes_count": 0,
+    "supernode_breakdown": {
+      "flows_folded": 0,
+      "dns_folded": 0,
+      "http_folded": 0,
+      "alerts_folded": 0,
+      "total_supernodes": 0
+    },
+    "threat_clusters_count": 1,
+    "clusters": [
+      {
+        "cluster_id": "cluster_0",
+        "threat_score": 17,
+        "alerts_count": 1,
+        "flows_count": 1,
+        "hosts_count": 2,
+        "nodes_count": 4,
+        "nodes": [
+          "ip:192.168.1.50",
+          "ip:103.251.167.20",
+          "flow:103.251.167.20:39114<->192.168.1.50:80/TCP",
+          "alert:1:2101424:1"
+        ],
+        "title": "Primary Attack Incident"
+      }
+    ],
+    "top_pivots": [
+      {
+        "node_id": "ip:192.168.1.50",
+        "label": "192.168.1.50",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.4628,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:103.251.167.20",
+        "label": "103.251.167.20",
+        "type": "entity_ip",
+        "role": "Attacker Ingress Source",
+        "pagerank_score": 0.0418,
+        "betweenness_score": 0.0
+      }
+    ],
+    "critical_attack_paths": []
+  },
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_002) ===\nGraph Scale: 6 raw nodes condensed into 4 high-signal nodes.\nReduction: Pruned 2 background nodes; folded 0 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 192.168.1.50 [Target Host] - PPR: 0.4628, Centrality: 0.0\n  \u2022 103.251.167.20 [Attacker Ingress Source] - PPR: 0.0418, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 17 | Alerts: 1 | Nodes: 4]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:"
 }

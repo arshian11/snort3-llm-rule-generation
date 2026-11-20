@@ -255,7 +255,7 @@ class RuleConstructionEngine:
         self.flow_generator = FlowGenerator(llm_client=self.client, max_retries=max_retries)
         self.detection_generator = DetectionGenerator(llm_client=self.client, max_retries=max_retries)
         self.supporting_generator = SupportingOptionsGenerator(llm_client=self.client, max_retries=max_retries)
-        self.assembly_manager = RuleAssemblyManager()
+        self.assembly_manager = RuleAssemblyManager(llm_client=self.client, max_retries=max_retries)
         self.max_retries = max_retries
 
     # ═════════════════════════════════════════════════════════════════════════
@@ -695,27 +695,30 @@ Respond strictly with a JSON object conforming exactly to this schema:
             return state
 
         # Proceed through requested stages
+        terminal_states = [ConstructionState.CONSTRUCTION_FAILED.value, ConstructionState.CORRELATION_ONLY.value]
         if target_stage >= 2:
             self.stage2_header_generation(state, report=report)
-            if state.status == ConstructionState.CONSTRUCTION_FAILED.value:
+            if state.status in terminal_states:
                 return state
         if target_stage >= 3:
             self.stage3_message_generation(state, report=report)
-            if state.status == ConstructionState.CONSTRUCTION_FAILED.value:
+            if state.status in terminal_states:
                 return state
         if target_stage >= 4:
             self.stage4_flow_generation(state, report=report)
-            if state.status == ConstructionState.CONSTRUCTION_FAILED.value:
+            if state.status in terminal_states:
                 return state
         if target_stage >= 5:
             self.stage5_detection_generation(state, report=report)
-            if state.status == ConstructionState.CONSTRUCTION_FAILED.value:
+            if state.status in terminal_states:
                 return state
         if target_stage >= 6:
             self.stage6_supporting_options(state, report=report, base_sid=base_sid)
-            if state.status == ConstructionState.CONSTRUCTION_FAILED.value:
+            if state.status in terminal_states:
                 return state
         if target_stage >= 7:
+            if state.status in terminal_states:
+                return state
             self.stage7_final_assembly(
                 state,
                 report=report,

@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET any ( msg:"PROTOCOL-DNS DNS Tunneling covert channel communication detected"; flow:to_server,established; content:"/wp-login.php",nocase,fast_pattern; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family DNS_Tunneling; sid:9002047; rev:1; )

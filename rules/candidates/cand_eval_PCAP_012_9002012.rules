@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC Hancitor Loader outbound HTTP GET request to /api/getn.php with base64-encoded id parameter"; flow:to_server,established,only_stream; http_uri; http_method; http_header; http_cookie; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family Hancitor_Loader__IcedID___ZLoader_; sid:9002013; rev:1; )

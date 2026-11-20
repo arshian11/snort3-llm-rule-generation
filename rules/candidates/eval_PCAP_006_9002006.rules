@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-OTHER CTU-13 Botnet malicious executable download request /setup/kuai8_rjaz.exe"; flow:to_server,established,only_stream,no_frag; http_uri; content:"/setup/kuai8_rjaz.exe",nocase,fast_pattern; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family CTU-13_Botnet; sid:9002007; rev:1; )

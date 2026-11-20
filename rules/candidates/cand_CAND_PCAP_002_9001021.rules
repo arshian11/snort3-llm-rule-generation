@@ -1,0 +1,1 @@
+alert http ( msg:"SERVER-WEBAPP SQL Injection attempt: HTTP GET request with single quote in query string"; flow:to_server,established,only_stream,no_frag; http_uri; http_method; http_header; http_cookie; classtype:web-application-attack; metadata:policy max-detect-ips drop, ruleset community, malware_family SQL_Injection; sid:9001021; rev:1; )

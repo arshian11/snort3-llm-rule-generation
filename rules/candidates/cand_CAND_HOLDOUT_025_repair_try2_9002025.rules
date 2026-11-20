@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET any (msg:"MALWARE-OTHER AMOS Stealer DNS spoofing response"; content:"...", dns_response; content:"\x00\x00\x00\x3C", fast_pattern; sid:9002025; rev:1; )

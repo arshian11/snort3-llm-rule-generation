@@ -1,0 +1,1 @@
+alert icmp $HOME_NET any -> $EXTERNAL_NET any ( msg:"MALWARE-OTHER ICMP Large Echo Request Covert Channel"; itype:8; dsize:>1400; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family ICMP___DNS_Anomalies; sid:9002034; rev:1; )

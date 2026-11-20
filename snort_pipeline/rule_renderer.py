@@ -446,3 +446,218 @@ class RuleRenderer:
         state.ast = RuleAST(header=header_ast, options=ast_options)
         state.rendered_rule_text = cls.render_singleline(state)
         return state
+
+    @classmethod
+    def parse_rule_string(cls, rule_text: str) -> RuleAST:
+        """
+        Parse raw Snort 3 rule text into a compliant RuleAST with exact option preservation.
+        Handles traditional headers, service headers, file headers, sticky buffers,
+        quoted patterns, escaped semicolons, and comma-separated content modifiers.
+        """
+        rule_str = rule_text.strip()
+        m = re.match(r"^([^(]+)\(\s*([\s\S]*?)\s*\)\s*$", rule_str)
+        if not m:
+            raise ValueError(f"Invalid rule format: unable to match header and body in '{rule_text}'")
+
+        header_part = m.group(1).strip()
+        body_part = m.group(2).strip()
+
+        # Parse header tokens
+        tokens = header_part.split()
+        if len(tokens) >= 7:
+            action = tokens[0]
+            proto = tokens[1]
+            src_ip = tokens[2]
+            src_port = tokens[3]
+            direction = tokens[4]
+            dst_ip = tokens[5]
+            dst_port = tokens[6]
+            header = RuleHeaderAST(
+                action=action,
+                header_type="traditional",
+                protocol=proto,
+                source_addr=src_ip,
+                source_port=src_port,
+                direction=direction,
+                dest_addr=dst_ip,
+                dest_port=dst_port
+            )
+        elif len(tokens) == 2:
+            action = tokens[0]
+            h_type = "file" if tokens[1] == "file" else "service"
+            header = RuleHeaderAST(
+                action=action,
+                header_type=h_type,
+                protocol=tokens[1] if h_type == "traditional" else None,
+                service=tokens[1] if h_type == "service" else None
+            )
+        elif len(tokens) == 1 and tokens[0] == "file_id":
+            header = RuleHeaderAST(header_type="file_id")
+        else:
+            header = RuleHeaderAST(action=tokens[0] if tokens else "alert")
+
+        # Parse body options with quote & escape aware semicolon splitting
+        options: List[RuleOptionAST] = []
+        opt_strings: List[str] = []
+        current: List[str] = []
+        in_quotes = False
+        escaped = False
+
+        for char in body_part:
+            if escaped:
+                current.append(char)
+                escaped = False
+            elif char == '\\':
+                current.append(char)
+                escaped = True
+            elif char == '"':
+                in_quotes = not in_quotes
+                current.append(char)
+            elif char == ';' and not in_quotes:
+                s = "".join(current).strip()
+                if s:
+                    opt_strings.append(s)
+                current = []
+            else:
+                current.append(char)
+        trailing = "".join(current).strip()
+        if trailing and trailing != ")":
+            opt_strings.append(trailing)
+
+        for opt_str in opt_strings:
+            if ":" not in opt_str:
+                # Sticky buffer or flag option like 'http_uri', 'file_data', 'raw_data', 'dns_query'
+                options.append(RuleOptionAST(name=opt_str.strip(), value=None))
+                continue
+
+            opt_name, opt_val = opt_str.split(":", 1)
+            opt_name = opt_name.strip()
+            opt_val = opt_val.strip()
+
+            if opt_name == "content":
+                is_neg = False
+                if opt_val.startswith("!"):
+                    is_neg = True
+                    opt_val = opt_val[1:].strip()
+
+                pattern = ""
+                mod_str = ""
+                if opt_val.startswith('"'):
+                    end_q = -1
+                    esc = False
+                    for idx in range(1, len(opt_val)):
+                        if esc:
+                            esc = False
+                        elif opt_val[idx] == '\\':
+                            esc = True
+                        elif opt_val[idx] == '"':
+                            end_q = idx
+                            break
+                    if end_q != -1:
+                        pattern = opt_val[1:end_q]
+                        mod_str = opt_val[end_q + 1:].lstrip(",").strip()
+                    else:
+                        pattern = opt_val.strip('"')
+                elif opt_val.startswith("|"):
+                    end_bar = opt_val.find("|", 1)
+                    if end_bar != -1:
+                        pattern = opt_val[:end_bar + 1]
+                        mod_str = opt_val[end_bar + 1:].lstrip(",").strip()
+                    else:
+                        pattern = opt_val
+                else:
+                    if "," in opt_val:
+                        parts = opt_val.split(",", 1)
+                        pattern = parts[0].strip()
+                        mod_str = parts[1].strip()
+                    else:
+                        pattern = opt_val
+
+                modifiers: Dict[str, Any] = {}
+                if mod_str:
+                    for mod_token in [m.strip() for m in mod_str.split(",") if m.strip()]:
+                        if mod_token == "nocase":
+                            modifiers["nocase"] = True
+                        elif mod_token == "fast_pattern":
+                            modifiers["fast_pattern"] = True
+                        elif mod_token.startswith("fast_pattern"):
+                            modifiers["fast_pattern"] = mod_token.split(None, 1)[1]
+                        elif mod_token.startswith("offset"):
+                            modifiers["offset"] = int(mod_token.split(None, 1)[1])
+                        elif mod_token.startswith("depth"):
+                            modifiers["depth"] = int(mod_token.split(None, 1)[1])
+                        elif mod_token.startswith("distance"):
+                            modifiers["distance"] = int(mod_token.split(None, 1)[1])
+                        elif mod_token.startswith("within"):
+                            modifiers["within"] = int(mod_token.split(None, 1)[1])
+
+                val_res = f"!{pattern}" if is_neg else pattern
+                options.append(RuleOptionAST(name="content", value=val_res, modifiers=modifiers))
+
+            elif opt_name == "pcre":
+                clean_p = opt_val.strip().strip('"')
+                options.append(RuleOptionAST(name="pcre", value=clean_p))
+
+            elif opt_name == "regex":
+                clean_r = opt_val.strip().strip('"')
+                options.append(RuleOptionAST(name="regex", value=clean_r))
+
+            elif opt_name == "msg":
+                clean_m = opt_val.strip().strip('"')
+                clean_m = clean_m.replace('\\"', '"').replace('\\;', ';')
+                options.append(RuleOptionAST(name="msg", value=clean_m))
+
+            elif opt_name in ["sid", "rev", "gid", "priority"]:
+                try:
+                    options.append(RuleOptionAST(name=opt_name, value=int(opt_val)))
+                except ValueError:
+                    options.append(RuleOptionAST(name=opt_name, value=opt_val))
+
+            elif opt_name == "flow":
+                tokens = [t.strip() for t in opt_val.split(",")]
+                options.append(RuleOptionAST(name="flow", value=tokens))
+
+            else:
+                clean_v = opt_val.strip().strip('"')
+                options.append(RuleOptionAST(name=opt_name, value=clean_v))
+
+        return RuleAST(header=header, options=options)
+
+    @classmethod
+    def parse_rule_to_state(
+        cls,
+        rule_text: str,
+        candidate_id: str = "CAND_001",
+        hypothesis_id: Optional[str] = None
+    ) -> RuleState:
+        """
+        Reconstruct a complete RuleState from raw Snort 3 rule text.
+        Synchronizes AST, components store, rendered text, and status.
+        """
+        ast = cls.parse_rule_string(rule_text)
+        state = RuleState(candidate_id=candidate_id, hypothesis_id=hypothesis_id)
+        state.ast = ast
+        state.status = ConstructionState.RULE_ASSEMBLED.value
+        state.rendered_rule_text = cls.render_singleline(state)
+
+        # Sync components store
+        state.components["header"] = ast.header.to_dict()
+        for opt in ast.options:
+            if opt.name == "msg":
+                state.components["msg"] = opt.value
+            elif opt.name == "flow":
+                state.components["flow"] = opt.value
+            elif opt.name == "sid":
+                state.components["sid"] = opt.value
+            elif opt.name == "rev":
+                state.components["rev"] = opt.value
+            elif opt.name == "classtype":
+                state.components["classification"] = opt.value
+            elif opt.name == "reference":
+                state.components["references"].append(opt.value)
+            elif opt.name == "metadata":
+                state.components["metadata"].append(opt.value)
+            elif opt.name in ["content", "pcre", "regex", "byte_test", "byte_jump", "isdataat"]:
+                state.components["detection"].append(opt.to_dict())
+
+        return state

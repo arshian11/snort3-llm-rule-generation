@@ -232,17 +232,17 @@ SNORT3_OPTION_CATALOGUE: Dict[str, OptionSpec] = {
         version_constraints="New in Snort 3. Dedicated sticky buffer for extracted TLS SNI hostname."
     ),
 
-    "dns_query": OptionSpec(
-        name="dns_query",
+    "dns_wire_format": OptionSpec(
+        name="dns_wire_format",
         stage=5,
-        category="buffer",
-        syntax="dns_query;",
-        arguments_and_types={"argument": "None (standalone sticky buffer option)"},
-        dependencies=["Requires DNS inspector enabled. Scopes subsequent payload matches to normalized domain query."],
-        compatibility_restrictions=["Applies to DNS client query transactions. Normalizes domain dot separators so ASCII dots match."],
+        category="detection",
+        syntax='content:"|<len>|<label>|<len>|<tld>|00|",fast_pattern,nocase;',
+        arguments_and_types={"argument": "DNS wire length-byte encoded domain string (e.g. |08|carwaded|03|com|00|)"},
+        dependencies=["Applies to DNS UDP/TCP port 53."],
+        compatibility_restrictions=["Snort 3 core inspection requires binary length-byte encoding for DNS queries on UDP/TCP 53. Do NOT use 'dns_query;' keyword (unsupported in Snort 3 core)."],
         applicable_protocols_and_buffers=["DNS queries (UDP/TCP 53)"],
-        examples=["dns_query; content:\"carwaded.com\",fast_pattern,nocase;"],
-        version_constraints="New in Snort 3 sticky buffer architecture. Replaces complex binary length-byte matching on raw UDP payload."
+        examples=['alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"MALWARE-CNC Sliver C2 DNS"; flow:to_server; content:"|08|carwaded|03|com|00|",fast_pattern,nocase; classtype:trojan-activity; sid:9002027; rev:1; )'],
+        version_constraints="Standard Snort 3 DNS detection on UDP 53. Encode domain labels with length bytes."
     ),
 
     "http_cookie": OptionSpec(

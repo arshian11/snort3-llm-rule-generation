@@ -1,0 +1,1 @@
+alert icmp $EXTERNAL_NET any -> $HOME_NET any ( msg:"PROTOCOL-DNS Large ICMP Echo Request payload >1000 bytes detected"; flow:to_server; content:"ICMP type 8",nocase,fast_pattern; classtype:attempted-recon; metadata:policy max-detect-ips drop, ruleset community, malware_family ICMP___DNS_Anomalies; sid:9002005; rev:1; )

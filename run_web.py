@@ -21,6 +21,7 @@ def main():
     parser.add_argument("--pcap-dir", type=str, default=None, help="Path to PCAP directory (default: PCAP_dataset)")
     parser.add_argument("--log-file", type=str, default=None, help="Path to initial Snort alert log file to load")
     parser.add_argument("--tail", type=str, default=None, help="Path to Snort alert log file to tail live")
+    parser.add_argument("--reset-candidates", action="store_true", help="Explicitly archive existing candidates to candidates_history.json and start with clean candidates.json")
     args = parser.parse_args()
 
     # Add web directory to path
@@ -29,12 +30,14 @@ def main():
     sys.path.insert(0, str(web_dir))
     sys.path.insert(0, str(repo_dir))
 
-    # Keep candidates.json clean/empty on boot-up; archive prior candidates to candidates_history.json
-    try:
-        from snort_pipeline.lifecycle import RuleLifecycleManager
-        RuleLifecycleManager().archive_and_reset_candidates()
-    except Exception as e:
-        print(f"[!] Note: Candidate lifecycle boot check: {e}")
+    # Only archive candidates if explicitly requested by the analyst via --reset-candidates
+    if args.reset_candidates:
+        try:
+            from snort_pipeline.lifecycle import RuleLifecycleManager
+            archived = RuleLifecycleManager().archive_and_reset_candidates()
+            print(f"[*] Explicit reset requested: Archived {archived} candidates into candidates_history.json.")
+        except Exception as e:
+            print(f"[!] Note: Candidate lifecycle archive: {e}")
 
     from server import app, load_log_file, start_tailing_log, run_on_pcap_target
     print("=" * 70)

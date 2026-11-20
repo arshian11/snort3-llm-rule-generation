@@ -1,0 +1,1 @@
+alert http (msg:"WEB-APP SQL Injection Attempt - single-quote in URI"; flow:to_server,established; http_uri; content:"'",nocase,fast_pattern; pcre:"/\b(SELECT|UNION|OR|AND)\b/is"; classtype:web-application-attack; sid:9001022; rev:1; )

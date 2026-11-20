@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $EXTERNAL_NET 53 (msg:"PROTOCOL-DNS DNS_TUNNELING High-entropy DNS query to .ozymandns-txt.com suffix"; flow:to_server; content:"|08|carwaded|03|com|00|",raw_data; sid:9002043; rev:1; )

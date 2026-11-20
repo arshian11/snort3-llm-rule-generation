@@ -1,0 +1,1 @@
+alert udp $EXTERNAL_NET 53 -> $HOME_NET any ( msg:"MALWARE-OTHER AMOS Stealer DNS spoofing response with TTL 60 and no authority section"; flow:to_server; dns_query; content:"00 00 00 3C",fast_pattern; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family AMOS_Stealer; sid:9002025; rev:1; )

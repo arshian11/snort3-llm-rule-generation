@@ -29,10 +29,6 @@ llm_engine = LLMAnalysisEngine()
 validator = RuleValidator(dataset_manager=dataset_mgr)
 lifecycle_mgr = RuleLifecycleManager()
 
-# On web server startup: archive existing candidates into candidates_history.json
-# and keep candidates.json clean/empty
-lifecycle_mgr.archive_and_reset_candidates()
-
 @pipeline_bp.route("/dataset", methods=["GET"])
 def get_dataset():
     """Return all registered PCAPs grouped by split and ground truth."""
@@ -104,6 +100,19 @@ def get_report(capture_id: str):
                 or not data.get("snort", {}).get("pcap_hash")
             )
             if not is_stub:
+                # Automatically upgrade legacy reports lacking graph_summary / supernode reduction
+                if "graph_summary" not in data or not data.get("raw_graph"):
+                    try:
+                        corr_res = correlator.correlate(capture_id, data.get("snort", {}), data.get("network_behaviour", {}))
+                        data["event_graph"] = corr_res.get("event_graph")
+                        data["raw_graph"] = corr_res.get("raw_graph")
+                        data["graph_summary"] = corr_res.get("graph_summary")
+                        data["linearized_stories"] = corr_res.get("linearized_stories")
+                        with open(rep_file, "w", encoding="utf-8") as wf:
+                            json.dump(data, wf, indent=2)
+                    except Exception as ce:
+                        print(f"[!] Graph summary upgrade warning for {capture_id}: {ce}")
+
                 # If cached SOC report exists, attach it to report response
                 soc_file = REPORTS_DIR / f"{capture_id}_soc_report.json"
                 if soc_file.is_file():
@@ -604,6 +613,8 @@ def run_hdirc_stage7_route(capture_id: str):
             "confidence": "high",
             "status": "APPROVED_DEPLOYED" if (state.status == "approved" and tp_res.get("passed", True) and fp_res.get("passed", True)) else "PENDING_REVIEW",
             "source_pcap": capture_id,
+            "synthesis_source": state.components.get("synthesis_source", "llm"),
+            "fallback_used": state.components.get("fallback_used", False),
             "hdirc_stage1": state.hypothesis.to_dict() if state.hypothesis else None,
             "validation_results": {
                 "rule_id": sid,
@@ -716,6 +727,16 @@ def get_rules():
         "total_candidates": len(cands),
         "candidates": cands,
         "audit_log": lifecycle_mgr.audit_log[-100:]
+    })
+
+@pipeline_bp.route("/rules/reset", methods=["POST"])
+def reset_candidates():
+    """Explicitly archive and reset candidates.json for the current web session."""
+    archived = lifecycle_mgr.archive_and_reset_candidates()
+    return jsonify({
+        "status": "success",
+        "archived_count": archived,
+        "message": f"Archived {archived} candidates and reset candidates.json to empty."
     })
 
 @pipeline_bp.route("/rules/history", methods=["GET"])

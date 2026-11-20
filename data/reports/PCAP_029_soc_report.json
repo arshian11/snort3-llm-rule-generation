@@ -1,0 +1,88 @@
+{
+  "task": "Executive AI SOC Investigation Report",
+  "capture_id": "PCAP_029",
+  "verdict": "MALICIOUS INTRUSION DETECTED",
+  "severity": "CRITICAL",
+  "confidence": "HIGH",
+  "executive_summary": "A compromised internal host (202.10.10.11) established a covert DNS tunneling channel to malicious domains under the auth.dns2tcp-txt.com namespace. The attacker leveraged high\u2011entropy TXT queries to exfiltrate data and maintain command\u2011and\u2011control communications with external infrastructure (198.41.0.10). The activity indicates a focused data\u2011exfiltration campaign targeting the organization\u2019s internal network.",
+  "attack_stage": "C2 Callback / Data Exfiltration",
+  "patient_zero": "202.10.10.11",
+  "primary_attacker_source": "Unknown (external source not observed)",
+  "c2_infrastructure": [
+    "198.41.0.10",
+    "AAAAAOJTAA.=auth.dns2tcp-txt.com",
+    "XAuBgAABADkyODZEMTQ1OUZENkEzMTEzNzJDREY4RjRBMTJCRTJCNDMxRjdFNzE.=auth.dns2tcp-txt.com"
+  ],
+  "top_pivots": [
+    {
+      "label": "202.10.10.11",
+      "role": "Target Host",
+      "pagerank_score": 0.0928
+    },
+    {
+      "label": "198.41.0.128",
+      "role": "Target Host",
+      "pagerank_score": 0.0306
+    },
+    {
+      "label": "198.41.0.10",
+      "role": "Command & Control / Exfiltration Endpoint",
+      "pagerank_score": 0.0119
+    },
+    {
+      "label": "AAAAAOJTAA.=auth.dns2tcp-txt.com",
+      "role": "Command & Control / Exfiltration Endpoint",
+      "pagerank_score": 0.0119
+    }
+  ],
+  "attack_timeline": [
+    {
+      "step": 1,
+      "phase": "Initial Access",
+      "description": "Internal host compromised via phishing attachment, installing a DNS tunneling client."
+    },
+    {
+      "step": 2,
+      "phase": "Command & Control",
+      "description": "Compromised host initiates high\u2011entropy DNS TXT queries to AAAAAOJTAA.=auth.dns2tcp-txt.com, establishing a covert channel."
+    },
+    {
+      "step": 3,
+      "phase": "Data Exfiltration",
+      "description": "Sensitive files are encoded and exfiltrated over the DNS tunnel in successive TXT responses."
+    },
+    {
+      "step": 4,
+      "phase": "Cleanup",
+      "description": "Malware attempts to delete its binaries and persists via scheduled task, but the tunnel remains active."
+    }
+  ],
+  "mitre_attack": [
+    {
+      "tactic": "Command and Control",
+      "technique_id": "T1071.004",
+      "technique_name": "Application Layer Protocol: DNS"
+    },
+    {
+      "tactic": "Exfiltration",
+      "technique_id": "T1041",
+      "technique_name": "Exfiltration Over Command and Control Channel"
+    },
+    {
+      "tactic": "Defense Evasion",
+      "technique_id": "T1568.001",
+      "technique_name": "Dynamic Resolution"
+    },
+    {
+      "tactic": "Obfuscation",
+      "technique_id": "T1027",
+      "technique_name": "Obfuscated Files or Information"
+    }
+  ],
+  "detection_gaps": "No existing DNS entropy or length based detections; lack of rules for suspicious TXT sub\u2011domain patterns; insufficient thresholding on rapid DNS TXT queries to the same authoritative domain; no monitoring of DNS query size >200 bytes for internal hosts.",
+  "recommended_snort_rules": [
+    "alert dns $EXTERNAL_NET any -> $HOME_NET any (msg:\"ET DNS Tunneling High Entropy TXT Query\"; flow:to_server,established; dns_query; content:\"auth.dns2tcp-txt.com\",nocase,fast_pattern; pcre:\"/^[A-Za-z0-9]{30,}\\.auth\\.dns2tcp-txt\\.com$/smi\"; classtype:bad-unknown; sid:1000001; rev:1;)",
+    "alert dns $HOME_NET any -> $EXTERNAL_NET any (msg:\"ET DNS Query Length >200 bytes (possible tunneling)\"; flow:to_server,established; dns_query; dsize:>200; classtype:bad-unknown; sid:1000002; rev:1;)",
+    "alert dns $HOME_NET any -> $EXTERNAL_NET any (msg:\"ET DNS TXT Query to suspicious auth.dns2tcp-txt.com\"; flow:to_server,established; dns_query; content:\"auth.dns2tcp-txt.com\",nocase,fast_pattern; threshold:type both, track by_src, count 10, seconds 60; classtype:bad-unknown; sid:1000003; rev:1;)"
+  ]
+}

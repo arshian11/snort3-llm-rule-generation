@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET 53 (msg:"PROTOCOL-DNS DNS_TUNNELING Data exfiltration via DNS"; flow:to_server,established,only_stream; dns_query; content:"malicious_artifact",nocase,fast_pattern; bufferlen:>30; service:dns; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family DNS_Tunneling; sid:9002026; rev:1; )

@@ -1,0 +1,1 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET 443 (msg:"ET MALWARE Cobalt Strike Beaconing over HTTPS"; flow:to_server,established; http_uri; content:"/beacon",nocase,fast_pattern; content:"id=",nocase; isdataat:30,relative; classtype:trojan-activity; sid:9002048; rev:1;)

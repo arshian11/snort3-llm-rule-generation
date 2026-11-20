@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC Qakbot malicious ZIP payload download via HTTP GET"; flow:to_server,established,only_stream; http_uri; content:"/mnyrzfuljk/mnyrzfuljk.zip",fast_pattern; classtype:trojan-activity; metadata:policy max-detect-ips drop, ruleset community, malware_family Qakbot_Banking_Trojan; sid:9002020; rev:1; )

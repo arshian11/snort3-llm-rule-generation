@@ -150,8 +150,8 @@ VALID_HTTP_BUFFERS: Set[str] = {
 }
 
 VALID_STICKY_BUFFERS: Set[str] = VALID_GENERAL_BUFFERS | VALID_HTTP_BUFFERS | {
-    # Service and protocol buffers
-    "dns_query", "ssl_state", "tls_sni", "sip_header", "sip_body",
+    # Service and protocol buffers (Note: dns_query is NOT supported in Snort 3 core; use wire format on UDP/53)
+    "ssl_state", "tls_sni", "sip_header", "sip_body",
     "dce_stub_data", "modbus_data", "ber_data"
 }
 
@@ -163,7 +163,7 @@ PROTOCOL_OPTIONS_CATALOGUE: Dict[str, Set[str]] = {
     },
     "ssl": {"ssl_state", "ssl_version", "tls_sni"},
     "tls": {"ssl_state", "ssl_version", "tls_sni"},
-    "dns": {"dns_query"},
+    "dns": set(),
     "sip": {"sip_method", "sip_stat_code", "sip_header", "sip_body"},
     "dcerpc": {"dce_iface", "dce_opnum", "dce_stub_data"},
     "modbus": {"modbus_func", "modbus_unit", "modbus_data"},

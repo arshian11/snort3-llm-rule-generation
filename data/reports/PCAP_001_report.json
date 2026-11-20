@@ -161,45 +161,12 @@
   "event_graph": {
     "nodes": [
       {
-        "id": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-        "label": "Flow: TCP 443 (S1)",
-        "type": "flow",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.0277,
-        "betweenness_score": 0.0079,
-        "details": {
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "dst_port": 443,
-          "evidence": {
-            "capture_id": "PCAP_001",
-            "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-            "packets": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "byte_count": 464,
-            "packet_count": 5,
-            "duration": 4.004,
-            "start_time": 1794652564.0,
-            "end_time": 1794652568.004,
-            "zeek_conn_state": "S1",
-            "zeek_service": "http"
-          }
-        }
-      },
-      {
         "id": "http:4",
         "label": "HTTP: POST /api/login",
         "type": "http_event",
         "is_supernode": false,
-        "cluster_id": "cluster_1",
-        "ppr_score": 0.0308,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.3701,
         "betweenness_score": 0.0,
         "details": {
           "method": "POST",
@@ -222,8 +189,8 @@
         "label": "HTTP: GET /api/v2/beacon?id=48",
         "type": "http_event",
         "is_supernode": false,
-        "cluster_id": "cluster_1",
-        "ppr_score": 0.0308,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.3701,
         "betweenness_score": 0.0,
         "details": {
           "method": "GET",
@@ -242,219 +209,17 @@
         }
       },
       {
-        "id": "alert:1:2034647:4",
-        "label": "Alert: ET EXPLOIT Apache log4j RCE At...",
-        "type": "alert",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.2222,
-        "betweenness_score": 0.0079,
-        "details": {
-          "sid": 2034647,
-          "priority": 1,
-          "classification": "custom-detection",
-          "evidence": {
-            "capture_id": "PCAP_001",
-            "packets": [
-              4
-            ],
-            "alert_sid": 2034647,
-            "gid": 1,
-            "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-            "proto": "TCP",
-            "src_ip": "185.220.101.5",
-            "dst_ip": "192.168.1.50",
-            "timestamp": "11/14-16:06:07.003000"
-          }
-        }
-      },
-      {
-        "id": "alert:1:2024897:5",
-        "label": "Alert: ET MALWARE Cobalt Strike Malle...",
-        "type": "alert",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.2222,
-        "betweenness_score": 0.0079,
-        "details": {
-          "sid": 2024897,
-          "priority": 1,
-          "classification": "custom-detection",
-          "evidence": {
-            "capture_id": "PCAP_001",
-            "packets": [
-              5
-            ],
-            "alert_sid": 2024897,
-            "gid": 1,
-            "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-            "proto": "TCP",
-            "src_ip": "185.220.101.5",
-            "dst_ip": "192.168.1.50",
-            "timestamp": "11/14-16:06:08.004000"
-          }
-        }
-      },
-      {
-        "id": "ip:185.220.101.5",
-        "label": "185.220.101.5",
-        "type": "entity_ip",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.0216,
-        "betweenness_score": 0.0,
-        "details": {
-          "ip": "185.220.101.5"
-        }
-      },
-      {
-        "id": "ip:192.168.1.50",
-        "label": "192.168.1.50",
-        "type": "entity_ip",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.423,
-        "betweenness_score": 0.0,
-        "details": {
-          "ip": "192.168.1.50"
-        }
-      },
-      {
         "id": "domain:target.local",
         "label": "target.local",
         "type": "entity_domain",
         "is_supernode": false,
-        "cluster_id": "cluster_1",
-        "ppr_score": 0.0216,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.2597,
         "betweenness_score": 0.0,
         "details": {}
       }
     ],
     "links": [
-      {
-        "source": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-        "target": "ip:192.168.1.50",
-        "relation": "DELIVERED_TO",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "byte_count": 464,
-          "packet_count": 5,
-          "duration": 4.004,
-          "start_time": 1794652564.0,
-          "end_time": 1794652568.004,
-          "zeek_conn_state": "S1",
-          "zeek_service": "http"
-        }
-      },
-      {
-        "source": "alert:1:2034647:4",
-        "target": "ip:192.168.1.50",
-        "relation": "TARGETED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            4
-          ],
-          "alert_sid": 2034647,
-          "gid": 1,
-          "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:07.003000"
-        }
-      },
-      {
-        "source": "alert:1:2024897:5",
-        "target": "ip:192.168.1.50",
-        "relation": "TARGETED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            5
-          ],
-          "alert_sid": 2024897,
-          "gid": 1,
-          "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:08.004000"
-        }
-      },
-      {
-        "source": "ip:185.220.101.5",
-        "target": "alert:1:2034647:4",
-        "relation": "ORIGINATED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            4
-          ],
-          "alert_sid": 2034647,
-          "gid": 1,
-          "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:07.003000"
-        }
-      },
-      {
-        "source": "ip:185.220.101.5",
-        "target": "alert:1:2024897:5",
-        "relation": "ORIGINATED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            5
-          ],
-          "alert_sid": 2024897,
-          "gid": 1,
-          "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:08.004000"
-        }
-      },
-      {
-        "source": "ip:185.220.101.5",
-        "target": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-        "relation": "INITIATED_FLOW",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "byte_count": 464,
-          "packet_count": 5,
-          "duration": 4.004,
-          "start_time": 1794652564.0,
-          "end_time": 1794652568.004,
-          "zeek_conn_state": "S1",
-          "zeek_service": "http"
-        }
-      },
       {
         "source": "domain:target.local",
         "target": "http:4",
@@ -492,29 +257,29 @@
   "raw_graph": {
     "nodes": [
       {
-        "id": "alert:1:2034647:4",
-        "label": "Alert: ET EXPLOIT Apache log4j RCE At...",
-        "type": "alert",
+        "id": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
+        "label": "Flow: TCP 443 (S1)",
+        "type": "flow",
         "is_supernode": false,
         "cluster_id": "cluster_0",
         "ppr_score": 0.0,
         "betweenness_score": 0.0,
         "details": {
-          "sid": 2034647,
-          "priority": 1,
-          "classification": "custom-detection",
+          "proto": "TCP",
+          "src_ip": "185.220.101.5",
+          "dst_ip": "192.168.1.50",
+          "dst_port": 443,
           "evidence": {
             "capture_id": "PCAP_001",
-            "packets": [
-              4
-            ],
-            "alert_sid": 2034647,
-            "gid": 1,
-            "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-            "proto": "TCP",
-            "src_ip": "185.220.101.5",
-            "dst_ip": "192.168.1.50",
-            "timestamp": "11/14-16:06:07.003000"
+            "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
+            "packets": [],
+            "byte_count": 464,
+            "packet_count": 5,
+            "duration": 4.004,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "S1",
+            "zeek_service": "http"
           }
         }
       },
@@ -540,66 +305,6 @@
         "betweenness_score": 0.0,
         "details": {
           "ip": "192.168.1.50"
-        }
-      },
-      {
-        "id": "alert:1:2024897:5",
-        "label": "Alert: ET MALWARE Cobalt Strike Malle...",
-        "type": "alert",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.0,
-        "betweenness_score": 0.0,
-        "details": {
-          "sid": 2024897,
-          "priority": 1,
-          "classification": "custom-detection",
-          "evidence": {
-            "capture_id": "PCAP_001",
-            "packets": [
-              5
-            ],
-            "alert_sid": 2024897,
-            "gid": 1,
-            "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-            "proto": "TCP",
-            "src_ip": "185.220.101.5",
-            "dst_ip": "192.168.1.50",
-            "timestamp": "11/14-16:06:08.004000"
-          }
-        }
-      },
-      {
-        "id": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-        "label": "Flow: TCP 443 (S1)",
-        "type": "flow",
-        "is_supernode": false,
-        "cluster_id": "cluster_0",
-        "ppr_score": 0.0,
-        "betweenness_score": 0.0,
-        "details": {
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "dst_port": 443,
-          "evidence": {
-            "capture_id": "PCAP_001",
-            "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-            "packets": [
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "byte_count": 464,
-            "packet_count": 5,
-            "duration": 4.004,
-            "start_time": 1794652564.0,
-            "end_time": 1794652568.004,
-            "zeek_conn_state": "S1",
-            "zeek_service": "http"
-          }
         }
       },
       {
@@ -663,60 +368,21 @@
     ],
     "links": [
       {
-        "source": "alert:1:2034647:4",
+        "source": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
         "target": "ip:192.168.1.50",
-        "relation": "TARGETED_ALERT",
+        "relation": "DELIVERED_TO",
         "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_001",
-          "packets": [
-            4
-          ],
-          "alert_sid": 2034647,
-          "gid": 1,
-          "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:07.003000"
-        }
-      },
-      {
-        "source": "ip:185.220.101.5",
-        "target": "alert:1:2034647:4",
-        "relation": "ORIGINATED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            4
-          ],
-          "alert_sid": 2034647,
-          "gid": 1,
-          "msg": "ET EXPLOIT Apache log4j RCE Attempt (CVE-2021-44228)",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:07.003000"
-        }
-      },
-      {
-        "source": "ip:185.220.101.5",
-        "target": "alert:1:2024897:5",
-        "relation": "ORIGINATED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            5
-          ],
-          "alert_sid": 2024897,
-          "gid": 1,
-          "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:08.004000"
+          "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
+          "packets": [],
+          "byte_count": 464,
+          "packet_count": 5,
+          "duration": 4.004,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "S1",
+          "zeek_service": "http"
         }
       },
       {
@@ -727,61 +393,12 @@
         "evidence": {
           "capture_id": "PCAP_001",
           "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
+          "packets": [],
           "byte_count": 464,
           "packet_count": 5,
           "duration": 4.004,
-          "start_time": 1794652564.0,
-          "end_time": 1794652568.004,
-          "zeek_conn_state": "S1",
-          "zeek_service": "http"
-        }
-      },
-      {
-        "source": "alert:1:2024897:5",
-        "target": "ip:192.168.1.50",
-        "relation": "TARGETED_ALERT",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "packets": [
-            5
-          ],
-          "alert_sid": 2024897,
-          "gid": 1,
-          "msg": "ET MALWARE Cobalt Strike Malleable C2 Beaconing",
-          "proto": "TCP",
-          "src_ip": "185.220.101.5",
-          "dst_ip": "192.168.1.50",
-          "timestamp": "11/14-16:06:08.004000"
-        }
-      },
-      {
-        "source": "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-        "target": "ip:192.168.1.50",
-        "relation": "DELIVERED_TO",
-        "is_attack_path": false,
-        "evidence": {
-          "capture_id": "PCAP_001",
-          "flow_id": "185.220.101.5:44892<->192.168.1.50:443/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5
-          ],
-          "byte_count": 464,
-          "packet_count": 5,
-          "duration": 4.004,
-          "start_time": 1794652564.0,
-          "end_time": 1794652568.004,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "S1",
           "zeek_service": "http"
         }
@@ -821,11 +438,11 @@
     ]
   },
   "graph_summary": {
-    "total_raw_nodes": 8,
-    "total_raw_edges": 8,
-    "condensed_nodes": 8,
-    "condensed_edges": 8,
-    "pruned_nodes_count": 0,
+    "total_raw_nodes": 6,
+    "total_raw_edges": 4,
+    "condensed_nodes": 3,
+    "condensed_edges": 2,
+    "pruned_nodes_count": 3,
     "supernodes_count": 0,
     "supernode_breakdown": {
       "flows_folded": 0,
@@ -834,66 +451,35 @@
       "alerts_folded": 0,
       "total_supernodes": 0
     },
-    "threat_clusters_count": 2,
+    "threat_clusters_count": 1,
     "clusters": [
       {
         "cluster_id": "cluster_0",
-        "threat_score": 32,
-        "alerts_count": 2,
-        "flows_count": 1,
-        "hosts_count": 2,
-        "nodes_count": 5,
-        "nodes": [
-          "alert:1:2024897:5",
-          "alert:1:2034647:4",
-          "flow:185.220.101.5:44892<->192.168.1.50:443/TCP",
-          "ip:192.168.1.50",
-          "ip:185.220.101.5"
-        ],
-        "title": "Primary Attack Incident"
-      },
-      {
-        "cluster_id": "cluster_1",
         "threat_score": 0,
         "alerts_count": 0,
         "flows_count": 0,
         "hosts_count": 0,
         "nodes_count": 3,
         "nodes": [
+          "http:5",
           "http:4",
-          "domain:target.local",
-          "http:5"
+          "domain:target.local"
         ],
-        "title": "Secondary Activity 1"
+        "title": "Primary Attack Incident"
       }
     ],
     "top_pivots": [
-      {
-        "node_id": "ip:192.168.1.50",
-        "label": "192.168.1.50",
-        "type": "entity_ip",
-        "role": "Target Host",
-        "pagerank_score": 0.423,
-        "betweenness_score": 0.0
-      },
-      {
-        "node_id": "ip:185.220.101.5",
-        "label": "185.220.101.5",
-        "type": "entity_ip",
-        "role": "Attacker Ingress Source",
-        "pagerank_score": 0.0216,
-        "betweenness_score": 0.0
-      },
       {
         "node_id": "domain:target.local",
         "label": "target.local",
         "type": "entity_domain",
         "role": "Command & Control / Exfiltration Endpoint",
-        "pagerank_score": 0.0216,
+        "pagerank_score": 0.2597,
         "betweenness_score": 0.0
       }
     ],
     "critical_attack_paths": []
   },
-  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_001) ===\nGraph Scale: 8 raw nodes condensed into 8 high-signal nodes.\nReduction: Pruned 0 background nodes; folded 0 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 192.168.1.50 [Target Host] - PPR: 0.423, Centrality: 0.0\n  \u2022 185.220.101.5 [Attacker Ingress Source] - PPR: 0.0216, Centrality: 0.0\n  \u2022 target.local [Command & Control / Exfiltration Endpoint] - PPR: 0.0216, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 32 | Alerts: 2 | Nodes: 5]\n[Secondary Activity 1 | Threat Score: 0 | Alerts: 0 | Nodes: 3]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:\n  - [C2_BEACONING_ACTIVITY] Periodic outbound communication from 185.220.101.5 to 192.168.1.50:443 with cadence 1.0s (std_dev=0.0)"
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_001) ===\nGraph Scale: 6 raw nodes condensed into 3 high-signal nodes.\nReduction: Pruned 3 background nodes; folded 0 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 target.local [Command & Control / Exfiltration Endpoint] - PPR: 0.2597, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 0 | Alerts: 0 | Nodes: 3]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:\n  - [C2_BEACONING_ACTIVITY] Periodic outbound communication from 185.220.101.5 to 192.168.1.50:443 with cadence 1.0s (std_dev=0.0)",
+  "correlations_count": 1
 }

@@ -575,21 +575,19 @@ class ProtocolConstantFilter:
 
         # ── Gate 3: DNS Wire Format Consistency Check
         clean_proto = (candidate_proto or "").lower().strip()
-        if clean_proto in ["dns", "udp"] and is_domain_name(raw_val):
-            # If domain has dots and buffer is pkt_data or raw UDP
-            if not candidate_buf or candidate_buf in ["pkt_data", "raw"]:
-                encoded_wire = encode_dns_wire_format(raw_val)
-                return InvariantEvaluationResult(
-                    candidate=raw_val,
-                    status="rejected",
-                    normalized_value=norm_val,
-                    is_hard_exclusion=True,
-                    is_contextual_exclusion=False,
-                    entropy=entropy,
-                    length_bytes=byte_len,
-                    rejection_reason=f"DNS Wire-Format Violation: Searching for raw domain '{raw_val}' with dots on raw UDP/53 fails because DNS packets encode domain labels with length bytes.",
-                    recommendation=f"Scope rule inside 'dns_query;' sticky buffer, or encode domain in DNS wire format: content:\"{encoded_wire}\";"
-                )
+        if (clean_proto in ["dns", "udp"] or candidate_buf == "dns") and is_domain_name(raw_val):
+            encoded_wire = encode_dns_wire_format(raw_val)
+            return InvariantEvaluationResult(
+                candidate=raw_val,
+                status="rejected",
+                normalized_value=norm_val,
+                is_hard_exclusion=True,
+                is_contextual_exclusion=False,
+                entropy=entropy,
+                length_bytes=byte_len,
+                rejection_reason=f"DNS Wire-Format Violation: Searching for raw domain '{raw_val}' with dots fails because DNS packets encode domain labels with length bytes. Snort 3 core does not support 'dns_query;'.",
+                recommendation=f"Encode domain in DNS wire format: content:\"{encoded_wire}\";"
+            )
 
         # ── Gate 4: Low Shannon Entropy Repetition Check
         # Discard repeated single characters (e.g. '[[[[[[[' or '00000000') unless length >= 12

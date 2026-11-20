@@ -1,0 +1,1 @@
+alert http ( msg:"MALWARE-CNC AMOS Stealer HTTPS beacon to /api/metrics/run"; flow:to_server,established; http_uri; content:"/api/metrics/run",nocase,fast_pattern; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family AMOS_Stealer; sid:9002037; rev:1; )

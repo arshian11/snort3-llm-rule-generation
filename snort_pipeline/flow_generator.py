@@ -339,6 +339,8 @@ def validate_flow_option(
 
         # Protocol check for connection states
         proto = (header.protocol or "").lower().strip()
+        if proto == "icmp" and flow_option:
+            errors.append("Protocol conflict: The 'flow' option is prohibited on ICMP rules. Snort 3 does not support flow tracking for ICMP traffic.")
         conn_state = next((a.lower().strip() for a in flow_option if a.lower().strip() in VALID_FLOW_STATES), None)
         if conn_state in ["established", "not_established"]:
             if proto in ["udp", "icmp", "ip"]:

@@ -1,0 +1,1 @@
+alert dns ( msg:"MALWARE-CNC Qakbot DNS resolution followed by immediate HTTPS connection"; flow:to_server; dns_query; content:"example.com",nocase,fast_pattern; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family Qakbot_Banking_Trojan; sid:9002018; rev:1; )

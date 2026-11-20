@@ -1,0 +1,1 @@
+alert tcp $HOME_NET any -> $EXTERNAL_NET $HTTP_PORTS ( msg:"MALWARE-CNC Sliver C2 payload download attempt via HTTP GET to URI ending in zes2"; flow:to_server,established,only_stream; http_uri; content:"/zes2",nocase,fast_pattern; service:http; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family Sliver_C2; sid:9002016; rev:1; )

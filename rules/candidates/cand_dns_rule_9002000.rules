@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 ( msg:"PROTOCOL-DNS Sliver C2 (carwaded.com)"; flow:to_server; content:"|08|carwaded|03|com|00|",fast_pattern,nocase; classtype:trojan-activity; sid:9002027; rev:1; )

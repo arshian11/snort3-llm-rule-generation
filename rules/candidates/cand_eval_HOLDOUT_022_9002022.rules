@@ -1,0 +1,2 @@
+alert tcp $EXTERNAL_NET any -> $HOME_NET $HTTP_PORTS ( msg:"MALWARE-OTHER Redline Stealer embedded x86 shellcode in HTTP POST"; flow:to_server,established,only_stream; http_header; content:"POST / HTTP/1.1
+Host:",nocase,fast_pattern; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family Redline_Stealer___RigEK; sid:9002023; rev:1; )

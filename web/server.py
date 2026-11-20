@@ -18,17 +18,21 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, Counter
+import uuid
 from typing import Dict, List, Any, Optional, Tuple
 
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, render_template, request, jsonify, Response, session
 
 app = Flask(
     __name__,
     template_folder=os.path.join(os.path.dirname(__file__), "templates"),
     static_folder=os.path.join(os.path.dirname(__file__), "static")
 )
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or f"snort3_secret_{int(time.time())}_{os.urandom(8).hex()}"
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+app.config['SESSION_COOKIE_HTTPONLY'] = True
+app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
 app.jinja_env.auto_reload = True
 
 # Register Snort 3 LLM Rule Engineering & Investigation Pipeline Blueprint
@@ -517,6 +521,30 @@ def add_cache_control_headers(response):
 
 @app.route("/")
 def index():
+    now = time.time()
+    session_id = session.get("browser_session_id")
+    last_seen = session.get("last_seen", 0)
+    is_new_session = False
+
+    if not session_id:
+        is_new_session = True
+    elif (now - last_seen) > 3600:  # 1 hour inactivity threshold
+        is_new_session = True
+
+    if is_new_session:
+        session["browser_session_id"] = str(uuid.uuid4())
+        session["session_started_at"] = datetime.now().isoformat()
+        try:
+            try:
+                from web.pipeline_routes import lifecycle_mgr
+            except ImportError:
+                from pipeline_routes import lifecycle_mgr
+            archived = lifecycle_mgr.archive_and_reset_candidates()
+            print(f"[+] New web browser session started ({session['browser_session_id']}): Cleaned candidates.json (archived {archived} candidates).")
+        except Exception as e:
+            print(f"[!] Note on resetting candidates for new session: {e}")
+
+    session["last_seen"] = now
     return render_template("index.html")
 
 @app.route("/events")

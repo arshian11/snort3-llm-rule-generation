@@ -1,0 +1,4 @@
+{ "timestamp" : "05/19-16:47:29.428151", "pkt_num" : 93654, "proto" : "ICMP", "pkt_gen" : "raw", "pkt_len" : 123, "dir" : "C2S", "src_ap" : "198.41.0.134:0", "dst_ap" : "198.41.0.10:0", "rule" : "1:402:16", "action" : "allow" }
+{ "timestamp" : "05/19-16:47:29.446444", "pkt_num" : 93656, "proto" : "ICMP", "pkt_gen" : "raw", "pkt_len" : 122, "dir" : "C2S", "src_ap" : "198.41.0.134:0", "dst_ap" : "198.41.0.10:0", "rule" : "1:402:16", "action" : "allow" }
+{ "timestamp" : "05/19-16:47:32.452881", "pkt_num" : 93659, "proto" : "ICMP", "pkt_gen" : "raw", "pkt_len" : 173, "dir" : "C2S", "src_ap" : "198.41.0.134:0", "dst_ap" : "198.41.0.10:0", "rule" : "1:402:16", "action" : "allow" }
+{ "timestamp" : "05/19-16:47:32.452881", "pkt_num" : 93659, "proto" : "ICMP", "pkt_gen" : "raw", "pkt_len" : 173, "dir" : "C2S", "src_ap" : "198.41.0.134:0", "dst_ap" : "198.41.0.10:0", "rule" : "1:2100366:8", "action" : "allow" }

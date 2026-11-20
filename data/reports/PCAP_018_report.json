@@ -270,26 +270,7 @@
       ]
     }
   },
-  "correlations": [
-    {
-      "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
-      "confidence": "very_high",
-      "description": "Host 10.3.2.101 downloaded suspicious file '' (application/x-dosexec) from 62.204.41.175, followed by outbound communication to 188.227.106.13",
-      "client_ip": "10.3.2.101",
-      "file_server": "62.204.41.175",
-      "filename": "",
-      "mime_type": "application/x-dosexec",
-      "file_size": 786944,
-      "evidence_packets": [
-        30,
-        31,
-        32,
-        33,
-        34
-      ],
-      "evidence_summary": "Zeek extracted file  (FUID Fe8Qd92VoEDz6DyH7h) from 62.204.41.175; client subsequently connected to 2 external hosts."
-    }
-  ],
+  "correlations": [],
   "packet_evidence": [
     {
       "pkt_num": 4,
@@ -322,6 +303,10 @@
         "id": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
         "label": "Flow: TCP 44271 (RSTO)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0625,
+        "betweenness_score": 0.0056,
         "details": {
           "proto": "TCP",
           "src_ip": "10.3.2.101",
@@ -330,90 +315,48 @@
           "evidence": {
             "capture_id": "PCAP_018",
             "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
-            "packets": [
-              2485,
-              2486,
-              2487,
-              2488,
-              2489,
-              2490,
-              2491,
-              2492,
-              2493,
-              2494
-            ],
+            "packets": [],
             "byte_count": 1755574,
             "packet_count": 2284,
             "duration": 5.222,
-            "start_time": 1677790441.623717,
-            "end_time": 1677790446.845488,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "RSTO",
             "zeek_service": "other"
           }
         }
       },
       {
-        "id": "ip:10.3.2.101",
-        "label": "10.3.2.101",
-        "type": "entity_ip",
-        "details": {
-          "ip": "10.3.2.101"
-        }
-      },
-      {
-        "id": "ip:62.204.41.175",
-        "label": "62.204.41.175",
-        "type": "entity_ip",
-        "details": {
-          "ip": "62.204.41.175"
-        }
-      },
-      {
-        "id": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
-        "label": "Flow: TCP 80 (RSTO)",
+        "id": "flow_agg:10.3.2.101->188.227.106.13:80:TCP",
+        "label": "Flows: TCP 80 (2x, 1.5 MB)",
         "type": "flow",
+        "is_supernode": true,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.16,
+        "betweenness_score": 0.0111,
         "details": {
-          "proto": "TCP",
           "src_ip": "10.3.2.101",
           "dst_ip": "188.227.106.13",
           "dst_port": 80,
-          "evidence": {
-            "capture_id": "PCAP_018",
-            "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
-            "packets": [
-              30,
-              31,
-              32,
-              33,
-              34,
-              35,
-              36,
-              37,
-              38,
-              39
-            ],
-            "byte_count": 1596146,
-            "packet_count": 1615,
-            "duration": 6.118,
-            "start_time": 1677790428.46038,
-            "end_time": 1677790434.578783,
-            "zeek_conn_state": "RSTO",
-            "zeek_service": "http"
-          }
-        }
-      },
-      {
-        "id": "ip:188.227.106.13",
-        "label": "188.227.106.13",
-        "type": "entity_ip",
-        "details": {
-          "ip": "188.227.106.13"
+          "proto": "TCP",
+          "total_flows": 2,
+          "total_bytes": 1619161,
+          "total_packets": 1644,
+          "packets": [],
+          "zeek_conn_states": [
+            "RSTO"
+          ],
+          "is_supernode": true
         }
       },
       {
         "id": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
         "label": "Flow: TCP 80 (RSTO)",
         "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0625,
+        "betweenness_score": 0.0056,
         "details": {
           "proto": "TCP",
           "src_ip": "10.3.2.101",
@@ -422,57 +365,12 @@
           "evidence": {
             "capture_id": "PCAP_018",
             "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
-            "packets": [
-              1645,
-              1646,
-              1647,
-              1648,
-              1649,
-              1650,
-              1651,
-              1652,
-              1653,
-              1654
-            ],
+            "packets": [],
             "byte_count": 832692,
             "packet_count": 841,
             "duration": 9.905,
-            "start_time": 1677790436.940375,
-            "end_time": 1677790446.844966,
-            "zeek_conn_state": "RSTO",
-            "zeek_service": "http"
-          }
-        }
-      },
-      {
-        "id": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
-        "label": "Flow: TCP 80 (RSTO)",
-        "type": "flow",
-        "details": {
-          "proto": "TCP",
-          "src_ip": "10.3.2.101",
-          "dst_ip": "188.227.106.13",
-          "dst_port": 80,
-          "evidence": {
-            "capture_id": "PCAP_018",
-            "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
-            "packets": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              6,
-              7,
-              8,
-              9,
-              10
-            ],
-            "byte_count": 23015,
-            "packet_count": 29,
-            "duration": 0.854,
-            "start_time": 1677790427.484026,
-            "end_time": 1677790428.338502,
+            "start_time": 0.0,
+            "end_time": 0.0,
             "zeek_conn_state": "RSTO",
             "zeek_service": "http"
           }
@@ -482,6 +380,10 @@
         "id": "http:4",
         "label": "HTTP: GET /?MTkzMjU=&bcjcojSX&",
         "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0694,
+        "betweenness_score": 0.0,
         "details": {
           "method": "GET",
           "host": "188.227.106.13",
@@ -499,15 +401,13 @@
         }
       },
       {
-        "id": "domain:188.227.106.13",
-        "label": "188.227.106.13",
-        "type": "entity_domain",
-        "details": {}
-      },
-      {
         "id": "http:33",
         "label": "HTTP: GET /?NDA2MTQ=&zBXaC&cxv",
         "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0694,
+        "betweenness_score": 0.0,
         "details": {
           "method": "GET",
           "host": "188.227.106.13",
@@ -528,6 +428,454 @@
         "id": "http:1648",
         "label": "HTTP: GET /putingods.exe",
         "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_2",
+        "ppr_score": 0.0901,
+        "betweenness_score": 0.0,
+        "details": {
+          "method": "GET",
+          "host": "62.204.41.175",
+          "uri": "/putingods.exe",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              1648
+            ],
+            "method": "GET",
+            "host": "62.204.41.175",
+            "uri": "/putingods.exe",
+            "user_agent": ""
+          }
+        }
+      },
+      {
+        "id": "ip:10.3.2.101",
+        "label": "10.3.2.101",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0487,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "10.3.2.101"
+        }
+      },
+      {
+        "id": "ip:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.155,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "62.204.41.175"
+        }
+      },
+      {
+        "id": "ip:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.1847,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "188.227.106.13"
+        }
+      },
+      {
+        "id": "domain:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_1",
+        "ppr_score": 0.0487,
+        "betweenness_score": 0.0,
+        "details": {}
+      },
+      {
+        "id": "domain:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_2",
+        "ppr_score": 0.0487,
+        "betweenness_score": 0.0,
+        "details": {}
+      }
+    ],
+    "links": [
+      {
+        "source": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "target": "ip:62.204.41.175",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+          "packets": [],
+          "byte_count": 1755574,
+          "packet_count": 2284,
+          "duration": 5.222,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "flow_agg:10.3.2.101->188.227.106.13:80:TCP",
+        "target": "ip:188.227.106.13",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+          "packets": [],
+          "byte_count": 1596146,
+          "packet_count": 1615,
+          "duration": 6.118,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "target": "ip:62.204.41.175",
+        "relation": "DELIVERED_TO",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+          "packets": [],
+          "byte_count": 832692,
+          "packet_count": 841,
+          "duration": 9.905,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+          "packets": [],
+          "byte_count": 1755574,
+          "packet_count": 2284,
+          "duration": 5.222,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "other"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow_agg:10.3.2.101->188.227.106.13:80:TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+          "packets": [],
+          "byte_count": 1596146,
+          "packet_count": 1615,
+          "duration": 6.118,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "ip:10.3.2.101",
+        "target": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+          "packets": [],
+          "byte_count": 832692,
+          "packet_count": 841,
+          "duration": 9.905,
+          "start_time": 0.0,
+          "end_time": 0.0,
+          "zeek_conn_state": "RSTO",
+          "zeek_service": "http"
+        }
+      },
+      {
+        "source": "domain:188.227.106.13",
+        "target": "http:4",
+        "relation": "SERVES_HTTP",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            4
+          ],
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+          "user_agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"
+        }
+      },
+      {
+        "source": "domain:188.227.106.13",
+        "target": "http:33",
+        "relation": "SERVES_HTTP",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            33
+          ],
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+          "user_agent": "1"
+        }
+      },
+      {
+        "source": "domain:62.204.41.175",
+        "target": "http:1648",
+        "relation": "SERVES_HTTP",
+        "is_attack_path": false,
+        "evidence": {
+          "capture_id": "PCAP_018",
+          "packets": [
+            1648
+          ],
+          "method": "GET",
+          "host": "62.204.41.175",
+          "uri": "/putingods.exe",
+          "user_agent": ""
+        }
+      }
+    ]
+  },
+  "raw_graph": {
+    "nodes": [
+      {
+        "id": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
+        "label": "Flow: TCP 44271 (RSTO)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "62.204.41.175",
+          "dst_port": 44271,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
+            "packets": [],
+            "byte_count": 1755574,
+            "packet_count": 2284,
+            "duration": 5.222,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "other"
+          }
+        }
+      },
+      {
+        "id": "ip:10.3.2.101",
+        "label": "10.3.2.101",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "10.3.2.101"
+        }
+      },
+      {
+        "id": "ip:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "62.204.41.175"
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "188.227.106.13",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
+            "packets": [],
+            "byte_count": 1596146,
+            "packet_count": 1615,
+            "duration": 6.118,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "ip:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_ip",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "ip": "188.227.106.13"
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "62.204.41.175",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
+            "packets": [],
+            "byte_count": 832692,
+            "packet_count": 841,
+            "duration": 9.905,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
+        "label": "Flow: TCP 80 (RSTO)",
+        "type": "flow",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "proto": "TCP",
+          "src_ip": "10.3.2.101",
+          "dst_ip": "188.227.106.13",
+          "dst_port": 80,
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
+            "packets": [],
+            "byte_count": 23015,
+            "packet_count": 29,
+            "duration": 0.854,
+            "start_time": 0.0,
+            "end_time": 0.0,
+            "zeek_conn_state": "RSTO",
+            "zeek_service": "http"
+          }
+        }
+      },
+      {
+        "id": "http:4",
+        "label": "HTTP: GET /?MTkzMjU=&bcjcojSX&",
+        "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              4
+            ],
+            "method": "GET",
+            "host": "188.227.106.13",
+            "uri": "/?MTkzMjU=&bcjcojSX&vbnvbnvbnvn43=ltc&xcvcxvxc434=xXvQMvWVbRXQDJ3BJfPHUKRNMVHYFU6VxYuRhOjZQt2xcmj1lrT5QEL1tAitQx-IovYzbepZ&xcvxcvxc354=xrp&cxvxcvxcv243=fTOzhULTLgJgndxbW1NF8Pv43UfXzkSZgZeB-0GIYQMQrJqTQLE93wumnbZAQPsg91LA7yRT&cxvxcvxcv323=114uneo.114rb68.406u3h4x8&fRpNjY4NA==",
+            "user_agent": "Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko"
+          }
+        }
+      },
+      {
+        "id": "domain:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {}
+      },
+      {
+        "id": "http:33",
+        "label": "HTTP: GET /?NDA2MTQ=&zBXaC&cxv",
+        "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
+        "details": {
+          "method": "GET",
+          "host": "188.227.106.13",
+          "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+          "evidence": {
+            "capture_id": "PCAP_018",
+            "packets": [
+              33
+            ],
+            "method": "GET",
+            "host": "188.227.106.13",
+            "uri": "/?NDA2MTQ=&zBXaC&cxvxcvxcv243=aNbP0fOH0WD2MjN2LHSSMvpFGX_0_HDfF-qoV_cCgWRxaEsKuEFPAKzjEyJLVc3z41fVQgS96qs2kTVnEWUgsOC-0PeMwgRz5WREYE4hR32_w&vbnvbnvbnvn43=zec&xcvxcvxc354=doge&cxvxcvxcv323=105gdusk.113pp75.406i9o5q5&xcvcxvxc434=wH_QMvXcJwDMFYPJKeXDT&WUcNzUxNw==",
+            "user_agent": "1"
+          }
+        }
+      },
+      {
+        "id": "http:1648",
+        "label": "HTTP: GET /putingods.exe",
+        "type": "http_event",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {
           "method": "GET",
           "host": "62.204.41.175",
@@ -548,67 +896,11 @@
         "id": "domain:62.204.41.175",
         "label": "62.204.41.175",
         "type": "entity_domain",
+        "is_supernode": false,
+        "cluster_id": "cluster_0",
+        "ppr_score": 0.0,
+        "betweenness_score": 0.0,
         "details": {}
-      },
-      {
-        "id": "file:FvNhDzTQqCquxzvf9",
-        "label": "File: text/html",
-        "type": "entity_file",
-        "details": {
-          "filename": "",
-          "mime_type": "text/html",
-          "size_bytes": 36335,
-          "evidence": {
-            "capture_id": "PCAP_018",
-            "fuid": "FvNhDzTQqCquxzvf9",
-            "filename": "",
-            "mime_type": "text/html",
-            "total_bytes": 36335,
-            "source": "HTTP",
-            "orig_h": "10.3.2.101",
-            "resp_h": "188.227.106.13"
-          }
-        }
-      },
-      {
-        "id": "file:FJpFUV2uQVFZ255r8",
-        "label": "File: FJpFUV2uQVFZ255r8",
-        "type": "entity_file",
-        "details": {
-          "filename": "",
-          "mime_type": "",
-          "size_bytes": 1508352,
-          "evidence": {
-            "capture_id": "PCAP_018",
-            "fuid": "FJpFUV2uQVFZ255r8",
-            "filename": "",
-            "mime_type": "",
-            "total_bytes": 1508352,
-            "source": "HTTP",
-            "orig_h": "10.3.2.101",
-            "resp_h": "188.227.106.13"
-          }
-        }
-      },
-      {
-        "id": "file:Fe8Qd92VoEDz6DyH7h",
-        "label": "File: application/x-dosexec",
-        "type": "entity_file",
-        "details": {
-          "filename": "",
-          "mime_type": "application/x-dosexec",
-          "size_bytes": 786944,
-          "evidence": {
-            "capture_id": "PCAP_018",
-            "fuid": "Fe8Qd92VoEDz6DyH7h",
-            "filename": "",
-            "mime_type": "application/x-dosexec",
-            "total_bytes": 786944,
-            "source": "HTTP",
-            "orig_h": "10.3.2.101",
-            "resp_h": "62.204.41.175"
-          }
-        }
       }
     ],
     "links": [
@@ -616,26 +908,16 @@
         "source": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
         "target": "ip:62.204.41.175",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
-          "packets": [
-            2485,
-            2486,
-            2487,
-            2488,
-            2489,
-            2490,
-            2491,
-            2492,
-            2493,
-            2494
-          ],
+          "packets": [],
           "byte_count": 1755574,
           "packet_count": 2284,
           "duration": 5.222,
-          "start_time": 1677790441.623717,
-          "end_time": 1677790446.845488,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "other"
         }
@@ -644,26 +926,16 @@
         "source": "ip:10.3.2.101",
         "target": "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49176<->62.204.41.175:44271/TCP",
-          "packets": [
-            2485,
-            2486,
-            2487,
-            2488,
-            2489,
-            2490,
-            2491,
-            2492,
-            2493,
-            2494
-          ],
+          "packets": [],
           "byte_count": 1755574,
           "packet_count": 2284,
           "duration": 5.222,
-          "start_time": 1677790441.623717,
-          "end_time": 1677790446.845488,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "other"
         }
@@ -672,26 +944,16 @@
         "source": "ip:10.3.2.101",
         "target": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
-          "packets": [
-            30,
-            31,
-            32,
-            33,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39
-          ],
+          "packets": [],
           "byte_count": 1596146,
           "packet_count": 1615,
           "duration": 6.118,
-          "start_time": 1677790428.46038,
-          "end_time": 1677790434.578783,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
         }
@@ -700,26 +962,16 @@
         "source": "ip:10.3.2.101",
         "target": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
-          "packets": [
-            1645,
-            1646,
-            1647,
-            1648,
-            1649,
-            1650,
-            1651,
-            1652,
-            1653,
-            1654
-          ],
+          "packets": [],
           "byte_count": 832692,
           "packet_count": 841,
           "duration": 9.905,
-          "start_time": 1677790436.940375,
-          "end_time": 1677790446.844966,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
         }
@@ -728,127 +980,52 @@
         "source": "ip:10.3.2.101",
         "target": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
         "relation": "INITIATED_FLOW",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ],
+          "packets": [],
           "byte_count": 23015,
           "packet_count": 29,
           "duration": 0.854,
-          "start_time": 1677790427.484026,
-          "end_time": 1677790428.338502,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
-        }
-      },
-      {
-        "source": "ip:62.204.41.175",
-        "target": "file:Fe8Qd92VoEDz6DyH7h",
-        "relation": "DELIVERED_FILE",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "Fe8Qd92VoEDz6DyH7h",
-          "filename": "",
-          "mime_type": "application/x-dosexec",
-          "total_bytes": 786944,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "62.204.41.175"
         }
       },
       {
         "source": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
         "target": "ip:188.227.106.13",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49170<->188.227.106.13:80/TCP",
-          "packets": [
-            30,
-            31,
-            32,
-            33,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39
-          ],
+          "packets": [],
           "byte_count": 1596146,
           "packet_count": 1615,
           "duration": 6.118,
-          "start_time": 1677790428.46038,
-          "end_time": 1677790434.578783,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
-        }
-      },
-      {
-        "source": "ip:188.227.106.13",
-        "target": "file:FvNhDzTQqCquxzvf9",
-        "relation": "DELIVERED_FILE",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "FvNhDzTQqCquxzvf9",
-          "filename": "",
-          "mime_type": "text/html",
-          "total_bytes": 36335,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "188.227.106.13"
-        }
-      },
-      {
-        "source": "ip:188.227.106.13",
-        "target": "file:FJpFUV2uQVFZ255r8",
-        "relation": "DELIVERED_FILE",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "FJpFUV2uQVFZ255r8",
-          "filename": "",
-          "mime_type": "",
-          "total_bytes": 1508352,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "188.227.106.13"
         }
       },
       {
         "source": "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
         "target": "ip:62.204.41.175",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49174<->62.204.41.175:80/TCP",
-          "packets": [
-            1645,
-            1646,
-            1647,
-            1648,
-            1649,
-            1650,
-            1651,
-            1652,
-            1653,
-            1654
-          ],
+          "packets": [],
           "byte_count": 832692,
           "packet_count": 841,
           "duration": 9.905,
-          "start_time": 1677790436.940375,
-          "end_time": 1677790446.844966,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
         }
@@ -857,26 +1034,16 @@
         "source": "flow:10.3.2.101:49169<->188.227.106.13:80/TCP",
         "target": "ip:188.227.106.13",
         "relation": "DELIVERED_TO",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "flow_id": "10.3.2.101:49169<->188.227.106.13:80/TCP",
-          "packets": [
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ],
+          "packets": [],
           "byte_count": 23015,
           "packet_count": 29,
           "duration": 0.854,
-          "start_time": 1677790427.484026,
-          "end_time": 1677790428.338502,
+          "start_time": 0.0,
+          "end_time": 0.0,
           "zeek_conn_state": "RSTO",
           "zeek_service": "http"
         }
@@ -885,6 +1052,7 @@
         "source": "domain:188.227.106.13",
         "target": "http:4",
         "relation": "SERVES_HTTP",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "packets": [
@@ -900,6 +1068,7 @@
         "source": "domain:188.227.106.13",
         "target": "http:33",
         "relation": "SERVES_HTTP",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "packets": [
@@ -915,6 +1084,7 @@
         "source": "domain:62.204.41.175",
         "target": "http:1648",
         "relation": "SERVES_HTTP",
+        "is_attack_path": false,
         "evidence": {
           "capture_id": "PCAP_018",
           "packets": [
@@ -925,75 +1095,114 @@
           "uri": "/putingods.exe",
           "user_agent": ""
         }
-      },
-      {
-        "source": "file:FvNhDzTQqCquxzvf9",
-        "target": "ip:10.3.2.101",
-        "relation": "DOWNLOADED_BY",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "FvNhDzTQqCquxzvf9",
-          "filename": "",
-          "mime_type": "text/html",
-          "total_bytes": 36335,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "188.227.106.13"
-        }
-      },
-      {
-        "source": "file:FJpFUV2uQVFZ255r8",
-        "target": "ip:10.3.2.101",
-        "relation": "DOWNLOADED_BY",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "FJpFUV2uQVFZ255r8",
-          "filename": "",
-          "mime_type": "",
-          "total_bytes": 1508352,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "188.227.106.13"
-        }
-      },
-      {
-        "source": "file:Fe8Qd92VoEDz6DyH7h",
-        "target": "ip:10.3.2.101",
-        "relation": "DOWNLOADED_BY",
-        "evidence": {
-          "capture_id": "PCAP_018",
-          "fuid": "Fe8Qd92VoEDz6DyH7h",
-          "filename": "",
-          "mime_type": "application/x-dosexec",
-          "total_bytes": 786944,
-          "source": "HTTP",
-          "orig_h": "10.3.2.101",
-          "resp_h": "62.204.41.175"
-        }
-      },
-      {
-        "source": "file:Fe8Qd92VoEDz6DyH7h",
-        "target": "flow:10.3.2.101:49170<->188.227.106.13:80/TCP",
-        "relation": "PRECEDED_C2_FLOW",
-        "evidence": {
-          "type": "ZEEK_MALWARE_DROPPER_TO_C2_SEQUENCE",
-          "confidence": "very_high",
-          "description": "Host 10.3.2.101 downloaded suspicious file '' (application/x-dosexec) from 62.204.41.175, followed by outbound communication to 188.227.106.13",
-          "client_ip": "10.3.2.101",
-          "file_server": "62.204.41.175",
-          "filename": "",
-          "mime_type": "application/x-dosexec",
-          "file_size": 786944,
-          "evidence_packets": [
-            30,
-            31,
-            32,
-            33,
-            34
-          ],
-          "evidence_summary": "Zeek extracted file  (FUID Fe8Qd92VoEDz6DyH7h) from 62.204.41.175; client subsequently connected to 2 external hosts."
-        }
       }
     ]
-  }
+  },
+  "graph_summary": {
+    "total_raw_nodes": 12,
+    "total_raw_edges": 11,
+    "condensed_nodes": 11,
+    "condensed_edges": 9,
+    "pruned_nodes_count": 0,
+    "supernodes_count": 1,
+    "supernode_breakdown": {
+      "flows_folded": 2,
+      "dns_folded": 0,
+      "http_folded": 0,
+      "alerts_folded": 0,
+      "total_supernodes": 1
+    },
+    "threat_clusters_count": 3,
+    "clusters": [
+      {
+        "cluster_id": "cluster_0",
+        "threat_score": 6,
+        "alerts_count": 0,
+        "flows_count": 3,
+        "hosts_count": 3,
+        "nodes_count": 6,
+        "nodes": [
+          "ip:10.3.2.101",
+          "flow_agg:10.3.2.101->188.227.106.13:80:TCP",
+          "ip:188.227.106.13",
+          "flow:10.3.2.101:49174<->62.204.41.175:80/TCP",
+          "ip:62.204.41.175",
+          "flow:10.3.2.101:49176<->62.204.41.175:44271/TCP"
+        ],
+        "title": "Primary Attack Incident"
+      },
+      {
+        "cluster_id": "cluster_1",
+        "threat_score": 0,
+        "alerts_count": 0,
+        "flows_count": 0,
+        "hosts_count": 0,
+        "nodes_count": 3,
+        "nodes": [
+          "domain:188.227.106.13",
+          "http:33",
+          "http:4"
+        ],
+        "title": "Secondary Activity 1"
+      },
+      {
+        "cluster_id": "cluster_2",
+        "threat_score": 0,
+        "alerts_count": 0,
+        "flows_count": 0,
+        "hosts_count": 0,
+        "nodes_count": 2,
+        "nodes": [
+          "http:1648",
+          "domain:62.204.41.175"
+        ],
+        "title": "Secondary Activity 2"
+      }
+    ],
+    "top_pivots": [
+      {
+        "node_id": "ip:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.1847,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_ip",
+        "role": "Target Host",
+        "pagerank_score": 0.155,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "ip:10.3.2.101",
+        "label": "10.3.2.101",
+        "type": "entity_ip",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0487,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:188.227.106.13",
+        "label": "188.227.106.13",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0487,
+        "betweenness_score": 0.0
+      },
+      {
+        "node_id": "domain:62.204.41.175",
+        "label": "62.204.41.175",
+        "type": "entity_domain",
+        "role": "Command & Control / Exfiltration Endpoint",
+        "pagerank_score": 0.0487,
+        "betweenness_score": 0.0
+      }
+    ],
+    "critical_attack_paths": []
+  },
+  "linearized_stories": "=== CORRELATION GRAPH TOPOLOGY & CAUSAL ATTACK CHAINS (PCAP_018) ===\nGraph Scale: 12 raw nodes condensed into 11 high-signal nodes.\nReduction: Pruned 0 background nodes; folded 1 repetitive flow/DNS supernodes.\n\nTOP INCIDENT PIVOTS (PageRank & Betweenness Centrality):\n  \u2022 188.227.106.13 [Target Host] - PPR: 0.1847, Centrality: 0.0\n  \u2022 62.204.41.175 [Target Host] - PPR: 0.155, Centrality: 0.0\n  \u2022 10.3.2.101 [Command & Control / Exfiltration Endpoint] - PPR: 0.0487, Centrality: 0.0\n  \u2022 188.227.106.13 [Command & Control / Exfiltration Endpoint] - PPR: 0.0487, Centrality: 0.0\n\n[Primary Attack Incident | Threat Score: 6 | Alerts: 0 | Nodes: 6]\n[Secondary Activity 1 | Threat Score: 0 | Alerts: 0 | Nodes: 3]\n[Secondary Activity 2 | Threat Score: 0 | Alerts: 0 | Nodes: 2]\n\nCRITICAL ATTACK PATHS:\n  \u2022 Single-stage or point-to-point alert communication.\n\nBEHAVIOURAL CORRELATION HIGHLIGHTS:",
+  "correlations_count": 0
 }

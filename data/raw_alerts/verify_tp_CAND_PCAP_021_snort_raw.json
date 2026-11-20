@@ -1,0 +1,2 @@
+{ "timestamp" : "04/19-00:23:05.239438", "pkt_num" : 1066, "proto" : "UDP", "pkt_gen" : "raw", "pkt_len" : 66, "dir" : "S2C", "src_ap" : "10.4.18.4:53", "dst_ap" : "10.4.18.169:52169", "rule" : "1:254:17", "action" : "allow" }
+{ "timestamp" : "04/19-01:33:00.249159", "pkt_num" : 9320, "proto" : "UDP", "pkt_gen" : "raw", "pkt_len" : 66, "dir" : "S2C", "src_ap" : "10.4.18.4:53", "dst_ap" : "10.4.18.169:50232", "rule" : "1:254:17", "action" : "allow" }

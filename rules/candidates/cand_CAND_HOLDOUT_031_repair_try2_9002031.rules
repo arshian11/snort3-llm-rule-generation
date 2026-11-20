@@ -1,0 +1,1 @@
+alert udp $HOME_NET any -> $EXTERNAL_NET 53 (msg:"PROTOCOL-DNS DNS_TUNNELING High-entropy subdomain exfiltration attempt"; flow:to_server,no_stream; dns_query; pcre:"/^[a-z0-9]{8,}\.id-36207\.down\.sshdns\.ozymandns-txt\.com$/i"; service:dns; classtype:malware-cnc; metadata:policy max-detect-ips drop, ruleset community, malware_family DNS_Tunneling; sid:9002031; rev:1; )
