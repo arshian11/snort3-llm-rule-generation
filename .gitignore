@@ -70,3 +70,8 @@ build/
 # vscode config
 snort3.code-workspace
 
+rules/candidates_history.json
+rules/snort_docs_scraper.py
+rules/test_dns.rules
+ChangeLog.md
+rules/history
